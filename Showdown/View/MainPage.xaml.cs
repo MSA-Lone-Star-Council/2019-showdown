@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using Showdown.Examples;
 
 namespace Showdown
 {
@@ -12,6 +9,11 @@ namespace Showdown
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        async void OpenOtherPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ListViewPage1());
         }
     }
 }
