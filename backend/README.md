@@ -21,9 +21,10 @@ Backend for the Texas MSA Showdown 2017 mobile application.
 In order to run the entire application:
 
 0. Docker must be installed. 
-1. Copy env.json.example to env.json and specify parameters
+1. Copy ```env.json.example``` to ```env.json``` and specify parameters
 2. Run docker-compose,
-    ```bash
-    docker-compose up # For development
-    docker-compose up -f production.yml # For production
-    ```
+
+```bash
+docker-compose up # For development
+docker-compose up -f production.yml # For production
+```
