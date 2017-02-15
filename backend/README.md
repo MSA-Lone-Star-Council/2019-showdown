@@ -8,7 +8,7 @@ Backend for the Texas MSA Showdown 2017 mobile application.
 * Twitter stream
 
 ## Tech stack:
-* Language: [TypeScript 2](https://www.typescriptlang.org/)
+* Language: [TypeScript 2.2](https://www.typescriptlang.org/)
 * Web framework: [Koa v2](http://koajs.com/)
 * Database: [MongoDB](https://www.mongodb.com/)
 * Deployment: [Docker](https://www.docker.com/), [docker-compose](https://docs.docker.com/compose/)
