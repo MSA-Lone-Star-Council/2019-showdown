@@ -1,0 +1,27 @@
+{
+  "name": "showdown-17-backend",
+  "version": "1.0.0",
+  "description": "Backend API server for LSC showdown 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saadnajmi/Showdown.git"
+  },
+  "author": "Zuhair Parvez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Saadnajmi/Showdown/issues"
+  },
+  "homepage": "https://github.com/Saadnajmi/Showdown#readme",
+  "devDependencies": {
+    "@types/koa": "^2.0.37",
+    "typescript": "^2.2.0"
+  },
+  "dependencies": {
+    "koa": "^2.0.0-alpha.8",
+    "nodemon": "^1.11.0"
+  }
+}
