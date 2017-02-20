@@ -1,0 +1,7 @@
+{
+    "api": {
+        "username": "admin",
+        "saltedPassword": "",
+        "salt": ""
+    }
+}
