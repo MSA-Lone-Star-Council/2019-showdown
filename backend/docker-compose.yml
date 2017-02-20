@@ -1,6 +1,6 @@
 api:
     extends:
-        file: docker-compose-common.yml
+        file: production.yml
         service: api
     volumes:
         - ./api/dist:/usr/src/app
