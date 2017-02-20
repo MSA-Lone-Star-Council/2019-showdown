@@ -3,9 +3,7 @@ import * as winston from 'winston';
 
 interface ApiConfig {
     username: string;
-
-    saltedPassword: string;
-    salt: string;
+    hashedPassword: string;
 }
 
 interface AppConfig {
@@ -20,7 +18,7 @@ export function loadConfig(filename: string): AppConfig {
 }
 
 let _config = null;
-export function config(filename: string) {
+export function config(filename: string = '/usr/config/config.json'): AppConfig {
     if(_config === null){
         winston.info(`Loading config file from ${ filename }`)
         _config = loadConfig(filename);
