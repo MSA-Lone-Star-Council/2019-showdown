@@ -11,7 +11,7 @@ namespace Showdown
             InitializeComponent();
         }
 
-        async void OpenOtherPage(object sender, EventArgs e)
+        async void OpenListViewPage(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ListViewPage1());
         }

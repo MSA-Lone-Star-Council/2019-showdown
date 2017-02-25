@@ -20,7 +20,10 @@
             <Label Text="Welcome to Xamarin Forms! 2"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"/>
-            <Button Text="Do an Action" Clicked="OpenOtherPage" />
+            <Button Text="Open a List View Page"    Clicked="OpenListViewPage" />
+            <!--
+            <Button Text="Open a Tabbed Page"       Clicked="OpenTabbedPage" />
+            -->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Showdown.Examples
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListViewPage1 : ContentPage
     {
         public ListViewPage1()
