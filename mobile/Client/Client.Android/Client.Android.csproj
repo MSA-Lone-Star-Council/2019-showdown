@@ -66,5 +66,15 @@
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client.Common\Client.Common.csproj">
+      <Project>{F240F33F-CA8A-42C2-B5A6-EF854421050E}</Project>
+      <Name>Client.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Android\Common.Android.csproj">
+      <Project>{A14E524E-9A68-4C07-ACB8-35AC34E7ED9C}</Project>
+      <Name>Common.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

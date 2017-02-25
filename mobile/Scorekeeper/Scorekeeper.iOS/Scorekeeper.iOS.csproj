@@ -112,5 +112,15 @@
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
+      <Project>{EEFA1122-8413-42A3-874F-132D90640E58}</Project>
+      <Name>Scorekeeper.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
+      <Project>{9FC81125-076D-4AFC-8180-DE27BB1EAF33}</Project>
+      <Name>Common.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

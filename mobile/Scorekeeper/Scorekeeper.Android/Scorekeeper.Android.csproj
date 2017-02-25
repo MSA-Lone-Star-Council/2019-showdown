@@ -66,5 +66,15 @@
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
+      <Project>{EEFA1122-8413-42A3-874F-132D90640E58}</Project>
+      <Name>Scorekeeper.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Android\Common.Android.csproj">
+      <Project>{A14E524E-9A68-4C07-ACB8-35AC34E7ED9C}</Project>
+      <Name>Common.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

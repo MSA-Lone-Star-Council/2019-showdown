@@ -115,5 +115,15 @@
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
+      <Project>{9FC81125-076D-4AFC-8180-DE27BB1EAF33}</Project>
+      <Name>Common.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Admin.Common\Admin.Common.csproj">
+      <Project>{6B32DD6D-85D3-421E-9F80-D7977043A3A2}</Project>
+      <Name>Admin.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
