@@ -28,3 +28,17 @@ In order to run the entire application:
 docker-compose up # For development
 docker-compose up -f production.yml # For production
 ```
+
+## ```config.json``` Options
+
+```javascript
+{
+    "api" : {
+        "secret": "changeme"   // secret used to (en/de)crypt auth tokens. Can be any string
+        "facebook": {
+            "appID": "abcd1234"  // App ID to use for Facebook login validation, get it from https://developers.facebook.com
+            "appSecret": "xyz987" // App secret to use for Facebook login validation, get it from https://developers.facebook.com
+        }
+    }
+}
+```
