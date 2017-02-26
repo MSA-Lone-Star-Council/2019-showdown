@@ -1,7 +1,9 @@
 {
     "api": {
-        "username": "admin",
-        "saltedPassword": "",
-        "salt": ""
+        "secret": "changeme",
+        "facebook": {
+            "appID": "abcd1234",
+            "appSecret": "xyz987"
+        }
     }
 }
