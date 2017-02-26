@@ -1,9 +1,14 @@
 import * as fs from 'mz/fs';
 import * as winston from 'winston';
 
+interface FacebookConfig {
+    appID: string,
+    appSecret: string,
+}
+
 interface ApiConfig {
-    username: string;
-    hashedPassword: string;
+    secret: string,
+    facebook: FacebookConfig
 }
 
 interface AppConfig {

@@ -1,5 +1,6 @@
 import * as Koa from 'koa';
-import * as bcrypt from 'bcrypt';
+import { config } from './config';
+import fetch from 'node-fetch';
 import * as jwt from 'jsonwebtoken';
 import * as winston from 'winston';
 
@@ -25,6 +26,17 @@ export class UnauthorizedUserError implements Error {
     stack: string;
 }
 
+export async function verifyFacebookAccessToken(accessToken: string) : Promise<boolean>
+{
+    const fbConfig = config().api.facebook;
+    const appToken = `${ fbConfig.appID }|${ fbConfig.appSecret }`;
+
+    const url = `https://graph.facebook.com/v2.8/debug_token?access_token=${ appToken }&input_token=${ accessToken }`
+    const response = await fetch(url);
+    const body = await response.json();
+
+    const data = body['data'];
+    return !data.error && data.is_valid;
 }
 
 export function authenticator(secret: string) : Koa.Middleware {
