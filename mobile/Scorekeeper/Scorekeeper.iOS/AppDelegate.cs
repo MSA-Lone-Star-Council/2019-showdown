@@ -21,7 +21,7 @@ namespace Scorekeeper.iOS
 			
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-			var homeViewController = new UINavigationController(new ViewController());
+			var homeViewController = new UINavigationController(new LoginViewController());
 
 			Window.RootViewController = homeViewController;
 			Window.MakeKeyAndVisible();

@@ -5,11 +5,11 @@ using Masonry;
 using WebKit;
 using Foundation;
 
-namespace Scorekeeper.iOS
+namespace Common.iOS
 {
 	public delegate void OnAccessTokenEventHandler(string accessToken);
 
-	public partial class FacebookLoginViewController : UIViewController
+	public class FacebookLoginViewController : UIViewController
 	{
 		public event OnAccessTokenEventHandler OnAccessToken;
 
@@ -68,7 +68,7 @@ namespace Scorekeeper.iOS
 				var match = System.Text.RegularExpressions.Regex.Match(navigationAction.Request.Url.Query, regexPattern);
 				var accessCode = match.Groups[1].Value;
 				controller.OnAccessToken(accessCode);
-				controller.NavigationController.PopViewController(true);
+				controller.NavigationController.PopViewController(false);
 			}
 
 		}

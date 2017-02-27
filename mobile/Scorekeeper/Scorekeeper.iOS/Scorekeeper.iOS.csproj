@@ -104,7 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
-    <InterfaceDefinition Include="FacebookLoginViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -114,10 +113,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
+    <Compile Include="LoginViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
@@ -127,6 +123,10 @@
     <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
       <Project>{9FC81125-076D-4AFC-8180-DE27BB1EAF33}</Project>
       <Name>Common.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
+      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
+      <Name>Common.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
