@@ -118,10 +118,6 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="FacebookLoginViewController.cs" />
-    <Compile Include="FacebookLoginViewController.designer.cs">
-      <DependentUpon>FacebookLoginViewController.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
