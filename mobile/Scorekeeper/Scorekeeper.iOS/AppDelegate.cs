@@ -18,8 +18,13 @@ namespace Scorekeeper.iOS
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
+			
+			Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+			var homeViewController = new UINavigationController(new ViewController());
+
+			Window.RootViewController = homeViewController;
+			Window.MakeKeyAndVisible();
 
 			return true;
 		}
