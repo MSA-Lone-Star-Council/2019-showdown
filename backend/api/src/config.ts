@@ -30,3 +30,8 @@ export function config(filename: string = '/usr/config/config.json'): AppConfig 
     }
     return _config;
 }
+
+// Load up configuration
+const configPath: string = process.env.CONFIG_FILE || '/usr/config/config.json';
+const appConfig = config(configPath);
+export default appConfig;

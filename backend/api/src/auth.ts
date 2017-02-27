@@ -1,12 +1,12 @@
 import * as Koa from 'koa';
-import { config } from './config';
+import  appConfig from './config';
 import fetch from 'node-fetch';
 import * as jwt from 'jsonwebtoken';
 import * as winston from 'winston';
 
 interface UserClaims {
-    sub: string;
-    iss: string;
+    sub: string;  // subject - the Facebook user id
+    iss: string;  // issuer - https://texas-msa.org
     permissions: string;
 }
 
@@ -28,7 +28,7 @@ export class UnauthorizedUserError implements Error {
 
 export async function verifyFacebookAccessToken(accessToken: string) : Promise<boolean>
 {
-    const fbConfig = config().api.facebook;
+    const fbConfig = appConfig.api.facebook;
     const appToken = `${ fbConfig.appID }|${ fbConfig.appSecret }`;
 
     const url = `https://graph.facebook.com/v2.8/debug_token?access_token=${ appToken }&input_token=${ accessToken }`

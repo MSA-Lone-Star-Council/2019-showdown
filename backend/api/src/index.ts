@@ -1,7 +1,7 @@
 import * as Koa from 'koa';
 import * as winston from 'winston';
 
-import { config } from './config';
+import appConfig from './config';
 import { authenticator, UserState, UnauthenticatedUserError } from './auth';
 
 // Set up winston logging
@@ -11,9 +11,6 @@ winston.add(winston.transports.Console, {
     'colorize': true,
 });
 
-// Load up configuration
-const configPath: string = process.env.CONFIG_FILE || '/usr/config/config.json';
-const appConfig = config(configPath);
 
 const app = new Koa();
 
@@ -23,7 +20,7 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-app.use(authenticator(appConfig.api.username, appConfig.api.hashedPassword));
+app.use(authenticator(appConfig.api.secret));
 
 // Default route
 app.use(async (ctx, next) => {
@@ -31,7 +28,7 @@ app.use(async (ctx, next) => {
     if (!state.user){
         throw new UnauthenticatedUserError();
     }
-    const name = state.user.username;
+    const name = state.user.sub;
     ctx.body = `Hello, ${ name }!!`;
 });
 
