@@ -26,7 +26,12 @@ export class UnauthorizedUserError implements Error {
     stack: string;
 }
 
-export async function verifyFacebookAccessToken(accessToken: string) : Promise<boolean>
+/**
+ * Verifies that a Facebook access token is valid, and if so, gets the associated Facebook userId 
+ * @param accessToken The token to validate
+ * @returns Facebook user id iff the token is valid, null otherwise
+ */
+export async function verifyFacebookAccessToken(accessToken: string) : Promise<string>
 {
     const fbConfig = appConfig.api.facebook;
     const appToken = `${ fbConfig.appID }|${ fbConfig.appSecret }`;
@@ -36,7 +41,9 @@ export async function verifyFacebookAccessToken(accessToken: string) : Promise<b
     const body = await response.json();
 
     const data = body['data'];
-    return !data.error && data.is_valid;
+    if (!data || data.error || !data.is_valid) return null;
+
+    return data.user_id;
 }
 
 export function authenticator(secret: string) : Koa.Middleware {
