@@ -46,6 +46,14 @@ export async function verifyFacebookAccessToken(accessToken: string) : Promise<s
     return data.user_id;
 }
 
+/**
+ * Create a Koa middleware that can authenticate an HTTP request
+ * by decrypting a JSON Web Token included in the header
+ * 
+ * It expects the token to be included as the 'authorization' header
+ * and prefixed by 'Bearer '
+ * @param secret The secret to use for decrypting the JWTs
+ */
 export function authenticator(secret: string) : Koa.Middleware {
     return async function(ctx, next) {
         const authorizationHeader: string = ctx.header['authorization'];
