@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">Showdown</string>
+	<string name="hello">Hello World, Click Me!</string>
+	<string name="announcementsButton">Announcements</string>
+	<string name="scheduleButton">Schedule</string>
+	<string name="mapsButton">Map</string>
+	<string name="sportsButton">Sports</string>
+
 </resources>

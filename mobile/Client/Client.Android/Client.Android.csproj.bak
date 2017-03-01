@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D26B4FAD-8EED-4244-9ABF-825770A444E6}</ProjectGuid>
+    <ProjectGuid>{307B14D1-B468-4477-B01F-8ADAE71F4461}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>Admin.Android</RootNamespace>
-    <AssemblyName>Admin.Android</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <RootNamespace>Client.Android</RootNamespace>
+    <AssemblyName>Client.Android</AssemblyName>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -16,8 +16,6 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
-    <AndroidTlsProvider>
-    </AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,9 +67,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Admin.Common\Admin.Common.csproj">
-      <Project>{6B32DD6D-85D3-421E-9F80-D7977043A3A2}</Project>
-      <Name>Admin.Common</Name>
+    <ProjectReference Include="..\Client.Common\Client.Common.csproj">
+      <Project>{F240F33F-CA8A-42C2-B5A6-EF854421050E}</Project>
+      <Name>Client.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Android\Common.Android.csproj">
       <Project>{A14E524E-9A68-4C07-ACB8-35AC34E7ED9C}</Project>
