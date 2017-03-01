@@ -46,6 +46,12 @@ export async function verifyFacebookAccessToken(accessToken: string) : Promise<s
     return data.user_id;
 }
 
+export function generateJSONWebToken(username: string, permissions: string) : string
+{
+    const claim : UserClaims = { iss: "http://texas-msa.org", sub: username, permissions: permissions};
+    return jwt.sign(claim, appConfig.api.secret);
+}
+
 /**
  * Create a Koa middleware that can authenticate an HTTP request
  * by decrypting a JSON Web Token included in the header
