@@ -1,5 +1,5 @@
 
-FROM node:latest
+FROM node:7.6.0
 LABEL Name=showdown-17-api Version=1.0.0 
 RUN npm install pm2 -g
 COPY package.json /tmp/package.json
