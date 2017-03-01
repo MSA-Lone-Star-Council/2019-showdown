@@ -1,8 +1,10 @@
 import * as Koa from 'koa';
+import * as parse from 'co-body';
 import * as winston from 'winston';
 
-import { config } from './config';
+import appConfig from './config';
 import { authenticator, UserState, UnauthenticatedUserError } from './auth';
+import router from './routes';
 
 // Set up winston logging
 winston.remove(winston.transports.Console);
@@ -11,11 +13,12 @@ winston.add(winston.transports.Console, {
     'colorize': true,
 });
 
-// Load up configuration
-const configPath: string = process.env.CONFIG_FILE || '/usr/config/config.json';
-const appConfig = config(configPath);
 
 const app = new Koa();
+app.use(async (ctx, next) => {
+    (ctx.request as any).body = await parse.json(ctx);
+    next();
+});
 
 // Basic logger that just logs incoming requests
 app.use(async (ctx, next) => {
@@ -23,17 +26,11 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-app.use(authenticator(appConfig.api.username, appConfig.api.hashedPassword));
+app.use(authenticator(appConfig.api.secret));
 
 // Default route
-app.use(async (ctx, next) => {
-    const state = ctx.state as UserState
-    if (!state.user){
-        throw new UnauthenticatedUserError();
-    }
-    const name = state.user.username;
-    ctx.body = `Hello, ${ name }!!`;
-});
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 winston.info('Starting server on port 3000');
 app.listen(3000);

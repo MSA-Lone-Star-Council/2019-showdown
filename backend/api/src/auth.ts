@@ -1,16 +1,17 @@
 import * as Koa from 'koa';
-import * as bcrypt from 'bcrypt';
+import  appConfig from './config';
+import fetch from 'node-fetch';
+import * as jwt from 'jsonwebtoken';
 import * as winston from 'winston';
 
-class User {
-    username: string;
-    constructor(username: string){
-        this.username = username;
-    }
+interface UserClaims {
+    sub: string;  // subject - the Facebook user id
+    iss: string;  // issuer - https://texas-msa.org
+    permissions: string;
 }
 
 export interface UserState {
-    user?: User;
+    user?: UserClaims;
 }
 
 export class UnauthenticatedUserError implements Error {
@@ -19,42 +20,57 @@ export class UnauthenticatedUserError implements Error {
     stack: string;
 }
 
-/**
- * Extracts the username and password from a Basic Authentication header
- * For example: "Basic YWRtaW46cGEkJHcwcmQ=" returns { username: 'admin', password: 'pa$$w0rd'}
- * @param {string} authorizationHeader The value for the 'authorization' header
- * @returns {object} username and password encoded in 'authorization' header
- */
-function extractUsernameAndPassword(authorizationHeader: string) : { username: string, password: string } {
-    const authorizeHeader: string[] = authorizationHeader.split(' ');
-    const [, base64string] = authorizeHeader;  // Ignores the string 'Basic'
-
-    // base64 is decoded into a string of form username:password
-    const [username, password] = Buffer.from(base64string, 'base64').toString('UTF-8').split(':');
-    return {
-        username,
-        password
-    }
+export class UnauthorizedUserError implements Error {
+    name: string = "UnauthorizedUserError";
+    message: string = "User is unauthorized";
+    stack: string;
 }
 
 /**
- * Create a middleware function for authenticating against a single username and password with Basic Auth
- * @param {string} username The username for logging in
- * @param {string} hashedPassword The encrypted password the user will use
- * @return {Koa.Middleware} Middleware function that reads Basic Auth headers and authenticates users
+ * Verifies that a Facebook access token is valid, and if so, gets the associated Facebook userId 
+ * @param accessToken The token to validate
+ * @returns Facebook user id iff the token is valid, null otherwise
  */
-export function authenticator(username: string, hashedPassword: string) : Koa.Middleware {
+export async function verifyFacebookAccessToken(accessToken: string) : Promise<string>
+{
+    const fbConfig = appConfig.api.facebook;
+    const appToken = `${ fbConfig.appID }|${ fbConfig.appSecret }`;
+
+    const url = `https://graph.facebook.com/v2.8/debug_token?access_token=${ appToken }&input_token=${ accessToken }`
+    const response = await fetch(url);
+    const body = await response.json();
+
+    const data = body['data'];
+    if (!data || data.error || !data.is_valid) return null;
+
+    return data.user_id;
+}
+
+export function generateJSONWebToken(username: string, permissions: string) : string
+{
+    const claim : UserClaims = { iss: "http://texas-msa.org", sub: username, permissions: permissions};
+    return jwt.sign(claim, appConfig.api.secret);
+}
+
+/**
+ * Create a Koa middleware that can authenticate an HTTP request
+ * by decrypting a JSON Web Token included in the header
+ * 
+ * It expects the token to be included as the 'authorization' header
+ * and prefixed by 'Bearer '
+ * @param secret The secret to use for decrypting the JWTs
+ */
+export function authenticator(secret: string) : Koa.Middleware {
     return async function(ctx, next) {
-        if (ctx.header['authorization']) {
-            const { username, password: plaintextPassword } = extractUsernameAndPassword(ctx.header['authorization']);
-            const valid = await bcrypt.compare(plaintextPassword, hashedPassword);
-            if(valid) {
-                winston.info(`User ${ username } authenticated successfully`);
+        const authorizationHeader: string = ctx.header['authorization'];
+        if (authorizationHeader) {
+            const [, token] = authorizationHeader.split(' ');
+            try {
+                const decodedToken = jwt.verify(token, secret);
                 const userState: UserState = ctx.state as UserState;
-                userState.user = new User(username); 
-            }
-            else {
-                winston.warn(`User ${ username } failed to authenticate`);
+                userState.user = decodedToken as UserClaims;
+            } catch (err) {
+                winston.warn(`Invalid JWT token supplied`);
             }
         }
 
@@ -62,10 +78,12 @@ export function authenticator(username: string, hashedPassword: string) : Koa.Mi
             await next();
         }
         catch (e) {
-            if (e instanceof UnauthenticatedUserError){
+            if (e instanceof UnauthenticatedUserError) {
                 ctx.response.status = 401;
-                ctx.set('WWW-Authenticate', 'Basic realm="User Visible Realm"');
+            }
+            else if (e instanceof UnauthorizedUserError) {
+                ctx.response.status = 403;
             }
         }
     }
-}
+} 

@@ -1,9 +1,14 @@
 import * as fs from 'mz/fs';
 import * as winston from 'winston';
 
+interface FacebookConfig {
+    appID: string,
+    appSecret: string,
+}
+
 interface ApiConfig {
-    username: string;
-    hashedPassword: string;
+    secret: string,
+    facebook: FacebookConfig
 }
 
 interface AppConfig {
@@ -25,3 +30,8 @@ export function config(filename: string = '/usr/config/config.json'): AppConfig 
     }
     return _config;
 }
+
+// Load up configuration
+const configPath: string = process.env.CONFIG_FILE || '/usr/config/config.json';
+const appConfig = config(configPath);
+export default appConfig;
