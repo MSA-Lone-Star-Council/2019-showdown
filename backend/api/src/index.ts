@@ -6,9 +6,10 @@ import { makeExecutableSchema } from 'graphql-tools';
 import * as winston from 'winston';
 
 import { config } from './config';
-import Schema from './schema';
-import Resolvers from './resolvers';
-import { FacebookConnector } from './facebook';
+import Schema from './data/schema';
+import Resolvers from './data/resolvers';
+import { FacebookConnector } from './connectors/facebook';
+import { Facebook } from './model/facebook';
 
 // Set up winston logging
 winston.remove(winston.transports.Console);
@@ -22,6 +23,7 @@ const configPath: string = process.env.CONFIG_FILE || '/usr/config/config.json';
 const appConfig = config(configPath);
 
 const fbConnector = new FacebookConnector(appConfig.api.facebook);
+const facebook = new Facebook(fbConnector);
 
 const executableSchema = makeExecutableSchema({
     typeDefs: Schema,
@@ -41,7 +43,7 @@ app.use(bodyParser());
 
 router.post('/graphql', graphqlKoa( { 
     schema: executableSchema,
-    context: { fbConnector }
+    context: { facebook }
 }));
 router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql'}));
 app.use(router.routes());

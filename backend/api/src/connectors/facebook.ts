@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import * as DataLoader from 'dataloader';
 import * as winston from 'winston';
 
-import { FacebookConfig } from './config'
+import { FacebookConfig } from '../config'
 
 const FACEBOOK_GRAPH_ROOT = 'https://graph.facebook.com/v2.8';
 
@@ -23,7 +23,6 @@ export class FacebookConnector {
                         paramString = `${ paramString }&${ queryString }`
                 }
                 const url = `${ FACEBOOK_GRAPH_ROOT }/${ query.path }?${ paramString }`;
-                winston.info(`Making request to\n ${ url }`)
                 return fetch(url).then(data => data.json());
             }));
         }, { batch: false })
