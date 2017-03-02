@@ -30,6 +30,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Presenter.cs" />
+    <Compile Include="LoginScreen\ILoginView.cs" />
+    <Compile Include="LoginScreen\LoginPresenter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="LoginScreen\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
