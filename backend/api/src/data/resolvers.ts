@@ -2,8 +2,8 @@ import fetch from 'node-fetch';
 import * as jwt from 'jsonwebtoken';
 import * as winston from 'winston';
 
-import config from './config';
-import { FacebookConnector, FacebookQuery } from './facebook';
+import config from '../config';
+import { FacebookConnector, FacebookQuery } from '../connectors/facebook';
 
 const resolvers = {
     Query: {
