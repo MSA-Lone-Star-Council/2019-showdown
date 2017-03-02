@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as winston from 'winston';
 
-interface FacebookConfig {
+export interface FacebookConfig {
     appID: string,
     appSecret: string,
 }

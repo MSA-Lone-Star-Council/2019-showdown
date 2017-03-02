@@ -3,36 +3,35 @@ import * as jwt from 'jsonwebtoken';
 import * as winston from 'winston';
 
 import config from './config';
+import { FacebookConnector, FacebookQuery } from './facebook';
 
 const resolvers = {
     Query: {
         async viewer(root, { token }, context) {
-            if(!token) return { name: 'test user'}
-
-            const secret = config.api.secret;
+            const facebook: FacebookConnector = context.fbConnector;
+            if(!token) return { name: ''}
             try
             {
-                const decodedToken = jwt.verify(token, secret);
-                const fbConfig = config.api.facebook;
-                const appToken = `${ fbConfig.appID }|${ fbConfig.appSecret }`
-                const url = `https://graph.facebook.com/v2.8/${ decodedToken.sub }?access_token=${ appToken }`
-                const response = await fetch(url);
-                const body = await response.json();
-
-                return { name: body.name }
+                const decodedToken = jwt.verify(token, config.api.secret);
+                const result = await facebook.get({ path: decodedToken.sub });
+                return { name: result.name }
             } catch (err) {
-                winston.warn('Invalid JWT token supplied');
+                winston.warn('Invalid JWT token supllied');
             }
 
         }
     },
+
     Mutation: {
         async createToken(root, { facebookAccessToken }, context) {
-            const fbConfig = config.api.facebook;
-            const appToken = `${ fbConfig.appID }|${ fbConfig.appSecret }`
-            const url = `https://graph.facebook.com/v2.8/debug_token?access_token=${ appToken }&input_token=${ facebookAccessToken }`
-            const response = await fetch(url);
-            const body = await response.json();
+            const facebook: FacebookConnector = context.fbConnector;
+
+            const body = await facebook.get({
+                path: 'debug_token',
+                options: {
+                    'input_token': facebookAccessToken
+                }
+            });
 
             const data = body['data'];
             if(!data) return { token: '', error: 'unknown error'};
