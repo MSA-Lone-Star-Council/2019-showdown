@@ -13,7 +13,7 @@ using Android.Widget;
 namespace Client.Android
 {
     [Activity(Label = "SportsAcctivity")]
-    public class SportsAcctivity : Activity
+    public class SportsActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

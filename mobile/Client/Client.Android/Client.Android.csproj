@@ -52,7 +52,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduleActivity.cs" />
-    <Compile Include="SportsAcctivity.cs" />
+    <Compile Include="SportsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

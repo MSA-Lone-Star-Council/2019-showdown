@@ -6,5 +6,6 @@
 	<string name="scheduleButton">Schedule</string>
 	<string name="mapsButton">Map</string>
 	<string name="sportsButton">Sports</string>
+  <string name="acknowledgementsButton">Acknowledgements</string>
 
 </resources>

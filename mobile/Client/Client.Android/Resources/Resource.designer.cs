@@ -45,6 +45,9 @@ namespace Client.Android
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050005
+			public const int acknowledgementsButton = 2131034117;
+			
 			// aapt resource value: 0x7f050001
 			public const int announcementsButton = 2131034113;
 			
@@ -104,6 +107,9 @@ namespace Client.Android
 		
 		public partial class String
 		{
+			
+			// aapt resource value: 0x7f040007
+			public const int acknowledgementsButton = 2130968583;
 			
 			// aapt resource value: 0x7f040003
 			public const int announcementsButton = 2130968579;
