@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
 
 namespace Client.Android
 {
@@ -21,7 +22,20 @@ namespace Client.Android
 			Button button = FindViewById<Button>(Resource.Id.myButton);
 
 			button.Click += delegate { button.Text = $"{count++} clicks!"; };
-		}
-	}
+
+            Button AnnouncementButton = FindViewById<Button>(Resource.Id.announcementsButton);
+            Button ScheduleButton = FindViewById<Button>(Resource.Id.scheduleButton);
+            Button MapButton = FindViewById<Button>(Resource.Id.mapsButton);
+            Button SportsButton = FindViewById<Button>(Resource.Id.sportsButton);
+            Button AcknowledgementsButton = FindViewById<Button>(Resource.Id.acknowledgementsButton);
+
+            AnnouncementButton.Click += delegate { StartActivity(typeof(AnnouncementsActivity)); };
+            ScheduleButton.Click += delegate { StartActivity(typeof(ScheduleActivity)); };
+            MapButton.Click += delegate { StartActivity(typeof(MapActivity)); };
+            SportsButton.Click += delegate { StartActivity(typeof(SportsActivity)); };
+            AcknowledgementsButton.Click += delegate { StartActivity(typeof(AcknowledgementsActivity)); };
+
+        }
+    }
 }
 
