@@ -3,5 +3,5 @@ api:
         file: production.yml
         service: api
     volumes:
-        - ./api/dist:/usr/src/app
-    command: ["pm2-dev", "index.js"]
+        - ./src:/usr/src/app
+    command: python manage.py runserver 0.0.0.0:3000

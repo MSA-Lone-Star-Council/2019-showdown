@@ -1,6 +1,6 @@
 api:
-    build: ./api
+    build: ./src
     ports:
         - "80:3000"
-    volumes:
-        - ${PWD}/config.json:/usr/config/config.json
+    env_file:
+        - .env
