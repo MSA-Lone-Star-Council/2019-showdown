@@ -14,7 +14,6 @@ ROOT_DIR = environ.Path(__file__) - 3
 APPS_DIR = ROOT_DIR.path('showdown')
 
 env = environ.Env()
-# environ.Env.read_env(ROOT_DIR('.env'))
 
 # App Configuration
 DJANGO_APPS = [
@@ -27,11 +26,11 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+    'graphene_django',
 ]
 
 LOCAL_APPS = [
-
+    'core',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -59,8 +58,6 @@ DATABASES = {
     'default': env.db('DJANGO_DATABASE_URL'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
-
-print(env)
 
 # General Configuration
 # --------------------------------------------------------------------------
@@ -103,15 +100,14 @@ TEMPLATES = [
 # --------------------------------------------------------------------------
 STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    str(APPS_DIR.path('static')),
-)
+# STATICFILES_DIRS = (
+#     str(APPS_DIR.path('static')),
+# )
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
 # URL Configuration
 # --------------------------------------------------------------------------
 ROOT_URLCONF = 'config.urls'
@@ -138,4 +134,46 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='')
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+
+# Logging Configuration
+# -------------------------------------------------------------------------
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'color',
+        },
+    },
+        
+    'formatters': {
+        'color': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': '%(log_color)s%(levelname)s %(asctime)s %(name)s:%(lineno)s %(message)s',
+            'log_colors': {
+                'DEBUG': 'cyan',
+                'INFO': 'green',
+                'WARNING': 'yellow',
+                'ERROR': 'red',
+                'CRITICAL': 'bold_red',
+            }
+        }
+    },
+    'loggers': {
+        'showdown': {
+            'handlers': ['console'],
+            'level': env('DJANGO_LOG_LEVEL', default='INFO')
+        }
+    }
+}
+
+GRAPHENE = {
+    'SCHEMA': 'core.schema.schema'
+}
+
+FACEBOOK = {
+    'app_id': env('FACEBOOK_APP_ID'),
+    'app_secret': env('FACEBOOK_APP_SECRET'),
+}
