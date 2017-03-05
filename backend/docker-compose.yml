@@ -1,7 +1,13 @@
-api:
-    extends:
-        file: production.yml
-        service: api
-    volumes:
-        - ./api/dist:/usr/src/app
-    command: ["pm2-dev", "index.js"]
+version: "2"
+services:
+    db:
+        image: postgres
+    api:
+        extends:
+            file: production.yml
+            service: api
+        volumes:
+            - ./src:/usr/src/app
+        command: gunicorn config.wsgi --name api_server -b :3000 -w 3 --reload
+        depends_on:
+            - db
