@@ -33,6 +33,8 @@ LOCAL_APPS = [
     'core',
     'accounts',
     'notifications',
+    'events',
+    'scores',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
