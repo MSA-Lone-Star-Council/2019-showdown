@@ -9,9 +9,18 @@ import jwt
 
 from accounts.models import User
 
-from util import facebook
-
 logger = logging.getLogger('showdown.%s' % __name__)
+
+def build_claim(user):
+    """Builds the payload for the JSON Web Token"""
+    return {
+        'sub': str(user.id),
+        'iss': 'http://texas-msa.org',
+        'permission': 'admin' if user.adminstrator else '',
+        'meta': {
+            'name': user.name
+        }
+    }
 
 class LoginView(APIView):
     def post(self, request, format=None):
@@ -22,21 +31,11 @@ class LoginView(APIView):
 
         try:
             user_id = facebook.get_token_info(facebook_access_token)
-            
-            user, created = User.objects.get_or_create(facebook_id=user_id)
-            if created:
-                profile = facebook.get_facebook_profile(user_id)
-                user.name = profile['name']
-                user.save()
-
-            claim = {
-                'sub': str(user.id),
-                'iss': 'http://texas-msa.org',
-                'permission': 'admin' if user.adminstrator else '',
-                'meta': {
-                    'name': user.name
-                }
-            }
+            user, _= User.objects.get_or_create(
+                facebook_id=user_id, 
+                defaults={ 'administrator': False }
+            )
+            claim = build_claim(user)
             jwt_token = jwt.encode(claim, settings.SECRET_KEY).decode("utf-8")
             return Response({'token': jwt_token}, status=200)
         except Exception as e:
