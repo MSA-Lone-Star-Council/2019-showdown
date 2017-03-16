@@ -104,7 +104,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\drawer_shadow.9.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_drawer.png" />
     <AndroidResource Include="Resources\drawable-mdpi\drawer_shadow.9.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_drawer.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\drawer_shadow.9.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_drawer.png" />
   </ItemGroup>
@@ -128,7 +127,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Screens\" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_drawer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
