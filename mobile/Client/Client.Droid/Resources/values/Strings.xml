@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">Client.Droid</string>
+    <string name="Schedule">Schedule</string>
+    <string name="Announcements">Announcements</string>
+    <string name="Map">Map</string>
+    <string name="Sports">Sports</string>
+    <string name="Acknowledgements">Acknowledgements</string>
+
 </resources>

@@ -2,6 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Schedule"
+        android:drawableLeft="@drawable/Icon"
+        android:id="@+id/scheduleButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Announcements"
+        android:drawableLeft="@drawable/Icon"
+        android:id="@+id/announcementsButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Map"
+        android:drawableLeft="@drawable/Icon"
+        android:id="@+id/mapsButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Sports"
+        android:drawableLeft="@drawable/Icon"
+        android:id="@+id/sportsButton" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Acknowledgements"
+        android:drawableLeft="@drawable/Icon"
+        android:id="@+id/acknowledgementsButton" />
 </LinearLayout>
