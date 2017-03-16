@@ -26,7 +26,7 @@ namespace Client.Droid
 
 			SetContentView(Resource.Layout.Main);
 
-			ActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_drawer);
+			//ActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_drawer);
 			ActionBar.SetDisplayHomeAsUpEnabled(true);
 			ActionBar.SetHomeButtonEnabled(true);
 			//ActionBar.SetDisplayShowTitleEnabled(false);
