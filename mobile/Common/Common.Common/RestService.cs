@@ -92,7 +92,6 @@ namespace Common.Common
                 {
                     Debug.WriteLine(@"				TodoItem successfully deleted.");
                 }
-
             }
             catch (Exception ex)
             {
