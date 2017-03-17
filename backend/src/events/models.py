@@ -8,9 +8,11 @@ class Location(models.Model):
     notes = models.TextField()
 
 class Event(models.Model):
+    title = models.CharField(max_length=80)
     audience = models.CharField(max_length=8) # "brothers", "sisters", or "general" 
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     description = models.TextField()
+    location = models.ForeignKey(Location, blank=True, null=True)
 
 
