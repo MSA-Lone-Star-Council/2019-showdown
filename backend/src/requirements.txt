@@ -6,3 +6,5 @@ pyjwt==1.4.2
 colorlog==2.10.0
 djangorestframework==3.5.4
 whitenoise==3.3.0
+ipython==5.3.0
+drfdocs==0.0.11
