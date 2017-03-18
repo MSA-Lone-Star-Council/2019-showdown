@@ -1,7 +1,7 @@
 version: "2"
 services:
     api:
-        build: ./src
+        image: msalonestarcouncil/showdown:latest
         ports:
             - "80:3000"
         env_file:

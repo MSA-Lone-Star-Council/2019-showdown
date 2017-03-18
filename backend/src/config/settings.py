@@ -145,6 +145,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]'] + [ env.str('HOST', '') ]
+
 # Logging Configuration
 # -------------------------------------------------------------------------
 LOGGING = {
