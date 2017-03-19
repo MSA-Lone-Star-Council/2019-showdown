@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleName</key>
 	<string>Showdown</string>
-	<key>CFBundleIdentifier</key>
-	<string>org.msa-texas.showdown</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -30,5 +28,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.msa-texas.showdown.temporary</string>
 </dict>
 </plist>
