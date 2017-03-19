@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Common.Models
 {
-    class Location
+    public class Location
     {
         public string Id { get; set; }
 
