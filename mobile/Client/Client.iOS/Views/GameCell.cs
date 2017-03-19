@@ -27,14 +27,14 @@ namespace Client.iOS
 
 		public GameCell(IntPtr p) : base (p)
 		{
-			var containerView = new UIView() { BackgroundColor = UIColor.White };
+			var containerView = new UIView() { BackgroundColor = new UIColor(0.94f, 0.94f, 0.94f, 1.0f) };
 			ContentView.Add(containerView);
 			containerView.MakeConstraints(make =>
 			{
 				make.Edges.EqualTo(ContentView).Insets(new UIEdgeInsets(5, 5, 5, 5));
 			});
-			containerView.Layer.CornerRadius = 10;
-			containerView.Layer.BorderWidth = 1.5f;
+			containerView.Layer.CornerRadius = 3;
+			containerView.Layer.BorderWidth = 0.5f;
 			containerView.Layer.BorderColor = UIColor.LightGray.CGColor;
 
 
