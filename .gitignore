@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 
 **/[Rr]esource.[Dd]esigner.cs
+**/Secrets.cs
