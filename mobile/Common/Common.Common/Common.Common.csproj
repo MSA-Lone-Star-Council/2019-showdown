@@ -32,6 +32,12 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Presenter.cs" />
+    <Compile Include="Models\Game.cs" />
+    <Compile Include="Models\ScoreRecord.cs" />
+    <Compile Include="Models\Score.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
     <Compile Include="Secrets.cs" />
     <Compile Include="ShowdownRESTClient.cs" />
   </ItemGroup>
