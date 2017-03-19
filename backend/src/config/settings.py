@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3
-APPS_DIR = ROOT_DIR.path('showdown')
+APPS_DIR = ROOT_DIR.path('app')
 
 env = environ.Env()
 
@@ -26,23 +26,30 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'graphene_django',
+    'rest_framework',
+    'rest_framework_docs',
 ]
 
 LOCAL_APPS = [
     'core',
+    'accounts',
+    'notifications',
+    'events',
+    'scores',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 # Middleware Configuration
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'accounts.middleware.WebTokenMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -114,6 +121,8 @@ ROOT_URLCONF = 'config.urls'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+APPEND_SLASH = False
+
 # Authentication Configuration
 # --------------------------------------------------------------------------
 # Password validation
@@ -135,6 +144,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]'] + [ env.str('HOST', '') ]
 
 # Logging Configuration
 # -------------------------------------------------------------------------
@@ -167,10 +178,6 @@ LOGGING = {
             'level': env('DJANGO_LOG_LEVEL', default='INFO')
         }
     }
-}
-
-GRAPHENE = {
-    'SCHEMA': 'core.schema.schema'
 }
 
 FACEBOOK = {

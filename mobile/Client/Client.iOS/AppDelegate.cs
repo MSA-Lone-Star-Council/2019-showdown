@@ -18,8 +18,20 @@ namespace Client.iOS
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
+			Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+			var tabBarController = new UITabBarController();
+
+			tabBarController.ViewControllers = new UIViewController[]
+			{
+				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
+				new UINavigationController(new AnnoucementsViewController())  { Title = "Annoucements" },
+				new UINavigationController(new SportsViewController())  { Title = "Sports" },
+				new UINavigationController(new AcknowledgementsViewController()) { Title = "Acknowledgemetns" },
+			};
+
+			Window.RootViewController = tabBarController;
+			Window.MakeKeyAndVisible();
 
 			return true;
 		}
