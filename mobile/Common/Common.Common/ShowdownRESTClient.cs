@@ -9,20 +9,21 @@ using Common.Common.Models;
 
 namespace Common.Common
 {
-    class RestService
+    class ShowdownRESTClient
     {
         HttpClient client;
 
         //Move to a "Constants" file once finalized
-        static string RestUrl = "http://developer.xamarin.com:8081/api/todoitems{0}";
+        static string RestUrl;
 
 
-        public RestService()
+        public ShowdownRESTClient()
         {
             client = new HttpClient()
             {
                 MaxResponseContentBufferSize = 256000
             };
+            RestUrl = "http://developer.xamarin.com:8081/api/todoitems{0}";
         }
 
         //Get a list of Schedule Events
