@@ -16,10 +16,10 @@ namespace Client.Droid
 
         string[] NavigationTitles { get; set; }
         DrawerLayout DrawerLayout { get; set; }
-        Android.Support.V7.App.ActionBarDrawerToggle DrawerToggle { get; set; }
+        V7.App.ActionBarDrawerToggle DrawerToggle { get; set; }
         ListView DrawerList { get; set; }
 
-        Android.Support.V4.App.Fragment[] Fragments { get; set; }
+        V4.App.Fragment[] Fragments { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
