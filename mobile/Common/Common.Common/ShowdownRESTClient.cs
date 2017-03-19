@@ -12,8 +12,6 @@ namespace Common.Common
     class ShowdownRESTClient
     {
         HttpClient client;
-
-        //Move to a "Constants" file once finalized
         static string RestUrl;
 
 
@@ -23,7 +21,7 @@ namespace Common.Common
             {
                 MaxResponseContentBufferSize = 256000
             };
-            RestUrl = "http://developer.xamarin.com:8081/api/todoitems{0}";
+            RestUrl = Secrets.BACKEND_URL;
         }
 
         //Get a list of Schedule Events
