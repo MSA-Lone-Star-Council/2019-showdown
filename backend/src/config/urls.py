@@ -1,9 +1,11 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from graphene_django.views import GraphQLView
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^graphql', GraphQLView.as_view(graphiql=True))
+    url(r'^accounts/', include('accounts.urls')),
+    url(r'^events/', include('events.urls')),
+    url(r'^scores/', include('scores.urls')),
+    url(r'^core/', include('core.urls')),
+    url(r'^docs/', include('rest_framework_docs.urls')),
 ]

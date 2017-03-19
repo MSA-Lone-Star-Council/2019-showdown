@@ -1,13 +1,20 @@
 version: "2"
 services:
-    db:
-        image: postgres
     api:
-        extends:
-            file: production.yml
-            service: api
+        build: ./src
+        ports:
+            - "80:3000"
+        env_file:
+            - .env
+        depends_on:
+            - db
         volumes:
             - ./src:/usr/src/app
         command: gunicorn config.wsgi --name api_server -b :3000 -w 3 --reload
-        depends_on:
-            - db
+
+    db:
+        image: postgres
+        volumes:
+            - data:/var/lib/postgresql/data
+volumes:
+    data: {}
