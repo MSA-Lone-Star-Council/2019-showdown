@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">Client.Droid</string>
-
-	<string-array name="nav_titles">
-		<item>Schedule</item>
-		<item>Annoucements</item>
-		<item>Sports</item>
-		<item>Acknowledgements</item>
-	</string-array>
-	<string name="drawer_open">Open Menu</string>
+    <string name="ApplicationName">MSA Showdown 2017</string>
+    <string-array name="nav_titles">
+      <item>Schedule</item>
+      <item>Annoucements</item>
+      <item>Sports</item>
+      <item>Acknowledgements</item>
+    </string-array>
+    <string name="drawer_open">Open Menu</string>
     <string name="drawer_close">Close Menu</string>
 </resources>
