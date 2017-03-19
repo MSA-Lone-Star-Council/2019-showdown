@@ -40,13 +40,13 @@ namespace Client.Droid
             DrawerList.Adapter = new ArrayAdapter<string>(this, Resource.Layout.drawer_list_item, NavigationTitles);
             DrawerList.ItemClick += (sender, e) => SelectItem(e.Position);
 
-            DrawerToggle = new Android.Support.V7.App.ActionBarDrawerToggle(
+            DrawerToggle = new V7.App.ActionBarDrawerToggle(
                 this,
                 DrawerLayout,
                 Resource.String.drawer_open,
                 Resource.String.drawer_close);
 
-            Fragments = new Android.Support.V4.App.Fragment[] {
+            Fragments = new V4.App.Fragment[] {
                 new ScheduleFragment(),
                 new AnnouncementsFragment(),
                 new SportsFragment(),
