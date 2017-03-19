@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using Android.Support.V4.App;
 using Android.Content;
 using Android.OS;
@@ -8,7 +13,7 @@ using Android.Widget;
 
 namespace Client.Droid.Screens
 {
-    public class ScheduleFragment : Fragment
+    public class AnnouncementsFragment : Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -20,8 +25,7 @@ namespace Client.Droid.Screens
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            return inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
+            return inflater.Inflate(Resource.Layout.fragment_announcements, container, false);
         }
     }
 }
-

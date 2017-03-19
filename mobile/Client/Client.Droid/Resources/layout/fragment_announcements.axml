@@ -6,7 +6,7 @@
     android:minWidth="25px"
     android:minHeight="25px">
   <TextView
-      android:text="SPORTS!"
+      android:text="Annoucements"
       android:textAppearance="?android:attr/textAppearanceLarge"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
