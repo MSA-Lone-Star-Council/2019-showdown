@@ -80,6 +80,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Masonry">
+      <HintPath>..\..\packages\Masonry.0.6.4.0\lib\Xamarin.iOS\Masonry.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -92,6 +95,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Screens\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -99,18 +103,30 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Screens\ScheduleViewController.cs" />
     <Compile Include="Screens\AnnoucementsViewController.cs" />
     <Compile Include="Screens\SportsViewController.cs" />
     <Compile Include="Screens\AcknowledgementsViewController.cs" />
+    <Compile Include="Views\GameCell.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client.Common\Client.Common.csproj">
+      <Project>{F240F33F-CA8A-42C2-B5A6-EF854421050E}</Project>
+      <Name>Client.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
+      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
+      <Name>Common.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
+      <Project>{9FC81125-076D-4AFC-8180-DE27BB1EAF33}</Project>
+      <Name>Common.iOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

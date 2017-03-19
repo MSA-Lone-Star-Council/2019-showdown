@@ -20,7 +20,7 @@ namespace Scorekeeper.Common
 		/// </summary>
 		public async Task SetupView()
 		{
-			if (view == null) return;
+			if (View == null) return;
 
 			// TODO: Read scores from cache
 			SetScoreOnView(Team.Home, 0);
@@ -43,7 +43,7 @@ namespace Scorekeeper.Common
 		/// <param name="delta">The amount to increase (or if negative, decrease)</param>
 		public async Task IncreaseScore(Team team, int delta)
 		{
-			if (view == null) return; 
+			if (View == null) return; 
 
 			int previousScore = GetScoreFromView(team);
 
@@ -68,7 +68,7 @@ namespace Scorekeeper.Common
 		/// <param name="team">The team to get the score for</param>
 		private int GetScoreFromView(Team team)
 		{
-			return team == Team.Home ? view.HomeScore : view.AwayScore;
+			return team == Team.Home ? View.HomeScore : View.AwayScore;
 		}
 
 		/// <summary>
@@ -80,8 +80,8 @@ namespace Scorekeeper.Common
 		{
 			switch(team)
 			{
-				case Team.Home: view.HomeScore =  score; break;
-				case Team.Away: view.AwayScore = score; break;
+				case Team.Home: View.HomeScore =  score; break;
+				case Team.Away: View.AwayScore = score; break;
 			}
 		}
 
