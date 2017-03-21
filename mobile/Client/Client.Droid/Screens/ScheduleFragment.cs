@@ -30,6 +30,8 @@ namespace Client.Droid.Screens
             // Set up Recycler View for the Schedule
             ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
             ScheduleView.SetAdapter(new ScheduleAdapter(new string[5] { "hello", "my", "name", "is", "Saad" }));
+            ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
+
 
             return view;
         }

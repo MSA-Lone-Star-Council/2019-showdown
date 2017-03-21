@@ -23,9 +23,8 @@ namespace Client.Droid.Adapters
 
             //Setup your layout here
             View itemView = null;
-            //var id = Resource.Layout.__YOUR_ITEM_HERE;
-            //itemView = LayoutInflater.From(parent.Context).
-            //       Inflate(id, parent, false);
+            var id = Resource.Layout.event_layout;
+            itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
             var vh = new ScheduleAdapterViewHolder(itemView, OnClick, OnLongClick);
             return vh;
@@ -38,7 +37,7 @@ namespace Client.Droid.Adapters
 
             // Replace the contents of the view with that element
             var holder = viewHolder as ScheduleAdapterViewHolder;
-            //holder.TextView.Text = items[position];
+            holder.Title.Text = items[position];
         }
 
         public override int ItemCount => items.Length;
@@ -50,13 +49,13 @@ namespace Client.Droid.Adapters
 
     public class ScheduleAdapterViewHolder : RecyclerView.ViewHolder
     {
-        //public TextView TextView { get; set; }
+        public TextView Title { get; set; }
 
 
         public ScheduleAdapterViewHolder(View itemView, Action<ScheduleAdapterClickEventArgs> clickListener,
                             Action<ScheduleAdapterClickEventArgs> longClickListener) : base(itemView)
         {
-            //TextView = v;
+            Title = itemView.FindViewById<TextView>(Resource.Id.eventTitle);
             itemView.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
         }
