@@ -3,6 +3,7 @@ using System;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
+using Android.Support.V7;
 
 using Common.Common;
 using Common.Common.Models;
@@ -26,9 +27,8 @@ namespace Client.Droid.Adapters
         {
 
             //Setup your layout here
-            View itemView = null;
             var id = Resource.Layout.event_layout;
-            itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
+            View itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
             var vh = new ScheduleAdapterViewHolder(itemView, OnClick, OnLongClick);
             return vh;
@@ -61,6 +61,7 @@ namespace Client.Droid.Adapters
                             Action<ScheduleAdapterClickEventArgs> longClickListener) : base(itemView)
         {
             Title = itemView.FindViewById<TextView>(Resource.Id.eventTitle);
+            Description = itemView.FindViewById<TextView>(Resource.Id.eventDescription);
             itemView.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
         }
