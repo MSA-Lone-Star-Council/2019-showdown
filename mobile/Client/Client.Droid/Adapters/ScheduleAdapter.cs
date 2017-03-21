@@ -4,15 +4,19 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 
+using Common.Common;
+using Common.Common.Models;
+using System.Collections.Generic;
+
 namespace Client.Droid.Adapters
 {
     class ScheduleAdapter : RecyclerView.Adapter
     {
         public event EventHandler<ScheduleAdapterClickEventArgs> ItemClick;
         public event EventHandler<ScheduleAdapterClickEventArgs> ItemLongClick;
-        string[] items;
+        List<Event> items;
 
-        public ScheduleAdapter(string[] data)
+        public ScheduleAdapter(List<Event> data)
         {
             items = data;
         }
@@ -37,10 +41,10 @@ namespace Client.Droid.Adapters
 
             // Replace the contents of the view with that element
             var holder = viewHolder as ScheduleAdapterViewHolder;
-            holder.Title.Text = items[position];
+            holder.Title.Text = items[position].Title;
         }
 
-        public override int ItemCount => items.Length;
+        public override int ItemCount => items.Count;
 
         void OnClick(ScheduleAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
         void OnLongClick(ScheduleAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);
@@ -50,6 +54,7 @@ namespace Client.Droid.Adapters
     public class ScheduleAdapterViewHolder : RecyclerView.ViewHolder
     {
         public TextView Title { get; set; }
+        public TextView Description { get; set; }
 
 
         public ScheduleAdapterViewHolder(View itemView, Action<ScheduleAdapterClickEventArgs> clickListener,

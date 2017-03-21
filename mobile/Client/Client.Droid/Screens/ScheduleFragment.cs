@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Client.Droid.Adapters;
+using Common.Common;
 
 namespace Client.Droid.Screens
 {
@@ -29,7 +30,7 @@ namespace Client.Droid.Screens
 
             // Set up Recycler View for the Schedule
             ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
-            ScheduleView.SetAdapter(new ScheduleAdapter(new string[5] { "hello", "my", "name", "is", "Saad" }));
+            ScheduleView.SetAdapter(new ScheduleAdapter(ShowdownRESTClient.MakeFakeData()));
             ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
 
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.Common.Models
 {
-    class Event
+    public class Event
     {
         public string Id { get; set; }
 
