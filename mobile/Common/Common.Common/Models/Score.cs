@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Common.Common.Models
 {
-	public class Score
+	public struct Score
 	{
 		public string Team { get; set; }
 

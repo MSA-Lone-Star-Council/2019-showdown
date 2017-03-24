@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Common.Common.Models
 {
-	public class Event
+	public struct Event
     {
         public string Id { get; set; }
 
-        //TODO: Make this a DateTime Object that's compatible cross-platform
-        public string StartTime { get; set; }
+		public DateTimeOffset StartTime { get; set; }
 
-        //TODO: Make this a DateTime Object that's compatible cross-platform
-        public string EndTime { get; set; }
+		public DateTimeOffset EndTime { get; set; }
 
         public string Title { get; set; }
 

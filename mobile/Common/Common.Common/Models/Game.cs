@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Common.Common.Models
 {
-	public class Game
+	public struct Game
 	{
 		public string ID { get; set; }
 		public string Title { get; set; }
