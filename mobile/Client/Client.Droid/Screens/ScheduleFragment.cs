@@ -13,9 +13,7 @@ namespace Client.Droid.Screens
 {
     public class ScheduleFragment : Fragment
     {
-
         RecyclerView ScheduleView;
-
 
         public override void OnCreate(Bundle savedInstanceState)
         {
