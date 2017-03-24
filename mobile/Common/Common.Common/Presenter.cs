@@ -1,6 +1,7 @@
 ﻿namespace Common.Common
 {
 	using System;
+	using System.Threading.Tasks;
 
 	/// <summary>
 	/// Presenter is the base class for all presenters in the app. The presenter is pretty much
@@ -9,7 +10,7 @@
 	/// </summary>
 	public class Presenter<V>
 	{
-		protected V view;
+		protected V View { get; set; }
 
 		/// <summary>
 		/// Sets the view the presenter is holding
@@ -17,7 +18,7 @@
 		/// <param name="view">The view the presenter should use</param>
 		public virtual void TakeView(V view)
 		{
-			this.view = view;
+			this.View = view;
 		}
 
 		/// <summary>
@@ -25,7 +26,8 @@
 		/// </summary>
 		public virtual void RemoveView()
 		{
-			this.view = default(V);
+			this.View = default(V);
 		}
 	}
+
 }
