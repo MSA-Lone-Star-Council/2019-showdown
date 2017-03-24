@@ -46,6 +46,7 @@ namespace Client.Droid.Screens
             // Display a toast that briefly shows the enumeration of the selected photo:
             int itemNumber = args.Position + 1;
             Toast.MakeText(this.Activity, "This is event number " + itemNumber, ToastLength.Short).Show();
+            StartActivity(new Intent(this.Activity, typeof(DetailedEventActivity)));
         }
     }
 }
