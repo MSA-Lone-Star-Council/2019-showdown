@@ -9,11 +9,9 @@ using Common.Common.Models;
 
 namespace Common.Common
 {
-    class ShowdownRESTClient
+    public class ShowdownRESTClient
     {
         HttpClient client;
-
-        //Move to a "Constants" file once finalized
         static string RestUrl;
 
 
@@ -23,7 +21,7 @@ namespace Common.Common
             {
                 MaxResponseContentBufferSize = 256000
             };
-            RestUrl = "http://developer.xamarin.com:8081/api/todoitems{0}";
+            RestUrl = Secrets.BACKEND_URL;
         }
 
         //Get a list of Schedule Events
@@ -97,6 +95,44 @@ namespace Common.Common
             {
                 Debug.WriteLine(@"				ERROR {0}", ex.Message);
             }
+        }
+
+        public static List<Event> MakeFakeData()
+        {
+            var event1 = new Event
+            {
+                Id = "0",
+                StartTime = "900",
+                EndTime = "1100",
+                Description = "Listen to Dudes sing",
+                Title = "Brothers Nasheed",
+                Location = new Location
+                {
+                    Name = "Texas Union Ballroom"
+                }
+            };
+            var event2 = new Event
+            {
+                Id = "1",
+                StartTime = "900",
+                EndTime = "1100",
+                Description = "Listen to gals spit fire",
+                Title = "Sisters Poetry",
+                Location = new Location
+                {
+                    Name = "Texas Union Ballroom"
+                }
+            };
+            List<Event> events = new List<Event>();
+            for (int i = 0; i < 5; i++)
+            {
+                if (i % 2 != 0) { event1.Id = i.ToString(); }
+                else            { event2.Id = i.ToString(); }
+
+                events.Add(event1);
+                events.Add(event2);
+            }
+            return events;
         }
     }
 }
