@@ -58,6 +58,7 @@ namespace Client.Droid.Adapters
         public TextView Title { get; set; }
         public TextView Description { get; set; }
         public TextView StartTime { get; set; }
+        public ImageView EventPicture { get; set; }
 
 
         public ScheduleAdapterViewHolder(View itemView, Action<ScheduleAdapterClickEventArgs> clickListener,
@@ -66,6 +67,7 @@ namespace Client.Droid.Adapters
             Title = itemView.FindViewById<TextView>(Resource.Id.event_title);
             Description = itemView.FindViewById<TextView>(Resource.Id.event_description);
             StartTime = itemView.FindViewById<TextView>(Resource.Id.event_start_time);
+            EventPicture = itemView.FindViewById<ImageView>(Resource.Id.event_picture);
 
             itemView.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
