@@ -42,7 +42,7 @@ namespace Client.Droid.Adapters
             // Replace the contents of the view with that element
             var holder = viewHolder as ScheduleAdapterViewHolder;
             holder.Title.Text = items[position].Title;
-            holder.Description.Text = items[position].Description;
+            holder.Location.Text = items[position].Location.Name;
             holder.StartTime.Text = items[position].StartTime;
         }
 
@@ -56,7 +56,7 @@ namespace Client.Droid.Adapters
     public class ScheduleAdapterViewHolder : RecyclerView.ViewHolder
     {
         public TextView Title { get; set; }
-        public TextView Description { get; set; }
+        public TextView Location { get; set; }
         public TextView StartTime { get; set; }
         public ImageView EventPicture { get; set; }
 
@@ -65,7 +65,7 @@ namespace Client.Droid.Adapters
                             Action<ScheduleAdapterClickEventArgs> longClickListener) : base(itemView)
         {
             Title = itemView.FindViewById<TextView>(Resource.Id.event_title);
-            Description = itemView.FindViewById<TextView>(Resource.Id.event_description);
+            Location = itemView.FindViewById<TextView>(Resource.Id.event_location);
             StartTime = itemView.FindViewById<TextView>(Resource.Id.event_start_time);
             EventPicture = itemView.FindViewById<ImageView>(Resource.Id.event_picture);
 

@@ -105,15 +105,23 @@ namespace Common.Common
                 StartTime = "900",
                 EndTime = "1100",
                 Description = "Listen to Dudes sing",
-                Title = "Brothers Nasheed"
+                Title = "Brothers Nasheed",
+                Location = new Location
+                {
+                    Name = "Texas Union Ballroom"
+                }
             };
             var event2 = new Event
             {
                 Id = "1",
                 StartTime = "900",
                 EndTime = "1100",
-                Description = "Listen to gals sing",
-                Title = "Sisters Nasheed"
+                Description = "Listen to gals spit fire",
+                Title = "Sisters Poetry",
+                Location = new Location
+                {
+                    Name = "Texas Union Ballroom"
+                }
             };
             List<Event> events = new List<Event>();
             for (int i = 0; i < 5; i++)

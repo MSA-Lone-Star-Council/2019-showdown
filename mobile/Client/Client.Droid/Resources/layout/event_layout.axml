@@ -4,7 +4,8 @@
       android:id="@+id/android_card_view_example2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp">
+      android:layout_marginTop="16dp"
+      android:foreground="?android:attr/selectableItemBackground">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
             android:textColor="#8b8b8b"
             android:textSize="24sp" />
         <TextView
-            android:id="@+id/event_description"
+            android:id="@+id/event_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/event_title"
@@ -40,7 +41,7 @@
             android:id="@+id/event_start_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/event_description"
+            android:layout_below="@+id/event_location"
             android:layout_toRightOf="@+id/event_picture"
             android:text="Event Description"
             android:textColor="#8b8b8b" />
