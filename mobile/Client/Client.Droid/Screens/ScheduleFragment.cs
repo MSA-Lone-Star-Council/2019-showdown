@@ -30,11 +30,22 @@ namespace Client.Droid.Screens
 
             // Set up Recycler View for the Schedule
             ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
-            ScheduleView.SetAdapter(new ScheduleAdapter(ShowdownRESTClient.MakeFakeData()));
+
+            ScheduleAdapter adapter = new ScheduleAdapter(ShowdownRESTClient.MakeFakeData());
+            ScheduleView.SetAdapter(adapter);
             ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
 
+            adapter.ItemClick += OnItemClick;
 
             return view;
+        }
+
+        // Handler for the item click event:
+        void OnItemClick(object sender, ScheduleAdapterClickEventArgs args)
+        {
+            // Display a toast that briefly shows the enumeration of the selected photo:
+            int itemNumber = args.Position + 1;
+            Toast.MakeText(this.Activity, "This is event number " + itemNumber, ToastLength.Short).Show();
         }
     }
 }
