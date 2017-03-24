@@ -4,11 +4,10 @@ using Common.Common.Models;
 
 namespace Client.Common
 {
-	public interface ISportsView
+	public interface IGameView
 	{
-		List<Game> Games { set; }
-
-		void OpenGame(Game g);
+		Game Game { get; }
+		List<ScoreRecord> ScoreHistory { set; }
 
 		void ShowMessage(string message);
 	}

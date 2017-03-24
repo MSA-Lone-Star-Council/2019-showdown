@@ -31,6 +31,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SportsScreen\SportsPresenter.cs" />
     <Compile Include="SportsScreen\ISportsView.cs" />
+    <Compile Include="GameScreen\GamePresenter.cs" />
+    <Compile Include="GameScreen\IGameView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
@@ -40,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SportsScreen\" />
+    <Folder Include="GameScreen\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
