@@ -43,7 +43,7 @@ namespace Client.Droid.Adapters
             var holder = viewHolder as ScheduleAdapterViewHolder;
             holder.Title.Text = items[position].Title;
             holder.Location.Text = items[position].Location.Name;
-            holder.StartTime.Text = items[position].StartTime;
+            holder.StartTime.Text = Utilities.FormatDateTime(items[position].StartTime);
         }
 
         public override int ItemCount => items.Count;
