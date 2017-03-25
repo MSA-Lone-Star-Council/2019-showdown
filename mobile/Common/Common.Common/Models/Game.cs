@@ -10,8 +10,7 @@ namespace Common.Common.Models
 		public string ID { get; set; }
 		public string Title { get; set; }
 
-		[JsonProperty(PropertyName = "event")]
-		public int EventId { get; set; }
+		public Event Event { get; set; }
 
 		public List<string> Teams { get; set; }
 
@@ -39,7 +38,7 @@ namespace Common.Common.Models
 	        return (
                 ID == other.ID &&
                 Title == other.Title &&
-	            EventId == other.EventId &&
+                Event == other.Event &&
                 Time == other.Time &&
                 Teams.SequenceEqual(other.Teams) &&
                 Score.SequenceEqual(other.Score)

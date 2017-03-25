@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using Common.Common;
+using Foundation;
 using UIKit;
 
 namespace Client.iOS
@@ -16,8 +17,12 @@ namespace Client.iOS
 			set;
 		}
 
+	    public ShowdownRESTClient BackendClient { get; set; }
+
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
+		    BackendClient = new ShowdownRESTClient();
+
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
 			var tabBarController = new UITabBarController();

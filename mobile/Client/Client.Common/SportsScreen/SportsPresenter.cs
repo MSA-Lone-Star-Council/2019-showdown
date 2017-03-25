@@ -10,6 +10,13 @@ namespace Client.Common
 	public class SportsPresenter : Presenter<ISportsView>
 	{
 
+	    private readonly ShowdownRESTClient _client;
+
+	    public SportsPresenter(ShowdownRESTClient client)
+	    {
+	        _client = client;
+	    }
+
 		public async Task OnBegin()
 		{
 			await UpdateFromServer();
@@ -41,53 +48,7 @@ namespace Client.Common
 
 		private async Task<List<Game>> GetAllGames()
 		{
-
-			var baseTime = DateTimeOffset.Now;
-
-
-			// TODO: Hit the backend
-			Event basketball = new Event() { Title = "Brother's Basketball" };
-			Event volleyball = new Event() { Title = "Sister's Vollyeball" };
-
-			Game bballLoserFinals = new Game() { 
-				Title = "Loser Bracket Finals", 
-				Time = baseTime.Subtract(TimeSpan.FromSeconds(30*60 + 12)),
-				Event = basketball,
-				Teams = new List<string>() { "UH", "Texas Tech" },
-			};
-			Game bballFinals = new Game() {
-				ID = "abc-123-xyz-789",
-				Title = "Finals", 
-				Time = baseTime.Subtract(TimeSpan.FromSeconds(45*60 + 28)),
-				Event = basketball,
-				Teams = new List<string>() { "UT Austin", "UT Dallas" },
-			};
-
-			Score utAustinBBallScore = new Score() { Team = "UT Austin", Points = 90 };
-			Score utDallasBBallScore = new Score() { Team = "UT Dallas", Points = 10 };
-
-
-			Score uHoustonBBallScore = new Score() { Team = "UH", Points = 40 };
-			Score texasTechBBallScore = new Score() { Team = "Texas Tech", Points = 30 };
-
-			bballFinals.Score = new List<Score>() { utAustinBBallScore, utDallasBBallScore };
-			bballFinals.Teams = new List<string>() { "UT Austin", "UT Dallas" };
-
-			bballLoserFinals.Score = new List<Score> { uHoustonBBallScore, texasTechBBallScore };
-
-			Game volleyballElim = new Game() { 
-				Title = "SMU vs UTA Elimination", 
-				Time = baseTime.Subtract(TimeSpan.FromSeconds(20*60 + 48)),
-				Event = volleyball,
-				Teams = new List<string>() { "SMU", "UT Arlington" },
-			};
-			Score smuScore = new Score() { Team = "SMU", Points = 25 };
-			Score utaScore = new Score() { Team = "UT Arlington", Points = 10 };
-			volleyballElim.Score = new List<Score> { smuScore, utaScore };
-			volleyballElim.Teams = new List<string>() { "SMU", "UT Arlington" };
-
-
-			return new List<Game>() { bballLoserFinals, bballFinals, volleyballElim };
+		    return await _client.GetAllGames();
 		}
 	}
 }

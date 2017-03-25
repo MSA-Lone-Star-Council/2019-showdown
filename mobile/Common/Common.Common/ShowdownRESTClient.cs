@@ -30,6 +30,12 @@ namespace Common.Common
 			return Location.FromJSON(jsonString);
 		}
 
+        public async Task<List<Game>> GetAllGames()
+        {
+            var jsonString = await RequestAsync("/scores/games");
+            return Game.FromJSONArray(jsonString);
+        }
+
         public async Task<List<Game>> GetEventGames(int eventId)
         {
             var path = $"/events/{eventId}/games";

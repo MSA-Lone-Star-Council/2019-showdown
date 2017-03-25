@@ -20,8 +20,8 @@ namespace Client.iOS
 
 		public SportsViewController()
 		{
-			Presenter = new SportsPresenter();
-
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			Presenter = new SportsPresenter(appDelegate.BackendClient);
 			Presenter.TakeView(this);
 		}
 

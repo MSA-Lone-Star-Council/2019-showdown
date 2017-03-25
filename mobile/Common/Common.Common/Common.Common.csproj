@@ -36,6 +36,7 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\ScoreRecord.cs" />
     <Compile Include="Models\Score.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
