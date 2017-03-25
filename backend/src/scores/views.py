@@ -3,10 +3,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
 from .models import Game
-from .serializers import GameEventSerializer, ScoreCardSerializer
+from .serializers import GameSerializer, ScoreCardSerializer
 
 class GamesView(generics.ListAPIView):
-    serializer_class = GameEventSerializer
+    serializer_class = GameSerializer
     queryset = Game.objects.all()
 
 class ScoresForGameView(generics.ListAPIView):
