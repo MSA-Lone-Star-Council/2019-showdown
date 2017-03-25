@@ -36,5 +36,4 @@ namespace Client.Common
         {
             return ShowdownRESTClient.MakeFakeData();
         }
-    }
 }
