@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Common.Common.Models;
 
 namespace Common.Common

@@ -116,6 +116,9 @@
     <Compile Include="Screens\SportsViewController.cs" />
     <Compile Include="Screens\AcknowledgementsViewController.cs" />
     <Compile Include="Views\GameCell.cs" />
+    <Compile Include="Screens\GameViewController.cs" />
+    <Compile Include="Views\ScoreCell.cs" />
+    <Compile Include="Views\GameHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">

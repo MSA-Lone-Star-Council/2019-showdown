@@ -27,7 +27,7 @@ namespace Client.iOS
 
 		public GameCell(IntPtr p) : base (p)
 		{
-			var containerView = new UIView() { BackgroundColor = new UIColor(0.94f, 0.94f, 0.94f, 1.0f) };
+			var containerView = new UIView() { BackgroundColor = UIColor.White };
 			ContentView.Add(containerView);
 			containerView.MakeConstraints(make =>
 			{

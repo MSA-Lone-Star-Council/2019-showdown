@@ -22,7 +22,7 @@ namespace Client.Common
 
 		public async Task OnClickRow(Game row)
 		{
-			View.OpenGame(row.ID);
+			View.OpenGame(row);
 		}
 
 		public async Task OnStar(Game game)
@@ -52,12 +52,15 @@ namespace Client.Common
 			Game bballLoserFinals = new Game() { 
 				Title = "Loser Bracket Finals", 
 				Time = baseTime.Subtract(TimeSpan.FromSeconds(30*60 + 12)),
-				Event = basketball
+				Event = basketball,
+				Teams = new List<string>() { "UH", "Texas Tech" },
 			};
-			Game bballFinals = new Game() { 
+			Game bballFinals = new Game() {
+				ID = "abc-123-xyz-789",
 				Title = "Finals", 
 				Time = baseTime.Subtract(TimeSpan.FromSeconds(45*60 + 28)),
-				Event = basketball
+				Event = basketball,
+				Teams = new List<string>() { "UT Austin", "UT Dallas" },
 			};
 
 			Score utAustinBBallScore = new Score() { Team = "UT Austin", Points = 90 };
@@ -75,7 +78,8 @@ namespace Client.Common
 			Game volleyballElim = new Game() { 
 				Title = "SMU vs UTA Elimination", 
 				Time = baseTime.Subtract(TimeSpan.FromSeconds(20*60 + 48)),
-				Event = volleyball
+				Event = volleyball,
+				Teams = new List<string>() { "SMU", "UT Arlington" },
 			};
 			Score smuScore = new Score() { Team = "SMU", Points = 25 };
 			Score utaScore = new Score() { Team = "UT Arlington", Points = 10 };
