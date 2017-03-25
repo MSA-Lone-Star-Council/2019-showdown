@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Common.Common.Models
 {
@@ -13,5 +14,10 @@ namespace Common.Common.Models
 
 		public DateTimeOffset Time { get; set; }
 		public List<Score> Scores { get; set; }
+
+	    public static List<ScoreRecord> FromJSONArray(string jsonString)
+	    {
+	        return JsonConvert.DeserializeObject<List<ScoreRecord>>(jsonString);
+	    }
 	}
 }

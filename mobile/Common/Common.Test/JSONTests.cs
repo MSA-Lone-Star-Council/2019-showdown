@@ -24,7 +24,7 @@ namespace Common.Test
 
 			Location expected = new Location()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "Union Ballroom",
 				Latitude = 35.0,
 				Longitude = 40.0,
@@ -48,7 +48,7 @@ namespace Common.Test
 
 			Location expected = new Location()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "Union Ballroom",
 				Latitude = 0,
 				Longitude = 0,
@@ -80,8 +80,8 @@ namespace Common.Test
 
 			Event expected = new Event()
 			{
-				Id = 1,
-				Location = new Location() { Id = 1, Name = "Texas Union" },
+				Id = "1",
+				Location = new Location() { Id = "1", Name = "Texas Union" },
 				Title = "Rollcall",
 				Audience = "general",
 				StartTime = new DateTimeOffset(2017, 3, 17, 3, 21, 10, TimeSpan.Zero),
@@ -101,7 +101,6 @@ namespace Common.Test
 		    {
 		        ""id"":""80df9306-cafc-4f3d-9a16-f6da0d357b1b"",
 		        ""title"":""Finals"",
-		        ""event"":1,
 		        ""teams"":[
 		            ""UT Austin"",
 		            ""UT Dallas""
@@ -126,7 +125,7 @@ namespace Common.Test
 	        {
 	            ID = "80df9306-cafc-4f3d-9a16-f6da0d357b1b",
 	            Title = "Finals",
-	            EventId = 1,
+	            Event = default(Event),
 	            Teams = new List<string>() { "UT Austin", "UT Dallas"},
 	            Score = new List<Score>()
 	            {

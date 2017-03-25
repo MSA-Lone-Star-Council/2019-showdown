@@ -9,7 +9,7 @@ namespace Common.Common.Models
 {
 	public struct Event
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
 		[JsonProperty(PropertyName = "start_time")]
 		public DateTimeOffset StartTime { get; set; }
