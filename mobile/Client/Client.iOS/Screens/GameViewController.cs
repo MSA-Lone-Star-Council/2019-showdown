@@ -20,7 +20,8 @@ namespace Client.iOS
 
 		public GameViewController(Game g)
 		{
-			Presenter = new GamePresenter() { Game = g };
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			Presenter = new GamePresenter(appDelegate.BackendClient) { Game = g };
 
 			Game = g;
 
@@ -83,8 +84,8 @@ namespace Client.iOS
 
 			await Presenter.OnBegin();
 
-			Header.HomeScore = Game.Score[0];
-			Header.AwayScore = Game.Score[1];
+			Header.AwayScore = Game.Score[0];
+			Header.HomeScore = Game.Score[1];
 		}
 
 		public override void ViewWillDisappear(bool animated)
