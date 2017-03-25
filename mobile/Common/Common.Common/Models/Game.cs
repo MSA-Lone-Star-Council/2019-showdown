@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Common.Common.Models
 {
@@ -7,28 +9,57 @@ namespace Common.Common.Models
 	{
 		public string ID { get; set; }
 		public string Title { get; set; }
-		public Event Event { get; set; }
+
+		[JsonProperty(PropertyName = "event")]
+		public int EventId { get; set; }
 
 		public List<string> Teams { get; set; }
 
 		/// <summary>
 		/// The latest score for the game. 
 		/// It is essentially a list of (Team, Points) pairs (it's pretty bad naming)
-		/// 
-		/// This value can be null, and likely is
 		/// </summary>
 		/// <value>The score.</value>
 		public List<Score> Score { get; set; }
 
-		// Map this to JSON field "Scores" - the backend got all wonky...
-		/// <summary>
-		/// The score history of the game, with the newest score first
-		/// 
-		/// This value can be null, but usually isn't
-		/// </summary>
-		/// <value>The score history.</value>
-		public List<ScoreRecord> ScoreHistory { get; set; }
-
 		public DateTimeOffset Time { get; set; }
+
+	    public static Game FromJSON(string jsonString)
+	    {
+	        return JsonConvert.DeserializeObject<Game>(jsonString);
+	    }
+
+	    public static List<Game> FromJSONArray(string jsonString)
+	    {
+	        return JsonConvert.DeserializeObject<List<Game>>(jsonString);
+	    }
+
+	    public bool Equals(Game other)
+	    {
+	        return (
+                ID == other.ID &&
+                Title == other.Title &&
+	            EventId == other.EventId &&
+                Time == other.Time &&
+                Teams.SequenceEqual(other.Teams) &&
+                Score.SequenceEqual(other.Score)
+	        );
+	    }
+
+	    public override bool Equals(object obj)
+	    {
+	        if (ReferenceEquals(null, obj)) return false;
+	        return obj is Game && Equals((Game) obj);
+	    }
+
+	    public static bool operator ==(Game left, Game right)
+	    {
+	        return left.Equals(right);
+	    }
+
+	    public static bool operator !=(Game left, Game right)
+	    {
+	        return !left.Equals(right);
+	    }
 	}
 }
