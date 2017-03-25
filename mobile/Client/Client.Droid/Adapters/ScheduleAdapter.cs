@@ -15,12 +15,7 @@ namespace Client.Droid.Adapters
     {
         public event EventHandler<ScheduleAdapterClickEventArgs> ItemClick;
         public event EventHandler<ScheduleAdapterClickEventArgs> ItemLongClick;
-        List<Event> items;
-
-        public ScheduleAdapter(List<Event> data)
-        {
-            items = data;
-        }
+        public List<Event> Events { get; internal set; }
 
         // Create new views (invoked by the layout manager)
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -37,17 +32,17 @@ namespace Client.Droid.Adapters
         // Replace the contents of a view (invoked by the layout manager)
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            var item = items[position];
+            var item = Events[position];
 
             // Replace the contents of the view with that element
             var holder = viewHolder as ScheduleAdapterViewHolder;
             holder.Event = item;
             holder.Title.Text = item.Title;
             holder.Location.Text = item.Location.Name;
-            holder.StartTime.Text = item.StartTime;
+            holder.StartTime.Text = item.StartTime.ToString();
         }
 
-        public override int ItemCount => items.Count;
+        public override int ItemCount => Events.Count;
 
         void OnClick(ScheduleAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
         void OnLongClick(ScheduleAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);

@@ -9,7 +9,7 @@ namespace Client.Common
 {
     public interface IScheduleView
     {
-        List<Event> Events { get; set; }
+        List<Event> Events { set; }
 
         void ShowMessage(string message);
 

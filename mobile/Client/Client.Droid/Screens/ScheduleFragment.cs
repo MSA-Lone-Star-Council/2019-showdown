@@ -19,14 +19,29 @@ namespace Client.Droid.Screens
     public class ScheduleFragment : Fragment, IScheduleView
     {
         SchedulePresenter Presenter { get; set; }
-        RecyclerView scheduleView;  //TODO Change from field to Property? Saad thinks nah
-        List<Event> IScheduleView.Events { get; set; }
 
-        public override void OnCreate(Bundle savedInstanceState)
+
+        List<Event> IScheduleView.Events {
+            set
+            {
+                ScheduleAdapter adapter = this.Adapter;
+                adapter.Events = value;
+                adapter.NotifyDataSetChanged();
+            }
+        }
+        RecyclerView ScheduleView { get; set; }
+        ScheduleAdapter Adapter { get; set; }
+
+        public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Presenter = new SchedulePresenter();
+
+            Presenter = new SchedulePresenter(new ShowdownRESTClient());
             Presenter.TakeView(this);
+
+            Adapter = new ScheduleAdapter();
+            Adapter.ItemClick += OnItemClick;
+            await Presenter.OnBegin();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -34,13 +49,9 @@ namespace Client.Droid.Screens
             View view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
             // Set up Recycler View for the Schedule
-            scheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
-
-            ScheduleAdapter adapter = new ScheduleAdapter(ShowdownRESTClient.MakeFakeData());   //TODO move REST Call to Presenter
-            scheduleView.SetAdapter(adapter);
-            scheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
-
-            adapter.ItemClick += OnItemClick;
+            ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
+            ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
+            ScheduleView.SetAdapter(Adapter);
 
             return view;
         }
