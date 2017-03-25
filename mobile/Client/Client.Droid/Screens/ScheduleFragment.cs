@@ -25,6 +25,7 @@ namespace Client.Droid.Screens
             set
             {
                 ScheduleAdapter adapter = this.Adapter;
+				if (adapter == null) return;
                 adapter.Events = value;
                 adapter.NotifyDataSetChanged();
             }
@@ -40,7 +41,8 @@ namespace Client.Droid.Screens
             Presenter.TakeView(this);
 
             Adapter = new ScheduleAdapter();
-            Adapter.ItemClick += OnItemClick;
+
+			Adapter.Events = new List<Event>();
             await Presenter.OnBegin();
         }
 

@@ -8,6 +8,7 @@ using Android.Support.V7;
 using Common.Common;
 using Common.Common.Models;
 using System.Collections.Generic;
+using Android.Util;
 
 namespace Client.Droid.Adapters
 {
@@ -15,7 +16,7 @@ namespace Client.Droid.Adapters
     {
         public event EventHandler<ScheduleAdapterClickEventArgs> ItemClick;
         public event EventHandler<ScheduleAdapterClickEventArgs> ItemLongClick;
-        public List<Event> Events { get; internal set; }
+        public List<Event> Events { get; set; }
 
         // Create new views (invoked by the layout manager)
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -42,7 +43,14 @@ namespace Client.Droid.Adapters
             holder.StartTime.Text = item.StartTime.ToString();
         }
 
-        public override int ItemCount => Events.Count;
+		public override int ItemCount
+		{
+			get
+			{
+				return Events == null ? 0 : Events.Count;
+			}
+
+		}
 
         void OnClick(ScheduleAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
         void OnLongClick(ScheduleAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);
