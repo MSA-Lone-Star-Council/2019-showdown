@@ -19,7 +19,8 @@ namespace Client.Common
 
 		public async Task OnBegin()
 		{
-			View.ScoreHistory = new List<ScoreRecord>();
+			if (View != null)
+				View.ScoreHistory = new List<ScoreRecord>();
 			await UpdateFromServer();
 		}
 
