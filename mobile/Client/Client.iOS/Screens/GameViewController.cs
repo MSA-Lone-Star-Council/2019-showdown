@@ -82,10 +82,12 @@ namespace Client.iOS
 		{
 			base.ViewWillAppear(animated);
 
-			await Presenter.OnBegin();
+			var updateTask = Presenter.OnBegin();
 
 			Header.AwayScore = Game.Score[0];
 			Header.HomeScore = Game.Score[1];
+
+			await updateTask;
 		}
 
 		public override void ViewWillDisappear(bool animated)
