@@ -41,9 +41,10 @@ namespace Client.Droid.Adapters
 
             // Replace the contents of the view with that element
             var holder = viewHolder as ScheduleAdapterViewHolder;
-            holder.Title.Text = items[position].Title;
-            holder.Location.Text = items[position].Location.Name;
-            holder.StartTime.Text = items[position].StartTime;
+            holder.Event = item;
+            holder.Title.Text = item.Title;
+            holder.Location.Text = item.Location.Name;
+            holder.StartTime.Text = item.StartTime;
         }
 
         public override int ItemCount => items.Count;
@@ -55,6 +56,8 @@ namespace Client.Droid.Adapters
 
     public class ScheduleAdapterViewHolder : RecyclerView.ViewHolder
     {
+        public Event Event { get; set; }
+
         public TextView Title { get; set; }
         public TextView Location { get; set; }
         public TextView StartTime { get; set; }
@@ -69,8 +72,16 @@ namespace Client.Droid.Adapters
             StartTime = itemView.FindViewById<TextView>(Resource.Id.event_start_time);
             EventPicture = itemView.FindViewById<ImageView>(Resource.Id.event_picture);
 
-            itemView.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
-            itemView.LongClick += (sender, e) => longClickListener(new ScheduleAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
+            itemView.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs {
+                View = itemView,
+                Position = AdapterPosition,
+                Event = this.Event  //Edge case, Null if ViewHolder has been clicked before it was bound to a view
+            });
+            itemView.LongClick += (sender, e) => longClickListener(new ScheduleAdapterClickEventArgs {
+                View = itemView,
+                Position = AdapterPosition,
+                Event = this.Event //Edge case, Null if ViewHolder has been clicked before it was bound to a view
+            });
         }
     }
 
@@ -78,5 +89,6 @@ namespace Client.Droid.Adapters
     {
         public View View { get; set; }
         public int Position { get; set; }
+        public Event Event { get; set; }
     }
 }
