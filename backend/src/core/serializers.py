@@ -15,4 +15,4 @@ class SchoolSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = School
-        fields = ('slug', 'name', 'games', 'logo')
+        fields = ('slug', 'name', 'short_name', 'games', 'logo')
