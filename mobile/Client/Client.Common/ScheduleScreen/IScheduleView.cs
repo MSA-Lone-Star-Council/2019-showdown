@@ -7,8 +7,12 @@ using Common.Common.Models;
 
 namespace Client.Common
 {
-    interface IScheduleView
+    public interface IScheduleView
     {
-        List<Event> events { get; }
+        List<Event> Events { get; set; }
+
+        void ShowMessage(string message);
+
+        void OpenEvent(Event row);
     }
 }
