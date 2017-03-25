@@ -38,6 +38,7 @@ namespace Client.iOS
 			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
 
 			var tableSource = new SportsTableSource();
+			tableSource.Games = new List<Game>();
 			tableSource.RowTappedEvent += async (game) => await Presenter.OnClickRow(game);
 
 			GamesList = new UITableView(View.Bounds)

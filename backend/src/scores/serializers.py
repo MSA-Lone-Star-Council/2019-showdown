@@ -20,7 +20,7 @@ class ScoreCardSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ScoreCard
-        fields = ('id', 'game', 'scores')
+        fields = ('id', 'game', 'time', 'scores')
 
 class GameSerializer(serializers.ModelSerializer):
     event = serializers.PrimaryKeyRelatedField(read_only=True)
