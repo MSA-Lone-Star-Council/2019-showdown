@@ -39,17 +39,12 @@ namespace Client.Common
             View.OpenEvent(row);
         }
 
-        private async Task UpdateFromServer()
-        {
-            var gamesFromServer = await GetAllEvents();
+		private async Task UpdateFromServer()
+		{
+			var events = await _client.GetSchedule();
 
-            if (View != null)
-                View.Events = gamesFromServer.OrderByDescending(g => g.StartTime).ToList();
-        }
-
-        private async Task<List<Event>> GetAllEvents()
-        {
-            return await _client.GetSchedule();
-        }
+			if (View != null)
+				View.Events = events;
+		}
     }
 }
