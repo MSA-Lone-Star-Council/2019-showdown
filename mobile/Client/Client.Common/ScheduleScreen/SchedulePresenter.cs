@@ -11,6 +11,13 @@ namespace Client.Common
 {
     public class SchedulePresenter : Presenter<IScheduleView>
     {
+        private readonly ShowdownRESTClient _client;
+
+        public SchedulePresenter(ShowdownRESTClient client)
+        {
+            _client = client;
+        }
+
         public async Task OnBegin()
         {
             await UpdateFromServer();
@@ -32,9 +39,17 @@ namespace Client.Common
             View.OpenEvent(row);
         }
 
-        private async Task<List<Event>> UpdateFromServer()
+        private async Task UpdateFromServer()
         {
-            return ShowdownRESTClient.MakeFakeData();
+            var gamesFromServer = await GetAllEvents();
+
+            if (View != null)
+                View.Events = gamesFromServer.OrderByDescending(g => g.StartTime).ToList();
+        }
+
+        private async Task<List<Event>> GetAllEvents()
+        {
+            return await _client.GetSchedule();
         }
     }
 }

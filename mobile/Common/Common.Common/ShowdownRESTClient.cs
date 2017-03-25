@@ -17,7 +17,7 @@ namespace Common.Common
 			client = new HttpClient();
 		}
 
-		public async Task<List<Event>> GetScheduleAsync()
+		public async Task<List<Event>> GetSchedule()
 		{
 			var jsonString = await RequestAsync("/events/schedule");
 			return Event.FromJSONArray(jsonString);
