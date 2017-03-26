@@ -26,6 +26,7 @@ namespace Client.iOS
 	    {
 	        set
 	        {
+				if (AnnouncementsList == null) return;
                 AnnouncementsTableSource ats = AnnouncementsList.Source as AnnouncementsTableSource;
 	            ats.Announcements = value;
 	            AnnouncementsList.ReloadData();
