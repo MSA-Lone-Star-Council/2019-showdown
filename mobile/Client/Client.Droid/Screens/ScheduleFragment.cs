@@ -12,7 +12,6 @@ using Client.Common;
 using Common.Common.Models;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Client.Droid.Screens
 {
@@ -40,10 +39,13 @@ namespace Client.Droid.Screens
             Presenter = new SchedulePresenter(new ShowdownRESTClient());
             Presenter.TakeView(this);
 
-            Adapter = new ScheduleAdapter();
-
-			Adapter.Events = new List<Event>();
-            await Presenter.OnBegin();
+            Adapter = new ScheduleAdapter()
+            {
+                //Events = new List<Event>()
+                Events = MakeFakeData()
+            };
+            Adapter.ItemClick += OnItemClick;
+            //await Presenter.OnBegin();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -71,9 +73,50 @@ namespace Client.Droid.Screens
 
         void IScheduleView.OpenEvent(Event row)
         {
-            //TODO Serialize "Event" Object and pass to the Intent
-            StartActivity(new Intent(this.Activity, typeof(DetailedEventActivity)));
+            var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
+            Intent.PutExtra("event", row.ToJSON());
+            StartActivity(Intent);
         }
+
+        //REST Client isn't working right now, so this comes back
+        public static List<Event> MakeFakeData()
+        {
+            var event1 = new Event
+            {
+                Id = "0",
+                StartTime = new DateTimeOffset(),
+                EndTime = new DateTimeOffset(),
+                Description = "Listen to Dudes sing",
+                Title = "Brothers Nasheed",
+                Location = new Location
+                {
+                    Name = "Texas Union Ballroom"
+                }
+            };
+            var event2 = new Event
+            {
+                Id = "1",
+                StartTime = new DateTimeOffset(),
+                EndTime = new DateTimeOffset(),
+                Description = "Listen to gals spit fire",
+                Title = "Sisters Poetry",
+                Location = new Location
+                {
+                    Name = "Texas Union Ballroom"
+                }
+            };
+            List<Event> events = new List<Event>();
+            for (int i = 0; i < 5; i++)
+            {
+                if (i % 2 != 0) { event1.Id = i.ToString(); }
+                else { event2.Id = i.ToString(); }
+
+                events.Add(event1);
+                events.Add(event2);
+            }
+            return events;
+        }
+
     }
 }
 
