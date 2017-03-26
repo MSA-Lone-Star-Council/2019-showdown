@@ -30,6 +30,12 @@ namespace Common.Common
 			return Location.FromJSON(jsonString);
 		}
 
+        public async Task<List<Announcement>> GetAnnouncements()
+        {
+			var jsonString = await RequestAsync("/notifications/annoucements");
+			return Announcement.FromJSONArray(jsonString);
+        }
+
         public async Task<List<Game>> GetAllGames()
         {
             var jsonString = await RequestAsync("/scores/games");
