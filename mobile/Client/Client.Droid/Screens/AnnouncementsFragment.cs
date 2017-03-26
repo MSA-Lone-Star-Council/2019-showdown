@@ -13,6 +13,7 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Common.Common.Models;
 using Client.Common;
+using Client.Droid.Adapters;
 
 namespace Client.Droid.Screens
 {
@@ -60,27 +61,5 @@ namespace Client.Droid.Screens
 			return v;
 		}
 
-		class AnnouncementsAdapter : RecyclerView.Adapter
-		{
-
-			public List<Announcement> Announcements { get; set; }
-
-			public override int ItemCount => Announcements?.Count ?? 0;
-
-
-			public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
-			{
-				var item = Announcements[position];
-				AnnouncementViewHolder avh = holder as AnnouncementViewHolder;
-				avh.UpdateWithItem(item);
-			}
-
-			public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
-			{
-				var id = Resource.Layout.layout_announcement_item;
-				var itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
-				return new AnnouncementViewHolder(itemView);
-			}
-		}
 	}
 }

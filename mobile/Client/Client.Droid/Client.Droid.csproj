@@ -126,7 +126,7 @@
     <Compile Include="Notifications\ShowdownFirebaseMessagingIIDService.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingService.cs" />
     <Compile Include="ShowdownClientApplication.cs" />
-    <Compile Include="Views\AnnouncementViewHolder.cs" />
+    <Compile Include="Adapters\AnnouncementsAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -214,7 +214,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Notifications\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
