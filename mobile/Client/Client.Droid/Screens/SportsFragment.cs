@@ -26,6 +26,12 @@ namespace Client.Droid.Screens
         {
             // Use this to return your custom view for this Fragment
             return inflater.Inflate(Resource.Layout.fragment_sports, container, false);
+
+            //Setup recyclerview
+            //create adapter
+            //return the view
         }
+
+        //Add in handler for onClick events.
     }
 }
