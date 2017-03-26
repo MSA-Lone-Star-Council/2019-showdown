@@ -44,5 +44,5 @@
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:text="Event Location Address"
-        android:textSize="24sp" />      
+        android:textSize="24sp" />
 </LinearLayout>
