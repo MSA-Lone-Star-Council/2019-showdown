@@ -9,7 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Common.Common;
 using Common.Common.Models;
+
 
 namespace Client.Droid.Screens
 {
@@ -34,8 +36,8 @@ namespace Client.Droid.Screens
 
             EventTitle.Text = Event.Title;
             EventDescription.Text = Event.Description;
-            EventStartTime.Text = Event.StartTime.ToString();
-            EventEndTime.Text = Event.EndTime.ToString();
+            EventStartTime.Text = Utilities.FormatDateTime(Event.StartTime);
+            EventEndTime.Text = Utilities.FormatDateTime(Event.EndTime);
             LocationName.Text = Event.Location.Name;
             LocationAddress.Text = Event.Location.Address;
 

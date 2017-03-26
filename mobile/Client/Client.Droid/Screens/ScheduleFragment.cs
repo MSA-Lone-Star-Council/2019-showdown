@@ -41,11 +41,10 @@ namespace Client.Droid.Screens
 
             Adapter = new ScheduleAdapter()
             {
-                //Events = new List<Event>()
-                Events = MakeFakeData()
+                Events = new List<Event>()
             };
-            Adapter.ItemClick += OnItemClick;
-            //await Presenter.OnBegin();
+            Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
+            await Presenter.OnBegin();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -60,12 +59,6 @@ namespace Client.Droid.Screens
             return view;
         }
 
-        // Handler for the item click event. This should be moved to the Presenter Methods instead
-        void OnItemClick(object sender, ScheduleAdapterClickEventArgs args)
-        {
-             Presenter.OnClickRow(args.Event);
-        }
-
         void IScheduleView.ShowMessage(string message)
         {
             Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
@@ -77,46 +70,6 @@ namespace Client.Droid.Screens
             Intent.PutExtra("event", row.ToJSON());
             StartActivity(Intent);
         }
-
-        //REST Client isn't working right now, so this comes back
-        public static List<Event> MakeFakeData()
-        {
-            var event1 = new Event
-            {
-                Id = "0",
-                StartTime = new DateTimeOffset(),
-                EndTime = new DateTimeOffset(),
-                Description = "Listen to Dudes sing",
-                Title = "Brothers Nasheed",
-                Location = new Location
-                {
-                    Name = "Texas Union Ballroom"
-                }
-            };
-            var event2 = new Event
-            {
-                Id = "1",
-                StartTime = new DateTimeOffset(),
-                EndTime = new DateTimeOffset(),
-                Description = "Listen to gals spit fire",
-                Title = "Sisters Poetry",
-                Location = new Location
-                {
-                    Name = "Texas Union Ballroom"
-                }
-            };
-            List<Event> events = new List<Event>();
-            for (int i = 0; i < 5; i++)
-            {
-                if (i % 2 != 0) { event1.Id = i.ToString(); }
-                else { event2.Id = i.ToString(); }
-
-                events.Add(event1);
-                events.Add(event2);
-            }
-            return events;
-        }
-
     }
 }
 

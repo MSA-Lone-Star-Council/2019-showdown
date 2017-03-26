@@ -41,7 +41,7 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-			var events = await _client.GetSchedule();
+			var events = await _client.GetScheduleAsync();
 
 			if (View != null)
 				View.Events = events;
