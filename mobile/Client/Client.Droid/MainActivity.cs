@@ -7,6 +7,9 @@ using Android.Support.V4.Widget;
 using Android.Views;
 using System;
 using Client.Droid.Screens;
+using Android.Gms.Common;
+using Android.Util;
+using Firebase.Iid;
 
 namespace Client.Droid
 {
@@ -27,24 +30,7 @@ namespace Client.Droid
 
             SetContentView(Resource.Layout.Main);
 
-            ActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_drawer);
-            ActionBar.SetDisplayHomeAsUpEnabled(true);
-            ActionBar.SetHomeButtonEnabled(true);
-            //ActionBar.SetDisplayShowTitleEnabled(false);
-
-            NavigationTitles = Resources.GetStringArray(Resource.Array.nav_titles);
-
-            DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-
-            DrawerList = FindViewById<ListView>(Resource.Id.left_drawer);
-            DrawerList.Adapter = new ArrayAdapter<string>(this, Resource.Layout.drawer_list_item, NavigationTitles);
-            DrawerList.ItemClick += (sender, e) => SelectItem(e.Position);
-
-            DrawerToggle = new V7.App.ActionBarDrawerToggle(
-                this,
-                DrawerLayout,
-                Resource.String.drawer_open,
-                Resource.String.drawer_close);
+			BuildDrawer();
 
             Fragments = new V4.App.Fragment[] {
                 new ScheduleFragment(),
@@ -57,8 +43,31 @@ namespace Client.Droid
             {
                 SelectItem(0);
             }
-
+			IsPlayServicesAvailable();
         }
+	
+
+		void BuildDrawer()
+		{
+			ActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_drawer);
+			ActionBar.SetDisplayHomeAsUpEnabled(true);
+			ActionBar.SetHomeButtonEnabled(true);
+			//ActionBar.SetDisplayShowTitleEnabled(false);
+
+			NavigationTitles = Resources.GetStringArray(Resource.Array.nav_titles);
+
+			DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
+			DrawerList = FindViewById<ListView>(Resource.Id.left_drawer);
+			DrawerList.Adapter = new ArrayAdapter<string>(this, Resource.Layout.drawer_list_item, NavigationTitles);
+			DrawerList.ItemClick += (sender, e) => SelectItem(e.Position);
+
+			DrawerToggle = new V7.App.ActionBarDrawerToggle(
+				this,
+				DrawerLayout,
+				Resource.String.drawer_open,
+				Resource.String.drawer_close);
+		}
 
         void SelectItem(int position)
         {
@@ -78,5 +87,15 @@ namespace Client.Droid
             if (DrawerToggle.OnOptionsItemSelected(item)) return true; // This gets the menu icon to work
             return base.OnOptionsItemSelected(item);
         }
+
+		void IsPlayServicesAvailable()
+		{
+			int resultCode = GoogleApiAvailability.Instance.IsGooglePlayServicesAvailable(this);
+			if (resultCode != ConnectionResult.Success)
+			{
+				// TODO: If user solvable error, provide some helpful resolution
+				Finish();
+			}
+		}
     }
 }

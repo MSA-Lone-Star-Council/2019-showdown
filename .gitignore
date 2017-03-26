@@ -266,3 +266,4 @@ __pycache__/
 *.p12
 *.pkey
 *.pem
+**/google-services.json
