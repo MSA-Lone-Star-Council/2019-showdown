@@ -262,3 +262,7 @@ __pycache__/
 
 **/[Rr]esource.[Dd]esigner.cs
 **/Secrets.cs
+
+*.p12
+*.pkey
+*.pem
