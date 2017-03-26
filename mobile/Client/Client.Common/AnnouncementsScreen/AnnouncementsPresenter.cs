@@ -10,10 +10,18 @@ namespace Client.Common
 	{
 		private readonly ShowdownRESTClient _client;
 
+		private List<Announcement> _announcements = new List<Announcement>();
+
 	    public AnnouncementsPresenter(ShowdownRESTClient client)
 	    {
 	        _client = client;
 	    }
+
+		public override void TakeView(IAnnouncementsView view)
+		{
+			base.TakeView(view);
+			View.Announcements = _announcements;
+		}
 
 		public async Task OnBegin()
 		{
@@ -27,9 +35,9 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-		    var announcements = await _client.GetAnnouncements();
+		    _announcements = await _client.GetAnnouncements();
 		    if (View != null)
-		        View.Announcements = announcements;
+		        View.Announcements = _announcements;
 		}
 	}
 }

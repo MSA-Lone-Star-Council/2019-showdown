@@ -125,6 +125,8 @@
     <Compile Include="Screens\SportsFragment.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingIIDService.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingService.cs" />
+    <Compile Include="ShowdownClientApplication.cs" />
+    <Compile Include="Views\AnnouncementViewHolder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -151,6 +153,7 @@
     <AndroidResource Include="Resources\layout\event_detailed_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\layout_announcement_item.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -211,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Notifications\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
