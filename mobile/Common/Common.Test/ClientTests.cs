@@ -45,5 +45,14 @@ namespace Common.Test
 
 			Assert.IsNotEmpty(result);
 		}
+
+	    [Test]
+		public async void TestGetAnnouncments()
+		{
+			var client = new ShowdownRESTClient();
+			var result = await client.GetAnnouncements();
+
+			Assert.IsNotEmpty(result);
+		}
 	}
 }

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from events.serializers import BriefEventSerializer
+from events.serializers import FullEventSerializer
 
 from .models import Game, Score, ScoreCard
 
@@ -20,10 +20,10 @@ class ScoreCardSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ScoreCard
-        fields = ('id', 'game', 'scores')
+        fields = ('id', 'game', 'time', 'scores')
 
 class GameSerializer(serializers.ModelSerializer):
-    event = serializers.PrimaryKeyRelatedField(read_only=True)
+    event = FullEventSerializer(read_only=True)
     teams = serializers.SlugRelatedField(slug_field='name', many=True, read_only=True)
 
     score = serializers.SerializerMethodField('get_latest_score')
@@ -41,6 +41,3 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = ('id', 'title', 'event', 'teams', 'score', 'time')
-
-class GameEventSerializer(GameSerializer):
-    event = BriefEventSerializer(read_only=True)

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -35,6 +35,8 @@
     <Compile Include="SportsScreen\ISportsView.cs" />
     <Compile Include="GameScreen\GamePresenter.cs" />
     <Compile Include="GameScreen\IGameView.cs" />
+    <Compile Include="AnnouncementsScreen\IAnnouncementsView.cs" />
+    <Compile Include="AnnouncementsScreen\AnnouncementsPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
@@ -42,6 +44,10 @@
       <Name>Common.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SportsScreen\" />
+    <Folder Include="GameScreen\" />
+    <Folder Include="AnnouncementsScreen\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
