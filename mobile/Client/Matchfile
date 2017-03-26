@@ -1,4 +1,4 @@
-git_url "git@bitbucket.org:zuhairp/showdown-test-certs.git"
+git_url "git@bitbucket.org:zuhairp/zuhairparvez-ios-certs.git"
 
 type "development" # The default type, can be: appstore, adhoc, enterprise or development
 
