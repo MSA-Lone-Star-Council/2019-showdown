@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^events/', include('events.urls')),
     url(r'^scores/', include('scores.urls')),
     url(r'^core/', include('core.urls')),
+    url(r'^notifications/', include('notifications.urls')),
     url(r'^docs/', include('rest_framework_docs.urls')),
 ]

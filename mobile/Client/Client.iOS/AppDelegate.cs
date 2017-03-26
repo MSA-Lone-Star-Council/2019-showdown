@@ -1,13 +1,16 @@
-﻿using Common.Common;
+﻿using System.Threading.Tasks;
+using Common.Common;
 using Foundation;
 using UIKit;
+using UserNotifications;
+using WindowsAzure.Messaging;
 
 namespace Client.iOS
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the
 	// User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
 	[Register("AppDelegate")]
-	public class AppDelegate : UIApplicationDelegate
+	public class AppDelegate : UIApplicationDelegate, IUNUserNotificationCenterDelegate
 	{
 		// class-level declarations
 
@@ -17,6 +20,8 @@ namespace Client.iOS
 			set;
 		}
 
+		private SBNotificationHub Hub { get; set; }
+
 	    public ShowdownRESTClient BackendClient { get; set; }
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
@@ -25,6 +30,30 @@ namespace Client.iOS
 
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
+			Window.RootViewController = BuildRootViewController();
+			Window.MakeKeyAndVisible();
+
+			RegisterForRemoteNotification();
+
+
+			return true;
+		}
+
+		private void RegisterForRemoteNotification()
+		{
+			var center = UNUserNotificationCenter.Current;
+			center.Delegate = this;
+			center.RequestAuthorization(
+				UNAuthorizationOptions.Sound | UNAuthorizationOptions.Alert,
+				(granted, error) =>
+				{
+				if (error == null && granted) InvokeOnMainThread(() => UIApplication.SharedApplication.RegisterForRemoteNotifications());
+				}
+			);
+		}
+
+		private UIViewController BuildRootViewController()
+		{
 			var tabBarController = new UITabBarController();
 
 			tabBarController.ViewControllers = new UIViewController[]
@@ -35,42 +64,40 @@ namespace Client.iOS
 				new UINavigationController(new AcknowledgementsViewController()) { Title = "Acknowledgemetns" },
 			};
 
-			Window.RootViewController = tabBarController;
-			Window.MakeKeyAndVisible();
-
-			return true;
+			return tabBarController;
 		}
 
-		public override void OnResignActivation(UIApplication application)
+		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 		{
-			// Invoked when the application is about to move from active to inactive state.
-			// This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) 
-			// or when the user quits the application and it begins the transition to the background state.
-			// Games should use this method to pause the game.
+			Hub = new SBNotificationHub(Secrets.AzureConnectionString, Secrets.NotificationHubPath);
+			Hub.UnregisterAllAsync(deviceToken, (error) =>
+			{
+				if (error != null)
+				{
+					return;
+				}
+
+				NSSet tags = null;
+				Hub.RegisterNativeAsync(deviceToken, tags, callbackError =>
+				{
+					if (callbackError != null) return;
+				});
+			});
 		}
 
-		public override void DidEnterBackground(UIApplication application)
+		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
 		{
-			// Use this method to release shared resources, save user data, invalidate timers and store the application state.
-			// If your application supports background exection this method is called instead of WillTerminate when the user quits.
+			if (null != userInfo && userInfo.ContainsKey(new NSString("aps")))
+			{
+				string alert = string.Empty;
+
+				NSDictionary aps = userInfo.ObjectForKey(new NSString("aps")) as NSDictionary;
+
+				if (aps.ContainsKey(new NSString("alert")))
+					alert = (aps[new NSString("alert")] as NSString).ToString();
+			}
 		}
 
-		public override void WillEnterForeground(UIApplication application)
-		{
-			// Called as part of the transiton from background to active state.
-			// Here you can undo many of the changes made on entering the background.
-		}
-
-		public override void OnActivated(UIApplication application)
-		{
-			// Restart any tasks that were paused (or not yet started) while the application was inactive. 
-			// If the application was previously in the background, optionally refresh the user interface.
-		}
-
-		public override void WillTerminate(UIApplication application)
-		{
-			// Called when the application is about to terminate. Save data, if needed. See also DidEnterBackground.
-		}
 	}
 }
 
