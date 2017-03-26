@@ -16,6 +16,7 @@ namespace Client.Droid
     [Activity(Label = "Client.Droid", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : V4.App.FragmentActivity
     {
+		public static string ScreenIndexKey = "ScreenIndex";
 
         string[] NavigationTitles { get; set; }
         DrawerLayout DrawerLayout { get; set; }
@@ -39,12 +40,16 @@ namespace Client.Droid
                 new AcknowledgementsFragment()
             };
 
-            if (savedInstanceState == null)
-            {
-                SelectItem(0);
-            }
+
 			IsPlayServicesAvailable();
         }
+
+		protected override void OnResume()
+		{
+			base.OnResume();
+			int screenIndex = Intent.GetIntExtra(ScreenIndexKey, 0);
+			SelectItem(screenIndex);
+		}
 	
 
 		void BuildDrawer()

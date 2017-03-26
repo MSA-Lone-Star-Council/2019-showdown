@@ -123,7 +123,8 @@
     <Compile Include="Screens\DetailedEventActivity.cs" />
     <Compile Include="Screens\ScheduleFragment.cs" />
     <Compile Include="Screens\SportsFragment.cs" />
-    <Compile Include="ShowdownFirebaseMessagingIIDService.cs" />
+    <Compile Include="Notifications\ShowdownFirebaseMessagingIIDService.cs" />
+    <Compile Include="Notifications\ShowdownFirebaseMessagingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -207,6 +208,9 @@
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notifications\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
