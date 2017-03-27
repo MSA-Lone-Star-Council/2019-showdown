@@ -30,15 +30,40 @@ namespace Admin.iOS
 			Presenter.TakeView(this);
 		}
 
-		public override void ViewDidAppear(bool animated)
+		public async override void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
+
+			ParentViewController.NavigationItem.RightBarButtonItem = new UIBarButtonItem(
+				"Add Event",
+				UIBarButtonItemStyle.Plain,
+				(sender, e) =>
+				{
+					var newEvent = new Event()
+					{
+						Title = "Untitled Event",
+						Audience = "general",
+						StartTime = DateTimeOffset.Now,
+						EndTime = DateTimeOffset.Now.AddHours(1),
+						Description = "No description",
+						LocationId = 1,
+					};
+					OpenEvent(newEvent);
+				}
+			);
+
 			Presenter.TakeView(this);
+			await Presenter.OnBegin();
 		}
 
 		public async override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var navController = appDelegate.Window.RootViewController as UINavigationController;
+
+
 
 			View.BackgroundColor = UIColor.White;
 
@@ -59,6 +84,10 @@ namespace Admin.iOS
 
 		public void OpenEvent(Event row)
 		{
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var navController = appDelegate.Window.RootViewController as UINavigationController;
+
+			navController.PushViewController(new EventDetailViewController(row), true);
 		}
 
 		public delegate void OnRowTapped(Event game);

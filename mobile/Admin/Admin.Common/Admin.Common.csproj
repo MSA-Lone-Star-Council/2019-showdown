@@ -31,6 +31,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Events\EventsListPresenter.cs" />
     <Compile Include="Events\IEventsListView.cs" />
+    <Compile Include="Events\EventDetailPresenter.cs" />
+    <Compile Include="Events\IEventDetailView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">

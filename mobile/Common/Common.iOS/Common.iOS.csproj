@@ -49,12 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FacebookLoginViewController.cs" />
     <Compile Include="iOSStorage.cs" />
+    <Compile Include="Utilities\UneditableTextField.cs" />
+    <Compile Include="Utilities\IOSHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Common\Common.Common.csproj">

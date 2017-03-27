@@ -117,6 +117,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Screens\LoginViewController.cs" />
     <Compile Include="Screens\EventsListViewController.cs" />
+    <Compile Include="Screens\EventDetailViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">

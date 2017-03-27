@@ -6,9 +6,16 @@ namespace Admin.Common.API.Entities
 {
     public struct Event
     {
-        public int Id { get; set; }
+		[JsonProperty(PropertyName = "id", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Id { get; set; }
+
+		[JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
+
+		[JsonProperty(PropertyName = "audience")]
         public string Audience { get; set; }
+
+		[JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         [JsonProperty(PropertyName = "start_time")]

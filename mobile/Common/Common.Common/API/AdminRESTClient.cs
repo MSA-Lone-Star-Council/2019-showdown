@@ -45,6 +45,23 @@ namespace Admin.Common.API
 			return Event.FromJSONArray(jsonString);
 		}
 
+		public async Task<Event> SaveEvent(Event e)
+		{
+			var jsonString = "";
+			if (e.Id == null)
+			{
+				var path = $"/admin/events";
+				jsonString = await PostAsync(path, JsonConvert.SerializeObject(e));
+			}
+			else
+			{
+				var path = $"/admin/events/{e.Id}";
+				jsonString = await PutAsync(path, JsonConvert.SerializeObject(e));
+			}
+
+			return Event.FromJSON(jsonString);
+		}
+
 		public async Task<Location> GetLocation(int id)
 		{
 			var path = $"/admin/locations/{id}";
@@ -52,7 +69,7 @@ namespace Admin.Common.API
 			return Location.FromJSON(jsonString);
 		}
 
-		public async Task<List<Location>> GetLocations(int id)
+		public async Task<List<Location>> GetLocations()
 		{
 			var path = $"/admin/locations";
 			var jsonString = await RequestAsync(path);
