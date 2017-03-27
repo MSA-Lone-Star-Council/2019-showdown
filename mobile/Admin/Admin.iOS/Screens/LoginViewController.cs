@@ -35,7 +35,7 @@ namespace Admin.iOS
 
 			tabBarController.ViewControllers = new UIViewController[]
 			{
-				new UIViewController() { Title = "Events" },
+				new EventsListViewController() { Title = "Events" },
 				new UIViewController() { Title = "Announcements" },
 				new UIViewController()  { Title = "Locations" },
 				new UIViewController()  { Title = "Games" },
