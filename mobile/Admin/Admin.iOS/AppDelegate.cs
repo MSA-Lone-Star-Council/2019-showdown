@@ -1,4 +1,5 @@
-﻿using Common.Common;
+﻿using Admin.Common.API;
+using Common.Common;
 using Foundation;
 using UIKit;
 
@@ -11,7 +12,7 @@ namespace Admin.iOS
 	{
 		// class-level declarations
 
-		public ShowdownRESTClient BackendClient { get; set; }
+		public AdminRESTClient BackendClient { get; set; }
 
 		public override UIWindow Window
 		{
@@ -23,7 +24,7 @@ namespace Admin.iOS
 		{
 			// Override point for customization after application launch.
 			// If not required for your application you can safely delete this method
-			BackendClient = new ShowdownRESTClient();
+			BackendClient = new AdminRESTClient();
 
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 

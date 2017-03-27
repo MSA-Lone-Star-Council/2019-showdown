@@ -28,6 +28,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="API\AdminRESTClient.cs" />
+    <Compile Include="API\Entities\Event.cs" />
+    <Compile Include="API\Entities\Location.cs" />
     <Compile Include="Cache.cs" />
     <Compile Include="IStorage.cs" />
     <Compile Include="Models\Announcement.cs" />

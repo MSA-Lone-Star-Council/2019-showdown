@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Admin.Common.API;
 
 namespace Common.Common.Screens.Login
 {
@@ -7,10 +8,10 @@ namespace Common.Common.Screens.Login
 	{
 	    private static string BackendToken = "BACKEND_TOKEN";
 
-	    private ShowdownRESTClient _client;
+	    private AdminRESTClient _client;
 	    private IStorage _storage;
 
-	    public LoginPresenter(ShowdownRESTClient client, IStorage storage)
+		public LoginPresenter(AdminRESTClient client, IStorage storage)
 	    {
 	        _client = client;
 	        _storage = storage;

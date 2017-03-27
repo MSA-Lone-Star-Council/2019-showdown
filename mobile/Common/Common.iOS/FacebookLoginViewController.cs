@@ -79,5 +79,3 @@ namespace Common.iOS
 		}
 	}
 }
-
-//{https://www.facebook.com/connect/login_success.html#access_token=EAAIwmUsfMZAcBANqE7bsUigZCJSvIx3ZAY6qZAdmoBlF3F0BJqpkBIOEMGnM6BRQ595tWLetchUzNcOXHB49P2lZBVXZA0D5DfsfZBjScI6Rpy6hj6yfDeBPEeWKuRZBHOs6KyvQA4kK9fzeR9bwTLLZA9Gj0QzZA3Uj7zdXDpRjAmlLfLDJ2TadBu&expires_in=5183016}
