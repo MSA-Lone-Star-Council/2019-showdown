@@ -17,7 +17,6 @@ env = environ.Env()
 
 # App Configuration
 DJANGO_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -36,6 +35,7 @@ LOCAL_APPS = [
     'notifications',
     'events',
     'scores',
+    'admin',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
