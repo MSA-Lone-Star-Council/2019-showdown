@@ -10,56 +10,44 @@ using Common.iOS;
 
 namespace Admin.iOS
 {
-	public class EventDetailViewController : UIViewController, IEventDetailView
+	public partial class EventDetailViewController : UIViewController, IEventDetailView
 	{
-		EventDetailPresenter presenter;
+		EventDetailPresenter Presenter;
 
-		UITextField TitleField = new UITextField() { 
-			Font = UIFont.FromName("SanFranciscoDisplay-Bold", 20),
-			TextAlignment = UITextAlignment.Center,
-			BorderStyle = UITextBorderStyle.RoundedRect
-		};
-
-		UIPickerView AudiencePicker = new UIPickerView();
-		UITextField AudienceField;
-
-		UITextView DescriptionField = new UITextView();
-
-		UIDatePicker StartTimePicker = new UIDatePicker();
-		UITextField StartTimeField;
-
-		UIDatePicker EndTImePicker = new UIDatePicker();
-		UITextField EndTimeField;
-
-		UIPickerView LocationPicker = new UIPickerView();
-		UITextField LocationField;
-
-		UIButton UpdateButton = new UIButton() { BackgroundColor = UIColor.Green };
-		UIButton DeleteButton = new UIButton() { BackgroundColor = UIColor.Red };
-
-		public Event Event { get; set; }
-
-
-
-		List<string> IEventDetailView.LocationOptions
+		public EventDetailViewController(Event e)
 		{
-			set
-			{
-				(LocationPicker.Model as LocationPickerModel).locations = value;
-			}
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			Presenter = new EventDetailPresenter(e, appDelegate.BackendClient);
 		}
+
+		partial void AdditonalSetup()
+		{
+			LocationPicker.Model = new LocationPickerModel(Presenter, LocationField);
+			AudiencePicker.Model = new AudiencePickerModel(AudienceField);
+			UpdateButton.TouchUpInside += async (sender, e) => await Presenter.Save();
+
+		}
+
+		public async override void ViewWillAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
+			Presenter.TakeView(this);
+			var loadingTask = Presenter.OnBegin();
+			await loadingTask;
+		}
+
 
 		int IEventDetailView.SelectedLocationIndex
 		{
 			get
 			{
-				return (int)LocationPicker.SelectedRowInComponent(0);
+				return (int)LocationPicker.SelectedRowInComponent(0);	
 			}
 
 			set
 			{
 				LocationPicker.Select(value, 0, true);
-				LocationField.Text = (LocationPicker.Model as LocationPickerModel).locations[value];
+				LocationField.Text = LocationPicker.Model.GetTitle(LocationPicker, value, 0);
 			}
 		}
 
@@ -69,202 +57,55 @@ namespace Admin.iOS
 			{
 				LocationField.Enabled = !value;
 				UpdateButton.Enabled = !value;
-
 				UpdateButton.BackgroundColor = UpdateButton.Enabled ? UIColor.Green : UIColor.Gray;
+
+				LocationPicker.ReloadAllComponents();
 			}
 		}
 
-		public EventDetailViewController(Event e)
+		Event IEventDetailView.Event
 		{
-			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			presenter = new EventDetailPresenter(appDelegate.BackendClient) { Event = e };
-			Event = e;
-			presenter.TakeView(this);
-
-		}
-
-		public async override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-			presenter.TakeView(this);
-			await presenter.OnBegin();
-		}
-
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-
-			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			var navController = appDelegate.Window.RootViewController as UINavigationController;
-
-			NavigationItem.RightBarButtonItem = new UIBarButtonItem(
-				"Dismiss Keyboard",
-				UIBarButtonItemStyle.Plain,
-				(sender, e) => InvokeOnMainThread(() => View.EndEditing(true))
-			);
-
-
-			StartTimeField = new UITextField() { 
-				InputView = StartTimePicker, 
-				Delegate = new UneditableTextField(),
-				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect,
-			};
-			StartTimePicker.ValueChanged += (sender, e) =>
+			set
 			{
-				UIDatePicker picker = sender as UIDatePicker;
-				StartTimeField.Text = Utilities.FormatDateTime(IOSHelpers.Convert(picker.Date));
-			};
+				TitleField.Text = value.Title;
+				DescriptionField.Text = value.Description;
 
-			EndTimeField = new UITextField() { 
-				InputView = EndTImePicker, 
-				Delegate = new UneditableTextField(),
-				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect
-			};
-			EndTImePicker.ValueChanged += (sender, e) =>
+				AudienceField.Text = value.Audience;
+				AudiencePicker.Select(AudiencePickerModel.StringToIndex(value.Audience), 0, false);
+
+				StartTimeField.Text = Utilities.FormatEventTime(value.StartTime);
+				StartTimePicker.Date = IOSHelpers.ConvertToNSDate(value.StartTime);
+
+				EndTimeField.Text = Utilities.FormatEventTime(value.EndTime);
+				EndTimePicker.Date = IOSHelpers.ConvertToNSDate(value.EndTime);
+
+				// Location will be set by presenter
+			}
+			get
 			{
-				UIDatePicker picker = sender as UIDatePicker;
-				EndTimeField.Text = Utilities.FormatDateTime(IOSHelpers.Convert(picker.Date));
-			};
-
-			AudienceField = new UITextField()
-			{
-				InputView = AudiencePicker,
-				Delegate = new UneditableTextField(),
-				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect
-			};
-			AudiencePicker.Model = new AudiencePickerModel(AudienceField);
-
-			LocationField = new UITextField() {
-				InputView = LocationPicker, 
-				Delegate = new UneditableTextField(),
-				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect
-			};
-			LocationPicker.Model = new LocationPickerModel(LocationField);
-
-			DescriptionField.Layer.BorderColor = UIColor.Gray.CGColor;
-			DescriptionField.Layer.CornerRadius = 5;
-			DescriptionField.Layer.MasksToBounds = true;
-			DescriptionField.Font = UIFont.FromName("SanFranciscoDisplay-Regular", 18);
-
-			navController.NavigationBar.Translucent = false;
-
-			View.BackgroundColor = UIColor.White;
-
-			var parentView = View;
-
-			View.AddSubviews(new UIView[] {
-				TitleField,
-				AudienceField,
-				DescriptionField,
-				StartTimeField,
-				EndTimeField,
-				LocationField,
-				UpdateButton,
-				DeleteButton
-			});
-
-			TitleField.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(parentView).Offset(10);
-				make.Width.EqualTo(parentView);
-				make.Left.EqualTo(parentView).Offset(10);
-				make.Height.EqualTo((NSNumber) 40);
-			});
-
-			AudienceField.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(TitleField.Bottom()).Offset(10);
-				make.Width.EqualTo(parentView);
-				make.Left.EqualTo(TitleField);
-				make.Height.EqualTo((NSNumber)40);
-			}); 
-
-			DescriptionField.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(AudienceField.Bottom()).Offset(10);
-				make.Width.EqualTo(TitleField);
-				make.Left.EqualTo(TitleField);
-				make.Height.EqualTo((NSNumber)80);
-			});
-
-			StartTimeField.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(DescriptionField.Bottom()).Offset(10);
-				make.Width.EqualTo(AudienceField);
-				make.Left.EqualTo(TitleField);
-				make.Height.EqualTo((NSNumber)30);
-			});
-
-			EndTimeField.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(StartTimeField.Bottom()).Offset(10);
-				make.Width.EqualTo(AudienceField);
-				make.Left.EqualTo(TitleField);
-				make.Height.EqualTo((NSNumber)30);
-			});
-
-			LocationField.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(EndTimeField.Bottom()).Offset(10);
-				make.Width.EqualTo(AudienceField);
-				make.Left.EqualTo(TitleField);
-				make.Height.EqualTo((NSNumber)30);
-			});
-
-			DeleteButton.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(LocationField.Bottom()).Offset(10);
-				make.Width.EqualTo(parentView).MultipliedBy(0.5f);
-				make.Left.EqualTo(TitleField);
-				make.Height.EqualTo((NSNumber)50);
-			});
-			DeleteButton.SetTitle("DELETE", UIControlState.Normal);
-
-			UpdateButton.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(DeleteButton);
-				make.Width.EqualTo(parentView).MultipliedBy(0.5f);
-				make.Right.EqualTo(parentView).Offset(-10);
-				make.Height.EqualTo((NSNumber)50);
-			});
-			UpdateButton.SetTitle("SAVE", UIControlState.Normal);
-
-			TitleField.Text = Event.Title;
-			AudienceField.Text = Event.Audience;
-			DescriptionField.Text = Event.Description;
-			StartTimeField.Text = Utilities.FormatDateTime(Event.StartTime);
-			EndTimeField.Text = Utilities.FormatDateTime(Event.EndTime);
-
-			UpdateButton.TouchUpInside += async (sender, e) =>
-			{
-				Event updatedEvent = new Event()
+				return new Event()
 				{
-					Id = Event.Id,
+					// Presenter already has ID
 					Title = TitleField.Text,
 					Description = DescriptionField.Text,
 					Audience = AudienceField.Text,
 					StartTime = IOSHelpers.Convert(StartTimePicker.Date),
-					EndTime = IOSHelpers.Convert(EndTImePicker.Date),
-					LocationId = (int)LocationPicker.SelectedRowInComponent(0),
+					EndTime = IOSHelpers.Convert(EndTimePicker.Date),
+					// Presenter will figure out location from IEventDetailView.SelectedLocationIndex
 				};
-				await presenter.Save(updatedEvent);
-			};
+			}
 		}
+
 
 		public class LocationPickerModel : UIPickerViewModel
 		{
-			UITextField owner;
+			UITextField _owner;
+			EventDetailPresenter _presenter;
 
-			public List<string> locations;
-
-			public LocationPickerModel(UITextField owner)
+			public LocationPickerModel(EventDetailPresenter presenter, UITextField owner)
 			{
-				this.owner = owner;
-				locations = new List<string>();
+				this._owner = owner;
+				this._presenter = presenter;
 			}
 
 			public override nint GetComponentCount(UIPickerView pickerView)
@@ -274,27 +115,28 @@ namespace Admin.iOS
 
 			public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 			{
-				if (locations == null || locations.Count == 0) return "";
-				return locations[(int)row];
+				return _presenter.GetLocationName((int)row);
 			}
 
 			public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
 			{
-				return locations.Count;
+				return _presenter.GetLocationCount();
 			}
 
 			public override void Selected(UIPickerView pickerView, nint row, nint component)
 			{
-				owner.Text = GetTitle(pickerView, row, component);
+				_owner.Text = GetTitle(pickerView, row, component);
 			}
 		}
 
 		public class AudiencePickerModel : UIPickerViewModel
 		{
-			UITextField owner;
+			UITextField _owner;
+			EventDetailPresenter _presenter;
+
 			public AudiencePickerModel(UITextField owner)
 			{
-				this.owner = owner;
+				this._owner = owner;
 			}
 
 			public override nint GetComponentCount(UIPickerView pickerView)
@@ -304,13 +146,7 @@ namespace Admin.iOS
 
 			public override string GetTitle(UIPickerView pickerView, nint row, nint component)
 			{
-				switch (row)
-				{
-					case 0: return "general";
-					case 1: return "brothers";
-					case 2: return "sisters";
-				}
-				return "";
+				return IndexToString((int)row);
 			}
 
 			public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
@@ -320,7 +156,29 @@ namespace Admin.iOS
 
 			public override void Selected(UIPickerView pickerView, nint row, nint component)
 			{
-				owner.Text = GetTitle(pickerView, row, component);
+				_owner.Text = GetTitle(pickerView, row, component);
+			}
+
+			public static int StringToIndex(string audienceString)
+			{
+				switch (audienceString)
+				{
+					case "general": return 0;
+					case "brothers": return 1;
+					case "sisters": return 2;
+				}
+				return -1;
+			}
+
+			public static string IndexToString(int index)
+			{
+				switch (index)
+				{
+					case 0: return "general";
+					case 1: return "brothers";
+					case 2: return "sisters";
+				}
+				return "";
 			}
 		}
 

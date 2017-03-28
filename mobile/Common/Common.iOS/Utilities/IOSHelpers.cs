@@ -7,13 +7,13 @@ namespace Common.iOS
 	{
 		public static DateTimeOffset Convert(NSDate date)
 		{
-			var central = TimeZoneInfo.FindSystemTimeZoneById("America/Chicago");
+			var dt = (DateTime)date;
+			return new DateTimeOffset(dt, TimeSpan.Zero);
+		}
 
-			DateTime dt = new DateTime(2001, 1, 1).AddSeconds(date.SecondsSinceReferenceDate);
-
-			var localTime = TimeZoneInfo.ConvertTimeFromUtc(dt, central);
-
-			return new DateTimeOffset(localTime, TimeSpan.FromHours(-5));
+		public static NSDate ConvertToNSDate(DateTimeOffset date)
+		{
+			return (NSDate)date.LocalDateTime;
 		}
 	}
 }

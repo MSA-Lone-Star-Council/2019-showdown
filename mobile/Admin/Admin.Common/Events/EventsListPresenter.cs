@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Admin.Common.API;
 using Admin.Common.API.Entities;
@@ -25,6 +25,20 @@ namespace Admin.Common
 			await UpdateFromServer();
 		}
 
+		public void OnClickAdd()
+		{
+			var newEvent = new Event()
+			{
+				Title = "Untitled Event",
+				Audience = "general",
+				StartTime = DateTimeOffset.Now,
+				EndTime = DateTimeOffset.Now.AddHours(1),
+				Description = "No description",
+				LocationId = 1,
+			};
+			View.OpenEvent(newEvent);
+		}
+
 		public void OnClickRow(Event row)
 		{
 			View.OpenEvent(row);
@@ -37,5 +51,7 @@ namespace Admin.Common
 			if (View != null)
 				View.Events = events;
 		}
+
+
 	}
 }

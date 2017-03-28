@@ -10,22 +10,26 @@ namespace Admin.Common
 {
 	public class EventDetailPresenter : Presenter<IEventDetailView>
 	{
-		public Event Event { get; set; }
+		Event _event;
 		List<Location> _locations;
-
 		AdminRESTClient _client;
 
-		public EventDetailPresenter(AdminRESTClient client)
+
+		public EventDetailPresenter(Event e, AdminRESTClient client)
 		{
 			_client = client;
+			_event = e;
+		}
+
+		public override void TakeView(IEventDetailView view)
+		{
+			base.TakeView(view);
+			View.Event = _event;
 		}
 
 		public async Task OnBegin()
 		{
-			if(View != null) View.LocationOptions = new List<string>();
-
 			await UpdateLocationsFromServer();
-
 		}
 
 		async Task UpdateLocationsFromServer()
@@ -34,18 +38,29 @@ namespace Admin.Common
 			_locations = await _client.GetLocations();
 			if (View != null)
 			{
-				View.LocationOptions = _locations.Select(l => l.Name).ToList();
-				View.SelectedLocationIndex = _locations.Select(l => l.Id).ToList().IndexOf(Event.LocationId);
 				View.LocationLoading = false;
+				View.SelectedLocationIndex = _locations.FindIndex(l => l.Id == _event.LocationId);
 			}
-
 		}
 
-		public async Task Save(Event updatedEvent)
+		public async Task Save()
 		{
-			updatedEvent.LocationId = _locations[updatedEvent.LocationId].Id; // It's a hack...
-			Event = await _client.SaveEvent(updatedEvent);
+			var eventToSave = View.Event;
+			eventToSave.Id = _event.Id;
+			eventToSave.LocationId = _locations[View.SelectedLocationIndex].Id;
+
+			_event = await _client.SaveEvent(eventToSave);
 			await UpdateLocationsFromServer();
+		}
+
+		public string GetLocationName(int row)
+		{
+			return _locations[row].Name;
+		}
+
+		public int GetLocationCount()
+		{
+			return _locations.Count;
 		}
 	}
 }
