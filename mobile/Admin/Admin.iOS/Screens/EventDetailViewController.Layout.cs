@@ -42,12 +42,14 @@ namespace Admin.iOS
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
 			var navController = appDelegate.Window.RootViewController as UINavigationController;
 
-			NavigationItem.RightBarButtonItem = new UIBarButtonItem(
-				"Dismiss Keyboard",
-				UIBarButtonItemStyle.Plain,
-				(sender, e) => InvokeOnMainThread(() => View.EndEditing(true))
-			);
 
+			UIToolbar keyboardToolbar = new UIToolbar();
+			keyboardToolbar.SizeToFit();
+			UIBarButtonItem flexibleSpace = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+			UIBarButtonItem doneBarButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, (sender, e) => View.EndEditing(true));
+			keyboardToolbar.Items = new UIBarButtonItem[] { flexibleSpace, doneBarButton };
+
+			TitleField.InputAccessoryView = keyboardToolbar;
 
 			StartTimeField = new UITextField()
 			{
@@ -55,6 +57,7 @@ namespace Admin.iOS
 				Delegate = new UneditableTextField(),
 				TextAlignment = UITextAlignment.Center,
 				BorderStyle = UITextBorderStyle.RoundedRect,
+				InputAccessoryView = keyboardToolbar
 			};
 			StartTimePicker.ValueChanged += (sender, e) =>
 			{
@@ -67,7 +70,8 @@ namespace Admin.iOS
 				InputView = EndTimePicker,
 				Delegate = new UneditableTextField(),
 				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect
+				BorderStyle = UITextBorderStyle.RoundedRect,
+				InputAccessoryView = keyboardToolbar
 			};
 			EndTimePicker.ValueChanged += (sender, e) =>
 			{
@@ -80,7 +84,8 @@ namespace Admin.iOS
 				InputView = AudiencePicker,
 				Delegate = new UneditableTextField(),
 				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect
+				BorderStyle = UITextBorderStyle.RoundedRect,
+				InputAccessoryView = keyboardToolbar
 			};
 
 
@@ -89,14 +94,16 @@ namespace Admin.iOS
 				InputView = LocationPicker,
 				Delegate = new UneditableTextField(),
 				TextAlignment = UITextAlignment.Center,
-				BorderStyle = UITextBorderStyle.RoundedRect
+				BorderStyle = UITextBorderStyle.RoundedRect,
+				InputAccessoryView = keyboardToolbar
 			};
 
-
+			DescriptionField.Selectable = true;
 			DescriptionField.Layer.BorderColor = UIColor.Gray.CGColor;
 			DescriptionField.Layer.CornerRadius = 5;
 			DescriptionField.Layer.MasksToBounds = true;
 			DescriptionField.Font = UIFont.FromName("SanFranciscoDisplay-Regular", 18);
+			DescriptionField.InputAccessoryView = keyboardToolbar;
 
 			navController.NavigationBar.Translucent = false;
 
