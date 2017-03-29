@@ -35,6 +35,11 @@ namespace Common.Common.Models
 			return JsonConvert.DeserializeObject<List<Event>>(jsonString);
 		}
 
+        public string ToJSON()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
 		public static bool operator ==(Event one, Event two)
 		{
 			return (
