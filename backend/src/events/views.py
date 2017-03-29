@@ -9,7 +9,7 @@ from .models import Event, Location
 from .serializers import FullEventSerializer, FullLocationSerializer
 
 class ScheduleView(generics.ListAPIView):
-    queryset = Event.objects.order_by('-start_time')
+    queryset = Event.objects.order_by('start_time')
     serializer_class = FullEventSerializer
 
 class LocationView(generics.RetrieveAPIView):

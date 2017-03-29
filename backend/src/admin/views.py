@@ -2,8 +2,9 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import generics
 
+from notifications.models import Announcement
+from notifications.serializers import AnnouncementSerializer
 from events.models import Event, Location
-
 from scores.models import Game
 from scores.serializers import GameSerializer
 
@@ -12,7 +13,7 @@ from .serializers import EventSerializer, LocationSerializer
 
 class AllEventsView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
-    queryset = Event.objects.order_by('-start_time')
+    queryset = Event.objects.order_by('start_time')
     serializer_class = EventSerializer
 
 class EventDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -32,8 +33,12 @@ class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = 'location_id'
     serializer_class = LocationSerializer
 
-
 class AllGamesView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+class AllAnnouncementsView(generics.ListCreateAPIView):
+    permission_classes = (AdminPermission,)
+    queryset = Announcement.objects.order_by('-time')
+    serializer_class = AnnouncementSerializer
