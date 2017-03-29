@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Common.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Common.Common
 {
@@ -12,10 +15,21 @@ namespace Common.Common
     {
         HttpClient client;
 
+        public String Token { get; set; }
+
 		public ShowdownRESTClient()
 		{
 			client = new HttpClient();
 		}
+
+        public async Task<string> GetToken(string facebookAccessToken)
+        {
+			string jsonString = JsonConvert.SerializeObject(new { facebookAccessToken = facebookAccessToken }, Formatting.None);
+            string response = await PostAsync("/accounts/login", jsonString);
+
+            var data = JObject.Parse(response);
+			return ((string)data["token"]);
+        }
 
 		public async Task<List<Event>> GetScheduleAsync()
 		{
@@ -62,5 +76,14 @@ namespace Common.Common
 			var response = await client.GetAsync(url);
 			return await response.Content.ReadAsStringAsync();
 		}
+
+        private async Task<string> PostAsync(string path, string jsonString)
+        {
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var url = $"{Secrets.BACKEND_URL}{path}.json";
+            var response = await client.PostAsync(url, content);
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception(response.StatusCode.ToString());
+            return await response.Content.ReadAsStringAsync();
+        }
     }
 }
