@@ -58,6 +58,8 @@
     <Compile Include="iOSStorage.cs" />
     <Compile Include="Utilities\UneditableTextField.cs" />
     <Compile Include="Utilities\IOSHelpers.cs" />
+    <Compile Include="AnnoucementsViewController.cs" />
+    <Compile Include="AnnouncementCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Common\Common.Common.csproj">

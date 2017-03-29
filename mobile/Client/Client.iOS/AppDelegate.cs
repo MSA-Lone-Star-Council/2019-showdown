@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Common.Common;
+using Common.iOS;
 using Foundation;
 using UIKit;
 using UserNotifications;
@@ -59,7 +60,7 @@ namespace Client.iOS
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
-				new UINavigationController(new AnnoucementsViewController())  { Title = "Annoucements" },
+				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Annoucements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
 				new UINavigationController(new AcknowledgementsViewController()) { Title = "Acknowledgemetns" },
 			};
@@ -87,15 +88,7 @@ namespace Client.iOS
 
 		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
 		{
-			if (null != userInfo && userInfo.ContainsKey(new NSString("aps")))
-			{
-				string alert = string.Empty;
-
-				NSDictionary aps = userInfo.ObjectForKey(new NSString("aps")) as NSDictionary;
-
-				if (aps.ContainsKey(new NSString("alert")))
-					alert = (aps[new NSString("alert")] as NSString).ToString();
-			}
+			// TODO: Fancy stuff
 		}
 
 	}

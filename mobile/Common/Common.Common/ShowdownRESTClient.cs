@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Common.Common
 {
-    public class ShowdownRESTClient
+	public class ShowdownRESTClient : IAnnoucementInteractor
     {
         HttpClient client;
 
@@ -85,5 +85,10 @@ namespace Common.Common
             if (response.StatusCode != HttpStatusCode.OK) throw new Exception(response.StatusCode.ToString());
             return await response.Content.ReadAsStringAsync();
         }
-    }
+
+		public Task<Announcement> CreateAnnouncement(Announcement announcement)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
