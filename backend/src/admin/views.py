@@ -1,7 +1,9 @@
+import logging
 from django.shortcuts import get_object_or_404
 
 from rest_framework import generics
 
+from notifications.views import NotificationOptions, send_notification
 from notifications.models import Announcement
 from notifications.serializers import AnnouncementSerializer
 from events.models import Event, Location
@@ -10,6 +12,8 @@ from scores.serializers import GameSerializer
 
 from .permissions import AdminPermission, ScorekeeperPermission
 from .serializers import EventSerializer, LocationSerializer
+
+logger = logging.getLogger('showdown.%s' % __name__)
 
 class AllEventsView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
@@ -42,3 +46,15 @@ class AllAnnouncementsView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
     queryset = Announcement.objects.order_by('-time')
     serializer_class = AnnouncementSerializer
+
+    def create(self, request, *args, **kwargs):
+        response = super(AllAnnouncementsView, self).create(request, *args, **kwargs)
+
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=False) # Should already be valid since super method checks
+        announcement = serializer.data
+        
+        options = NotificationOptions(title=announcement['title'], subtitle='Announcement from LSC', extra = { 'type': 'announcement' })
+        send_notification(options, '')
+
+        return response
