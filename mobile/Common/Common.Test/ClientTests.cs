@@ -61,7 +61,7 @@ namespace Common.Test
 	        var client = new ShowdownRESTClient();
 	        var result = await client.GetToken("EAAIwmUsfMZAcBAHbCYPsZCsp06Yec66vToS12AOhF8fZCOevvjg3zHeZBZAEAxj7OMPmkW540XjNsyfI069dTK0E3ZCGR6dCG9fD3tx2i3vjaWgBLZAYL5tvXIlBuPZBsKZAl8n8tscacwquS7NIomcufRijiV5AO11CKBtzfa9E1kV4HBLQOnZAuTEZCLUJLKBHri2VwOIZBfTUVjR6th0JXwR8JXcCIkzqO8AZD");
 
-	        Assert.IsNotNullOrEmpty(result);
+	        Assert.IsFalse(string.IsNullOrEmpty(result));
 	    }
 	}
 }
