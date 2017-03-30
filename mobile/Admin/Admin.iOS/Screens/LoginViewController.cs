@@ -37,7 +37,7 @@ namespace Admin.iOS
 			{
 				new EventsListViewController() { Title = "Events" },
 				new UIViewController() { Title = "Announcements" },
-				new UIViewController()  { Title = "Locations" },
+				new LocationsListViewController()  { Title = "Locations" },
 				new UIViewController()  { Title = "Games" },
 			};
 			tabBarController.NavigationItem.HidesBackButton = true;

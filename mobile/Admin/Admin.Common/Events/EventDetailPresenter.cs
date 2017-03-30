@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,7 +47,7 @@ namespace Admin.Common
 		{
 			var eventToSave = View.Event;
 			eventToSave.Id = _event.Id;
-			eventToSave.LocationId = _locations[View.SelectedLocationIndex].Id;
+			eventToSave.LocationId = (int) _locations[View.SelectedLocationIndex].Id;
 
 			_event = await _client.SaveEvent(eventToSave);
 			await UpdateLocationsFromServer();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -66,6 +66,23 @@ namespace Admin.Common.API
 		{
 			var path = $"/admin/locations/{id}";
 			var jsonString = await RequestAsync(path);
+			return Location.FromJSON(jsonString);
+		}
+
+		public async Task<Location> SaveLocation(Location locationToSave)
+		{
+			var jsonString = "";
+			if (locationToSave.Id == null)
+			{
+				var path = $"/admin/locations";
+				jsonString = await PostAsync(path, JsonConvert.SerializeObject(locationToSave));
+			}
+			else
+			{
+				var path = $"/admin/locations/{locationToSave.Id}";
+				jsonString = await PutAsync(path, JsonConvert.SerializeObject(locationToSave));
+			}
+
 			return Location.FromJSON(jsonString);
 		}
 
