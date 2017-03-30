@@ -37,11 +37,12 @@ def get_android_payload(options):
     }
 
 def send_notification(options, tags):
-    hub = NotificationHub(connection_string=settings.AZURE_NH_CONNECTION_STRING, hub_name=settings.AZURE_NH_NAME)    
+    hub = NotificationHub(connection_string=settings.AZURE_NH_CONNECTION_STRING, hub_name=settings.AZURE_NH_NAME, debug=0)    
     logger.info('Sending notification to APNS with options %s to tags "%s"', options, tags)
     hub.send_apple_notification(get_ios_payload(options), tags)
     logger.info('Sending notification to FCM with options %s to tags "%s"', options, tags)
     hub.send_gcm_notification(get_android_payload(options), tags)
+    logger.info('All notifications sent to notification hub')
 
 
 

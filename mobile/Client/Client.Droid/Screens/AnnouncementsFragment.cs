@@ -61,5 +61,10 @@ namespace Client.Droid.Screens
 			return v;
 		}
 
+		void IAnnouncementsView.OpenNewAnnouncement()
+		{
+			// Admin only method
+			throw new NotImplementedException();
+		}
 	}
 }
