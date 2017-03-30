@@ -62,7 +62,7 @@ namespace Client.iOS
 
 			Header.MakeConstraints(make =>
 			{
-				make.Height.EqualTo(View).MultipliedBy(0.15f);
+				make.Height.EqualTo((NSNumber)125);
 				make.Top.EqualTo(View);
 				make.Left.EqualTo(View);
 				make.Width.EqualTo(View);
@@ -134,8 +134,7 @@ namespace Client.iOS
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				var game = ScoreHistory[indexPath.Row];
-
+				tableView.DeselectRow(indexPath, false);
 			}
 		}
 	}

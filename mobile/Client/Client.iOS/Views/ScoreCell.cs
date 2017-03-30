@@ -12,8 +12,8 @@ namespace Client.iOS
 		UILabel AwayScoreLabel { get; set; }
 		UILabel HomeScoreLabel { get; set; }
 
-		static UIFont TimeFont = UIFont.FromName("Helvetica", 12);
-		static UIFont ScoreFont = UIFont.FromName("Helvetica-Bold", 20);
+		static UIFont TimeFont = UIFont.SystemFontOfSize(12, UIFontWeight.Regular);
+		static UIFont ScoreFont = UIFont.SystemFontOfSize(20, UIFontWeight.Bold);
 
 		public ScoreCell(IntPtr p) : base(p)
 		{
