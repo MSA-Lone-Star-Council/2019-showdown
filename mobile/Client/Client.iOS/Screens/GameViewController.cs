@@ -50,7 +50,7 @@ namespace Client.iOS
 			ScoresList = new UITableView()
 			{
 				BackgroundColor = UIColor.Clear,
-				Source = new ScoreTableSource(),
+				Source = new ScoreTableSource() { Game = Game},
 				RowHeight = 50,
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
@@ -84,8 +84,7 @@ namespace Client.iOS
 
 			var updateTask = Presenter.OnBegin();
 
-			Header.AwayScore = Game.Score[0];
-			Header.HomeScore = Game.Score[1];
+		    Header.Game = Game;
 
 			await updateTask;
 		}
@@ -96,7 +95,7 @@ namespace Client.iOS
 			Presenter.RemoveView();
 		}
 
-		public List<ScoreRecord> ScoreHistory
+		public List<Score> ScoreHistory
 		{
 			set
 			{
@@ -113,7 +112,8 @@ namespace Client.iOS
 
 		class ScoreTableSource : UITableViewSource
 		{
-			public List<ScoreRecord> ScoreHistory { get; set; }
+		    public Game Game;
+			public List<Score> ScoreHistory { get; set; }
 
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
@@ -122,7 +122,7 @@ namespace Client.iOS
 
 				var scoreRecord = ScoreHistory[indexPath.Row];
 
-				cell.UpdateCell(scoreRecord);
+				cell.UpdateCell(Game, scoreRecord);
 
 				return cell;
 			}

@@ -8,23 +8,17 @@ namespace Client.iOS
 {
 	public class GameHeader : UIView
 	{
-		public Score HomeScore
-		{
-			set
-			{
-				HomeTeamNameLabel.Text = value.Team;
-				HomeScoreLabel.Text = value.Points.ToString();
-			}
-		}
+	    public Game Game
+	    {
+	        set
+	        {
+	            HomeTeamNameLabel.Text = value.HomeTeam.ShortName;
+	            AwayTeamNameLabel.Text = value.AwayTeam.ShortName;
+				HomeScoreLabel.Text = value.Score.HomePoints.ToString();
+			    AwayScoreLabel.Text = value.Score.AwayPoints.ToString();
+	        }
+	    }
 
-		public Score AwayScore
-		{
-			set
-			{
-				AwayTeamNameLabel.Text = value.Team;
-				AwayScoreLabel.Text = value.Points.ToString();
-			}
-		}
 
 		UILabel AwayTeamNameLabel { get; set; }
 		UILabel HomeTeamNameLabel { get; set; }
