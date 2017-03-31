@@ -15,6 +15,9 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class GameSerializer(serializers.ModelSerializer):
+    away_team = serializers.SlugRelatedField(slug_field='slug', read_only=True)
+    home_team = serializers.SlugRelatedField(slug_field='slug', read_only=True)
+
     class Meta:
         model = Game
         fields = '__all__'
