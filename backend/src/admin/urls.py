@@ -25,6 +25,21 @@ urlpatterns = [
         view=LocationDetailView.as_view(),
         name="location_detail_view",
     ),
+    url(
+        regex=r"^games$",
+        view=AllGamesView.as_view(),
+        name="all_games_view",
+    ),
+    url(
+        regex=r"^games/(?P<game_id>[0-9a-f-]+)$",
+        view=GameDetailView.as_view(),
+        name="game_detail_view",
+    ),
+    url(
+        regex=r"^users$",
+        view=AllUsersView.as_view(),
+        name="all_users_view",
+    ),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

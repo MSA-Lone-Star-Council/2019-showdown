@@ -3,12 +3,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
 from events.models import Event, Location
-
 from scores.models import Game
-from scores.serializers import GameSerializer
+from accounts.models import User
 
 from .permissions import AdminPermission, ScorekeeperPermission
-from .serializers import EventSerializer, LocationSerializer
+from .serializers import EventSerializer, LocationSerializer, GameSerializer, UserSerializer
 
 class AllEventsView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
@@ -32,8 +31,18 @@ class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = 'location_id'
     serializer_class = LocationSerializer
 
-
 class AllGamesView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+class GameDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (AdminPermission,)
+    queryset = Game.objects.all()
+    lookup_url_kwarg = 'game_id'
+    serializer_class = GameSerializer
+
+class AllUsersView(generics.ListAPIView):
+    permission_classes = (AdminPermission,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
