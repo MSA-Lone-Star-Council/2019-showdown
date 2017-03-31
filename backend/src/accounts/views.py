@@ -7,7 +7,9 @@ from rest_framework.response import Response
 
 import jwt
 
-from accounts.models import User
+from util import facebook
+
+from .models import User
 
 logger = logging.getLogger('showdown.%s' % __name__)
 

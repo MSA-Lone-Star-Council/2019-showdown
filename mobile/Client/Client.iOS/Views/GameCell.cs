@@ -114,17 +114,17 @@ namespace Client.iOS
 			string format = "M/d h:mm:ss";
 
 			Title.Text = g.Title;
-			Time.Text = g.Time.ToString(format, null as DateTimeFormatInfo);
+			Time.Text = g.Score.Time.ToString(format, null as DateTimeFormatInfo);
 			EventName.Text = g.Event.Title;
 
-			var awayTeam = g.Score[0];
-			var homeTeam = g.Score[1];
+			var awayTeam = g.HomeTeam;
+			var homeTeam = g.AwayTeam;
 
-			AwayTeamName.Text = awayTeam.Team;
-			AwayTeamScore.Text = awayTeam.Points.ToString();
+			AwayTeamName.Text = awayTeam.ShortName;
+			AwayTeamScore.Text = g.Score.AwayPoints.ToString();
 
-			HomeTeamName.Text = homeTeam.Team;
-			HomeTeamScore.Text = homeTeam.Points.ToString();
+			HomeTeamName.Text = homeTeam.ShortName;
+			HomeTeamScore.Text = g.Score.HomePoints.ToString();
 		}
 	}
 }

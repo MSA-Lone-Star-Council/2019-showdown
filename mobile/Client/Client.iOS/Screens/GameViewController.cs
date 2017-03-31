@@ -20,7 +20,8 @@ namespace Client.iOS
 
 		public GameViewController(Game g)
 		{
-			Presenter = new GamePresenter() { Game = g };
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			Presenter = new GamePresenter(appDelegate.BackendClient) { Game = g };
 
 			Game = g;
 
@@ -49,7 +50,7 @@ namespace Client.iOS
 			ScoresList = new UITableView()
 			{
 				BackgroundColor = UIColor.Clear,
-				Source = new ScoreTableSource(),
+				Source = new ScoreTableSource() { Game = Game},
 				RowHeight = 50,
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
@@ -61,7 +62,7 @@ namespace Client.iOS
 
 			Header.MakeConstraints(make =>
 			{
-				make.Height.EqualTo(View).MultipliedBy(0.15f);
+				make.Height.EqualTo((NSNumber)125);
 				make.Top.EqualTo(View);
 				make.Left.EqualTo(View);
 				make.Width.EqualTo(View);
@@ -81,10 +82,11 @@ namespace Client.iOS
 		{
 			base.ViewWillAppear(animated);
 
-			await Presenter.OnBegin();
+			var updateTask = Presenter.OnBegin();
 
-			Header.HomeScore = Game.Score[0];
-			Header.AwayScore = Game.Score[1];
+		    Header.Game = Game;
+
+			await updateTask;
 		}
 
 		public override void ViewWillDisappear(bool animated)
@@ -93,7 +95,7 @@ namespace Client.iOS
 			Presenter.RemoveView();
 		}
 
-		public List<ScoreRecord> ScoreHistory
+		public List<Score> ScoreHistory
 		{
 			set
 			{
@@ -110,7 +112,8 @@ namespace Client.iOS
 
 		class ScoreTableSource : UITableViewSource
 		{
-			public List<ScoreRecord> ScoreHistory { get; set; }
+		    public Game Game;
+			public List<Score> ScoreHistory { get; set; }
 
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
@@ -119,7 +122,7 @@ namespace Client.iOS
 
 				var scoreRecord = ScoreHistory[indexPath.Row];
 
-				cell.UpdateCell(scoreRecord);
+				cell.UpdateCell(Game, scoreRecord);
 
 				return cell;
 			}
@@ -131,8 +134,7 @@ namespace Client.iOS
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				var game = ScoreHistory[indexPath.Row];
-
+				tableView.DeselectRow(indexPath, false);
 			}
 		}
 	}

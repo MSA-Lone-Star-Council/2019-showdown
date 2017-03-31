@@ -8,18 +8,43 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Client.Droid.Adapters;
 using Common.Common;
+using Client.Common;
+using Common.Common.Models;
+using System;
+using System.Collections.Generic;
 
 namespace Client.Droid.Screens
 {
-    public class ScheduleFragment : Fragment
+    public class ScheduleFragment : Fragment, IScheduleView
     {
-        RecyclerView ScheduleView;
+        SchedulePresenter Presenter { get; set; }
 
-        public override void OnCreate(Bundle savedInstanceState)
+
+        List<Event> IScheduleView.Events {
+            set
+            {
+                ScheduleAdapter adapter = this.Adapter;
+				if (adapter == null) return;
+                adapter.Events = value;
+                adapter.NotifyDataSetChanged();
+            }
+        }
+        RecyclerView ScheduleView { get; set; }
+        ScheduleAdapter Adapter { get; set; }
+
+        public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Create your fragment here
+            Presenter = new SchedulePresenter(new ShowdownRESTClient());
+            Presenter.TakeView(this);
+
+            Adapter = new ScheduleAdapter()
+            {
+                Events = new List<Event>()
+            };
+            Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
+            await Presenter.OnBegin();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -28,23 +53,22 @@ namespace Client.Droid.Screens
 
             // Set up Recycler View for the Schedule
             ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
-
-            ScheduleAdapter adapter = new ScheduleAdapter(ShowdownRESTClient.MakeFakeData());
-            ScheduleView.SetAdapter(adapter);
             ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
-
-            adapter.ItemClick += OnItemClick;
+            ScheduleView.SetAdapter(Adapter);
 
             return view;
         }
 
-        // Handler for the item click event:
-        void OnItemClick(object sender, ScheduleAdapterClickEventArgs args)
+        void IScheduleView.ShowMessage(string message)
         {
-            // Display a toast that briefly shows the enumeration of the selected photo:
-            int itemNumber = args.Position + 1;
-            Toast.MakeText(this.Activity, "This is event number " + itemNumber, ToastLength.Short).Show();
-            StartActivity(new Intent(this.Activity, typeof(DetailedEventActivity)));
+            Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
+        }
+
+        void IScheduleView.OpenEvent(Event row)
+        {
+            var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
+            Intent.PutExtra("event", row.ToJSON());
+            StartActivity(Intent);
         }
     }
 }

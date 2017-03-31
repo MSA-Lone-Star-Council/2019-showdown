@@ -12,13 +12,8 @@ class BriefLocationSerializer(serializers.ModelSerializer):
         model = Location
         fields = ('id', 'name')
 
-class BriefEventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-        fields = ('id', 'title')
-
 class FullEventSerializer(serializers.ModelSerializer):
-    location = BriefLocationSerializer(read_only=True)
+    location = FullLocationSerializer(read_only=True)
 
     class Meta:
         model = Event

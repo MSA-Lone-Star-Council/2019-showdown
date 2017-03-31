@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 
 from scores.models import Game
-from scores.serializers import GameSerializer, ScoreCardSerializer
+from scores.serializers import GameSerializer
 
 from .models import Event, Location
 from .serializers import FullEventSerializer, FullLocationSerializer
