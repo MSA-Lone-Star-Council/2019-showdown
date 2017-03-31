@@ -1,43 +1,31 @@
 from rest_framework import serializers
 
 from events.serializers import FullEventSerializer
+from core.models import School
 
-from .models import Game, Score, ScoreCard
+from .models import Game, Score
+
+# Redefining to avoid circular dependency between apps
+class ShortSchoolSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = School
+        fields = ('slug', 'name', 'short_name', 'logo')
 
 class ScoreSerializer(serializers.ModelSerializer):
-    team = serializers.SlugRelatedField(slug_field='name', read_only=True)
     class Meta:
         model = Score
-        fields = ('team', 'score')
-
-class ScoreCardSerializer(serializers.ModelSerializer):
-    game = serializers.PrimaryKeyRelatedField(read_only=True)
-    scores = serializers.SerializerMethodField()
-
-    def get_scores(self, obj):
-        scores = Score.objects.filter(score_card=obj)
-        return ScoreSerializer(scores, many=True).data
+        fields = ('away_points', 'home_points', 'time')
     
-    class Meta:
-        model = ScoreCard
-        fields = ('id', 'game', 'time', 'scores')
-
 class GameSerializer(serializers.ModelSerializer):
     event = FullEventSerializer(read_only=True)
-    teams = serializers.SlugRelatedField(slug_field='name', many=True, read_only=True)
+    away_team = ShortSchoolSerializer(read_only=True)
+    home_team = ShortSchoolSerializer(read_only=True)
 
-    score = serializers.SerializerMethodField('get_latest_score')
-    time = serializers.SerializerMethodField()
+    score = serializers.SerializerMethodField()
 
-    def get_latest_score(self, obj):
-        scorecard = ScoreCard.objects.filter(game=obj).latest()
-        scores = Score.objects.filter(score_card=scorecard)
-        return ScoreSerializer(scores, many=True).data
-    
-    def get_time(self, obj):
-        scorecard = ScoreCard.objects.filter(game=obj).latest()
-        return scorecard.time
+    def get_score(self, obj):
+        return ScoreSerializer(obj.scores.first()).data
 
     class Meta:
         model = Game
-        fields = ('id', 'title', 'event', 'teams', 'score', 'time')
+        fields = ('id', 'title', 'event', 'away_team', 'home_team', 'score', 'in_progress')

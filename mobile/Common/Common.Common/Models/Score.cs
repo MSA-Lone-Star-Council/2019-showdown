@@ -6,10 +6,13 @@ namespace Common.Common.Models
 {
 	public struct Score
 	{
-		public string Team { get; set; }
+		[JsonProperty(PropertyName = "away_points")]
+		public double AwayPoints { get; set; }
 
-		[JsonProperty(PropertyName = "score")]
-		public double Points { get; set; }
+		[JsonProperty(PropertyName = "home_points")]
+		public double HomePoints { get; set; }
+
+	    public DateTimeOffset Time { get; set; }
 
 		public static Score FromJSON(string jsonString)
 		{
@@ -23,13 +26,24 @@ namespace Common.Common.Models
 
 	    public bool Equals(Score other)
 	    {
-	        return Team == other.Team && Points == other.Points;
+	        return AwayPoints.Equals(other.AwayPoints) && HomePoints.Equals(other.HomePoints) && Time.Equals(other.Time);
 	    }
 
 	    public override bool Equals(object obj)
 	    {
 	        if (ReferenceEquals(null, obj)) return false;
 	        return obj is Score && Equals((Score) obj);
+	    }
+
+	    public override int GetHashCode()
+	    {
+	        unchecked
+	        {
+	            var hashCode = AwayPoints.GetHashCode();
+	            hashCode = (hashCode * 397) ^ HomePoints.GetHashCode();
+	            hashCode = (hashCode * 397) ^ Time.GetHashCode();
+	            return hashCode;
+	        }
 	    }
 
 	    public static bool operator ==(Score left, Score right)
