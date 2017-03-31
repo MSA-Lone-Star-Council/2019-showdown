@@ -44,6 +44,7 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="Screens\Login\ILoginView.cs" />
     <Compile Include="Screens\Login\LoginPresenter.cs" />
+    <Compile Include="API\Entities\Game.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

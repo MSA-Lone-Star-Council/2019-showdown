@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -9,6 +9,7 @@ using Admin.Common.API.Entities;
 using Common.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ClientModels = Common.Common.Models;
 
 namespace Admin.Common.API
 {
@@ -31,6 +32,12 @@ namespace Admin.Common.API
             var data = JObject.Parse(response);
 			return ((string)data["token"]);
         }
+
+		public async Task<List<ClientModels.School>> GetSchools()
+		{
+			var jsonString = await RequestAsync("/core/schools");
+			return ClientModels.School.FromJSONArray(jsonString);
+		}
 
 		public async Task<Event> GetEvent(int id)
 		{
@@ -74,6 +81,12 @@ namespace Admin.Common.API
 			var path = $"/admin/locations";
 			var jsonString = await RequestAsync(path);
 			return Location.FromJSONArray(jsonString);
+		}
+
+		public async Task<List<Game>> GetGames()
+		{
+			var jsonString = await RequestAsync("/admin/games");
+			return Game.FromJSONArray(jsonString);
 		}
 
         private HttpRequestMessage BuildRequest(string path, string jsonBody, bool authenticated)

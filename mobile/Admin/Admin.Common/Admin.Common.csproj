@@ -33,6 +33,8 @@
     <Compile Include="Events\IEventsListView.cs" />
     <Compile Include="Events\EventDetailPresenter.cs" />
     <Compile Include="Events\IEventDetailView.cs" />
+    <Compile Include="Games\GamesListPresenter.cs" />
+    <Compile Include="Games\IGamesListView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
@@ -47,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Events\" />
+    <Folder Include="Games\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
