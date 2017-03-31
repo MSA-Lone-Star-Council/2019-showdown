@@ -35,6 +35,8 @@
     <Compile Include="Events\IEventDetailView.cs" />
     <Compile Include="Games\GamesListPresenter.cs" />
     <Compile Include="Games\IGamesListView.cs" />
+    <Compile Include="Games\GameEditorPresenter.cs" />
+    <Compile Include="Games\IGameEditorView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">

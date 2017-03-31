@@ -89,6 +89,29 @@ namespace Admin.Common.API
 			return Game.FromJSONArray(jsonString);
 		}
 
+		public async Task<Game> SaveGame(Game g)
+		{
+			var jsonString = "";
+			if (g.Id == null)
+			{
+				var path = $"/admin/games";
+				jsonString = await PostAsync(path, JsonConvert.SerializeObject(g));
+			}
+			else
+			{
+				var path = $"/admin/games/{g.Id}";
+				jsonString = await PutAsync(path, JsonConvert.SerializeObject(g));
+			}
+
+			return Game.FromJSON(jsonString);
+		}
+
+		public async Task<List<User>> GetUsers()
+		{
+			var jsonString = await RequestAsync("/admin/users");
+			return User.FromJSONArray(jsonString);
+		}
+
         private HttpRequestMessage BuildRequest(string path, string jsonBody, bool authenticated)
         {
             var url = $"{Secrets.BACKEND_URL}{path}.json";

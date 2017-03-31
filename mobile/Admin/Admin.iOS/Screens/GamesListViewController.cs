@@ -50,7 +50,9 @@ namespace Admin.iOS
 
 		void IGamesListView.OpenGame(Game row)
 		{
-			
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var navController = appDelegate.Window.RootViewController as UINavigationController;
+			navController.PushViewController(new GameEditorViewController(row), true);
 		}
 
 		void IGamesListView.Refresh()
@@ -89,6 +91,13 @@ namespace Admin.iOS
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
 				return _presenter.GetNumGames();
+			}
+
+			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+			{
+				var row = _presenter.GetGame(indexPath.Row);
+				RowTappedEvent(row);
+				tableView.DeselectRow(indexPath, false);
 			}
 		}
 	}

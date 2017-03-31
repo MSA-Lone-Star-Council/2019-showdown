@@ -32,5 +32,18 @@ namespace Admin.Common.API.Entities
 		{
 			return JsonConvert.DeserializeObject<List<Game>>(jsonString);
 		}
-	}
+
+		public static Game FromJSON(string jsonString)
+		{
+			return JsonConvert.DeserializeObject<Game>(jsonString);
+		}
+
+		public bool IsEmpty()
+		{
+			return string.IsNullOrEmpty(Id) && string.IsNullOrEmpty(Title)
+						 && EventId == 0 && string.IsNullOrEmpty(ScorekeeperId) && string.IsNullOrEmpty(AwayTeamId)
+					&& InProgress == false;
+		}
+
+}
 }

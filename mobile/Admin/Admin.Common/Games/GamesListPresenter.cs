@@ -39,12 +39,7 @@ namespace Admin.Common
 
 		public void OnClickAdd()
 		{
-			View.OpenGame(new Game()
-			{
-				EventId = 1,
-				HomeTeamId = "",
-				AwayTeamId = "",
-			});
+			View.OpenGame(new Game() { InProgress = true });
 		}
 
 		public Game GetGame(int index)
