@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from core.models import School
 from events.models import Location, Event
 from scores.models import Game
 from accounts.models import User
@@ -15,8 +16,8 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class GameSerializer(serializers.ModelSerializer):
-    away_team = serializers.SlugRelatedField(slug_field='slug', read_only=True)
-    home_team = serializers.SlugRelatedField(slug_field='slug', read_only=True)
+    away_team = serializers.SlugRelatedField(slug_field='slug', queryset=School.objects.all())
+    home_team = serializers.SlugRelatedField(slug_field='slug', queryset=School.objects.all())
 
     class Meta:
         model = Game
