@@ -9,6 +9,7 @@ namespace Client.iOS
 {
 	public class SchoolViewController : UIViewController, ISchoolView
 	{
+		
 		static string SchoolGameCellId = "SchoolGameCell";
 
 		SchoolPresenter presenter { get; set; }
@@ -77,6 +78,15 @@ namespace Client.iOS
 			GamesList.ReloadData();
 		}
 
+		void ISchoolView.OpenGame(Game game)
+		{
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var tabBarController = appDelegate.Window.RootViewController as UITabBarController;
+			var navController = tabBarController.SelectedViewController as UINavigationController;
+
+			navController.PushViewController(new GameViewController(game), true);
+		}
+
 		class GameTableSource : UITableViewSource
 		{
 			SchoolPresenter presenter;
@@ -100,6 +110,12 @@ namespace Client.iOS
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
 				return presenter.GetGameCount();
+			}
+
+			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+			{
+				presenter.OnClickRow(indexPath.Row);
+				tableView.DeselectRow(indexPath, false);
 			}
 		}
 	}

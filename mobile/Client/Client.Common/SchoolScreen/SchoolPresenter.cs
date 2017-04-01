@@ -29,9 +29,9 @@ namespace Client.Common
 			await UpdateFromServer();
 		}
 
-		public async Task OnClickRow()
+		public void OnClickRow(int row)
 		{
-			await UpdateFromServer();
+			View.OpenGame(games[row]);
 		}
 
 		public Game GetGame(int row)
