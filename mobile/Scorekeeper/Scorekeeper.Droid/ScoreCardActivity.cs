@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Scorekeeper.Common;
 
-namespace Scorekeeper.Android
+namespace Scorekeeper.Droid
 {
     [Activity(Label = "ScoreCardActivity")]
     public class ScoreCardActivity : Activity, IScoreCardView
