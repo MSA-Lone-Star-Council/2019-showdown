@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
   <Button
-    android:id="@+id/tempSportsButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Example Sport to Keep score" />
+    android:id="@+id/fakeLoginButton"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="Fake Login Button" />
 </LinearLayout>
