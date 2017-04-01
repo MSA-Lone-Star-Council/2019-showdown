@@ -18,7 +18,6 @@ namespace Scorekeeper.Droid
     {
         private ScoreCardPresenter presenter;
 
-        // TODO: Make a layout that actually has these widgets
         private TextView homeScoreTV, awayScoreTV;
         private Button HomePlusOneButton, AwayPlusOneButton;
 
@@ -51,9 +50,15 @@ namespace Scorekeeper.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.score_card_layout);
 
             presenter = new ScoreCardPresenter();
 
+            homeScoreTV = FindViewById<TextView>(Resource.Id.home_score);
+            awayScoreTV = FindViewById<TextView>(Resource.Id.away_score);
+            HomePlusOneButton = FindViewById<Button>(Resource.Id.home_update_score_button);
+            AwayPlusOneButton = FindViewById<Button>(Resource.Id.away_update_score_button);
+            
             HomePlusOneButton.Click += async (sender, e) => { await presenter.IncreaseScore(ScoreCardPresenter.Team.Home, 1); };
             AwayPlusOneButton.Click += async (sender, e) => { await presenter.IncreaseScore(ScoreCardPresenter.Team.Away, 1); };
         }

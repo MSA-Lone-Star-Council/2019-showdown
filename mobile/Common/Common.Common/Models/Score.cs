@@ -12,7 +12,8 @@ namespace Common.Common.Models
 		[JsonProperty(PropertyName = "home_points")]
 		public double HomePoints { get; set; }
 
-	    public DateTimeOffset Time { get; set; }
+        [JsonProperty(PropertyName = ("time"), NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? Time { get; set; }
 
 		public static Score FromJSON(string jsonString)
 		{
