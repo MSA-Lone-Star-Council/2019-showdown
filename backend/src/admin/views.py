@@ -1,7 +1,7 @@
 import logging
 from django.shortcuts import get_object_or_404
 
-from rest_framework import generics, status
+from rest_framework import generics, status, views
 from rest_framework.response import Response
 
 from notifications.views import NotificationOptions, send_notification
@@ -117,3 +117,14 @@ class ScorekeeperScoresView(generics.CreateAPIView):
         send_notification(options, '')
 
         return Response(score, status=status.HTTP_201_CREATED, headers=headers)
+
+class GameInProgressView(views.APIView):
+    def put(self, request, game_id, format=None):
+        if not request.token:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        game = get_object_or_404(Game, pk=game_id)
+        game.in_progress = request.data['in_progress']
+        game.save()
+        resp = Response({'in_progress': game.in_progress}, headers={})
+        return resp
