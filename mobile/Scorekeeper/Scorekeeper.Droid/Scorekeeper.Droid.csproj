@@ -58,8 +58,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapter1.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Screens\GameListActivity.cs" />
+    <Compile Include="Adapters\GameListAdapter.cs" />
+    <Compile Include="Screens\MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreCardActivity.cs" />
@@ -69,6 +70,9 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\score_card_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\game_list_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

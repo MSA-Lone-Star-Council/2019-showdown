@@ -43,7 +43,8 @@ namespace Scorekeeper.Common
 		/// <param name="delta">The amount to increase (or if negative, decrease)</param>
 		public async Task IncreaseScore(Team team, int delta)
 		{
-			if (View == null) return; 
+			if (View == null) return;
+            if (delta == 0) return;
 
 			int previousScore = GetScoreFromView(team);
 
