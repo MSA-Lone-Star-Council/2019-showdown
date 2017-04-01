@@ -5,7 +5,6 @@ namespace Client.Common
 {
 	public interface ISchoolView
 	{
-		School School { set; }
 		void Refresh();
 	}
 }
