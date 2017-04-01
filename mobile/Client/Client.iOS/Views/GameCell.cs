@@ -126,10 +126,13 @@ namespace Client.iOS
 			AwayTeamName.Text = awayTeam.ShortName;
 			AwayTeamScore.Text = g.Score.AwayPoints.ToString();
 			AwayTeamScore.TextColor = !g.InProgress && awayTeamLost && !isTie ? UIColor.LightGray : UIColor.Black;
+			AwayTeamName.TextColor = !g.InProgress && awayTeamLost && !isTie ? UIColor.LightGray : UIColor.Black;
 
 			HomeTeamName.Text = homeTeam.ShortName;
 			HomeTeamScore.Text = g.Score.HomePoints.ToString();
 			HomeTeamScore.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
+			HomeTeamName.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
+
 		}
 	}
 }
