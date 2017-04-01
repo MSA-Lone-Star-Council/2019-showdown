@@ -46,7 +46,7 @@ namespace Client.iOS
 			{
 				BackgroundColor = UIColor.Clear,
 				Source = tableSource,
-				RowHeight = 155,
+				RowHeight = 130,
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
 			GamesList.RegisterClassForCellReuse(typeof(GameCell), GameCellID);
