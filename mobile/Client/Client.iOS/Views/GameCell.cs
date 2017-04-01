@@ -20,10 +20,10 @@ namespace Client.iOS
 		UILabel AwayTeamName { get; set; }
 		UILabel AwayTeamScore { get; set; }
 
-		static UIFont TitleFont = UIFont.FromName("Helvetica-Bold", 18);
-		static UIFont TimeFont =  UIFont.FromName("Helvetica-Oblique", 12);
-		static UIFont EventFont = UIFont.FromName("Helvetica-BoldOblique", 16);
-		static UIFont ScoreFont = UIFont.FromName("Helvetica-Bold", 20);
+		static UIFont TitleFont = UIFont.SystemFontOfSize(16, UIFontWeight.Bold);
+		static UIFont TimeFont = UIFont.SystemFontOfSize(12, UIFontWeight.UltraLight);
+		static UIFont EventFont = UIFont.SystemFontOfSize(14, UIFontWeight.Thin);
+		static UIFont ScoreFont = UIFont.SystemFontOfSize(18, UIFontWeight.Bold);
 
 		public GameCell(IntPtr p) : base (p)
 		{
@@ -38,9 +38,9 @@ namespace Client.iOS
 			containerView.Layer.BorderColor = UIColor.LightGray.CGColor;
 
 
-			Title = new UILabel() { Font = TitleFont };
+			Title = new UILabel() { Font = TitleFont, TextAlignment = UITextAlignment.Center };
 			Time = new UILabel() { Font = TimeFont };
-			EventName = new UILabel() { Font = EventFont };
+			EventName = new UILabel() { Font = EventFont, TextAlignment = UITextAlignment.Center };
 
 			AwayTeamName = new UILabel() { Font = ScoreFont };
 			AwayTeamScore = new UILabel() { Font = ScoreFont };
@@ -68,22 +68,21 @@ namespace Client.iOS
 			Title.MakeConstraints(make =>
 			{
 				make.Top.EqualTo(parentView).Offset(tbOffset);
-				make.Left.EqualTo(parentView).Offset(lrOffset);
+				make.CenterX.EqualTo(parentView);
 				make.Width.EqualTo(parentView);
 			});
 
 			EventName.MakeConstraints(make =>
 			{
-				make.Left.EqualTo(Title);
-				make.Top.EqualTo(Title.Bottom()).Offset(tbOffset);
+				make.CenterX.EqualTo(Title);
+				make.Top.EqualTo(Title.Bottom()).Offset(2);
 				make.Width.EqualTo(parentView);
 			});
 
-
 			AwayTeamName.MakeConstraints(make =>
 			{
-				make.Top.EqualTo(EventName.Bottom()).Offset(tbOffset + 10);
-				make.Left.EqualTo(EventName);
+				make.Top.EqualTo(EventName.Bottom()).Offset(tbOffset);
+				make.Left.EqualTo(parentView).Offset(lrOffset);
 			});
 			AwayTeamScore.MakeConstraints(make =>
 			{
@@ -104,7 +103,7 @@ namespace Client.iOS
 
 			Time.MakeConstraints(make =>
 			{
-				make.Bottom.EqualTo(parentView.Bottom()).Offset(-tbOffset);
+				make.Bottom.EqualTo(parentView.Bottom()).Offset(-5);
 				make.Right.EqualTo(parentView).Offset(-lrOffset);
 			});
 		}
@@ -114,17 +113,26 @@ namespace Client.iOS
 			string format = "M/d h:mm:ss";
 
 			Title.Text = g.Title;
+			Title.TextColor = g.InProgress ? UIColor.FromRGB(0, 0.5f, 0) : UIColor.Black;
 			Time.Text = g.Score.Time.ToString(format, null as DateTimeFormatInfo);
 			EventName.Text = g.Event.Title;
 
 			var awayTeam = g.HomeTeam;
 			var homeTeam = g.AwayTeam;
 
+			var awayTeamLost = g.Score.AwayPoints < g.Score.HomePoints;
+			var isTie = g.Score.AwayPoints == g.Score.HomePoints;
+
 			AwayTeamName.Text = awayTeam.ShortName;
 			AwayTeamScore.Text = g.Score.AwayPoints.ToString();
+			AwayTeamScore.TextColor = !g.InProgress && awayTeamLost && !isTie ? UIColor.LightGray : UIColor.Black;
+			AwayTeamName.TextColor = !g.InProgress && awayTeamLost && !isTie ? UIColor.LightGray : UIColor.Black;
 
 			HomeTeamName.Text = homeTeam.ShortName;
 			HomeTeamScore.Text = g.Score.HomePoints.ToString();
+			HomeTeamScore.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
+			HomeTeamName.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
+
 		}
 	}
 }
