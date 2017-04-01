@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Admin.Common.API.Entities;
 
 namespace Admin.Common
@@ -13,5 +13,7 @@ namespace Admin.Common
 		int SelectedHomeTeamIndex { get; set; }
 
 		bool FetchingValues { set; }
+
+		void GoBack();
 	}
 }

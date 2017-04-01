@@ -53,6 +53,12 @@ namespace Admin.Common
 			await UpdateLocationsFromServer();
 		}
 
+		public async Task Delete()
+		{
+			await _client.DeleteEvent(_event);
+			View.GoBack();
+		}
+
 		public string GetLocationName(int row)
 		{
 			return _locations[row].Name;

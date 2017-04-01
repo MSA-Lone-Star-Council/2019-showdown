@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Admin.Common.API.Entities;
 
 namespace Admin.Common
@@ -8,5 +8,7 @@ namespace Admin.Common
 		Location Location { get; set; }
 
 		bool LocationSaving { set; }
+
+		void GoBack();
 	}
 }
