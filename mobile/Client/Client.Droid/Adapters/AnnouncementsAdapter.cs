@@ -47,7 +47,7 @@ namespace Client.Droid.Adapters
 			{
 				Title.Text = announcement.Title;
 				Body.Text = announcement.Body;
-				Time.Text = Utilities.FormatDateTime(announcement.Time);
+				Time.Text = Utilities.FormatDateTime((System.DateTimeOffset)announcement.Time);
 			}
 		}
 	}

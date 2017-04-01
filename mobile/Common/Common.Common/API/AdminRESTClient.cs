@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Admin.Common.API.Entities;
 using Common.Common;
+using ClientModel = Common.Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Admin.Common.API
 {
-    public class AdminRESTClient
+	public class AdminRESTClient : IAnnoucementInteractor
     {
         HttpClient client;
 
@@ -74,6 +75,28 @@ namespace Admin.Common.API
 			var path = $"/admin/locations";
 			var jsonString = await RequestAsync(path);
 			return Location.FromJSONArray(jsonString);
+		}
+
+		public async Task<List<ClientModel.Announcement>> GetAnnouncements()
+		{
+			var jsonString = await RequestAsync("/admin/announcements");
+			return ClientModel.Announcement.FromJSONArray(jsonString);
+		}
+
+		public async Task<ClientModel.Announcement> CreateAnnouncement(ClientModel.Announcement announcement)
+		{
+			var jsonString = "";
+			if (announcement.Id == null)
+			{
+				var path = $"/admin/announcements";
+				jsonString = await PostAsync(path, JsonConvert.SerializeObject(announcement));
+			}
+			else
+			{
+				throw new Exception("Can't update announcements!");
+			}
+
+			return ClientModel.Announcement.FromJSON(jsonString);
 		}
 
         private HttpRequestMessage BuildRequest(string path, string jsonBody, bool authenticated)

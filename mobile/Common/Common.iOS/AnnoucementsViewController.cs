@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Client.Common;
+using Common.Common;
 using Common.Common.Models;
 using Foundation;
 using UIKit;
 
-namespace Client.iOS
+namespace Common.iOS
 {
 	public class AnnoucementsViewController : UIViewController, IAnnouncementsView
 	{
@@ -15,10 +16,9 @@ namespace Client.iOS
 
 		public AnnouncementsPresenter Presenter { get; set; }
 
-	    public AnnoucementsViewController()
+	    public AnnoucementsViewController(IAnnoucementInteractor client)
 		{
-		    var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-		    Presenter = new AnnouncementsPresenter(appDelegate.BackendClient);
+		    Presenter = new AnnouncementsPresenter(client);
 			Presenter.TakeView(this);
 		}
 
@@ -42,20 +42,19 @@ namespace Client.iOS
 	        {
                 BackgroundColor = UIColor.Clear,
 	            Source = new AnnouncementsTableSource(),
-	            RowHeight = 150,
+	            RowHeight = 100,
 	            SeparatorStyle = UITableViewCellSeparatorStyle.None
 	        };
 			AnnouncementsList.RegisterClassForCellReuse(typeof(AnnouncementCell), AnnouncmentCellID);
 
 	        View.AddSubview(AnnouncementsList);
-			await Presenter.OnBegin();
 	    }
 
 	    public override async void ViewDidAppear(bool animated)
 	    {
 	        base.ViewDidAppear(animated);
 			Presenter.TakeView(this);
-	
+			await Presenter.OnBegin();
 	    }
 
 	    public override void ViewWillDisappear(bool animated)
@@ -64,7 +63,12 @@ namespace Client.iOS
 	        Presenter.RemoveView();
 	    }
 
-	    class AnnouncementsTableSource : UITableViewSource
+		public virtual void OpenNewAnnouncement()
+		{
+			throw new NotImplementedException();
+		}
+
+		class AnnouncementsTableSource : UITableViewSource
 		{
 			public List<Announcement> Announcements { get; set; }
 

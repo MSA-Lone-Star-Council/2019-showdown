@@ -26,8 +26,7 @@ namespace Admin.iOS
 		{
 			base.ViewDidAppear(animated);
 
-			ParentViewController.NavigationItem.RightBarButtonItem =
-				new UIBarButtonItem("Add Event", UIBarButtonItemStyle.Plain, (sender, e) => Presenter.OnClickAdd());
+			ParentViewController.NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Add, (sender, e) => Presenter.OnClickAdd());
 			
 			Presenter.TakeView(this);
 			await Presenter.OnBegin();
