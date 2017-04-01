@@ -1,7 +1,8 @@
 import logging
 from django.shortcuts import get_object_or_404
 
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
 
 from notifications.views import NotificationOptions, send_notification
 from notifications.models import Announcement
@@ -11,7 +12,7 @@ from scores.models import Game
 from accounts.models import User
 
 from .permissions import AdminPermission, ScorekeeperPermission
-from .serializers import EventSerializer, LocationSerializer, GameSerializer, UserSerializer
+from .serializers import EventSerializer, LocationSerializer, GameSerializer, UserSerializer, ScoreSerializer
 
 logger = logging.getLogger('showdown.%s' % __name__)
 
@@ -80,3 +81,16 @@ class ScorekeeperGamesView(generics.ListAPIView):
         games = Game.objects.filter(scorekeeper__id=token['sub'])
         return games
 
+class ScorekeeperScoresView(generics.CreateAPIView):
+    permission_classes = (ScorekeeperPermission,)
+    serializer_class = ScoreSerializer
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        data['game'] = kwargs['game_id']
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

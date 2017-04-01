@@ -50,6 +50,11 @@ urlpatterns = [
         view=ScorekeeperGamesView.as_view(),
         name="scorekeeper_games",
     ),
+    url(
+        regex=r"^scorekeeper/games/(?P<game_id>[0-9a-f-]+)$",
+        view=ScorekeeperScoresView.as_view(),
+        name="scorekeeper_scores",
+    ),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
