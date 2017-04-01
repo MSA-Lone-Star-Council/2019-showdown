@@ -25,13 +25,14 @@ namespace Client.iOS
 			Presenter.TakeView(this);
 		}
 
-		public override void ViewDidAppear(bool animated)
+		public async override void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
 			Presenter.TakeView(this);
+			await Presenter.OnBegin();
 		}
 
-		public async override void ViewDidLoad()
+		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
@@ -45,13 +46,11 @@ namespace Client.iOS
 			{
 				BackgroundColor = UIColor.Clear,
 				Source = tableSource,
-				RowHeight = 155,
+				RowHeight = 130,
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
 			GamesList.RegisterClassForCellReuse(typeof(GameCell), GameCellID);
 			View.AddSubview(GamesList);
-
-			await Presenter.OnBegin();
 		}
 
 
