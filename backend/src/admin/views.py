@@ -77,7 +77,6 @@ class ScorekeeperGamesView(generics.ListAPIView):
 
     def get_queryset(self):
         token = self.request.token
-        logger.info(token)
         games = Game.objects.filter(scorekeeper__id=token['sub'])
         return games
 
@@ -86,11 +85,35 @@ class ScorekeeperScoresView(generics.CreateAPIView):
     serializer_class = ScoreSerializer
 
     def create(self, request, *args, **kwargs):
+        game = get_object_or_404(Game, pk=kwargs['game_id'])
+
         data = request.data
         data['game'] = kwargs['game_id']
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        
+        score = serializer.data
+        options = NotificationOptions(
+            title='%s %d v %s %d' % (
+                game.away_team.short_name, 
+                score['away_points'],
+                game.home_team.short_name,
+                score['home_points']
+            ),
+            subtitle='%s - %s' % (
+                game.event.title,
+                "Live" if game.in_progress else "Final",
+            ),
+            extra = {
+                'type': 'score',
+                'game_id': str(game.id),
+            }
+        )
+        logger.info(options)
+        
+        # TODO: https://msdn.microsoft.com/en-us/library/azure/dn530749.aspx#Anchor_3
+        send_notification(options, '')
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(score, status=status.HTTP_201_CREATED, headers=headers)
