@@ -114,7 +114,7 @@ namespace Client.iOS
 
 			Title.Text = g.Title;
 			Title.TextColor = g.InProgress ? UIColor.FromRGB(0, 0.5f, 0) : UIColor.Black;
-			Time.Text = g.Score.Time.ToString(format, null as DateTimeFormatInfo);
+			Time.Text = ((DateTimeOffset) g.Score.Time).ToString(format, null as DateTimeFormatInfo);
 			EventName.Text = g.Event.Title;
 
 			var awayTeam = g.HomeTeam;
