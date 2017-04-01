@@ -7,7 +7,7 @@ using UIKit;
 
 namespace Client.iOS
 {
-	public delegate void OnRowTapped(Game game);
+
 
 	public class SportsViewController : UIViewController, ISportsView
 	{
@@ -87,6 +87,7 @@ namespace Client.iOS
 
 		class SportsTableSource : UITableViewSource
 		{
+			public delegate void OnRowTapped(Game game);
 			public List<Game> Games { get; set; }
 
 			public event OnRowTapped RowTappedEvent;
