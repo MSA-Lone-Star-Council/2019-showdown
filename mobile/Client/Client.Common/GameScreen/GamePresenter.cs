@@ -20,7 +20,7 @@ namespace Client.Common
 		public async Task OnBegin()
 		{
 			if (View != null)
-				View.ScoreHistory = new List<ScoreRecord>();
+				View.ScoreHistory = new List<Score>();
 			await UpdateFromServer();
 		}
 
@@ -43,7 +43,7 @@ namespace Client.Common
 			if (View != null) View.ScoreHistory = scoreHistory;
 		}
 
-		async Task<List<ScoreRecord>> GetScoreHistoryFromServer()
+		async Task<List<Score>> GetScoreHistoryFromServer()
 		{
 			return await _client.GetScoreHistory(Game.ID);
 		}

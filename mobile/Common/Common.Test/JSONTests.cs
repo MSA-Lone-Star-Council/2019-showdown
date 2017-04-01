@@ -94,50 +94,5 @@ namespace Common.Test
 			Assert.AreEqual(expected, actual);
 		}
 
-	    [Test]
-	    public void TestGameDeserialization()
-	    {
-			string jsonString = @"
-		    {
-		        ""id"":""80df9306-cafc-4f3d-9a16-f6da0d357b1b"",
-		        ""title"":""Finals"",
-		        ""teams"":[
-		            ""UT Austin"",
-		            ""UT Dallas""
-		        ],
-		        ""score"":[
-		            {
-		                ""team"":""UT Austin"",
-		                ""score"":90.0
-		            },
-		            {
-		                ""team"":""UT Dallas"",
-		                ""score"":10.0
-		            }
-		        ],
-		        ""time"":""2017-03-17T04:53:03.000000Z""
-		    }				
-		    ";
-
-	        List<string> l = new List<string>();
-
-	        Game expected = new Game()
-	        {
-	            ID = "80df9306-cafc-4f3d-9a16-f6da0d357b1b",
-	            Title = "Finals",
-	            Event = default(Event),
-	            Teams = new List<string>() { "UT Austin", "UT Dallas"},
-	            Score = new List<Score>()
-	            {
-	                new Score() { Team = "UT Austin", Points = 90},
-	                new Score() { Team = "UT Dallas", Points = 10}
-	            },
-	            Time = new DateTimeOffset(2017, 3, 17, 4, 53, 3, TimeSpan.Zero)
-	        };
-
-	        Game actual = Game.FromJSON(jsonString);
-
-	        Assert.AreEqual(expected, actual);
-	    }
 	}
 }

@@ -4,7 +4,7 @@ using Common.Common.Models;
 using UIKit;
 using Masonry;
 
-namespace Client.iOS
+namespace Common.iOS
 {
     public class AnnouncementCell : UITableViewCell
     {
@@ -62,7 +62,7 @@ namespace Client.iOS
         {
             Title.Text = announcement.Title;
             Body.Text = announcement.Body;
-            Time.Text = Utilities.FormatDateTime(announcement.Time);
+            Time.Text = Utilities.FormatDateTime((System.DateTimeOffset)announcement.Time);
         }
     }
 }

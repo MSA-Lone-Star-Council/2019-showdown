@@ -7,7 +7,7 @@ namespace Client.Common
 	public interface IGameView
 	{
 		Game Game { get; }
-		List<ScoreRecord> ScoreHistory { set; }
+		List<Score> ScoreHistory { set; }
 
 		void ShowMessage(string message);
 	}

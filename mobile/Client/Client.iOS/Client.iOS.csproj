@@ -119,10 +119,8 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Screens\ScheduleViewController.cs" />
-    <Compile Include="Screens\AnnoucementsViewController.cs" />
     <Compile Include="Screens\SportsViewController.cs" />
     <Compile Include="Screens\AcknowledgementsViewController.cs" />
-    <Compile Include="Views\AnnouncementCell.cs" />
     <Compile Include="Views\GameCell.cs" />
     <Compile Include="Screens\GameViewController.cs" />
     <Compile Include="Views\ScoreCell.cs" />

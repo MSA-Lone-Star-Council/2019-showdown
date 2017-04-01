@@ -36,14 +36,17 @@
     <Compile Include="Models\Announcement.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\School.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="Models\Game.cs" />
-    <Compile Include="Models\ScoreRecord.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="Utilities.cs" />
     <Compile Include="Screens\Login\ILoginView.cs" />
     <Compile Include="Screens\Login\LoginPresenter.cs" />
+    <Compile Include="API\IAnnoucementInteractor.cs" />
+    <Compile Include="Screens\AnnouncementsScreen\AnnouncementsPresenter.cs" />
+    <Compile Include="Screens\AnnouncementsScreen\IAnnouncementsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -51,6 +54,7 @@
     <Compile Include="ShowdownRESTClient.cs" />
     <Folder Include="Screens\" />
     <Folder Include="Screens\Login\" />
+    <Folder Include="Screens\AnnouncementsScreen\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

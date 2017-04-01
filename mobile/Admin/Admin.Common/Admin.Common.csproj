@@ -37,6 +37,8 @@
     <Compile Include="Locations\LocationsListPresenter.cs" />
     <Compile Include="Locations\ILocationDetailView.cs" />
     <Compile Include="Locations\LocationDetailPresenter.cs" />
+    <Compile Include="Announcements\IAnnouncementEditorView.cs" />
+    <Compile Include="Announcements\AnnouncementEditorPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
@@ -52,6 +54,7 @@
   <ItemGroup>
     <Folder Include="Events\" />
     <Folder Include="Locations\" />
+    <Folder Include="Announcements\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

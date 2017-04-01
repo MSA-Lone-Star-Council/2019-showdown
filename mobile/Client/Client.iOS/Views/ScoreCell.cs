@@ -12,8 +12,8 @@ namespace Client.iOS
 		UILabel AwayScoreLabel { get; set; }
 		UILabel HomeScoreLabel { get; set; }
 
-		static UIFont TimeFont = UIFont.FromName("Helvetica", 12);
-		static UIFont ScoreFont = UIFont.FromName("Helvetica-Bold", 20);
+		static UIFont TimeFont = UIFont.SystemFontOfSize(12, UIFontWeight.Regular);
+		static UIFont ScoreFont = UIFont.SystemFontOfSize(20, UIFontWeight.Bold);
 
 		public ScoreCell(IntPtr p) : base(p)
 		{
@@ -55,17 +55,17 @@ namespace Client.iOS
 			});
 		}
 
-		public void UpdateCell(ScoreRecord record)
+		public void UpdateCell(Game game, Score record)
 		{
 			string format = "h:mm:ss";
 
 			TimeLabel.Text = record.Time.ToString(format, null as DateTimeFormatInfo);
 
-			var awayTeam = record.Scores[0];
-			var homeTeam = record.Scores[1];
+			var awayTeam = game.AwayTeam.ShortName;
+			var homeTeam = game.HomeTeam.ShortName;
 
-			AwayScoreLabel.Text = awayTeam.Points.ToString();
-			HomeScoreLabel.Text = homeTeam.Points.ToString();
+			AwayScoreLabel.Text = record.AwayPoints.ToString();
+			HomeScoreLabel.Text = record.HomePoints.ToString();
 		}
 	}
 }

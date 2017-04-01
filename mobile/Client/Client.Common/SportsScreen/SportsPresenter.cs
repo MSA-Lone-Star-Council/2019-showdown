@@ -43,7 +43,7 @@ namespace Client.Common
 			var gamesFromServer = await GetAllGames();
 
 			if (View != null)
-				View.Games = gamesFromServer.OrderByDescending(g => g.Time).ToList();
+				View.Games = gamesFromServer.OrderByDescending(g => g.Score.Time).ToList();
 		}
 
 		private async Task<List<Game>> GetAllGames()

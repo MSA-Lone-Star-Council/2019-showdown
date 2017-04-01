@@ -7,5 +7,7 @@ namespace Client.Common
 	public interface IAnnouncementsView
 	{
 	    List<Announcement> Announcements { set; }
+
+		void OpenNewAnnouncement();
 	}
 }

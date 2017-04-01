@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Common;
@@ -8,11 +8,11 @@ namespace Client.Common
 {
 	public class AnnouncementsPresenter : Presenter<IAnnouncementsView>
 	{
-		private readonly ShowdownRESTClient _client;
+		private readonly IAnnoucementInteractor _client;
 
 		private List<Announcement> _announcements = new List<Announcement>();
 
-	    public AnnouncementsPresenter(ShowdownRESTClient client)
+		public AnnouncementsPresenter(IAnnoucementInteractor client)
 	    {
 	        _client = client;
 	    }
@@ -21,6 +21,11 @@ namespace Client.Common
 		{
 			base.TakeView(view);
 			View.Announcements = _announcements;
+		}
+
+		public void OnClickAdd()
+		{
+			View.OpenNewAnnouncement();
 		}
 
 		public async Task OnBegin()

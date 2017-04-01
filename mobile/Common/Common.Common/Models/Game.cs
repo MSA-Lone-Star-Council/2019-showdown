@@ -12,16 +12,16 @@ namespace Common.Common.Models
 
 		public Event Event { get; set; }
 
-		public List<string> Teams { get; set; }
+		[JsonProperty(PropertyName= "away_team")]
+		public School AwayTeam { get; set; }
 
-		/// <summary>
-		/// The latest score for the game. 
-		/// It is essentially a list of (Team, Points) pairs (it's pretty bad naming)
-		/// </summary>
-		/// <value>The score.</value>
-		public List<Score> Score { get; set; }
+		[JsonProperty(PropertyName="home_team")]
+		public School HomeTeam { get; set; }
 
-		public DateTimeOffset Time { get; set; }
+		public Score Score { get; set; }
+
+	    [JsonProperty(PropertyName="in_progress")]
+	    public bool InProgress { get; set; }
 
 	    public static Game FromJSON(string jsonString)
 	    {
@@ -39,9 +39,8 @@ namespace Common.Common.Models
                 ID == other.ID &&
                 Title == other.Title &&
                 Event == other.Event &&
-                Time == other.Time &&
-                Teams.SequenceEqual(other.Teams) &&
-                Score.SequenceEqual(other.Score)
+                HomeTeam == other.HomeTeam &&
+                AwayTeam == other.AwayTeam
 	        );
 	    }
 
