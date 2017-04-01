@@ -45,7 +45,11 @@ namespace Client.iOS
 			navController.NavigationBar.Translucent = false;
 
 			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
-			Header = new GameHeader();
+			Header = new GameHeader()
+			{
+				AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
+				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); }
+			};
 
 			ScoresList = new UITableView()
 			{
@@ -62,7 +66,7 @@ namespace Client.iOS
 
 			Header.MakeConstraints(make =>
 			{
-				make.Height.EqualTo((NSNumber)125);
+				make.Height.EqualTo((NSNumber)140);
 				make.Top.EqualTo(View);
 				make.Left.EqualTo(View);
 				make.Width.EqualTo(View);
