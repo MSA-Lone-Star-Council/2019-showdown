@@ -113,17 +113,23 @@ namespace Client.iOS
 			string format = "M/d h:mm:ss";
 
 			Title.Text = g.Title;
+			Title.TextColor = g.InProgress ? UIColor.FromRGB(0, 0.5f, 0) : UIColor.Black;
 			Time.Text = g.Score.Time.ToString(format, null as DateTimeFormatInfo);
 			EventName.Text = g.Event.Title;
 
 			var awayTeam = g.HomeTeam;
 			var homeTeam = g.AwayTeam;
 
+			var awayTeamLost = g.Score.AwayPoints < g.Score.HomePoints;
+			var isTie = g.Score.AwayPoints == g.Score.HomePoints;
+
 			AwayTeamName.Text = awayTeam.ShortName;
 			AwayTeamScore.Text = g.Score.AwayPoints.ToString();
+			AwayTeamScore.TextColor = !g.InProgress && awayTeamLost && !isTie ? UIColor.LightGray : UIColor.Black;
 
 			HomeTeamName.Text = homeTeam.ShortName;
 			HomeTeamScore.Text = g.Score.HomePoints.ToString();
+			HomeTeamScore.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
 		}
 	}
 }
