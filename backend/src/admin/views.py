@@ -69,3 +69,14 @@ class AllAnnouncementsView(generics.ListCreateAPIView):
         send_notification(options, '')
 
         return response
+
+class ScorekeeperGamesView(generics.ListAPIView):
+    permission_classes = (ScorekeeperPermission,)
+    serializer_class = GameSerializer
+
+    def get_queryset(self):
+        token = self.request.token
+        logger.info(token)
+        games = Game.objects.filter(scorekeeper__id=token['sub'])
+        return games
+
