@@ -6,6 +6,11 @@ from .views import *
 
 urlpatterns = [
     url(
+        regex=r"^announcements$",
+        view=AllAnnouncementsView.as_view(),
+        name="all_announcements_view",
+    ),
+    url(
         regex=r"^events$",
         view=AllEventsView.as_view(),
         name="all_events_view",

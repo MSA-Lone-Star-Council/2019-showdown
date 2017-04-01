@@ -119,7 +119,17 @@
     </Compile>
     <Compile Include="Screens\EventDetailViewController.cs" />
     <Compile Include="Screens\EventDetailViewController.Layout.cs">
-      <DependentUpon>Screents\EventDetailViewController.cs</DependentUpon>
+      <DependentUpon>Screens\EventDetailViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\LocationViewController.cs" />
+    <Compile Include="Screens\LocationViewController.Layout.cs">
+      <DependentUpon>Screens\LocationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\LocationsListViewController.cs" />
+    <Compile Include="Screens\AdminAnnouncementsViewController.cs" />
+    <Compile Include="Screens\AnnouncementEditorViewController.cs" />
+    <Compile Include="Screens\AnnouncementEditorViewController.Layout.cs">
+      <DependentUpon>Screens\AnnouncementEditorViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\GamesListViewController.cs" />
     <Compile Include="Screens\GameEditorViewController.cs" />

@@ -6,10 +6,17 @@ namespace Common.Common.Models
 {
     public struct Announcement
     {
-        public string Id { get; set; }
+		[JsonProperty(PropertyName = ("id"), NullValueHandling = NullValueHandling.Ignore)]
+		public string Id { get; set; }
+
+		[JsonProperty(PropertyName=("title"))]
         public string Title { get; set; }
+
+		[JsonProperty(PropertyName=("body"))]
         public string Body { get; set; }
-        public DateTimeOffset Time { get; set; }
+
+		[JsonProperty(PropertyName=("time"), NullValueHandling=NullValueHandling.Ignore)]
+        public DateTimeOffset? Time { get; set; }
 
         public static Announcement FromJSON(string jsonString)
 		{

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Admin.Common;
 using Admin.Common.API.Entities;
@@ -25,7 +25,6 @@ namespace Admin.iOS
 			LocationPicker.Model = new LocationPickerModel(Presenter, LocationField);
 			AudiencePicker.Model = new AudiencePickerModel(AudienceField);
 			UpdateButton.TouchUpInside += async (sender, e) => await Presenter.Save();
-
 		}
 
 		public async override void ViewWillAppear(bool animated)
