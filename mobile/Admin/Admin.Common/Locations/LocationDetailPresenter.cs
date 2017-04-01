@@ -39,5 +39,11 @@ namespace Admin.Common
 				View.LocationSaving = false;
 			}
 		}
+
+		public async Task Delete()
+		{
+			await _client.DeleteLocation(_location);
+			View.GoBack();
+		}
 	}
 }

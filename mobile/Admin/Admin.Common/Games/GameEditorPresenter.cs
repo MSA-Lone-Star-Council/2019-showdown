@@ -85,6 +85,12 @@ namespace Admin.Common
 			await UpdateValuesFromServer();
 		}
 
+		public async Task Delete()
+		{
+			await _client.DeleteGame(_game);
+			View.GoBack();
+		}
+
 		async Task UpdateValuesFromServer()
 		{
 			if (View != null) View.FetchingValues = true;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Admin.Common;
 using Admin.Common.API.Entities;
+using Common.iOS;
 using UIKit;
 
 namespace Admin.iOS
@@ -22,7 +23,14 @@ namespace Admin.iOS
 			homeTeamPicker.Model = new SchoolPickerModel(_presenter, homeTeamField);
 			scorekeeperPicker.Model = new UserPickerModel(_presenter, scorekeeperField);
 
-			saveButton.TouchUpInside += async (sender, e) => _presenter.Save();
+			saveButton.TouchUpInside += async (sender, e) => await _presenter.Save();
+
+			deleteButton.TouchUpInside += (sender, e) =>
+			{
+				var alert = new UIAlertView("Delete game?", "Doing so will delete all related scores", new ConfirmActionAlert(async () => await _presenter.Delete()),
+											"No", new string[] { "Yes" });
+				alert.Show();
+			};
 		}
 
 		public async override void ViewWillAppear(bool animated)
@@ -128,6 +136,13 @@ namespace Admin.iOS
 				saveButton.BackgroundColor = enabled ? UIColor.Green : UIColor.Gray;
 				saveButton.Enabled = enabled;
 			}
+		}
+
+		void IGameEditorView.GoBack()
+		{
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var navController = appDelegate.Window.RootViewController as UINavigationController;
+			navController.PopViewController(true);
 		}
 
 		public class EventPickerModel : UIPickerViewModel

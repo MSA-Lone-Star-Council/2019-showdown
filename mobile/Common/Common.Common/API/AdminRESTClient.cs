@@ -70,6 +70,12 @@ namespace Admin.Common.API
 			return Event.FromJSON(jsonString);
 		}
 
+		public async Task DeleteEvent(Event e)
+		{
+			var path = $"/admin/events/{e.Id}";
+			await DeleteAsync(path);
+		}
+
 		public async Task<Location> GetLocation(int id)
 		{
 			var path = $"/admin/locations/{id}";
@@ -92,6 +98,12 @@ namespace Admin.Common.API
 			}
 
 			return Location.FromJSON(jsonString);
+		}
+
+		public async Task DeleteLocation(Location l)
+		{
+			var path = $"/admin/locations/{l.Id}";
+			await DeleteAsync(path);
 		}
 
 		public async Task<List<Location>> GetLocations()
@@ -122,6 +134,12 @@ namespace Admin.Common.API
 			}
 
 			return Game.FromJSON(jsonString);
+		}
+
+		public async Task DeleteGame(Game g)
+		{
+			var path = $"/admin/games/{g.Id}";
+			await DeleteAsync(path);
 		}
 
 		public async Task<List<User>> GetUsers()
@@ -187,5 +205,13 @@ namespace Admin.Common.API
 		    var response = await client.SendAsync(request);
 			return await response.Content.ReadAsStringAsync();
         }
+
+		private async Task DeleteAsync(string path, bool authenticated = true)
+		{
+			var request = BuildRequest(path, null, authenticated);
+			request.Method = HttpMethod.Delete;
+			var response = await client.SendAsync(request);
+			return;
+		}
     }
 }

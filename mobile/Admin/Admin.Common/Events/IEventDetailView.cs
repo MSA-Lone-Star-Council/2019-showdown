@@ -11,5 +11,7 @@ namespace Admin.Common
 		int SelectedLocationIndex { get; set; }
 
 		bool LocationLoading { set; }
+
+		void GoBack();
 	}
 }

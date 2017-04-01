@@ -1,6 +1,7 @@
 ﻿using System;
 using Admin.Common;
 using Admin.Common.API.Entities;
+using Common.iOS;
 using UIKit;
 
 namespace Admin.iOS
@@ -18,6 +19,13 @@ namespace Admin.iOS
 		partial void AdditionalSetup()
 		{
 			UpdateButton.TouchUpInside += async (sender, e) => await Presenter.Save();
+
+			DeleteButton.TouchUpInside += (sender, e) =>
+			{
+				var alert = new UIAlertView("Delete location?", "Doing so will delete all related events", new ConfirmActionAlert(async () => await Presenter.Delete()),
+											"No", new string[] { "Yes" });
+				alert.Show();
+			};
 		}
 
 		public override void ViewWillAppear(bool animated)
@@ -59,6 +67,13 @@ namespace Admin.iOS
 				UpdateButton.Enabled = !value;
 				UpdateButton.BackgroundColor = UpdateButton.Enabled ? UIColor.Green : UIColor.Gray;
 			}
+		}
+
+		void ILocationDetailView.GoBack()
+		{
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var navController = appDelegate.Window.RootViewController as UINavigationController;
+			navController.PopViewController(true);
 		}
 	}
 }
