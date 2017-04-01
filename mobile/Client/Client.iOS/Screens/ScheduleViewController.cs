@@ -26,7 +26,7 @@ namespace Client.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			View.BackgroundColor = UIColor.Black;
+			View.BackgroundColor = new UIColor(0.16f, 0.75f, 1.00f, 1.0f);
 
 			var tableSource = new ScheduleTableSource();
 			tableSource.Events = new List<Event>();
@@ -36,8 +36,10 @@ namespace Client.iOS
 			{
 				BackgroundColor = UIColor.Clear,
 				Source = tableSource,
-				SeparatorStyle = UITableViewCellSeparatorStyle.None
+				SeparatorStyle = UITableViewCellSeparatorStyle.None,
+				RowHeight = 110,
 			};
+			scheduleList.RegisterClassForCellReuse(typeof(EventCell), EventCellID);
 
 			View.AddSubview(scheduleList);
 		}
@@ -72,15 +74,12 @@ namespace Client.iOS
 
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
-				//var cell = tableView.DequeueReusableCell(GameCellID) as GameCell;
-				var cell = tableView.DequeueReusableCell(EventCellID) ?? 
-				                    new UITableViewCell(UITableViewCellStyle.Default, EventCellID);
-				cell.BackgroundColor = UIColor.White;
+				var cell = tableView.DequeueReusableCell(EventCellID) as EventCell;
+				cell.BackgroundColor = UIColor.Clear;
 
 				var item = Events[indexPath.Row];
-				cell.TextLabel.Text = item.Title;
 
-				//cell.UpdateCell(game);
+				cell.UpdateCell(item);
 
 				return cell;
 			}

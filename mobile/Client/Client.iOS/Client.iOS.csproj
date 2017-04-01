@@ -125,6 +125,7 @@
     <Compile Include="Screens\GameViewController.cs" />
     <Compile Include="Views\ScoreCell.cs" />
     <Compile Include="Views\GameHeader.cs" />
+    <Compile Include="Views\EventCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
