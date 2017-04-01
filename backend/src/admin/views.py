@@ -8,10 +8,10 @@ from notifications.models import Announcement
 from notifications.serializers import AnnouncementSerializer
 from events.models import Event, Location
 from scores.models import Game
-from scores.serializers import GameSerializer
+from accounts.models import User
 
 from .permissions import AdminPermission, ScorekeeperPermission
-from .serializers import EventSerializer, LocationSerializer
+from .serializers import EventSerializer, LocationSerializer, GameSerializer, UserSerializer
 
 logger = logging.getLogger('showdown.%s' % __name__)
 
@@ -41,6 +41,17 @@ class AllGamesView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+class GameDetailView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (AdminPermission,)
+    queryset = Game.objects.all()
+    lookup_url_kwarg = 'game_id'
+    serializer_class = GameSerializer
+
+class AllUsersView(generics.ListAPIView):
+    permission_classes = (AdminPermission,)
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class AllAnnouncementsView(generics.ListCreateAPIView):
     permission_classes = (AdminPermission,)

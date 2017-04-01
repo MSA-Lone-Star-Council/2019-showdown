@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Common.Common.Models
@@ -38,5 +39,10 @@ namespace Common.Common.Models
         {
             return !left.Equals(right);
         }
+
+		public static List<School> FromJSONArray(string jsonString)
+		{
+			return JsonConvert.DeserializeObject<List<School>>(jsonString);
+		}
     }
 }

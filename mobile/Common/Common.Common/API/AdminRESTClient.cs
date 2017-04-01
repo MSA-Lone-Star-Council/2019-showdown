@@ -10,6 +10,7 @@ using Common.Common;
 using ClientModel = Common.Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ClientModels = Common.Common.Models;
 
 namespace Admin.Common.API
 {
@@ -32,6 +33,12 @@ namespace Admin.Common.API
             var data = JObject.Parse(response);
 			return ((string)data["token"]);
         }
+
+		public async Task<List<ClientModels.School>> GetSchools()
+		{
+			var jsonString = await RequestAsync("/core/schools");
+			return ClientModels.School.FromJSONArray(jsonString);
+		}
 
 		public async Task<Event> GetEvent(int id)
 		{
@@ -92,6 +99,35 @@ namespace Admin.Common.API
 			var path = $"/admin/locations";
 			var jsonString = await RequestAsync(path);
 			return Location.FromJSONArray(jsonString);
+		}
+
+		public async Task<List<Game>> GetGames()
+		{
+			var jsonString = await RequestAsync("/admin/games");
+			return Game.FromJSONArray(jsonString);
+		}
+
+		public async Task<Game> SaveGame(Game g)
+		{
+			var jsonString = "";
+			if (g.Id == null)
+			{
+				var path = $"/admin/games";
+				jsonString = await PostAsync(path, JsonConvert.SerializeObject(g));
+			}
+			else
+			{
+				var path = $"/admin/games/{g.Id}";
+				jsonString = await PutAsync(path, JsonConvert.SerializeObject(g));
+			}
+
+			return Game.FromJSON(jsonString);
+		}
+
+		public async Task<List<User>> GetUsers()
+		{
+			var jsonString = await RequestAsync("/admin/users");
+			return User.FromJSONArray(jsonString);
 		}
 
 		public async Task<List<ClientModel.Announcement>> GetAnnouncements()

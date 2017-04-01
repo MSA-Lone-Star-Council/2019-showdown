@@ -38,9 +38,9 @@ namespace Admin.iOS
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new EventsListViewController() { Title = "Events" },
-				new LocationsListViewController()  { Title = "Locations" },
 				new AdminAnnouncementsViewController(appDelegate.BackendClient) { Title = "Announcements" },
-				new UIViewController()  { Title = "Games" },
+				new LocationsListViewController()  { Title = "Locations" },
+				new GamesListViewController()  { Title = "Games" },
 			};
 			tabBarController.NavigationItem.HidesBackButton = true;
 

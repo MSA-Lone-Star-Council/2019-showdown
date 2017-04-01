@@ -131,6 +131,9 @@
     <Compile Include="Screens\AnnouncementEditorViewController.Layout.cs">
       <DependentUpon>Screens\AnnouncementEditorViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\GamesListViewController.cs" />
+    <Compile Include="Screens\GameEditorViewController.cs" />
+    <Compile Include="Screens\GameEditorViewController.Layout.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
