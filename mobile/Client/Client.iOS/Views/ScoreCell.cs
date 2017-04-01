@@ -59,7 +59,7 @@ namespace Client.iOS
 		{
 			string format = "h:mm:ss";
 
-			TimeLabel.Text = record.Time.ToString(format, null as DateTimeFormatInfo);
+			TimeLabel.Text = ((DateTimeOffset)record.Time).ToString(format, null as DateTimeFormatInfo);
 
 			var awayTeam = game.AwayTeam.ShortName;
 			var homeTeam = game.HomeTeam.ShortName;

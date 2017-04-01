@@ -125,6 +125,7 @@
     <Compile Include="Screens\GameViewController.cs" />
     <Compile Include="Views\ScoreCell.cs" />
     <Compile Include="Views\GameHeader.cs" />
+    <Compile Include="Views\EventCell.cs" />
     <Compile Include="Screens\SchoolViewController.cs" />
     <Compile Include="Views\SchoolHeader.cs" />
   </ItemGroup>
