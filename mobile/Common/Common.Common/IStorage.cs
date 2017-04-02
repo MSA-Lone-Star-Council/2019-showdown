@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Common.Common
 {
@@ -10,5 +11,10 @@ namespace Common.Common
 
 		void Save(string key, bool boolToSave);
 		bool GetBool(string key);
+
+		void AddToList(string key, string stringToSave);
+		void RemoveFromList(string key, string stringToRemove);
+		List<string> GetList(string key);
+		void SaveList(string key, List<string> values);
     }
 }
