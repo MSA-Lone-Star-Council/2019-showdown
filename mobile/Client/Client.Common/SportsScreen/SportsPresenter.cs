@@ -7,7 +7,7 @@ using Common.Common.Models;
 
 namespace Client.Common
 {
-	public class SportsPresenter : Presenter<ISportsView>
+	public class SportsPresenter : Presenter<ISportsView>, IGameHavingPresenter
 	{
 	    private readonly ShowdownRESTClient _client;
 		private List<Game> games;
@@ -33,7 +33,7 @@ namespace Client.Common
 			View.OpenGame(row);
 		}
 
-		public int GamesCount()
+		public int GameCount()
 		{
 			return games.Count;
 		}
@@ -46,6 +46,11 @@ namespace Client.Common
 		public bool Subscribed(int row)
 		{
 			return false;
+		}
+
+		public void GameTapped(int index)
+		{
+			View.OpenGame(games[index]);
 		}
 
 		public async Task OnStar(Game game)

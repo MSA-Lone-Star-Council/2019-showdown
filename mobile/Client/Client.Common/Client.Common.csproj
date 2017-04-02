@@ -40,6 +40,7 @@
     <Compile Include="EventScreen\EventPresenter.cs" />
     <Compile Include="EventScreen\IEventView.cs" />
     <Compile Include="SubscriptionManager.cs" />
+    <Compile Include="IGameHavingPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">

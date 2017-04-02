@@ -38,8 +38,7 @@ namespace Client.iOS
 
 			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
 
-			var tableSource = new SportsTableSource(Presenter);
-			tableSource.RowTappedEvent += async (game) => Presenter.OnClickRow(game);
+			var tableSource = new GamesTableSource(GameCellID, Presenter);
 
 			GamesList = new UITableView(View.Bounds)
 			{
@@ -81,44 +80,6 @@ namespace Client.iOS
 		void ISportsView.Refresh()
 		{
 			GamesList.ReloadData();
-		}
-
-		class SportsTableSource : UITableViewSource
-		{
-			public delegate void OnRowTapped(Game game);
-
-			public event OnRowTapped RowTappedEvent;
-
-			public SportsPresenter presenter;
-
-			public SportsTableSource(SportsPresenter presenter)
-			{
-				this.presenter = presenter;
-			}
-
-			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-			{
-				var cell = tableView.DequeueReusableCell(GameCellID) as GameCell;
-				cell.BackgroundColor = UIColor.Clear;
-
-				var game = presenter.GetGame(indexPath.Row);
-
-				cell.UpdateCell(game);
-
-				return cell;
-			}
-
-			public override nint RowsInSection(UITableView tableview, nint section)
-			{
-				return presenter.GamesCount();
-			}
-
-			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-			{
-				var game = presenter.GetGame(indexPath.Row);
-				RowTappedEvent(game);
-				tableView.DeselectRow(indexPath, false);
-			}
 		}
 	}
 }

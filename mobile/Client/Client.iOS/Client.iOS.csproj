@@ -112,6 +112,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Screens\" />
     <Folder Include="Views\" />
+    <Folder Include="GamesTableSource\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -136,6 +137,7 @@
     <Compile Include="Views\SchoolHeader.cs" />
     <Compile Include="Screens\EventViewController.cs" />
     <Compile Include="Views\EventHeader.cs" />
+    <Compile Include="GamesTableSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
