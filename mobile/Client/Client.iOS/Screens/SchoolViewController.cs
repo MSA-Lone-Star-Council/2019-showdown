@@ -22,7 +22,11 @@ namespace Client.iOS
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
 			presenter = new SchoolPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { School = s };
-			Header = new SchoolHeader();
+			Header = new SchoolHeader()
+			{
+				NotificationTappedAction = presenter.SubscribeToSchool,
+				IsSubscribed = presenter.SubscribedToSchool(),
+			};
 			school = s;
 		}
 
@@ -75,6 +79,7 @@ namespace Client.iOS
 
 		void ISchoolView.Refresh()
 		{
+			Header.IsSubscribed = presenter.SubscribedToSchool();
 			GamesList.ReloadData();
 		}
 

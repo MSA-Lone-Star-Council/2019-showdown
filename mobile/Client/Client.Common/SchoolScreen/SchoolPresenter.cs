@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,6 +30,17 @@ namespace Client.Common
 		public async Task OnTick()
 		{
 			await UpdateFromServer();
+		}
+
+		public void SubscribeToSchool()
+		{
+			manager.ToggleSubscription(School.TopicId);
+			View.Refresh();
+		}
+
+		public bool SubscribedToSchool()
+		{
+			return manager[School.TopicId];
 		}
 
 		public void OnClickRow(int row)
