@@ -86,10 +86,9 @@ namespace Client.iOS
 			set
 			{
 				titleLabel.Text = value.Title;
-				timeLabel.Text = 
-					$"{Utilities.FormatEventTime(value.StartTime)} - {Utilities.FormatEventTime(value.EndTime)}";
-				locationLabel.SetTitle(value.Location.Name, UIControlState.Normal);
+				timeLabel.Text = Utilities.FormatEventTimeSpan(value);
 				descriptionLabel.Text = value.Description;
+				locationLabel.SetTitle(value.Location.Name, UIControlState.Normal);
 			}
 		}
 	}

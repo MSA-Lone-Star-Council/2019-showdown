@@ -73,7 +73,7 @@ namespace Client.iOS
 		{
 			titleLabel.Text = row.Title;
 			locationLabel.Text = row.Location.Name;
-			timeLabel.Text = Utilities.FormatEventTime(row.StartTime);
+			timeLabel.Text = Utilities.FormatEventTimeSpan(row);
 
 			switch (row.Audience)
 			{
