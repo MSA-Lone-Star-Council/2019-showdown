@@ -62,8 +62,8 @@ namespace Scorekeeper.Droid
             HomePlusOneButton = FindViewById<Button>(Resource.Id.home_update_score_button);
             AwayPlusOneButton = FindViewById<Button>(Resource.Id.away_update_score_button);
             
-            HomePlusOneButton.Click += async (sender, e) => { await presenter.IncreaseScore(ScoreCardPresenter.Team.Home, 1); };
-            AwayPlusOneButton.Click += async (sender, e) => { await presenter.IncreaseScore(ScoreCardPresenter.Team.Away, 1); };
+            HomePlusOneButton.Click += async (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, 1); };
+            AwayPlusOneButton.Click += async (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, 1); };
         }
 
         protected async override void OnResume()

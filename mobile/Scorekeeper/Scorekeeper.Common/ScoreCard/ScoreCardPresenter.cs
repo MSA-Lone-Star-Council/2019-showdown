@@ -35,39 +35,28 @@ namespace Scorekeeper.Common
 
 		}
 
-		/// <summary>
-		/// Increases the score. Optimistically updates the cache and the view with
-		/// the expected score and then updates it with the score from the server
-		/// </summary>
-		/// <param name="team">The team to increase the score for</param>
-		/// <param name="delta">The amount to increase (or if negative, decrease)</param>
-		public async Task IncreaseScore(Team team, int delta)
-		{
-			if (View == null) return;
+        /// <summary>
+        /// Updates the score on the view before sending it to the server.
+        /// PostScoreAsync() must be called to send the updates to the server.
+        /// </summary>
+        /// <param name="team">The team to increase the score for</param>
+        /// <param name="delta">The amount to update the score by</param>
+        public void UpdateScore(Team team, int delta)
+        {
+            if (View == null) return;
             if (delta == 0) return;
 
-			int previousScore = GetScoreFromView(team);
+            // TODO: Update a new view that shows the expected new score, 
+            // before they click the "Post" button to send it to the server
 
-			// Shoot off an update to the server
-			var scoreRequest = PostScoreUpdateAsync(team, delta);
+        }
 
-			// Compute what the score should be (for immediate update)
-			int expectedScore = previousScore + delta;
-			SetScoreOnView(team, expectedScore);
-
-			// Wait for the server to respond with the authoratitive score
-			int actualScore = await scoreRequest;
-			SetScoreOnView(team, actualScore);
-
-			// TODO: Cache the score
-		}
-
-		/// <summary>
-		/// Gets the score currently displayed on the view
-		/// </summary>
-		/// <returns>The score from view.</returns>
-		/// <param name="team">The team to get the score for</param>
-		private int GetScoreFromView(Team team)
+        /// <summary>
+        /// Gets the score currently displayed on the view
+        /// </summary>
+        /// <returns>The score from view.</returns>
+        /// <param name="team">The team to get the score for</param>
+        private int GetScoreFromView(Team team)
 		{
 			return team == Team.Home ? View.HomeScore : View.AwayScore;
 		}
@@ -87,17 +76,14 @@ namespace Scorekeeper.Common
 		}
 
 		/// <summary>
-		/// Posts the score update to the server
+		/// Posts the score update to the server, and updates the scores locally with the change
 		/// </summary>
 		/// <returns>The authoratitive score for the team</returns>
-		/// <param name="team">Team. The team to update</param>
-		/// <param name="delta">Delta. The amount to change the score</param>
-		private async Task<int> PostScoreUpdateAsync(Team team, int delta)
-		{
-			int previousScore = GetScoreFromView(team);
 
+		private async Task<int> PostScoreUpdateAsync()
+		{
 			// TODO: Actually communicate with the server. Just compute the new score right away
-			int newScore = await Task.FromResult<int>(previousScore + delta);
+			int newScore = await Task.FromResult<int>(10);
 
 			return newScore;
 		}
