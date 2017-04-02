@@ -10,12 +10,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Scorekeeper.Common;
+using Admin.Common.API.Entities;
 
 namespace Scorekeeper.Droid
 {
     [Activity(Label = "ScoreCardActivity")]
     public class ScoreCardActivity : Activity, IScoreCardView
     {
+        public Game Game { get; set; }
+
         private ScoreCardPresenter presenter;
 
         private TextView homeScoreTV, awayScoreTV;

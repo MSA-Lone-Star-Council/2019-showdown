@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Scorekeeper.Common;
-using Common.Common.Models;
+using Admin.Common.API.Entities;
 
 namespace Scorekeeper.Droid
 {
@@ -51,15 +51,15 @@ namespace Scorekeeper.Droid
 
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
             base.OnResume();
 
-            Presenter = new GameListPresenter();
+            Presenter = new GameListPresenter(((ShowdownScorekeeperApplication)Application).BackendClient);
             Presenter.TakeView(this);
             Adapter.ItemClick += (object sender, GameListAdapterClickEventArgs args) => Presenter.OnClickRow(args.Game);
-            
 
+            await Presenter.OnBegin();
         }
 
         void IGameListView.OpenGame(Game game)

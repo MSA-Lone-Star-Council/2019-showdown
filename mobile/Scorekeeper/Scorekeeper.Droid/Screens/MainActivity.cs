@@ -21,7 +21,6 @@ namespace Scorekeeper.Droid
             fakeLoginButton.Click += delegate
             {
                 var intent = new Intent(this, typeof(GameListActivity));
-                intent.PutExtra("token", "FAKE_TOKEN");
                 StartActivity(intent);
             };
         }

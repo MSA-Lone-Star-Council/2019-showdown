@@ -1,5 +1,6 @@
-﻿using Common.Common;
-using Common.Common.Models;
+﻿using Admin.Common.API;
+using Admin.Common.API.Entities;
+using Common.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,18 @@ namespace Scorekeeper.Common
 {
     public class GameListPresenter : Presenter<IGameListView>
     {
+        private readonly AdminRESTClient _client;
+
+        public GameListPresenter(AdminRESTClient client)
+        {
+            _client = client;
+        }
+
         public async Task OnBegin()
         {
+            var token = await _client.GetToken(Secrets.SaadsTokenThatMakesScoreKeeperWork);
+            _client.Token = token;
+
             await UpdateFromServer();
         }
 
@@ -22,8 +33,7 @@ namespace Scorekeeper.Common
 
         private async Task UpdateFromServer()
         {
-            int temp = await Task.FromResult<int>(10);
-            List<Game> games = new List<Game>();
+            List<Game> games = await _client.GetScoreKeeperGames();
             if (View != null)
             {
                 View.Games = games;
