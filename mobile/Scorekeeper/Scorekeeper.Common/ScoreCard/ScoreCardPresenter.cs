@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Common.Common;
+using Common.Common.Models;
 
 namespace Scorekeeper.Common
 {
@@ -22,17 +23,15 @@ namespace Scorekeeper.Common
 		{
 			if (View == null) return;
 
-			// TODO: Read scores from cache
-			SetScoreOnView(Team.Home, 0);
-			SetScoreOnView(Team.Away, 0);
+            View.HomeTeamName = View.Game.HomeTeamId;
+            View.AwayTeamName = View.Game.AwayTeamId;
 
 			// TODO: Read score from server
-			int homeScore = await Task.FromResult<int>(10);
-			int awayScore = await Task.FromResult<int>(10);
+			View.HomeScore = await Task.FromResult<int>(10);
+			View.AwayScore = await Task.FromResult<int>(10);
 
-			SetScoreOnView(Team.Home, homeScore);
-			SetScoreOnView(Team.Away, awayScore);
-
+            View.HomeScoreDelta = 0;
+            View.AwayScoreDelta = 0;
 		}
 
         /// <summary>
@@ -44,36 +43,15 @@ namespace Scorekeeper.Common
         public void UpdateScore(Team team, int delta)
         {
             if (View == null) return;
-            if (delta == 0) return;
 
-            // TODO: Update a new view that shows the expected new score, 
-            // before they click the "Post" button to send it to the server
-
+            if (team == Team.Home)
+            {
+                View.HomeScoreDelta += delta;
+            } else
+            {
+                View.AwayScoreDelta += delta;
+            }
         }
-
-        /// <summary>
-        /// Gets the score currently displayed on the view
-        /// </summary>
-        /// <returns>The score from view.</returns>
-        /// <param name="team">The team to get the score for</param>
-        private int GetScoreFromView(Team team)
-		{
-			return team == Team.Home ? View.HomeScore : View.AwayScore;
-		}
-
-		/// <summary>
-		/// Sets the score on the view.
-		/// </summary>
-		/// <param name="team">The team to set the score for</param>
-		/// <param name="score">The score to set it to</param>
-		private void SetScoreOnView(Team team, int score)
-		{
-			switch(team)
-			{
-				case Team.Home: View.HomeScore =  score; break;
-				case Team.Away: View.AwayScore = score; break;
-			}
-		}
 
 		/// <summary>
 		/// Posts the score update to the server, and updates the scores locally with the change
@@ -81,8 +59,23 @@ namespace Scorekeeper.Common
 
 		private async Task PostScoreUpdateAsync()
 		{
+            int newHomePoints = View.HomeScore + View.HomeScoreDelta;
+            int newAwayPoints = View.AwayScore + View.AwayScoreDelta;
+
+            Score newScore = new Score
+            {
+                Time = DateTimeOffset.Now,
+                HomePoints = newHomePoints,
+                AwayPoints = newAwayPoints
+            };
+
 			// TODO: Actually communicate with the server. Just compute the new score right away
-			int newScore = await Task.FromResult<int>(10);
+			int temp = await Task.FromResult<int>(10);
+
+            View.HomeScore = newHomePoints;
+            View.AwayScore = newAwayPoints;
+            View.HomeScoreDelta = 0;
+            View.AwayScoreDelta = 0;
 		}
 	}
 }

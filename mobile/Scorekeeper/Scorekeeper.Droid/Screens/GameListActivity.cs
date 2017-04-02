@@ -64,7 +64,9 @@ namespace Scorekeeper.Droid
 
         void IGameListView.OpenGame(Game game)
         {
-            throw new NotImplementedException();
+            var intent = new Intent(this, typeof(ScoreCardActivity));
+            Intent.PutExtra("game", game.ToJSON());
+            StartActivity(intent);
         }
     }
 }
