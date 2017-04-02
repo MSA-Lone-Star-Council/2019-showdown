@@ -119,7 +119,13 @@ namespace Admin.Common.API
 			return Game.FromJSONArray(jsonString);
 		}
 
-		public async Task<Game> SaveGame(Game g)
+        public async Task<List<Game>> GetScoreKeeperGames()
+        {
+            var jsonString = await RequestAsync("/admin/scorekeeper/games");
+            return Game.FromJSONArray(jsonString);
+        }
+
+        public async Task<Game> SaveGame(Game g)
 		{
 			var jsonString = "";
 			if (g.Id == null)

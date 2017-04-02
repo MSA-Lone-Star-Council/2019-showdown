@@ -10,15 +10,17 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Scorekeeper.Common;
+using Admin.Common.API.Entities;
 
-namespace Scorekeeper.Android
+namespace Scorekeeper.Droid
 {
     [Activity(Label = "ScoreCardActivity")]
     public class ScoreCardActivity : Activity, IScoreCardView
     {
+        public Game Game { get; set; }
+
         private ScoreCardPresenter presenter;
 
-        // TODO: Make a layout that actually has these widgets
         private TextView homeScoreTV, awayScoreTV;
         private Button HomePlusOneButton, AwayPlusOneButton;
 
@@ -51,11 +53,17 @@ namespace Scorekeeper.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.score_card_layout);
 
             presenter = new ScoreCardPresenter();
 
-            HomePlusOneButton.Click += async (sender, e) => { await presenter.IncreaseScore(ScoreCardPresenter.Team.Home, 1); };
-            AwayPlusOneButton.Click += async (sender, e) => { await presenter.IncreaseScore(ScoreCardPresenter.Team.Away, 1); };
+            homeScoreTV = FindViewById<TextView>(Resource.Id.home_score);
+            awayScoreTV = FindViewById<TextView>(Resource.Id.away_score);
+            HomePlusOneButton = FindViewById<Button>(Resource.Id.home_update_score_button);
+            AwayPlusOneButton = FindViewById<Button>(Resource.Id.away_update_score_button);
+            
+            HomePlusOneButton.Click += async (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, 1); };
+            AwayPlusOneButton.Click += async (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, 1); };
         }
 
         protected async override void OnResume()
