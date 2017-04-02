@@ -24,8 +24,9 @@ namespace Scorekeeper.Droid
         private TextView homeTeamName, awayTeamName;
         private TextView homeScoreTV, awayScoreTV;
         private TextView homeScoreDelta, awayScoreDelta;
-        private Button HomePlusOneButton, AwayPlusOneButton;
+        private Button homePlusOneButton, awayPlusOneButton;
         private Button HomeMinusOneButton, AwayMinusOneButton;
+        private Button postScoreButton;
 
         public string HomeTeamName
         {
@@ -114,13 +115,28 @@ namespace Scorekeeper.Droid
 
             presenter = new ScoreCardPresenter();
 
+            homeTeamName = FindViewById<TextView>(Resource.Id.home_team_name);
+            awayTeamName = FindViewById<TextView>(Resource.Id.away_team_name);
+
             homeScoreTV = FindViewById<TextView>(Resource.Id.home_score);
             awayScoreTV = FindViewById<TextView>(Resource.Id.away_score);
-            HomePlusOneButton = FindViewById<Button>(Resource.Id.home_update_score_button);
-            AwayPlusOneButton = FindViewById<Button>(Resource.Id.away_update_score_button);
-            
-            HomePlusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, 1); };
-            AwayPlusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, 1); };
+
+            homeScoreDelta = FindViewById<TextView>(Resource.Id.home_score_delta_TextView);
+            awayScoreDelta = FindViewById<TextView>(Resource.Id.away_score_delta_TextView);
+
+            homePlusOneButton = FindViewById<Button>(Resource.Id.home_score_plus_one_button);
+            awayPlusOneButton = FindViewById<Button>(Resource.Id.away_score_plus_one_button);
+            HomeMinusOneButton = FindViewById<Button>(Resource.Id.home_score_minus_one_button);
+            AwayMinusOneButton = FindViewById<Button>(Resource.Id.away_score_minus_one_button);
+
+
+            homePlusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, 1); };
+            awayPlusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, 1); };
+            HomeMinusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, -1); };
+            AwayMinusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, -1); };
+
+            postScoreButton = FindViewById<Button>(Resource.Id.post_score_button);
+            postScoreButton.Click += async (sender, e) => { await presenter.PostScoreUpdateAsync(); };
         }
 
         protected async override void OnResume()

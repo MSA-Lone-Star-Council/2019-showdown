@@ -23,6 +23,7 @@ namespace Scorekeeper.Common
 		{
 			if (View == null) return;
 
+            //TODO use slugs to get Team Objects, and set Actual Titles
             View.HomeTeamName = View.Game.HomeTeamId;
             View.AwayTeamName = View.Game.AwayTeamId;
 
@@ -53,11 +54,11 @@ namespace Scorekeeper.Common
             }
         }
 
-		/// <summary>
-		/// Posts the score update to the server, and updates the scores locally with the change
-		/// </summary>
+        /// <summary>
+        /// Posts the score update to the server, and updates the scores locally with the change
+        /// </summary>
 
-		private async Task PostScoreUpdateAsync()
+        public async Task PostScoreUpdateAsync()
 		{
             int newHomePoints = View.HomeScore + View.HomeScoreDelta;
             int newAwayPoints = View.AwayScore + View.AwayScoreDelta;

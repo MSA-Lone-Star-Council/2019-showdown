@@ -65,7 +65,8 @@ namespace Scorekeeper.Droid
         void IGameListView.OpenGame(Game game)
         {
             var intent = new Intent(this, typeof(ScoreCardActivity));
-            Intent.PutExtra("game", game.ToJSON());
+            string serializedObject = game.ToJSON();
+            intent.PutExtra("game", serializedObject);
             StartActivity(intent);
         }
     }

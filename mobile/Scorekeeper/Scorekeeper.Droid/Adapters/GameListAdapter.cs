@@ -33,7 +33,9 @@ namespace Scorekeeper.Droid
 
             // Replace the contents of the view with that element
             var holder = viewHolder as GameListAdapterViewHolder;
-            holder.GameName.Text = Games[position].Title;
+
+            holder.Game = item;
+            holder.GameName.Text = item.Title;
         }
 
         public override int ItemCount
