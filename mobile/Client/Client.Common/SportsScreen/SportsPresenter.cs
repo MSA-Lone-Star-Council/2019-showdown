@@ -9,12 +9,13 @@ namespace Client.Common
 {
 	public class SportsPresenter : Presenter<ISportsView>
 	{
-
 	    private readonly ShowdownRESTClient _client;
+		private List<Game> games;
 
 	    public SportsPresenter(ShowdownRESTClient client)
 	    {
 	        _client = client;
+			games = new List<Game>();
 	    }
 
 		public async Task OnBegin()
@@ -27,9 +28,24 @@ namespace Client.Common
 			await UpdateFromServer();
 		}
 
-		public async Task OnClickRow(Game row)
+		public void OnClickRow(Game row)
 		{
 			View.OpenGame(row);
+		}
+
+		public int GamesCount()
+		{
+			return games.Count;
+		}
+
+		public Game GetGame(int row)
+		{
+			return games[row];
+		}
+
+		public bool Subscribed(int row)
+		{
+			return false;
 		}
 
 		public async Task OnStar(Game game)
@@ -41,14 +57,15 @@ namespace Client.Common
 		private async Task UpdateFromServer()
 		{
 			var gamesFromServer = await GetAllGames();
-
-			if (View != null)
-				View.Games = gamesFromServer.OrderByDescending(g => g.Score.Time).ToList();
+			games = gamesFromServer.OrderByDescending(g => g.Score.Time).ToList();
+			View.Refresh();
 		}
 
 		private async Task<List<Game>> GetAllGames()
 		{
 		    return await _client.GetAllGames();
 		}
+
+
 	}
 }

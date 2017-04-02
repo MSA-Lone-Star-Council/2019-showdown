@@ -39,6 +39,7 @@
     <Compile Include="SchoolScreen\ISchoolView.cs" />
     <Compile Include="EventScreen\EventPresenter.cs" />
     <Compile Include="EventScreen\IEventView.cs" />
+    <Compile Include="SubscriptionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">

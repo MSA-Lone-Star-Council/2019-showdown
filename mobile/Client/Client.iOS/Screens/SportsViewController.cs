@@ -38,9 +38,8 @@ namespace Client.iOS
 
 			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
 
-			var tableSource = new SportsTableSource();
-			tableSource.Games = new List<Game>();
-			tableSource.RowTappedEvent += async (game) => await Presenter.OnClickRow(game);
+			var tableSource = new SportsTableSource(Presenter);
+			tableSource.RowTappedEvent += async (game) => Presenter.OnClickRow(game);
 
 			GamesList = new UITableView(View.Bounds)
 			{
@@ -60,16 +59,6 @@ namespace Client.iOS
 			Presenter.RemoveView();
 		}
 
-		public List<Game> Games
-		{
-			set
-			{
-				SportsTableSource sts = GamesList.Source as SportsTableSource;
-				sts.Games = value;
-				GamesList.ReloadData();
-			}
-		}
-
 		public void OpenGame(Game g)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
@@ -84,19 +73,35 @@ namespace Client.iOS
 			throw new NotImplementedException();
 		}
 
+		void ISportsView.ShowMessage(string message)
+		{
+			throw new NotImplementedException();
+		}
+
+		void ISportsView.Refresh()
+		{
+			GamesList.ReloadData();
+		}
+
 		class SportsTableSource : UITableViewSource
 		{
 			public delegate void OnRowTapped(Game game);
-			public List<Game> Games { get; set; }
 
 			public event OnRowTapped RowTappedEvent;
+
+			public SportsPresenter presenter;
+
+			public SportsTableSource(SportsPresenter presenter)
+			{
+				this.presenter = presenter;
+			}
 
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
 				var cell = tableView.DequeueReusableCell(GameCellID) as GameCell;
 				cell.BackgroundColor = UIColor.Clear;
 
-				var game = Games[indexPath.Row];
+				var game = presenter.GetGame(indexPath.Row);
 
 				cell.UpdateCell(game);
 
@@ -105,12 +110,12 @@ namespace Client.iOS
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-				return Games.Count;
+				return presenter.GamesCount();
 			}
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				var game = Games[indexPath.Row];
+				var game = presenter.GetGame(indexPath.Row);
 				RowTappedEvent(game);
 				tableView.DeselectRow(indexPath, false);
 			}
