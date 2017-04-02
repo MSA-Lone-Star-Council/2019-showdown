@@ -78,14 +78,11 @@ namespace Scorekeeper.Common
 		/// <summary>
 		/// Posts the score update to the server, and updates the scores locally with the change
 		/// </summary>
-		/// <returns>The authoratitive score for the team</returns>
 
-		private async Task<int> PostScoreUpdateAsync()
+		private async Task PostScoreUpdateAsync()
 		{
 			// TODO: Actually communicate with the server. Just compute the new score right away
 			int newScore = await Task.FromResult<int>(10);
-
-			return newScore;
 		}
 	}
 }
