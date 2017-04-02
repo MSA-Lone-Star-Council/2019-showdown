@@ -22,8 +22,9 @@ namespace Client.iOS
 			cell.BackgroundColor = UIColor.Clear;
 
 			var game = presenter.GetGame(indexPath.Row);
+			var subscribed = presenter.IsSubscribed(indexPath.Row);
 
-			cell.UpdateCell(game);
+			cell.UpdateCell(game, subscribed);
 
 			return cell;
 		}

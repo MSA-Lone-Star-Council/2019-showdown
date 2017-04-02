@@ -122,7 +122,7 @@ namespace Client.iOS
 			});
 		}
 
-		public void UpdateCell(Game g, bool subscribed = true)
+		public void UpdateCell(Game g, bool subscribed)
 		{
 			string format = "M/d h:mm:ss";
 

@@ -18,6 +18,7 @@ namespace Client.Common
 	    {
 	        _client = client;
 			games = new List<Game>();
+			this.manager = manager;
 	    }
 
 		public async Task OnBegin()
