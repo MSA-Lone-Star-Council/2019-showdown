@@ -23,6 +23,7 @@ namespace Client.Common
 
 		public async Task OnBegin()
 		{
+			if (View != null) View.Refresh();
 			await UpdateFromServer();
 		}
 
