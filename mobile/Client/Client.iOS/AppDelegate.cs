@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Client.Common;
 using Common.Common;
 using Common.iOS;
@@ -77,11 +78,37 @@ namespace Client.iOS
 			SubscriptionManager.SaveToHub();
 		}
 
-		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
-		{
-			// TODO: Fancy stuff
-		}
 
+		public async override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
+		{
+			NSDictionary data = (NSDictionary) userInfo[new NSString("data")];
+			NSString type = (NSString)data[new NSString("type")];
+			if (type == new NSString("event"))
+			{
+				NSString startTime = (NSString)data[new NSString("start_time")];
+				DateTimeOffset notificationTime = DateTimeOffset.Parse(startTime).ToOffset(TimeSpan.FromHours(-5)).Subtract(TimeSpan.FromMinutes(15));
+
+				var dateComponent = new NSDateComponents();
+				dateComponent.SetValueForComponent(notificationTime.Year, NSCalendarUnit.Year);
+				dateComponent.SetValueForComponent(notificationTime.Month, NSCalendarUnit.Month);
+				dateComponent.SetValueForComponent(notificationTime.Day, NSCalendarUnit.Day);
+				dateComponent.SetValueForComponent(notificationTime.Hour, NSCalendarUnit.Hour);
+				dateComponent.SetValueForComponent(notificationTime.Minute, NSCalendarUnit.Minute);
+				dateComponent.SetValueForComponent(-5, NSCalendarUnit.TimeZone);
+
+				var trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponent, false);
+
+				var center = UNUserNotificationCenter.Current;
+
+				var content = new UNMutableNotificationContent();
+				content.Title = (NSString)data[new NSString("event_title")];
+				content.Body = "Starts in 15 minutes";
+				content.Sound = UNNotificationSound.Default;
+
+				var request = UNNotificationRequest.FromIdentifier("TEST", content, trigger);
+				await center.AddNotificationRequestAsync(request);
+			}
+		}
 	}
 }
 
