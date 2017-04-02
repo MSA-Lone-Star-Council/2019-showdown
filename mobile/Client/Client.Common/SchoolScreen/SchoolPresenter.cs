@@ -7,7 +7,7 @@ using Common.Common.Models;
 
 namespace Client.Common
 {
-	public class SchoolPresenter : Presenter<ISchoolView>
+	public class SchoolPresenter : Presenter<ISchoolView>, IGameHavingPresenter
 	{
 		ShowdownRESTClient client;
 		public School School { get; set; }
@@ -39,7 +39,7 @@ namespace Client.Common
 			return games[row];
 		}
 
-		public int GetGameCount()
+		public int GameCount()
 		{
 			return games.Count;
 		}
@@ -52,6 +52,11 @@ namespace Client.Common
 			{
 				View.Refresh();
 			}
+		}
+
+		public void GameTapped(int index)
+		{
+			View.OpenGame(games[index]);
 		}
 	}
 }

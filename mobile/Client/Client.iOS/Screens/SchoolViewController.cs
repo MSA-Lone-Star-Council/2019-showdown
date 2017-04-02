@@ -10,7 +10,7 @@ namespace Client.iOS
 	public class SchoolViewController : UIViewController, ISchoolView
 	{
 		
-		static string SchoolGameCellId = "SchoolGameCell";
+		static NSString SchoolGameCellId = (NSString)"SchoolGameCell";
 
 		SchoolPresenter presenter { get; set; }
 		School school { get; set; }
@@ -49,7 +49,7 @@ namespace Client.iOS
 			GamesList = new UITableView()
 			{
 				BackgroundColor = UIColor.Clear,
-				Source = new GameTableSource(presenter),
+				Source = new GamesTableSource(SchoolGameCellId, presenter),
 				RowHeight = 130,
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
@@ -85,38 +85,6 @@ namespace Client.iOS
 			var navController = tabBarController.SelectedViewController as UINavigationController;
 
 			navController.PushViewController(new GameViewController(game), true);
-		}
-
-		class GameTableSource : UITableViewSource
-		{
-			SchoolPresenter presenter;
-
-			public GameTableSource(SchoolPresenter presenter)
-			{
-				this.presenter = presenter;
-			}
-
-			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-			{
-				var game = presenter.GetGame(indexPath.Row);
-
-				var cell = tableView.DequeueReusableCell(SchoolGameCellId) as GameCell;
-				cell.BackgroundColor = UIColor.Clear;
-				cell.UpdateCell(game);
-
-				return cell;
-			}
-
-			public override nint RowsInSection(UITableView tableview, nint section)
-			{
-				return presenter.GetGameCount();
-			}
-
-			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-			{
-				presenter.OnClickRow(indexPath.Row);
-				tableView.DeselectRow(indexPath, false);
-			}
 		}
 	}
 }
