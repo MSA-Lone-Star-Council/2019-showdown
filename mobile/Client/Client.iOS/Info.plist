@@ -35,5 +35,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>iconize-fontawesome.ttf</string>
+	</array>
 </dict>
 </plist>

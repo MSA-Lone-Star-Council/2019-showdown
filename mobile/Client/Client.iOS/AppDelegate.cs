@@ -36,6 +36,7 @@ namespace Client.iOS
 
 			RegisterForRemoteNotification();
 
+			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
 			return true;
 		}

@@ -4,11 +4,15 @@ using UIKit;
 using Masonry;
 using Foundation;
 using System.Globalization;
+using Plugin.Iconize.iOS.Controls;
 
 namespace Client.iOS
 {
 	public class GameCell : UITableViewCell
 	{
+		public delegate void SubscribedToGame(Game game, bool currentValue);
+
+		IconButton NotificationButton { get; set; }
 		UILabel Title { get; set; }
 		UILabel Time { get; set; }
 		UILabel EventName { get; set; }
@@ -37,6 +41,7 @@ namespace Client.iOS
 			containerView.Layer.BorderWidth = 0.5f;
 			containerView.Layer.BorderColor = UIColor.LightGray.CGColor;
 
+			NotificationButton = new IconButton();
 
 			Title = new UILabel() { Font = TitleFont, TextAlignment = UITextAlignment.Center };
 			Time = new UILabel() { Font = TimeFont };
@@ -48,7 +53,8 @@ namespace Client.iOS
 			HomeTeamScore = new UILabel() { Font = ScoreFont };
 
 
-			containerView.AddSubviews(new UIView[] { 
+			containerView.AddSubviews(new UIView[] {
+				NotificationButton,
 				Title, 
 				EventName,
 				AwayTeamName, 
@@ -64,6 +70,14 @@ namespace Client.iOS
 
 			var lrOffset = 7;
 			var tbOffset = 5;
+
+			NotificationButton.MakeConstraints(make =>
+			{
+				make.Top.EqualTo(parentView).Offset(3);
+				make.Right.EqualTo(parentView).Offset(-3);
+				make.Height.EqualTo((NSNumber)20);
+				make.Width.EqualTo((NSNumber)20);
+			});
 
 			Title.MakeConstraints(make =>
 			{
@@ -108,7 +122,7 @@ namespace Client.iOS
 			});
 		}
 
-		public void UpdateCell(Game g)
+		public void UpdateCell(Game g, bool subscribed = true)
 		{
 			string format = "M/d h:mm:ss";
 
@@ -133,6 +147,11 @@ namespace Client.iOS
 			HomeTeamScore.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
 			HomeTeamName.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
 
+			string normalText = subscribed ? $"{{fa-bell 16pt}}" : $"{{fa-bell-o 16pt}}";
+			string highligtedText = subscribed ? $"{{fa-bell-o 16pt}}" : $"{{fa-bell 16pt}}";
+
+			NotificationButton.SetTitle(normalText, UIControlState.Normal);
+			NotificationButton.SetTitle(highligtedText, UIControlState.Highlighted);
 		}
 	}
 }
