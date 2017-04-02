@@ -59,6 +59,11 @@ namespace Client.Common
 			}
 		}
 
+		public bool IsSubscribedToEvent(Event e)
+		{
+			return manager[e.TopicId];
+		}
+
 		public bool IsSubscribed(int index)
 		{
 			var game = games[index];
@@ -71,5 +76,10 @@ namespace Client.Common
 			View.Refresh(Event);
 		}
 
+		public void EventSubscribeTapped()
+		{
+			manager.ToggleSubscription(Event.TopicId);
+			View.Refresh(Event);
+		}
 	}
 }

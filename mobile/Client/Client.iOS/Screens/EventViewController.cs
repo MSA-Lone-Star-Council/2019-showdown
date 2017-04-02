@@ -22,8 +22,10 @@ namespace Client.iOS
 			presenter = new EventPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { Event = e};
 			header = new EventHeader()
 			{
-				LocationTappedAction = () => Console.WriteLine("Location tapped")
+				LocationTappedAction = () => Console.WriteLine("Location tapped"),
+				NotificationTappedAction = () => presenter.EventSubscribeTapped(),
 			};
+			header.IsSubscribed = false;
 		}
 
 		public override async void ViewDidAppear(bool animated)
@@ -75,6 +77,7 @@ namespace Client.iOS
 		void IEventView.Refresh(Event e)
 		{
 			header.Event = e;
+			header.IsSubscribed = presenter.IsSubscribedToEvent(e);
 			gamesList.ReloadData();
 		}
 
