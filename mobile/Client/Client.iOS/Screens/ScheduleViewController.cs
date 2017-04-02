@@ -15,10 +15,14 @@ namespace Client.iOS
 
 		UITableView scheduleList;
 
-		public async override void ViewWillAppear(bool animated)
+		public ScheduleViewController()
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			presenter = new SchedulePresenter(appDelegate.BackendClient);
+			presenter = new SchedulePresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager);
+		}
+
+		public async override void ViewWillAppear(bool animated)
+		{
 			presenter.TakeView(this);
 			await presenter.OnBegin();
 		}
@@ -28,7 +32,7 @@ namespace Client.iOS
 			base.ViewDidLoad();
 			View.BackgroundColor = new UIColor(0.16f, 0.75f, 1.00f, 1.0f);
 
-			var tableSource = new ScheduleTableSource();
+			var tableSource = new ScheduleTableSource() { Presenter = presenter };
 			tableSource.Events = new List<Event>();
 			tableSource.RowTappedEvent += (row) => presenter.OnClickRow(row);
 
@@ -65,7 +69,6 @@ namespace Client.iOS
 
 		void IScheduleView.ShowMessage(string message)
 		{
-			throw new NotImplementedException();
 		}
 
 		class ScheduleTableSource : UITableViewSource
@@ -76,6 +79,8 @@ namespace Client.iOS
 
 			public event OnRowTapped RowTappedEvent;
 
+			public SchedulePresenter Presenter { get; set; }
+
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
 				var cell = tableView.DequeueReusableCell(EventCellID) as EventCell;
@@ -83,7 +88,8 @@ namespace Client.iOS
 
 				var item = Events[indexPath.Row];
 
-				cell.UpdateCell(item);
+				cell.UpdateCell(item, Presenter.IsSubscribed(item));
+				cell.NotificationButtonAction = () => Presenter.OnStar(item);
 
 				return cell;
 			}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +12,14 @@ namespace Client.Common
     public class SchedulePresenter : Presenter<IScheduleView>
     {
         private readonly ShowdownRESTClient _client;
+		SubscriptionManager manager;
 
-        public SchedulePresenter(ShowdownRESTClient client)
+		List<Event> events;
+
+		public SchedulePresenter(ShowdownRESTClient client, SubscriptionManager manager = null)
         {
             _client = client;
+			this.manager = manager;
         }
 
         public async Task OnBegin()
@@ -28,10 +32,11 @@ namespace Client.Common
             await UpdateFromServer();
         }
 
-        public async Task OnStar()
+        public void OnStar(Event e)
         {
             View.ShowMessage("Subscribed for notifications for this game!");
-            // TODO: What the message says
+			if(manager != null) manager.ToggleSubscription(e.TopicId);
+			if (View != null) View.Events = events; // force a refresh...
         }
 
         public void OnClickRow(Event row)
@@ -41,10 +46,17 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-			var events = await _client.GetScheduleAsync();
+			events = await _client.GetScheduleAsync();
 
 			if (View != null)
 				View.Events = events;
 		}
-    }
+
+		public bool IsSubscribed(Event item)
+		{
+			if (manager == null) return false;
+
+			return manager[item.TopicId];
+		}
+	}
 }
