@@ -23,5 +23,11 @@ namespace Client.Common
 				storage.Save(subscriptionId, value);
 			}
 		}
+
+		public void ToggleSubscription(string subscriptionId)
+		{
+			var current = this[subscriptionId];
+			this[subscriptionId] = !current;
+		}
 	}
 }

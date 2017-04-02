@@ -66,5 +66,11 @@ namespace Client.Common
 			var game = games[index];
 			return manager[game.TopicId];
 		}
+
+		public void SubscribeTapped(int index)
+		{
+			manager.ToggleSubscription(games[index].TopicId);
+			View.Refresh();
+		}
 	}
 }

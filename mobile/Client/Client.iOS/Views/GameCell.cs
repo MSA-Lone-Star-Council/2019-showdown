@@ -10,7 +10,7 @@ namespace Client.iOS
 {
 	public class GameCell : UITableViewCell
 	{
-		public delegate void SubscribedToGame(Game game, bool currentValue);
+		public Action NotificationTappedAction { get; set; }
 
 		IconButton NotificationButton { get; set; }
 		UILabel Title { get; set; }
@@ -42,6 +42,7 @@ namespace Client.iOS
 			containerView.Layer.BorderColor = UIColor.LightGray.CGColor;
 
 			NotificationButton = new IconButton();
+			NotificationButton.TouchUpInside += (sender, e) => NotificationTappedAction();
 
 			Title = new UILabel() { Font = TitleFont, TextAlignment = UITextAlignment.Center };
 			Time = new UILabel() { Font = TimeFont };

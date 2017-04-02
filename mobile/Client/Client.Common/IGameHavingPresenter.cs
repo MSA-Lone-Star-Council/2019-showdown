@@ -9,5 +9,6 @@ namespace Client.Common
 		int GameCount();
 		void GameTapped(int index);
 		bool IsSubscribed(int index);
+		void SubscribeTapped(int index);
 	}
 }

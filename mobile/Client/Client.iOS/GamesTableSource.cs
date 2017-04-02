@@ -25,6 +25,7 @@ namespace Client.iOS
 			var subscribed = presenter.IsSubscribed(indexPath.Row);
 
 			cell.UpdateCell(game, subscribed);
+			cell.NotificationTappedAction = () => presenter.SubscribeTapped(indexPath.Row);
 
 			return cell;
 		}
