@@ -22,15 +22,14 @@ namespace Client.iOS
 			set;
 		}
 
-		private SBNotificationHub Hub { get; set; }
-
+		NotificationHubUtility hub = new NotificationHubUtility();
 	    public ShowdownRESTClient BackendClient { get; set; }
 		public SubscriptionManager SubscriptionManager { get; set; }
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 		    BackendClient = new ShowdownRESTClient();
-			SubscriptionManager = new SubscriptionManager(new iOSStorage());
+			SubscriptionManager = new SubscriptionManager(new iOSStorage(), hub);
 
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
@@ -74,20 +73,8 @@ namespace Client.iOS
 
 		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 		{
-			Hub = new SBNotificationHub(Secrets.AzureConnectionString, Secrets.NotificationHubPath);
-			Hub.UnregisterAllAsync(deviceToken, (error) =>
-			{
-				if (error != null)
-				{
-					return;
-				}
-
-				NSSet tags = null;
-				Hub.RegisterNativeAsync(deviceToken, tags, callbackError =>
-				{
-					if (callbackError != null) return;
-				});
-			});
+			hub.DeviceToken = deviceToken;
+			SubscriptionManager.SaveToHub();
 		}
 
 		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)

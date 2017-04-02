@@ -18,19 +18,24 @@ namespace Common.iOS
 			return result;
 		}
 
-
-
-		public Task<string> GetStringAsync(string key, string defaultValue)
+		public string GetString(string key, string defaultValue)
 		{
 			var plist = NSUserDefaults.StandardUserDefaults;
 			string result = plist.StringForKey(key);
-			return Task.FromResult(result ?? defaultValue);
+			return result ?? defaultValue;
 		}
 
 		public void Save(string key, bool boolToSave)
 		{
 			var plist = NSUserDefaults.StandardUserDefaults;
 			plist.SetBool(boolToSave, key);
+			plist.Synchronize();
+		}
+
+		public void Save(string key, string stringToSave)
+		{
+			var plist = NSUserDefaults.StandardUserDefaults;
+			plist.SetString(stringToSave, key);
 			plist.Synchronize();
 		}
 

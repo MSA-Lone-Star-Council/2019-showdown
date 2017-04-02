@@ -5,13 +5,15 @@ namespace Client.Common
 {
 	public class SubscriptionManager
 	{
-		const string TagStorageKey = "SUBSCRIBED_TAGS";
+		public const string TagStorageKey = "SUBSCRIBED_TAGS";
 
 		IStorage storage;
+		INotificationHub hub;
 
-		public SubscriptionManager(IStorage storage)
+		public SubscriptionManager(IStorage storage, INotificationHub hub)
 		{
 			this.storage = storage;
+			this.hub = hub;
 		}
 
 		public bool this[string subscriptionId]
@@ -35,6 +37,13 @@ namespace Client.Common
 			{
 				storage.AddToList(TagStorageKey, subscriptionId);
 			}
+			hub.SaveTags(storage.GetList(TagStorageKey));
+		}
+
+		public void SaveToHub()
+		{
+			var tags = storage.GetList(TagStorageKey);
+			hub.SaveTags(storage.GetList(TagStorageKey));
 		}
 	}
 }

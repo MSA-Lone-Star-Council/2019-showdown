@@ -138,6 +138,7 @@
     <Compile Include="Screens\EventViewController.cs" />
     <Compile Include="Views\EventHeader.cs" />
     <Compile Include="GamesTableSource.cs" />
+    <Compile Include="NotificationHubUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">

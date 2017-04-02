@@ -76,8 +76,8 @@ namespace Client.iOS
 			{
 				make.Top.EqualTo(parentView).Offset(3);
 				make.Right.EqualTo(parentView).Offset(-3);
-				make.Height.EqualTo((NSNumber)20);
-				make.Width.EqualTo((NSNumber)20);
+				make.Height.EqualTo((NSNumber)40);
+				make.Width.EqualTo((NSNumber)40);
 			});
 
 			Title.MakeConstraints(make =>
@@ -148,8 +148,8 @@ namespace Client.iOS
 			HomeTeamScore.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
 			HomeTeamName.TextColor = g.InProgress || awayTeamLost || isTie ? UIColor.Black : UIColor.LightGray;
 
-			string normalText = subscribed ? $"{{fa-bell 16pt}}" : $"{{fa-bell-o 16pt}}";
-			string highligtedText = subscribed ? $"{{fa-bell-o 16pt}}" : $"{{fa-bell 16pt}}";
+			string normalText = subscribed ? $"{{fa-bell 20pt}}" : $"{{fa-bell-o 20pt}}";
+			string highligtedText = subscribed ? $"{{fa-bell-o 20pt}}" : $"{{fa-bell 20pt}}";
 
 			NotificationButton.SetTitle(normalText, UIControlState.Normal);
 			NotificationButton.SetTitle(highligtedText, UIControlState.Highlighted);

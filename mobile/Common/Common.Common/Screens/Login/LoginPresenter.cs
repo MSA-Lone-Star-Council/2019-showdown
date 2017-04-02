@@ -19,7 +19,7 @@ namespace Common.Common.Screens.Login
 
 	    public async Task SetupView()
 	    {
-            string backendToken = await _storage.GetStringAsync(BackendToken, "");
+            string backendToken = _storage.GetString(BackendToken, "");
 
 	        if (!string.IsNullOrEmpty(backendToken))
 	        {
@@ -29,11 +29,11 @@ namespace Common.Common.Screens.Login
 
 	        // Exchange the facebook access token (if it exists, else do nothing)
 
-	        string facebookAccessToken = await _storage.GetStringAsync("FACEBOOK_TOKEN", "");
+	        string facebookAccessToken = _storage.GetString("FACEBOOK_TOKEN", "");
 	        if (!string.IsNullOrEmpty(facebookAccessToken))
 	        {
 	            backendToken = await _client.GetToken(facebookAccessToken);
-	            await _storage.SaveAsync(BackendToken, backendToken);
+	            _storage.Save(BackendToken, backendToken);
 	            _client.Token = backendToken;
 				if(View != null) View.Advance();
 	        }
