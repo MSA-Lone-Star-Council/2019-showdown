@@ -56,7 +56,11 @@ namespace Client.iOS
 
 		void IScheduleView.OpenEvent(Event row)
 		{
-			// TODO
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var tabBarController = appDelegate.Window.RootViewController as UITabBarController;
+			var navController = tabBarController.SelectedViewController as UINavigationController;
+
+			navController.PushViewController(new EventViewController(row), true);
 		}
 
 		void IScheduleView.ShowMessage(string message)

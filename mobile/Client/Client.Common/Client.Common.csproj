@@ -37,6 +37,8 @@
     <Compile Include="GameScreen\IGameView.cs" />
     <Compile Include="SchoolScreen\SchoolPresenter.cs" />
     <Compile Include="SchoolScreen\ISchoolView.cs" />
+    <Compile Include="EventScreen\EventPresenter.cs" />
+    <Compile Include="EventScreen\IEventView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
@@ -48,6 +50,7 @@
     <Folder Include="SportsScreen\" />
     <Folder Include="GameScreen\" />
     <Folder Include="SchoolScreen\" />
+    <Folder Include="EventScreen\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
