@@ -8,5 +8,6 @@ namespace Client.Common
 		Game GetGame(int index);
 		int GameCount();
 		void GameTapped(int index);
+		bool IsSubscribed(int index);
 	}
 }

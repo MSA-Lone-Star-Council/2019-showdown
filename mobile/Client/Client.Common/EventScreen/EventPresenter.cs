@@ -10,13 +10,15 @@ namespace Client.Common
 	public class EventPresenter : Presenter<IEventView>, IGameHavingPresenter
 	{
 		ShowdownRESTClient client;
+		SubscriptionManager manager;
 
 		public Event Event { get; set; }
 		public List<Game> games;
 
-		public EventPresenter(ShowdownRESTClient backendClient)
+		public EventPresenter(ShowdownRESTClient backendClient, SubscriptionManager subscriptionManager)
 		{
 			this.client = backendClient;
+			this.manager = subscriptionManager;
 			games = new List<Game>();
 		}
 
@@ -55,6 +57,12 @@ namespace Client.Common
 				View.Refresh(Event);
 
 			}
+		}
+
+		public bool IsSubscribed(int index)
+		{
+			var game = games[index];
+			return manager[game.TopicId];
 		}
 
 

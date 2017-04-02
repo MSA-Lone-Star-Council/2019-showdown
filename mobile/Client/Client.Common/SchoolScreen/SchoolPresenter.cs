@@ -10,13 +10,15 @@ namespace Client.Common
 	public class SchoolPresenter : Presenter<ISchoolView>, IGameHavingPresenter
 	{
 		ShowdownRESTClient client;
+		SubscriptionManager manager;
 		public School School { get; set; }
 		public List<Game> games;
 
-		public SchoolPresenter(ShowdownRESTClient backendClient)
+		public SchoolPresenter(ShowdownRESTClient backendClient, SubscriptionManager subscriptionManager)
 		{
 			client = backendClient;
 			games = new List<Game>();
+			manager = subscriptionManager;
 		}
 
 		public async Task OnBegin()
@@ -57,6 +59,12 @@ namespace Client.Common
 		public void GameTapped(int index)
 		{
 			View.OpenGame(games[index]);
+		}
+
+		public bool IsSubscribed(int index)
+		{
+			var game = games[index];
+			return manager[game.TopicId];
 		}
 	}
 }

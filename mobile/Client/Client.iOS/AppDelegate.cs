@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Client.Common;
 using Common.Common;
 using Common.iOS;
 using Foundation;
@@ -24,10 +25,12 @@ namespace Client.iOS
 		private SBNotificationHub Hub { get; set; }
 
 	    public ShowdownRESTClient BackendClient { get; set; }
+		public SubscriptionManager SubscriptionManager { get; set; }
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 		    BackendClient = new ShowdownRESTClient();
+			SubscriptionManager = new SubscriptionManager(new iOSStorage());
 
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 

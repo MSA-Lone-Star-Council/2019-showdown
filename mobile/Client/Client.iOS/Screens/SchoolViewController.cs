@@ -21,7 +21,7 @@ namespace Client.iOS
 		public SchoolViewController(School s)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			presenter = new SchoolPresenter(appDelegate.BackendClient) { School = s };
+			presenter = new SchoolPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { School = s };
 			Header = new SchoolHeader();
 			school = s;
 		}

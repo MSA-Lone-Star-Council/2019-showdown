@@ -19,7 +19,7 @@ namespace Client.iOS
 		public EventViewController(Event e)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			presenter = new EventPresenter(appDelegate.BackendClient) { Event = e};
+			presenter = new EventPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { Event = e};
 			header = new EventHeader()
 			{
 				LocationTappedAction = () => Console.WriteLine("Location tapped")

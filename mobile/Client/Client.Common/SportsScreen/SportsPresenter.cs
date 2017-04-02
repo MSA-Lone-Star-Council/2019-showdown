@@ -10,9 +10,11 @@ namespace Client.Common
 	public class SportsPresenter : Presenter<ISportsView>, IGameHavingPresenter
 	{
 	    private readonly ShowdownRESTClient _client;
+		private readonly SubscriptionManager manager;
+
 		private List<Game> games;
 
-	    public SportsPresenter(ShowdownRESTClient client)
+		public SportsPresenter(ShowdownRESTClient client, SubscriptionManager manager)
 	    {
 	        _client = client;
 			games = new List<Game>();
@@ -71,6 +73,10 @@ namespace Client.Common
 		    return await _client.GetAllGames();
 		}
 
-
+		public bool IsSubscribed(int index)
+		{
+			var game = games[index];
+			return manager[game.TopicId];
+		}
 	}
 }
