@@ -128,6 +128,8 @@
     <Compile Include="Views\EventCell.cs" />
     <Compile Include="Screens\SchoolViewController.cs" />
     <Compile Include="Views\SchoolHeader.cs" />
+    <Compile Include="Screens\EventViewController.cs" />
+    <Compile Include="Views\EventHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
