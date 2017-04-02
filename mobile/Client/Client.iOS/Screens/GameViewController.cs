@@ -48,7 +48,8 @@ namespace Client.iOS
 			Header = new GameHeader()
 			{
 				AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
-				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); }
+				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); },
+				EventAction = () => { navController.PushViewController(new EventViewController(Game.Event), true); }
 			};
 
 			ScoresList = new UITableView()
@@ -66,7 +67,7 @@ namespace Client.iOS
 
 			Header.MakeConstraints(make =>
 			{
-				make.Height.EqualTo((NSNumber)140);
+				make.Height.EqualTo((NSNumber)160);
 				make.Top.EqualTo(View);
 				make.Left.EqualTo(View);
 				make.Width.EqualTo(View);
