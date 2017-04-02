@@ -9,7 +9,7 @@ namespace Client.iOS
 {
 	public class EventViewController : UIViewController, IEventView
 	{
-		static string EventGameCellId = "SchoolGameCell";
+		static NSString EventGameCellId = new NSString("SchoolGameCell");
 
 		EventPresenter presenter;
 
@@ -48,7 +48,7 @@ namespace Client.iOS
 			gamesList = new UITableView()
 			{
 				BackgroundColor = UIColor.Clear,
-				Source = new GameTableSource(presenter),
+				Source = new GamesTableSource(EventGameCellId, presenter),
 				RowHeight = 130,
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
@@ -85,38 +85,6 @@ namespace Client.iOS
 			var navController = tabBarController.SelectedViewController as UINavigationController;
 
 			navController.PushViewController(new GameViewController(game), true);
-		}
-
-		class GameTableSource : UITableViewSource
-		{
-			EventPresenter presenter;
-
-			public GameTableSource(EventPresenter presenter)
-			{
-				this.presenter = presenter;
-			}
-
-			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-			{
-				var game = presenter.GetGame(indexPath.Row);
-
-				var cell = tableView.DequeueReusableCell(EventGameCellId) as GameCell;
-				cell.BackgroundColor = UIColor.Clear;
-				cell.UpdateCell(game);
-
-				return cell;
-			}
-
-			public override nint RowsInSection(UITableView tableview, nint section)
-			{
-				return presenter.GetGameCount();
-			}
-
-			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-			{
-				presenter.OnClickRow(indexPath.Row);
-				tableView.DeselectRow(indexPath, false);
-			}
 		}
 	}
 }

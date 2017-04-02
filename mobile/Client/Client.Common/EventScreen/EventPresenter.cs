@@ -7,7 +7,7 @@ using Common.Common.Models;
 
 namespace Client.Common
 {
-	public class EventPresenter : Presenter<IEventView>
+	public class EventPresenter : Presenter<IEventView>, IGameHavingPresenter
 	{
 		ShowdownRESTClient client;
 
@@ -31,19 +31,19 @@ namespace Client.Common
 			await UpdateFromServer();
 		}
 
-		public void OnClickRow(int row)
-		{
-			View.OpenGame(games[row]);
-		}
-
 		public Game GetGame(int row)
 		{
 			return games[row];
 		}
 
-		public int GetGameCount()
+		public int GameCount()
 		{
 			return games.Count;
+		}
+
+		public void GameTapped(int index)
+		{
+			View.OpenGame(games[index]);
 		}
 
 		private async Task UpdateFromServer()
@@ -56,5 +56,8 @@ namespace Client.Common
 
 			}
 		}
+
+
+
 	}
 }
