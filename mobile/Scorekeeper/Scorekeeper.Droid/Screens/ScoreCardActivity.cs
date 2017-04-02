@@ -113,7 +113,7 @@ namespace Scorekeeper.Droid
             string deserializedObject = this.Intent.GetStringExtra("game");
             Game = Game.FromJSON(deserializedObject);
 
-            presenter = new ScoreCardPresenter();
+            presenter = new ScoreCardPresenter(((ShowdownScorekeeperApplication)Application).BackendClient);
 
             homeTeamName = FindViewById<TextView>(Resource.Id.home_team_name);
             awayTeamName = FindViewById<TextView>(Resource.Id.away_team_name);
@@ -136,6 +136,7 @@ namespace Scorekeeper.Droid
             AwayMinusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, -1); };
 
             postScoreButton = FindViewById<Button>(Resource.Id.post_score_button);
+            postScoreButton.Clickable = false;
             postScoreButton.Click += async (sender, e) => { await presenter.PostScoreUpdateAsync(); };
         }
 
@@ -150,6 +151,12 @@ namespace Scorekeeper.Droid
         {
             base.OnPause();
             presenter.RemoveView();
+        }
+
+        private void UpdateScore(ScoreCardPresenter.Team team, int delta)
+        {
+            presenter.UpdateScore(team, delta);
+            postScoreButton.Clickable = (HomeScoreDelta != 0 | AwayScoreDelta != 0) ? true : false;
         }
     }
 }

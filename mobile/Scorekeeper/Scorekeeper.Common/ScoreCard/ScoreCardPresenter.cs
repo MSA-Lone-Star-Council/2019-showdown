@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Common.Common;
 using Common.Common.Models;
+using Admin.Common.API;
 
 namespace Scorekeeper.Common
 {
@@ -11,21 +12,36 @@ namespace Scorekeeper.Common
 	/// </summary>
 	public class ScoreCardPresenter : Presenter<IScoreCardView>
 	{
-		/// <summary>
-		/// Enum representing whether a team is Home or Away
-		/// </summary>
-		public enum Team { Home, Away };
+
+        private readonly AdminRESTClient _client;
+
+        /// <summary>
+        /// Enum representing whether a team is Home or Away
+        /// </summary>
+        public enum Team { Home, Away };
 
 		/// <summary>
 		/// Setups the view. Loads cached values immediately and then gets the latest score from the server
 		/// </summary>
+    
+        public ScoreCardPresenter(AdminRESTClient client)
+        {
+            _client = client;
+        }
+        
 		public async Task SetupView()
 		{
 			if (View == null) return;
 
-            //TODO use slugs to get Team Objects, and set Actual Titles
-            View.HomeTeamName = View.Game.HomeTeamId;
-            View.AwayTeamName = View.Game.AwayTeamId;
+            var schools = await _client.GetSchools();
+            string homeTeamId = View.Game.HomeTeamId;
+            string awayTeamId = View.Game.AwayTeamId;
+
+            foreach (School school in schools)
+            {
+                if (school.Slug.Equals(homeTeamId)) { View.HomeTeamName = school.ShortName; }
+                if (school.Slug.Equals(awayTeamId)) { View.AwayTeamName = school.ShortName; }
+            }
 
 			// TODO: Read score from server
 			View.HomeScore = await Task.FromResult<int>(10);
