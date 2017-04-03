@@ -16,6 +16,8 @@ namespace Common.iOS
 
 		public AnnouncementsPresenter Presenter { get; set; }
 
+		NSTimer timer;
+
 	    public AnnoucementsViewController(IAnnoucementInteractor client)
 		{
 		    Presenter = new AnnouncementsPresenter(client);
@@ -55,12 +57,14 @@ namespace Common.iOS
 	        base.ViewDidAppear(animated);
 			Presenter.TakeView(this);
 			await Presenter.OnBegin();
+			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(10), async (obj) => await Presenter.OnTick());
 	    }
 
 	    public override void ViewWillDisappear(bool animated)
 	    {
 	        base.ViewWillDisappear(animated);
 	        Presenter.RemoveView();
+			timer.Invalidate();
 	    }
 
 		public virtual void OpenNewAnnouncement()
