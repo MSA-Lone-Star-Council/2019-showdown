@@ -4,6 +4,8 @@ using Client.Common;
 using Common.Common;
 using Common.iOS;
 using Foundation;
+using Plugin.Iconize.iOS;
+using Plugin.Iconize.iOS.Controls;
 using UIKit;
 using UserNotifications;
 using WindowsAzure.Messaging;
@@ -32,6 +34,8 @@ namespace Client.iOS
 		    BackendClient = new ShowdownRESTClient();
 			SubscriptionManager = new SubscriptionManager(new iOSStorage(), hub);
 
+			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
+
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
 			Window.RootViewController = BuildRootViewController();
@@ -39,7 +43,6 @@ namespace Client.iOS
 
 			RegisterForRemoteNotification();
 
-			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
 			return true;
 		}
@@ -61,6 +64,8 @@ namespace Client.iOS
 		{
 			var tabBarController = new UITabBarController();
 
+
+
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
@@ -68,6 +73,17 @@ namespace Client.iOS
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
 				new UINavigationController(new AcknowledgementsViewController()) { Title = "About" },
 			};
+
+			var size = 20;
+			var scheduleIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bell").ToUIImage(size);
+			var announcementsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bullhorn").ToUIImage(size);
+			var sportsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-futbol-o").ToUIImage(size);
+			var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);
+
+			tabBarController.ViewControllers[0].TabBarItem.Image = scheduleIcon;
+			tabBarController.ViewControllers[1].TabBarItem.Image = announcementsIcon;
+			tabBarController.ViewControllers[2].TabBarItem.Image = sportsIcon;
+			tabBarController.ViewControllers[3].TabBarItem.Image = aboutIcon;
 
 			return tabBarController;
 		}
