@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ScoreAdapter.cs" />
     <Compile Include="Adapters\SportsAdapter.cs" />
     <Compile Include="Adapters\ScheduleAdapter.cs" />
     <Compile Include="MainActivity.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Screens\AcknowledgementsFragment.cs" />
     <Compile Include="Screens\AnnouncementsFragment.cs" />
     <Compile Include="Screens\DetailedEventActivity.cs" />
+    <Compile Include="Screens\GameScreenActivity.cs" />
     <Compile Include="Screens\ScheduleFragment.cs" />
     <Compile Include="Screens\SportsFragment.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingIIDService.cs" />
@@ -156,6 +158,12 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\layout_announcement_item.axml" />
     <AndroidResource Include="Resources\layout\sports_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\game_screen_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\score_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
