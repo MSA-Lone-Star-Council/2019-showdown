@@ -71,11 +71,11 @@ namespace Client.iOS
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
 				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
-				new UINavigationController(new AcknowledgementsViewController()) { Title = "About" },
+				new UINavigationController(new AboutViewController()) { Title = "About" },
 			};
 
 			var size = 20;
-			var scheduleIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bell").ToUIImage(size);
+			var scheduleIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-calendar").ToUIImage(size);
 			var announcementsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bullhorn").ToUIImage(size);
 			var sportsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-futbol-o").ToUIImage(size);
 			var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);

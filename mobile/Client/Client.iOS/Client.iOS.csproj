@@ -107,12 +107,18 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\TwitterIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\TwitterIcon.imageset\twitter-128.png" />
+    <ImageAsset Include="Assets.xcassets\FacebookIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\FacebookIcon.imageset\facebook-256.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Screens\" />
     <Folder Include="Views\" />
     <Folder Include="GamesTableSource\" />
+    <Folder Include="Assets.xcassets\TwitterIcon.imageset\" />
+    <Folder Include="Assets.xcassets\FacebookIcon.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -127,7 +133,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Screens\ScheduleViewController.cs" />
     <Compile Include="Screens\SportsViewController.cs" />
-    <Compile Include="Screens\AcknowledgementsViewController.cs" />
     <Compile Include="Views\GameCell.cs" />
     <Compile Include="Screens\GameViewController.cs" />
     <Compile Include="Views\ScoreCell.cs" />
@@ -140,6 +145,7 @@
     <Compile Include="Screens\LocationViewController.cs" />
     <Compile Include="GamesTableSource.cs" />
     <Compile Include="NotificationHubUtility.cs" />
+    <Compile Include="Screens\AboutViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
