@@ -24,12 +24,12 @@ namespace Client.iOS
 			presenter = new EventPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { Event = e};
 			header = new EventHeader()
 			{
-				LocationTappedAction = () => 
-				{ 
+				LocationTappedAction = () =>
+				{
 					var tabBarController = appDelegate.Window.RootViewController as UITabBarController;
 					var navController = tabBarController.SelectedViewController as UINavigationController;
 					navController.PushViewController(new LocationViewController(e.Location), true);
-				}
+				},
 				NotificationTappedAction = () => presenter.EventSubscribeTapped(),
 			};
 			header.IsSubscribed = false;

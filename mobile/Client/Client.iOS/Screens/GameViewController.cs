@@ -43,7 +43,7 @@ namespace Client.iOS
 			{
 				AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
 				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); },
-				EventAction = () => { navController.PushViewController(new EventViewController(Game.Event), true); }
+				EventAction = () => { navController.PushViewController(new EventViewController(Game.Event), true); },
 				NotificationTappedAction = Presenter.OnStar
 			};
 
