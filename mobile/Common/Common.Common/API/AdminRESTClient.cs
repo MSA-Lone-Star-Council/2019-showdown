@@ -185,8 +185,8 @@ namespace Admin.Common.API
 
         public async Task<ClientModel.Score> SaveScore(Game g, ClientModel.Score score)
         {
-            var path = $"/admin/games/{g.Id}/scores";
-            var jsonString = await PutAsync(path, JsonConvert.SerializeObject(score));
+            var path = $"/admin/scorekeeper/games/{g.Id}/scores";
+            var jsonString = await PostAsync(path, JsonConvert.SerializeObject(score));
 
             return ClientModel.Score.FromJSON(jsonString);
         }
