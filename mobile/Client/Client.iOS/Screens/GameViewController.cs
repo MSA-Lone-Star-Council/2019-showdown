@@ -23,7 +23,7 @@ namespace Client.iOS
 		public GameViewController(Game g)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			Presenter = new GamePresenter(appDelegate.BackendClient) { Game = g };
+			Presenter = new GamePresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { Game = g };
 
 			Game = g;
 		}
@@ -44,6 +44,7 @@ namespace Client.iOS
 				AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
 				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); },
 				EventAction = () => { navController.PushViewController(new EventViewController(Game.Event), true); }
+				NotificationTappedAction = Presenter.OnStar
 			};
 
 			ScoresList = new UITableView()
@@ -86,6 +87,7 @@ namespace Client.iOS
 			var updateTask = Presenter.OnBegin();
 
 		    Header.Game = Game;
+			Header.IsSubscribed = Presenter.IsSubscribed();
 
 			await updateTask;
 		}
@@ -118,6 +120,12 @@ namespace Client.iOS
 		public void ShowMessage(string message)
 		{
 			throw new NotImplementedException();
+		}
+
+		public void Refresh()
+		{
+			Header.IsSubscribed = Presenter.IsSubscribed();
+			ScoresList.ReloadData();
 		}
 
 		class ScoreTableSource : UITableViewSource

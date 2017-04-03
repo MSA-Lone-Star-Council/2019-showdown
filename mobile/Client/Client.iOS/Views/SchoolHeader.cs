@@ -1,6 +1,8 @@
 ﻿using System;
 using Common.Common.Models;
+using Foundation;
 using Masonry;
+using Plugin.Iconize.iOS.Controls;
 using UIKit;
 
 namespace Client.iOS
@@ -9,7 +11,10 @@ namespace Client.iOS
 	{
 		static UIFont SchoolTitleFont = UIFont.SystemFontOfSize(18, UIFontWeight.Bold);
 
+		IconButton notificationButton = new IconButton();
 		UILabel schoolTitleLabel = new UILabel() { Font = SchoolTitleFont };
+
+		public Action NotificationTappedAction { get; set; }
 
 		public SchoolHeader()
 		{
@@ -17,7 +22,18 @@ namespace Client.iOS
 			Layer.BorderColor = UIColor.LightGray.CGColor;
 			Layer.BorderWidth = 0.5f;
 
+			notificationButton.TouchUpInside += (sender, e) => NotificationTappedAction();
+
 			AddSubview(schoolTitleLabel);
+			AddSubview(notificationButton);
+
+			notificationButton.MakeConstraints(make =>
+			{
+				make.Top.EqualTo(this).Offset(5);
+				make.Right.EqualTo(this).Offset(-5);
+				make.Height.EqualTo((NSNumber)40);
+				make.Width.EqualTo((NSNumber)40);
+			});
 
 			schoolTitleLabel.MakeConstraints(make =>
 			{
@@ -30,6 +46,17 @@ namespace Client.iOS
 			set
 			{
 				schoolTitleLabel.Text = value.Name;
+			}
+		}
+
+		public bool IsSubscribed
+		{
+			set
+			{
+				string normalText = value ? $"{{fa-bell 20pt}}" : $"{{fa-bell-o 20pt}}";
+				string highligtedText = value ? $"{{fa-bell-o 20pt}}" : $"{{fa-bell 20pt}}";
+				notificationButton.SetTitle(normalText, UIControlState.Normal);
+				notificationButton.SetTitle(highligtedText, UIControlState.Highlighted);
 			}
 		}
 	}

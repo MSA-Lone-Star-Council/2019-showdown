@@ -4,21 +4,22 @@ using CoreGraphics;
 using UIKit;
 using Masonry;
 using Foundation;
+using Plugin.Iconize.iOS.Controls;
 
 namespace Client.iOS
 {
 	public class GameHeader : UIView
 	{
-	    public Game Game
-	    {
-	        set
-	        {
+		public Game Game
+		{
+			set
+			{
 				gameTitleLabel.Text = value.Title;
 				eventTitleLabel.SetTitle(value.Event.Title, UIControlState.Normal);
 				HomeTeamNameLabel.SetTitle(value.HomeTeam.ShortName, UIControlState.Normal);
 				AwayTeamNameLabel.SetTitle(value.AwayTeam.ShortName, UIControlState.Normal);
 				HomeScoreLabel.Text = value.Score.HomePoints.ToString();
-			    AwayScoreLabel.Text = value.Score.AwayPoints.ToString();
+				AwayScoreLabel.Text = value.Score.AwayPoints.ToString();
 
 				inProgressLabel.Text = value.InProgress ? "Live" : "Final";
 				inProgressLabel.TextColor = value.InProgress ? UIColor.FromRGB(0, 0.5f, 0) : UIColor.Black;
@@ -31,8 +32,19 @@ namespace Client.iOS
 					winnerLabel.TextColor = UIColor.Black;
 					loserLabel.TextColor = UIColor.LightGray;
 				}
-	        }
-	    }
+			}
+		}
+
+		public bool IsSubscribed
+		{
+			set
+			{
+				string normalText = value ? $"{{fa-bell 20pt}}" : $"{{fa-bell-o 20pt}}";
+				string highligtedText = value ? $"{{fa-bell-o 20pt}}" : $"{{fa-bell 20pt}}";
+				NotificationButton.SetTitle(normalText, UIControlState.Normal);
+				NotificationButton.SetTitle(highligtedText, UIControlState.Highlighted);
+			}
+		}
 
 		static UIFont GameTitleFont = UIFont.SystemFontOfSize(18, UIFontWeight.Bold);
 		static UIFont EventTitleFont = UIFont.SystemFontOfSize(16, UIFontWeight.Thin);
@@ -40,6 +52,9 @@ namespace Client.iOS
 		static UIFont ScoreFont = UIFont.SystemFontOfSize(32, UIFontWeight.Bold);
 		static UIFont InProgressFont = UIFont.SystemFontOfSize(14, UIFontWeight.Heavy);
 
+
+
+		IconButton NotificationButton { get; set; }
 		UILabel gameTitleLabel = new UILabel() { Font = GameTitleFont };
 		UIButton eventTitleLabel = new UIButton() { Font = EventTitleFont };
 
@@ -53,6 +68,7 @@ namespace Client.iOS
 		public Action AwayTeamAction { get; set; }
 		public Action HomeTeamAction { get; set; }
 		public Action EventAction { get; set; }
+		public Action NotificationTappedAction { get; set; }
 
 		public GameHeader()
 		{
@@ -64,6 +80,9 @@ namespace Client.iOS
 		public void LayoutView()
 		{
 			BackgroundColor = UIColor.White;
+
+			NotificationButton = new IconButton();
+			NotificationButton.TouchUpInside += (sender, e) => NotificationTappedAction();
 
 			AwayTeamNameLabel = new UIButton { Font = NameFont, BackgroundColor = UIColor.Clear };
 			AwayTeamNameLabel.SetTitleColor(UIColor.Black, UIControlState.Normal);
@@ -85,6 +104,7 @@ namespace Client.iOS
 
 
 			this.AddSubviews(new UIView[] {
+				NotificationButton,
 				gameTitleLabel,
 				eventTitleLabel,
 				AwayTeamNameLabel, 
@@ -95,6 +115,14 @@ namespace Client.iOS
 			});
 
 			var parentView = this;
+
+			NotificationButton.MakeConstraints(make =>
+			{
+				make.Top.EqualTo(parentView).Offset(2);
+				make.Right.EqualTo(parentView).Offset(-2);
+				make.Width.EqualTo((NSNumber)40);
+				make.Height.EqualTo((NSNumber)40);
+			});
 
 			gameTitleLabel.MakeConstraints(make =>
 			{

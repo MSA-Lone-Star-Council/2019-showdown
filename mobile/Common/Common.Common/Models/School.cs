@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -9,8 +9,9 @@ namespace Common.Common.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Slug { get; set; }
+		public string TopicId { get { return $"school_{Slug}"; } }
 
-        [JsonProperty(PropertyName = "short_name")]
+		[JsonProperty(PropertyName = "short_name")]
         public string ShortName;
 
         public string logo;
