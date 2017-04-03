@@ -18,6 +18,8 @@ namespace Client.iOS
 		SchoolHeader Header { get; set; }
 		UITableView GamesList { get; set; }
 
+		NSTimer timer;
+
 		public SchoolViewController(School s)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
@@ -32,6 +34,14 @@ namespace Client.iOS
 			presenter.TakeView(this);
 			Header.School = school;
 			await presenter.OnBegin();
+			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await presenter.OnTick());
+      	}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+			timer.Invalidate();
+			presenter.RemoveView();
 		}
 
 		public override void ViewDidLoad()

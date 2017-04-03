@@ -13,10 +13,12 @@ namespace Client.iOS
 		static NSString ScoreCellID = new NSString("ScoreCellId");
 
 		GamePresenter Presenter { get; set; }
-		public Game Game { get; }
+		public Game Game { get; set; }
 		UITableView ScoresList { get; set; }
 
 		GameHeader Header { get; set; }
+
+		NSTimer updateTimer;
 
 		public GameViewController(Game g)
 		{
@@ -24,14 +26,6 @@ namespace Client.iOS
 			Presenter = new GamePresenter(appDelegate.BackendClient) { Game = g };
 
 			Game = g;
-
-			Presenter.TakeView(this);
-		}
-
-		public override void ViewDidAppear(bool animated)
-		{
-			base.ViewDidAppear(animated);
-			Presenter.TakeView(this);
 		}
 
 		public async override void ViewDidLoad()
@@ -86,6 +80,8 @@ namespace Client.iOS
 		public async override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
+			Presenter.TakeView(this);
+			updateTimer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await Presenter.OnTick());
 
 			var updateTask = Presenter.OnBegin();
 
@@ -98,6 +94,7 @@ namespace Client.iOS
 		{
 			base.ViewWillDisappear(animated);
 			Presenter.RemoveView();
+			updateTimer.Invalidate();
 		}
 
 		public List<Score> ScoreHistory
@@ -107,6 +104,14 @@ namespace Client.iOS
 				ScoreTableSource sts = ScoresList.Source as ScoreTableSource;
 				sts.ScoreHistory = value;
 				ScoresList.ReloadData();
+
+				var game = Game;
+				if (value.Count > 0)
+				{
+					game.Score = value[0];
+					Header.Game = game;
+					Game = game;
+				}
 			}
 		}
 

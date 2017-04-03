@@ -16,6 +16,8 @@ namespace Client.iOS
 		EventHeader header;
 		UITableView gamesList;
 
+		NSTimer timer;
+
 		public EventViewController(Event e)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
@@ -36,6 +38,14 @@ namespace Client.iOS
 			base.ViewDidAppear(animated);
 			presenter.TakeView(this);
 			await presenter.OnBegin();
+			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await presenter.OnTick());
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+			presenter.RemoveView();
+			timer.Invalidate();
 		}
 
 		public override void ViewDidLoad()

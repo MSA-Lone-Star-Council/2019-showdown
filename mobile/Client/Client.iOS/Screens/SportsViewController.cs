@@ -17,6 +17,7 @@ namespace Client.iOS
 
 		UITableView GamesList { get; set; }
 
+		NSTimer updateTimer;
 
 		public SportsViewController()
 		{
@@ -30,6 +31,7 @@ namespace Client.iOS
 			base.ViewDidAppear(animated);
 			Presenter.TakeView(this);
 			await Presenter.OnBegin();
+			updateTimer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await Presenter.OnTick());
 		}
 
 		public override void ViewDidLoad()
@@ -58,6 +60,7 @@ namespace Client.iOS
 		{
 			base.ViewWillDisappear(animated);
 			Presenter.RemoveView();
+			updateTimer.Invalidate();
 		}
 
 		public List<Game> Games
