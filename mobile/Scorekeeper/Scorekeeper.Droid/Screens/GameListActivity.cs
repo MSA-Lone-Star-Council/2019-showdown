@@ -18,6 +18,14 @@ namespace Scorekeeper.Droid
     [Activity(Label = "List of Games")]
     public class GameListActivity : Activity, IGameListView
     {
+        string IGameListView.AccessToken
+        {
+            get
+            {
+                return this.Intent.GetStringExtra("access_token");
+            }
+        }
+
         GameListPresenter Presenter { get; set; }
 
         List<Game> IGameListView.Games
