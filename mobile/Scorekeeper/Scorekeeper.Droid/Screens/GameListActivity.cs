@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Scorekeeper.Common;
 using Admin.Common.API.Entities;
+using Xamarin.Facebook;
 
 namespace Scorekeeper.Droid
 {
@@ -22,7 +23,7 @@ namespace Scorekeeper.Droid
         {
             get
             {
-                return this.Intent.GetStringExtra("access_token");
+                return AccessToken.CurrentAccessToken.Token;
             }
         }
 

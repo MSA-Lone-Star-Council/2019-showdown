@@ -28,7 +28,7 @@ namespace Scorekeeper.Droid
         private Button HomeMinusOneButton, AwayMinusOneButton;
         private Button postScoreButton;
 
-        public string HomeTeamName
+        string IScoreCardView.HomeTeamName
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Scorekeeper.Droid
             }
         }
 
-        public string AwayTeamName
+        string IScoreCardView.AwayTeamName
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Scorekeeper.Droid
             }
         }
 
-        public int HomeScore
+        int IScoreCardView.HomeScore
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Scorekeeper.Droid
             }
         }
 
-        public int AwayScore
+        int IScoreCardView.AwayScore
         {
             get
             {
@@ -78,7 +78,7 @@ namespace Scorekeeper.Droid
             }
         }
 
-        public int HomeScoreDelta
+        int IScoreCardView.HomeScoreDelta
         {
             get
             {
@@ -91,7 +91,7 @@ namespace Scorekeeper.Droid
             }
         }
 
-        public int AwayScoreDelta
+        int IScoreCardView.AwayScoreDelta
         {
             get
             {
@@ -104,6 +104,13 @@ namespace Scorekeeper.Droid
             }
         }
 
+        bool IScoreCardView.CanPostScore
+        {
+            set
+            {
+                postScoreButton.Enabled = value;
+            }
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -136,7 +143,6 @@ namespace Scorekeeper.Droid
             AwayMinusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, -1); };
 
             postScoreButton = FindViewById<Button>(Resource.Id.post_score_button);
-            postScoreButton.Clickable = false;
             postScoreButton.Click += async (sender, e) => { await presenter.PostScoreUpdateAsync(); };
         }
 
@@ -151,12 +157,6 @@ namespace Scorekeeper.Droid
         {
             base.OnPause();
             presenter.RemoveView();
-        }
-
-        private void UpdateScore(ScoreCardPresenter.Team team, int delta)
-        {
-            presenter.UpdateScore(team, delta);
-            postScoreButton.Clickable = (HomeScoreDelta != 0 | AwayScoreDelta != 0) ? true : false;
         }
     }
 }

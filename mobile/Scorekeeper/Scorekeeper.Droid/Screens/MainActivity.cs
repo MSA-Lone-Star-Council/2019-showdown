@@ -43,12 +43,9 @@ namespace Scorekeeper.Droid
             name = FindViewById<TextView>(Resource.Id.facebook_name);
             profilePicture = FindViewById<ProfilePictureView>(Resource.Id.facebook_profile_picture);
             continueButton = FindViewById<Button>(Resource.Id.continue_button);
-            continueButton.Click += delegate
-            {
-                var intent = new Intent(this, typeof(GameListActivity));
-                intent.PutExtra("access_token", accessToken);
-                StartActivity(intent);
-            };
+            continueButton.Click += delegate { StartActivity(new Intent(this, typeof(GameListActivity))); };
+
+            UpdateProfileViews(Profile.CurrentProfile);
         }
 
         //Without this, the Facebook Callback mananger won't run
@@ -78,9 +75,13 @@ namespace Scorekeeper.Droid
 
         void OnProfileChanged(object sender, OnProfileChangedEventArgs e)
         {
-            if (e.mProfile != null)
+            UpdateProfileViews(e.mProfile);
+        }
+
+        private void UpdateProfileViews(Profile profile)
+        {
+            if (profile != null)
             {
-                var profile = e.mProfile;
                 name.Text = profile.Name;
                 profilePicture.ProfileId = profile.Id;
                 continueButton.Visibility = Android.Views.ViewStates.Visible;
@@ -91,6 +92,7 @@ namespace Scorekeeper.Droid
                 profilePicture.ProfileId = null;
                 continueButton.Visibility = Android.Views.ViewStates.Gone;
             }
+
         }
     }
 

@@ -15,5 +15,7 @@ namespace Scorekeeper.Common
 		int AwayScore { get; set; }
         int HomeScoreDelta { get; set; }
         int AwayScoreDelta { get; set; }
+
+        bool CanPostScore { set; }
 	}
 }

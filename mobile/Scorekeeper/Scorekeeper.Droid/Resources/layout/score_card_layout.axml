@@ -90,5 +90,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Post Scores"
+          android:enabled="false"
           android:padding="3dip" />
 </TableLayout>

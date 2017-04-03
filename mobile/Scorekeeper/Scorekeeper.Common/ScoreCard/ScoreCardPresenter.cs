@@ -68,6 +68,9 @@ namespace Scorekeeper.Common
             {
                 View.AwayScoreDelta += delta;
             }
+            
+            //If there's any change in score, the View can post updates.
+            View.CanPostScore = (View.AwayScoreDelta != 0 | View.HomeScoreDelta != 0);
         }
 
         /// <summary>
