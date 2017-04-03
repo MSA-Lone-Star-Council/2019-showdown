@@ -21,7 +21,7 @@ namespace Client.iOS
 		public SportsViewController()
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			Presenter = new SportsPresenter(appDelegate.BackendClient);
+			Presenter = new SportsPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager);
 			Presenter.TakeView(this);
 		}
 
@@ -38,9 +38,7 @@ namespace Client.iOS
 
 			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
 
-			var tableSource = new SportsTableSource();
-			tableSource.Games = new List<Game>();
-			tableSource.RowTappedEvent += async (game) => await Presenter.OnClickRow(game);
+			var tableSource = new GamesTableSource(GameCellID, Presenter);
 
 			GamesList = new UITableView(View.Bounds)
 			{
@@ -60,16 +58,6 @@ namespace Client.iOS
 			Presenter.RemoveView();
 		}
 
-		public List<Game> Games
-		{
-			set
-			{
-				SportsTableSource sts = GamesList.Source as SportsTableSource;
-				sts.Games = value;
-				GamesList.ReloadData();
-			}
-		}
-
 		public void OpenGame(Game g)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
@@ -84,36 +72,14 @@ namespace Client.iOS
 			throw new NotImplementedException();
 		}
 
-		class SportsTableSource : UITableViewSource
+		void ISportsView.ShowMessage(string message)
 		{
-			public delegate void OnRowTapped(Game game);
-			public List<Game> Games { get; set; }
+			throw new NotImplementedException();
+		}
 
-			public event OnRowTapped RowTappedEvent;
-
-			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-			{
-				var cell = tableView.DequeueReusableCell(GameCellID) as GameCell;
-				cell.BackgroundColor = UIColor.Clear;
-
-				var game = Games[indexPath.Row];
-
-				cell.UpdateCell(game);
-
-				return cell;
-			}
-
-			public override nint RowsInSection(UITableView tableview, nint section)
-			{
-				return Games.Count;
-			}
-
-			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-			{
-				var game = Games[indexPath.Row];
-				RowTappedEvent(game);
-				tableView.DeselectRow(indexPath, false);
-			}
+		void ISportsView.Refresh()
+		{
+			GamesList.ReloadData();
 		}
 	}
 }

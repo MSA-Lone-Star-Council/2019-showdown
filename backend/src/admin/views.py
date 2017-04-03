@@ -113,8 +113,11 @@ class ScorekeeperScoresView(generics.CreateAPIView):
         )
         logger.info(options)
         
-        # TODO: https://msdn.microsoft.com/en-us/library/azure/dn530749.aspx#Anchor_3
-        send_notification(options, '')
+        tags = "game_%s || school_%s || school_%s" % (
+            game.id,
+            game.away_team.slug,
+            game.home_team.slug)
+        send_notification(options, tags)
 
         return Response(score, status=status.HTTP_201_CREATED, headers=headers)
 

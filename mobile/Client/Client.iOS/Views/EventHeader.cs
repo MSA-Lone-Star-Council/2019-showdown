@@ -3,6 +3,7 @@ using Common.Common;
 using Common.Common.Models;
 using Foundation;
 using Masonry;
+using Plugin.Iconize.iOS.Controls;
 using UIKit;
 
 namespace Client.iOS
@@ -14,6 +15,7 @@ namespace Client.iOS
 		static UIFont locationFont = UIFont.SystemFontOfSize(16, UIFontWeight.Medium);
 		static UIFont descriptionFont = UIFont.SystemFontOfSize(14, UIFontWeight.Regular);
 
+		IconButton notificationButton = new IconButton();
 		UILabel titleLabel = new UILabel() { Font = titleFont, TextAlignment = UITextAlignment.Center };
 		UILabel timeLabel = new UILabel() { Font = timeFont, TextAlignment = UITextAlignment.Center };
 		UIButton locationLabel = new UIButton()
@@ -29,6 +31,7 @@ namespace Client.iOS
 		};
 
 		public Action LocationTappedAction { get; set; }
+		public Action NotificationTappedAction { get; set; }
 
 		public EventHeader()
 		{
@@ -41,7 +44,10 @@ namespace Client.iOS
 			locationLabel.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
 			locationLabel.TouchUpInside += (sender, e) => LocationTappedAction();
 
+			notificationButton.TouchUpInside += (sender, e) => NotificationTappedAction();
+
 			AddSubviews(new UIView[] {
+				notificationButton,
 				titleLabel,
 				timeLabel,
 				locationLabel,
@@ -49,6 +55,14 @@ namespace Client.iOS
 			});
 
 			var parentView = this;
+
+			notificationButton.MakeConstraints(make =>
+			{
+				make.Top.EqualTo(parentView).Offset(-5);
+				make.Right.EqualTo(parentView).Offset(-5);
+				make.Width.EqualTo((NSNumber)40);
+				make.Height.EqualTo((NSNumber)40);
+			});
 
 			titleLabel.MakeConstraints(make =>
 			{
@@ -89,6 +103,17 @@ namespace Client.iOS
 				timeLabel.Text = Utilities.FormatEventTimeSpan(value);
 				descriptionLabel.Text = value.Description;
 				locationLabel.SetTitle(value.Location.Name, UIControlState.Normal);
+			}
+		}
+
+		public bool IsSubscribed
+		{
+			set
+			{
+				string normalText = value ? $"{{fa-bell 20pt}}" : $"{{fa-bell-o 20pt}}";
+				string highligtedText = value ? $"{{fa-bell-o 20pt}}" : $"{{fa-bell 20pt}}";
+				notificationButton.SetTitle(normalText, UIControlState.Normal);
+				notificationButton.SetTitle(highligtedText, UIControlState.Highlighted);
 			}
 		}
 	}

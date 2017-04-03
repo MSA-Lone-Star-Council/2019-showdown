@@ -24,6 +24,7 @@ namespace Common.Common.Models
         public string Description { get; set; }
 
         public Location Location { get; set; }
+		public string TopicId { get { return $"event_{Id}"; } }
 
 		public static Event FromJSON(string jsonString)
 		{
