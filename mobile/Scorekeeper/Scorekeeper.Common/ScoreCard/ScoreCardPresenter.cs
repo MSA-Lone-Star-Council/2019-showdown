@@ -43,9 +43,10 @@ namespace Scorekeeper.Common
                 if (school.Slug.Equals(awayTeamId)) { View.AwayTeamName = school.ShortName; }
             }
 
-			// TODO: Read score from server
-			View.HomeScore = await Task.FromResult<int>(10);
-			View.AwayScore = await Task.FromResult<int>(10);
+            Score scoreFromServer = await _client.GetScore(View.Game);
+
+            View.HomeScore = (int)scoreFromServer.HomePoints;
+            View.AwayScore = (int)scoreFromServer.AwayPoints;
 
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
@@ -84,16 +85,15 @@ namespace Scorekeeper.Common
 
             Score newScore = new Score
             {
-                Time = DateTimeOffset.Now,
+                //Time = DateTimeOffset.Now,
                 HomePoints = newHomePoints,
                 AwayPoints = newAwayPoints
             };
 
-			// TODO: Actually communicate with the server. Just compute the new score right away
-			int temp = await Task.FromResult<int>(10);
+            var scoreFromServer = await _client.SaveScore(View.Game, newScore);
 
-            View.HomeScore = newHomePoints;
-            View.AwayScore = newAwayPoints;
+            View.HomeScore = (int) scoreFromServer.HomePoints;
+            View.AwayScore = (int) scoreFromServer.AwayPoints;
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
 		}

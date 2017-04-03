@@ -176,6 +176,21 @@ namespace Admin.Common.API
 			return ClientModel.Announcement.FromJSON(jsonString);
 		}
 
+        public async Task<ClientModel.Score> GetScore(Game g)
+        {
+            var jsonString = await RequestAsync($"/admin/games/{g.Id}/scores");
+            return ClientModel.Score.FromJSON(jsonString);
+        }
+
+
+        public async Task<ClientModel.Score> SaveScore(Game g, ClientModel.Score score)
+        {
+            var path = $"/admin/games/{g.Id}/scores";
+            var jsonString = await PostAsync(path, JsonConvert.SerializeObject(score));
+
+            return ClientModel.Score.FromJSON(jsonString);
+        }
+
         private HttpRequestMessage BuildRequest(string path, string jsonBody, bool authenticated)
         {
             var url = $"{Secrets.BACKEND_URL}{path}.json";
