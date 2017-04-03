@@ -64,9 +64,9 @@ namespace Client.iOS
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
-				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Annoucements" },
+				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
-				new UINavigationController(new AcknowledgementsViewController()) { Title = "Acknowledgemetns" },
+				new UINavigationController(new AcknowledgementsViewController()) { Title = "About" },
 			};
 
 			return tabBarController;
