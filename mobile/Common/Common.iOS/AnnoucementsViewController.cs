@@ -36,7 +36,7 @@ namespace Common.iOS
 	    public async override void ViewDidLoad()
 	    {
 	        base.ViewDidLoad();
-	        View.BackgroundColor = UIColor.White;
+			View.BackgroundColor = new UIColor(1, 0.8f, 0.36f, 1);
 
 	        AnnouncementsList = new UITableView(View.Bounds)
 	        {
