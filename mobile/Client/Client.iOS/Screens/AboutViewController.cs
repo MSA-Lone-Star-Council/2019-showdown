@@ -29,7 +29,7 @@ namespace Client.iOS
 
 		UILabel authors = new UILabel()
 		{
-			Text = "Developed by Zonera Javed, Hamzah Khatri, Ali Kedwaii, Saad Najmi, and Zuhair Parvez",
+			Text = "Developed by Zonera Javed, Ali Kedwaii, Hamzah Khatri, Saad Najmi, and Zuhair Parvez",
 			Font = UIFont.SystemFontOfSize(14, UIFontWeight.Light),
 			TextAlignment = UITextAlignment.Center,
 			Lines = 0
