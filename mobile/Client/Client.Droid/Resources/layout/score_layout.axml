@@ -16,8 +16,8 @@
       android:id="@+id/time"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:alignParentTop="true"
-      android:centerHorizontal="true"
+      android:layout_alignParentTop="true"
+      android:layout_centerHorizontal="true"
       android:paddingBottom="5dp"
       android:text="h:mm:dd"
       android:textColor="#8b8b8b"
@@ -29,7 +29,7 @@
         android:layout_below="@+id/time"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="65dp"
-        android:layout_paddingBottom="5dp"
+        android:paddingBottom="5dp"
         android:text="XX"
         android:textColor="#8b8b8b"
         android:textSize="32sp" />
@@ -40,7 +40,7 @@
         android:layout_below="@+id/time"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="65dp"
-        android:layout_paddingBottom="5dp"
+        android:paddingBottom="5dp"
         android:text="YY"
         android:textColor="#8b8b8b"
         android:textSize="32sp" />
