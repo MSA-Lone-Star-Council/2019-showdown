@@ -43,10 +43,12 @@ namespace Scorekeeper.Common
                 if (school.Slug.Equals(awayTeamId)) { View.AwayTeamName = school.ShortName; }
             }
 
-            Score scoreFromServer = await _client.GetScore(View.Game);
+            //Score scoreFromServer = await _client.GetScore(View.Game);
 
-            View.HomeScore = (int)scoreFromServer.HomePoints;
-            View.AwayScore = (int)scoreFromServer.AwayPoints;
+            //View.HomeScore = (int)scoreFromServer.HomePoints;
+            //View.AwayScore = (int)scoreFromServer.AwayPoints;
+            View.HomeScore = 0;
+            View.AwayScore = 0;
 
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
@@ -97,5 +99,13 @@ namespace Scorekeeper.Common
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
 		}
-	}
+
+        public async Task EndGameAsync()
+        {
+            await _client.EndGame(View.Game);
+            View.CanPostScore = false;
+            View.EndGame();
+        }
+
+    }
 }

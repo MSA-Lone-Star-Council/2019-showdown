@@ -92,4 +92,10 @@
           android:text="Post Scores"
           android:enabled="false"
           android:padding="3dip" />
+ <Button
+          android:id="@+id/end_game_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="End the game"
+          android:padding="3dip" />
 </TableLayout>

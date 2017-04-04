@@ -142,7 +142,12 @@ namespace Admin.Common.API
 			return Game.FromJSON(jsonString);
 		}
 
-		public async Task DeleteGame(Game g)
+        public async Task EndGame(Game game)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public async Task DeleteGame(Game g)
 		{
 			var path = $"/admin/games/{g.Id}";
 			await DeleteAsync(path);

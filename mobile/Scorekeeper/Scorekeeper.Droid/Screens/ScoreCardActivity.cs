@@ -14,7 +14,7 @@ using Admin.Common.API.Entities;
 
 namespace Scorekeeper.Droid
 {
-    [Activity(Label = "ScoreCardActivity")]
+    [Activity(Label = "Score Card")]
     public class ScoreCardActivity : Activity, IScoreCardView
     {
         public Game Game { get; set; }
@@ -26,7 +26,7 @@ namespace Scorekeeper.Droid
         private TextView homeScoreDelta, awayScoreDelta;
         private Button homePlusOneButton, awayPlusOneButton;
         private Button HomeMinusOneButton, AwayMinusOneButton;
-        private Button postScoreButton;
+        private Button postScoreButton, endGameButton;
 
         string IScoreCardView.HomeTeamName
         {
@@ -112,6 +112,11 @@ namespace Scorekeeper.Droid
             }
         }
 
+        void IScoreCardView.EndGame()
+        {
+            //TODO
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -144,6 +149,10 @@ namespace Scorekeeper.Droid
 
             postScoreButton = FindViewById<Button>(Resource.Id.post_score_button);
             postScoreButton.Click += async (sender, e) => { await presenter.PostScoreUpdateAsync(); };
+
+            endGameButton = FindViewById<Button>(Resource.Id.end_game_button);
+            endGameButton.Click += async (sender, e) => { await presenter.EndGameAsync(); };
+
         }
 
         protected async override void OnResume()
