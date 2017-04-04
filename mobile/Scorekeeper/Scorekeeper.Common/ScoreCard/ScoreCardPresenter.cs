@@ -36,8 +36,8 @@ namespace Scorekeeper.Common
             View.AwayTeamName = View.Game.AwayTeam.ShortName;
             View.HomeTeamName = View.Game.HomeTeam.ShortName;
 
-            View.AwayScore = View.AwayScore;
-            View.HomeScore = View.HomeScore;
+            View.AwayScore = (int)View.Game.Score.AwayPoints;
+            View.HomeScore = (int)View.Game.Score.HomePoints;
 
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
