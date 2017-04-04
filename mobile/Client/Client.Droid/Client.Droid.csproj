@@ -112,12 +112,16 @@
     <Reference Include="Xamarin.Azure.NotificationHubs.Android">
       <HintPath>..\..\packages\Xamarin.Azure.NotificationHubs.Android.0.4.0\lib\MonoAndroid403\Xamarin.Azure.NotificationHubs.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\ScoreAdapter.cs" />
     <Compile Include="Adapters\SportsAdapter.cs" />
     <Compile Include="Adapters\ScheduleAdapter.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="NotificationHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AcknowledgementsFragment.cs" />
     <Compile Include="Screens\AnnouncementsFragment.cs" />
@@ -185,6 +189,10 @@
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
       <Project>{c8d3aeba-b013-4b34-a559-83ebf00f0cdb}</Project>
       <Name>Common.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Droid\Common.Droid.csproj">
+      <Project>{645c6d11-ef3f-45c3-8dbc-bd4511419f9c}</Project>
+      <Name>Common.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
       <Project>{f240f33f-ca8a-42c2-b5a6-ef854421050e}</Project>

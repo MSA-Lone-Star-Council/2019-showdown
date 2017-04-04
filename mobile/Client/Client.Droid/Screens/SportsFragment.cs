@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Client.Common;
 using Common.Common;
+using Common.Droid;
 using Common.Common.Models;
 using Client.Droid.Adapters;
 using Android.Support.V7.Widget;
@@ -31,6 +32,10 @@ namespace Client.Droid.Screens
                 adapter.Games = value;
                 adapter.NotifyDataSetChanged();
             }
+            get
+            {
+                return this.Adapter.Games;
+            }
         }
         RecyclerView SportsView { get; set; }
         SportsAdapter Adapter { get; set; }
@@ -40,7 +45,7 @@ namespace Client.Droid.Screens
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            Presenter = new SportsPresenter(new ShowdownRESTClient());
+            Presenter = new SportsPresenter(new ShowdownRESTClient(), new SubscriptionManager(new Storage(), new NotificationHub()));
             Presenter.TakeView(this);
 
             Adapter = new SportsAdapter()
@@ -64,6 +69,11 @@ namespace Client.Droid.Screens
             SportsView.SetAdapter(Adapter);
             //return the view
             return view;
+        }
+
+        public void Refresh()
+        {
+            throw new NotImplementedException();
         }
 
         void ISportsView.OpenGame(Game g)
