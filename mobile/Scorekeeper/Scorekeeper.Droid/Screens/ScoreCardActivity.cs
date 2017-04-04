@@ -114,7 +114,10 @@ namespace Scorekeeper.Droid
 
         void IScoreCardView.EndGame()
         {
-            //TODO
+            postScoreButton.Enabled = false;
+            postScoreButton.Visibility = Android.Views.ViewStates.Gone;
+            endGameButton.Text = "Game Over";
+            endGameButton.Enabled = false;
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -151,7 +154,11 @@ namespace Scorekeeper.Droid
             postScoreButton.Click += async (sender, e) => { await presenter.PostScoreUpdateAsync(); };
 
             endGameButton = FindViewById<Button>(Resource.Id.end_game_button);
-            endGameButton.Click += async (sender, e) => { await presenter.EndGameAsync(); };
+            
+            endGameButton.Click += (sender, e) => {
+                Dialog dialog = createAlertDialog();
+                dialog.Show();             
+            };
 
         }
 
@@ -166,6 +173,22 @@ namespace Scorekeeper.Droid
         {
             base.OnPause();
             presenter.RemoveView();
+        }
+
+        private Dialog createAlertDialog()
+        {
+            //set alert for End game button
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Are you sure?");
+            alert.SetMessage("Once you end the game, this can't be undone.");
+            alert.SetPositiveButton("End Game", async (senderAlert, args) => {
+                await presenter.EndGameAsync();
+            });
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+            });
+            Dialog dialog = alert.Create();
+
+            return dialog;
         }
     }
 }

@@ -41,7 +41,12 @@ namespace Scorekeeper.Common
 
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
-		}
+
+            if (View.Game.InProgress == false)
+            {
+                View.EndGame();
+            }
+        }
 
         /// <summary>
         /// Updates the score on the view before sending it to the server.

@@ -10,20 +10,6 @@
             android:text="Home"
             android:padding="3dip"
             android:textAppearance="@android:style/TextAppearance.Material.Headline"
-            android:id="@+id/home_team_name" />
-        <TextView
-            android:text="0"
-            android:gravity="right"
-            android:padding="3dip"
-            android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:id="@+id/home_score" />
-    </TableRow>
-    <TableRow
-        android:id="@+id/tableRow2">
-        <TextView
-            android:text="Away"
-            android:padding="3dip"
-            android:textAppearance="@android:style/TextAppearance.Material.Headline"
             android:id="@+id/away_team_name" />
         <TextView
             android:text="0"
@@ -32,6 +18,20 @@
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:id="@+id/away_score" />
     </TableRow>
+    <TableRow
+        android:id="@+id/tableRow2">
+        <TextView
+            android:text="Away"
+            android:padding="3dip"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline"
+            android:id="@+id/home_team_name" />
+        <TextView
+            android:text="0"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAppearance="@android:style/TextAppearance.Material.Display1"
+            android:id="@+id/home_score" />
+    </TableRow>
     <View
         android:layout_height="2dip"
         android:background="#FF909090"
@@ -39,31 +39,31 @@
     <TableRow
         android:id="@+id/tableRow3">
         <Button
-            android:id="@+id/home_score_plus_one_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home + 1"
-            android:padding="3dip" />
-        <Button
             android:id="@+id/away_score_plus_one_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Away + 1"
             android:padding="3dip" />
+        <Button
+            android:id="@+id/home_score_plus_one_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home + 1"
+            android:padding="3dip" />
     </TableRow>
     <TableRow
       android:id="@+id/tableRow4">
-      <Button
-          android:id="@+id/home_score_minus_one_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Home - 1"
-          android:padding="3dip" />
       <Button
           android:id="@+id/away_score_minus_one_button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Away - 1"
+          android:padding="3dip" />
+      <Button
+          android:id="@+id/home_score_minus_one_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Home - 1"
           android:padding="3dip" />
     </TableRow>
   <TableRow
@@ -73,13 +73,13 @@
             android:gravity="center"
             android:padding="3dip"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:id="@+id/home_score_delta_TextView" />
+            android:id="@+id/away_score_delta_TextView" />
     <TextView
             android:text="0"
             android:gravity="center"
             android:padding="3dip"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
-            android:id="@+id/away_score_delta_TextView" />
+            android:id="@+id/home_score_delta_TextView" />
   </TableRow>
   <View
         android:layout_height="2dip"
