@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using System.Collections.Generic;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
 
 namespace Scorekeeper.Droid
 {

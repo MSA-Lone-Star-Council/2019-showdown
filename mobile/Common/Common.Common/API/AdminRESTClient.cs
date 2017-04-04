@@ -119,10 +119,10 @@ namespace Admin.Common.API
 			return Game.FromJSONArray(jsonString);
 		}
 
-        public async Task<List<Game>> GetScoreKeeperGames()
+        public async Task<List<ClientModel.Game>> GetScoreKeeperGames()
         {
             var jsonString = await RequestAsync("/admin/scorekeeper/games");
-            return Game.FromJSONArray(jsonString);
+            return ClientModel.Game.FromJSONArray(jsonString);
         }
 
         public async Task<Game> SaveGame(Game g)
@@ -142,7 +142,7 @@ namespace Admin.Common.API
 			return Game.FromJSON(jsonString);
 		}
 
-        public async Task EndGame(Game game)
+        public async Task EndGame(ClientModel.Game game)
         {
             //throw new NotImplementedException();
         }
@@ -188,9 +188,9 @@ namespace Admin.Common.API
         }
 
 
-        public async Task<ClientModel.Score> SaveScore(Game g, ClientModel.Score score)
+        public async Task<ClientModel.Score> SaveScore(ClientModel.Game g, ClientModel.Score score)
         {
-            var path = $"/admin/scorekeeper/games/{g.Id}/scores";
+            var path = $"/admin/scorekeeper/games/{g.ID}/scores";
             var jsonString = await PostAsync(path, JsonConvert.SerializeObject(score));
 
             return ClientModel.Score.FromJSON(jsonString);

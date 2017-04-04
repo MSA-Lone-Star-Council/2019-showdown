@@ -29,26 +29,15 @@ namespace Scorekeeper.Common
             _client = client;
         }
         
-		public async Task SetupView()
+		public void SetupView()
 		{
 			if (View == null) return;
 
-            var schools = await _client.GetSchools();
-            string homeTeamId = View.Game.HomeTeamId;
-            string awayTeamId = View.Game.AwayTeamId;
+            View.AwayTeamName = View.Game.AwayTeam.ShortName;
+            View.HomeTeamName = View.Game.HomeTeam.ShortName;
 
-            foreach (School school in schools)
-            {
-                if (school.Slug.Equals(homeTeamId)) { View.HomeTeamName = school.ShortName; }
-                if (school.Slug.Equals(awayTeamId)) { View.AwayTeamName = school.ShortName; }
-            }
-
-            //Score scoreFromServer = await _client.GetScore(View.Game);
-
-            //View.HomeScore = (int)scoreFromServer.HomePoints;
-            //View.AwayScore = (int)scoreFromServer.AwayPoints;
-            View.HomeScore = 0;
-            View.AwayScore = 0;
+            View.AwayScore = View.AwayScore;
+            View.HomeScore = View.HomeScore;
 
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;

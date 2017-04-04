@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Scorekeeper.Common;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
 using Xamarin.Facebook;
 
 namespace Scorekeeper.Droid

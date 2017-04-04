@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Scorekeeper.Common;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
 
 namespace Scorekeeper.Droid
 {
@@ -155,11 +155,11 @@ namespace Scorekeeper.Droid
 
         }
 
-        protected async override void OnResume()
+        protected override void OnResume()
         {
             base.OnResume();
             presenter.TakeView(this);
-            await presenter.SetupView();
+            presenter.SetupView();
         }
 
         protected override void OnPause()

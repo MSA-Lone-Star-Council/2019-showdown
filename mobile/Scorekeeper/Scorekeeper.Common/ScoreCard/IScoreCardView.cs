@@ -1,6 +1,6 @@
 ﻿using System;
 using Common.Common;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
 
 namespace Scorekeeper.Common
 {
