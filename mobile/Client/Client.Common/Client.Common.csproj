@@ -35,8 +35,13 @@
     <Compile Include="SportsScreen\ISportsView.cs" />
     <Compile Include="GameScreen\GamePresenter.cs" />
     <Compile Include="GameScreen\IGameView.cs" />
-    <Compile Include="AnnouncementsScreen\IAnnouncementsView.cs" />
-    <Compile Include="AnnouncementsScreen\AnnouncementsPresenter.cs" />
+    <Compile Include="SchoolScreen\SchoolPresenter.cs" />
+    <Compile Include="SchoolScreen\ISchoolView.cs" />
+    <Compile Include="EventScreen\EventPresenter.cs" />
+    <Compile Include="EventScreen\IEventView.cs" />
+    <Compile Include="IGameHavingPresenter.cs" />
+    <Compile Include="Notifications\SubscriptionManager.cs" />
+    <Compile Include="Notifications\INotificationHub.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
@@ -47,7 +52,9 @@
   <ItemGroup>
     <Folder Include="SportsScreen\" />
     <Folder Include="GameScreen\" />
-    <Folder Include="AnnouncementsScreen\" />
+    <Folder Include="SchoolScreen\" />
+    <Folder Include="EventScreen\" />
+    <Folder Include="Notifications\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

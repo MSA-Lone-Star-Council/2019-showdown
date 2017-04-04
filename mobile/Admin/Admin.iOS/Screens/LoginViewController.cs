@@ -31,14 +31,16 @@ namespace Admin.iOS
 
 		public void Advance()
 		{
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+
 			var tabBarController = new UITabBarController();
 
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new EventsListViewController() { Title = "Events" },
-				new UIViewController() { Title = "Announcements" },
-				new UIViewController()  { Title = "Locations" },
-				new UIViewController()  { Title = "Games" },
+				new AdminAnnouncementsViewController(appDelegate.BackendClient) { Title = "Announcements" },
+				new LocationsListViewController()  { Title = "Locations" },
+				new GamesListViewController()  { Title = "Games" },
 			};
 			tabBarController.NavigationItem.HidesBackButton = true;
 

@@ -1,0 +1,38 @@
+version: "2"
+services:
+    api:
+        image: msalonestarcouncil/showdown:latest
+        env_file:
+            - .env
+        depends_on:
+            - db
+        networks:
+            - webgateway
+        labels:
+            - "traefik.backend=api"
+            - "traefik.frontend.rule=Host:example.com"
+            - "traefik.enable=true"
+    db:
+        image: postgres
+        volumes:
+            - data:/var/lib/postgresql/data
+        networks:
+            - webgateway
+    
+    proxy:
+        image: traefik
+        command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+        networks:
+            - webgateway
+        ports:
+            - "80:80"
+            - "8080:8080"
+        volumes:
+            - ./traefik.toml:/traefik.toml 
+            - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+    data: {}
+
+networks:
+    webgateway:
+        driver: bridge

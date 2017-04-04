@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Admin.Common;
 using Admin.Common.API.Entities;
@@ -25,7 +25,12 @@ namespace Admin.iOS
 			LocationPicker.Model = new LocationPickerModel(Presenter, LocationField);
 			AudiencePicker.Model = new AudiencePickerModel(AudienceField);
 			UpdateButton.TouchUpInside += async (sender, e) => await Presenter.Save();
-
+			DeleteButton.TouchUpInside += (sender, e) =>
+			{
+				var alert = new UIAlertView("Delete event?", "Doing so will delete all related games", new ConfirmActionAlert(async () => await Presenter.Delete()),
+											"No", new string[] { "Yes" });
+				alert.Show();
+			};
 		}
 
 		public async override void ViewWillAppear(bool animated)
@@ -94,6 +99,13 @@ namespace Admin.iOS
 					// Presenter will figure out location from IEventDetailView.SelectedLocationIndex
 				};
 			}
+		}
+
+		void IEventDetailView.GoBack()
+		{
+			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+			var navController = appDelegate.Window.RootViewController as UINavigationController;
+			navController.PopViewController(true);
 		}
 
 

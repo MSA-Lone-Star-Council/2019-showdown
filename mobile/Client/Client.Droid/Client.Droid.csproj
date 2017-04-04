@@ -118,7 +118,6 @@
     <Compile Include="Adapters\SportsAdapter.cs" />
     <Compile Include="Adapters\ScheduleAdapter.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AcknowledgementsFragment.cs" />
     <Compile Include="Screens\AnnouncementsFragment.cs" />
@@ -130,6 +129,7 @@
     <Compile Include="Notifications\ShowdownFirebaseMessagingService.cs" />
     <Compile Include="ShowdownClientApplication.cs" />
     <Compile Include="Adapters\AnnouncementsAdapter.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

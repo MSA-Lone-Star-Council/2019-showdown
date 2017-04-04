@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Common.Common
 {
-    public class ShowdownRESTClient
+	public class ShowdownRESTClient : IAnnoucementInteractor
     {
         HttpClient client;
 
@@ -63,6 +63,13 @@ namespace Common.Common
             return Game.FromJSONArray(jsonString);
         }
 
+		public async Task<List<Game>> GetSchoolGames(string schoolSlug)
+		{
+			var path = $"/core/schools/{schoolSlug}/games";
+			var jsonString = await RequestAsync(path);
+			return Game.FromJSONArray(jsonString);
+		}
+
         public async Task<List<Score>> GetScoreHistory(String gameId)
         {
             var path = $"/scores/games/{gameId}/scores";
@@ -85,5 +92,10 @@ namespace Common.Common
             if (response.StatusCode != HttpStatusCode.OK) throw new Exception(response.StatusCode.ToString());
             return await response.Content.ReadAsStringAsync();
         }
-    }
+
+		public Task<Announcement> CreateAnnouncement(Announcement announcement)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

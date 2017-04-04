@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Client.Common;
 using Common.Common;
+using Common.iOS;
 using Foundation;
 using UIKit;
 using UserNotifications;
@@ -20,13 +23,14 @@ namespace Client.iOS
 			set;
 		}
 
-		private SBNotificationHub Hub { get; set; }
-
+		NotificationHubUtility hub = new NotificationHubUtility();
 	    public ShowdownRESTClient BackendClient { get; set; }
+		public SubscriptionManager SubscriptionManager { get; set; }
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 		    BackendClient = new ShowdownRESTClient();
+			SubscriptionManager = new SubscriptionManager(new iOSStorage(), hub);
 
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
@@ -35,6 +39,7 @@ namespace Client.iOS
 
 			RegisterForRemoteNotification();
 
+			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
 			return true;
 		}
@@ -59,7 +64,7 @@ namespace Client.iOS
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
-				new UINavigationController(new AnnoucementsViewController())  { Title = "Annoucements" },
+				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Annoucements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
 				new UINavigationController(new AcknowledgementsViewController()) { Title = "Acknowledgemetns" },
 			};
@@ -69,35 +74,41 @@ namespace Client.iOS
 
 		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 		{
-			Hub = new SBNotificationHub(Secrets.AzureConnectionString, Secrets.NotificationHubPath);
-			Hub.UnregisterAllAsync(deviceToken, (error) =>
-			{
-				if (error != null)
-				{
-					return;
-				}
-
-				NSSet tags = null;
-				Hub.RegisterNativeAsync(deviceToken, tags, callbackError =>
-				{
-					if (callbackError != null) return;
-				});
-			});
+			hub.DeviceToken = deviceToken;
+			SubscriptionManager.SaveToHub();
 		}
 
-		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+
+		public async override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, System.Action<UIBackgroundFetchResult> completionHandler)
 		{
-			if (null != userInfo && userInfo.ContainsKey(new NSString("aps")))
+			NSDictionary data = (NSDictionary) userInfo[new NSString("data")];
+			NSString type = (NSString)data[new NSString("type")];
+			if (type == new NSString("event"))
 			{
-				string alert = string.Empty;
+				NSString startTime = (NSString)data[new NSString("start_time")];
+				DateTimeOffset notificationTime = DateTimeOffset.Parse(startTime).ToOffset(TimeSpan.FromHours(-5)).Subtract(TimeSpan.FromMinutes(15));
 
-				NSDictionary aps = userInfo.ObjectForKey(new NSString("aps")) as NSDictionary;
+				var dateComponent = new NSDateComponents();
+				dateComponent.SetValueForComponent(notificationTime.Year, NSCalendarUnit.Year);
+				dateComponent.SetValueForComponent(notificationTime.Month, NSCalendarUnit.Month);
+				dateComponent.SetValueForComponent(notificationTime.Day, NSCalendarUnit.Day);
+				dateComponent.SetValueForComponent(notificationTime.Hour, NSCalendarUnit.Hour);
+				dateComponent.SetValueForComponent(notificationTime.Minute, NSCalendarUnit.Minute);
+				dateComponent.SetValueForComponent(-5, NSCalendarUnit.TimeZone);
 
-				if (aps.ContainsKey(new NSString("alert")))
-					alert = (aps[new NSString("alert")] as NSString).ToString();
+				var trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponent, false);
+
+				var center = UNUserNotificationCenter.Current;
+
+				var content = new UNMutableNotificationContent();
+				content.Title = (NSString)data[new NSString("event_title")];
+				content.Body = "Starts in 15 minutes";
+				content.Sound = UNNotificationSound.Default;
+
+				var request = UNNotificationRequest.FromIdentifier("TEST", content, trigger);
+				await center.AddNotificationRequestAsync(request);
 			}
 		}
-
 	}
 }
 

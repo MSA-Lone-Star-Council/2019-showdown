@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Admin.Common.API.Entities;
 
@@ -11,5 +11,7 @@ namespace Admin.Common
 		int SelectedLocationIndex { get; set; }
 
 		bool LocationLoading { set; }
+
+		void GoBack();
 	}
 }

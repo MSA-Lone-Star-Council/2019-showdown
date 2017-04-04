@@ -6,6 +6,11 @@ from .views import *
 
 urlpatterns = [
     url(
+        regex=r"^announcements$",
+        view=AllAnnouncementsView.as_view(),
+        name="all_announcements_view",
+    ),
+    url(
         regex=r"^events$",
         view=AllEventsView.as_view(),
         name="all_events_view",
@@ -24,6 +29,36 @@ urlpatterns = [
         regex=r"^locations/(?P<location_id>\d+)$",
         view=LocationDetailView.as_view(),
         name="location_detail_view",
+    ),
+    url(
+        regex=r"^games$",
+        view=AllGamesView.as_view(),
+        name="all_games_view",
+    ),
+    url(
+        regex=r"^games/(?P<game_id>[0-9a-f-]+)$",
+        view=GameDetailView.as_view(),
+        name="game_detail_view",
+    ),
+    url(
+        regex=r"^users$",
+        view=AllUsersView.as_view(),
+        name="all_users_view",
+    ),
+    url(
+        regex=r"^scorekeeper/games$",
+        view=ScorekeeperGamesView.as_view(),
+        name="scorekeeper_games",
+    ),
+    url(
+        regex=r"^scorekeeper/games/(?P<game_id>[0-9a-f-]+)$",
+        view=ScorekeeperScoresView.as_view(),
+        name="scorekeeper_scores",
+    ),
+    url(
+        regex=r"^scorekeeper/games/(?P<game_id>[0-9a-f-]+)/in-progress$",
+        view=GameInProgressView.as_view(),
+        name="scorekeeper_in_progress",
     ),
 ]
 

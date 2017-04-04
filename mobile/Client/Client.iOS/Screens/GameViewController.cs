@@ -21,7 +21,7 @@ namespace Client.iOS
 		public GameViewController(Game g)
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-			Presenter = new GamePresenter(appDelegate.BackendClient) { Game = g };
+			Presenter = new GamePresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { Game = g };
 
 			Game = g;
 
@@ -45,7 +45,12 @@ namespace Client.iOS
 			navController.NavigationBar.Translucent = false;
 
 			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
-			Header = new GameHeader();
+			Header = new GameHeader()
+			{
+				AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
+				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); },
+				NotificationTappedAction = Presenter.OnStar
+			};
 
 			ScoresList = new UITableView()
 			{
@@ -62,7 +67,7 @@ namespace Client.iOS
 
 			Header.MakeConstraints(make =>
 			{
-				make.Height.EqualTo((NSNumber)125);
+				make.Height.EqualTo((NSNumber)140);
 				make.Top.EqualTo(View);
 				make.Left.EqualTo(View);
 				make.Width.EqualTo(View);
@@ -85,6 +90,7 @@ namespace Client.iOS
 			var updateTask = Presenter.OnBegin();
 
 		    Header.Game = Game;
+			Header.IsSubscribed = Presenter.IsSubscribed();
 
 			await updateTask;
 		}
@@ -108,6 +114,12 @@ namespace Client.iOS
 		public void ShowMessage(string message)
 		{
 			throw new NotImplementedException();
+		}
+
+		public void Refresh()
+		{
+			Header.IsSubscribed = Presenter.IsSubscribed();
+			ScoresList.ReloadData();
 		}
 
 		class ScoreTableSource : UITableViewSource

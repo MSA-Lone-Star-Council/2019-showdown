@@ -44,6 +44,11 @@
     <Compile Include="Utilities.cs" />
     <Compile Include="Screens\Login\ILoginView.cs" />
     <Compile Include="Screens\Login\LoginPresenter.cs" />
+    <Compile Include="API\Entities\Game.cs" />
+    <Compile Include="API\Entities\User.cs" />
+    <Compile Include="API\IAnnoucementInteractor.cs" />
+    <Compile Include="Screens\AnnouncementsScreen\AnnouncementsPresenter.cs" />
+    <Compile Include="Screens\AnnouncementsScreen\IAnnouncementsView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -51,6 +56,7 @@
     <Compile Include="ShowdownRESTClient.cs" />
     <Folder Include="Screens\" />
     <Folder Include="Screens\Login\" />
+    <Folder Include="Screens\AnnouncementsScreen\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

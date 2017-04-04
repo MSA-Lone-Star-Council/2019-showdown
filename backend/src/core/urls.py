@@ -6,14 +6,14 @@ from .views import *
 
 urlpatterns = [
     url(
+        regex=r"^schools/(?P<school_slug>[A-Za-z0-9-]+)/games$",
+        view=SchoolView.as_view(),
+        name="school_view",
+    ),
+    url(
         regex=r"^schools$",
         view=SchoolsView.as_view(),
         name="schools_view",
-    ),
-    url(
-        regex=r"schools/(?P<school_slug>[A-Za-z0-9-]+)$",
-        view=SchoolView.as_view(),
-        name="school_view",
     ),
 ]
 

@@ -7,18 +7,23 @@ using Common.Common.Models;
 
 namespace Client.Common
 {
-	public class SportsPresenter : Presenter<ISportsView>
+	public class SportsPresenter : Presenter<ISportsView>, IGameHavingPresenter
 	{
-
 	    private readonly ShowdownRESTClient _client;
+		private readonly SubscriptionManager manager;
 
-	    public SportsPresenter(ShowdownRESTClient client)
+		private List<Game> games;
+
+		public SportsPresenter(ShowdownRESTClient client, SubscriptionManager manager)
 	    {
 	        _client = client;
+			games = new List<Game>();
+			this.manager = manager;
 	    }
 
 		public async Task OnBegin()
 		{
+			if (View != null) View.Refresh();
 			await UpdateFromServer();
 		}
 
@@ -27,9 +32,29 @@ namespace Client.Common
 			await UpdateFromServer();
 		}
 
-		public async Task OnClickRow(Game row)
+		public void OnClickRow(Game row)
 		{
 			View.OpenGame(row);
+		}
+
+		public int GameCount()
+		{
+			return games.Count;
+		}
+
+		public Game GetGame(int row)
+		{
+			return games[row];
+		}
+
+		public bool Subscribed(int row)
+		{
+			return false;
+		}
+
+		public void GameTapped(int index)
+		{
+			View.OpenGame(games[index]);
 		}
 
 		public async Task OnStar(Game game)
@@ -41,14 +66,25 @@ namespace Client.Common
 		private async Task UpdateFromServer()
 		{
 			var gamesFromServer = await GetAllGames();
-
-			if (View != null)
-				View.Games = gamesFromServer.OrderByDescending(g => g.Score.Time).ToList();
+			games = gamesFromServer.OrderByDescending(g => g.Score.Time).ToList();
+			if(View != null) View.Refresh();
 		}
 
 		private async Task<List<Game>> GetAllGames()
 		{
 		    return await _client.GetAllGames();
+		}
+
+		public bool IsSubscribed(int index)
+		{
+			var game = games[index];
+			return manager[game.TopicId];
+		}
+
+		public void SubscribeTapped(int index)
+		{
+			manager.ToggleSubscription(games[index].TopicId);
+			View.Refresh();
 		}
 	}
 }

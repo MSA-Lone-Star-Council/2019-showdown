@@ -16,6 +16,7 @@ namespace Client.Droid
 	{
 		public override void OnMessageReceived(RemoteMessage message)
 		{
+			Log.Info("Showdown", "Message Received");
 			string type = message.Data["type"];
 
 			Notification notification = null;
