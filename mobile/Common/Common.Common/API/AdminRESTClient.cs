@@ -142,9 +142,10 @@ namespace Admin.Common.API
 			return Game.FromJSON(jsonString);
 		}
 
-        public async Task EndGame(ClientModel.Game game)
+        public async Task EndGame(ClientModel.Game g)
         {
-            //throw new NotImplementedException();
+            var path = $"/admin/scorekeeper/games/{g.ID}/in-progress";
+            await PutAsync(path, "{ \"in_progress\": false}");
         }
 
         public async Task DeleteGame(Game g)
@@ -190,7 +191,7 @@ namespace Admin.Common.API
 
         public async Task<ClientModel.Score> SaveScore(ClientModel.Game g, ClientModel.Score score)
         {
-            var path = $"/admin/scorekeeper/games/{g.ID}/scores";
+            var path = $"/admin/scorekeeper/games/{g.ID}";
             var jsonString = await PostAsync(path, JsonConvert.SerializeObject(score));
 
             return ClientModel.Score.FromJSON(jsonString);
