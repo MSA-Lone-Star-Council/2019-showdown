@@ -8,8 +8,6 @@ namespace Client.Common
 {
 	public class GamePresenter : Presenter<IGameView>
 	{
-		public Game Game { get; set; }
-
 		public ShowdownRESTClient _client;
 		public SubscriptionManager manager;
 
@@ -35,13 +33,13 @@ namespace Client.Common
 		public void OnStar()
 		{
 			//View.ShowMessage("Subscribed for notifications for this game!");
-			manager.ToggleSubscription(Game.TopicId);
+			manager.ToggleSubscription(View.Game.TopicId);
 			View.Refresh();
 		}
 
 		public bool IsSubscribed()
 		{
-			return manager[Game.TopicId];
+			return manager[View.Game.TopicId];
 		}
 
 		async Task UpdateFromServer()
@@ -53,7 +51,7 @@ namespace Client.Common
 
 		async Task<List<Score>> GetScoreHistoryFromServer()
 		{
-			return await _client.GetScoreHistory(Game.ID);
+			return await _client.GetScoreHistory(View.Game.ID);
 		}
 	}
 }

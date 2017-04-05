@@ -37,10 +37,11 @@ namespace Client.Droid.Screens
 
         public Game Game { get; set; }
 
-
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Game = Game.FromJSON(this.Intent.GetStringExtra("game"));
+
             SetContentView(Client.Droid.Resource.Layout.game_screen_layout);
             Presenter = new GamePresenter(new ShowdownRESTClient(), null);
             Presenter.TakeView(this);
