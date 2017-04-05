@@ -82,6 +82,7 @@ namespace Client.Droid.Screens
             //throw new NotImplementedException();
             var intent = new Intent(this.Activity, typeof(GameScreenActivity));
             intent.PutExtra("game", g.ToJSON());
+            StartActivity(intent);
         }
 
         void ISportsView.ShowMessage(string message)

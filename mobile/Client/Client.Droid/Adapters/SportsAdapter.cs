@@ -40,8 +40,8 @@ namespace Client.Droid.Adapters
             holder.Game = item;
             holder.Title.Text = item.Title;
             holder.Category.Text = item.Event.Title;
-            holder.Team1.Text = item.AwayTeam.Name;
-            holder.Team2.Text = item.HomeTeam.Name;
+            holder.Team1.Text = item.AwayTeam.ShortName;
+            holder.Team2.Text = item.HomeTeam.ShortName;
             holder.Score1.Text = item.Score.AwayPoints.ToString();
             holder.Score2.Text = item.Score.HomePoints.ToString();
             holder.StartTime.Text = Utilities.FormatDateTime(item.Event.StartTime);
