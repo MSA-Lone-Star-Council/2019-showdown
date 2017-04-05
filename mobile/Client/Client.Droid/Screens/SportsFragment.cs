@@ -45,7 +45,7 @@ namespace Client.Droid.Screens
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            Presenter = new SportsPresenter(new ShowdownRESTClient(), new SubscriptionManager(new Storage(), new NotificationHub()));
+            Presenter = new SportsPresenter(new ShowdownRESTClient(), new SubscriptionManager(new Storage(), null));
             Presenter.TakeView(this);
 
             Adapter = new SportsAdapter()
@@ -73,13 +73,15 @@ namespace Client.Droid.Screens
 
         public void Refresh()
         {
-            throw new NotImplementedException();
+            //TODO
+            //throw new NotImplementedException();
         }
 
         void ISportsView.OpenGame(Game g)
         {
-            throw new NotImplementedException();
-            //need to make new intent for game screen
+            //throw new NotImplementedException();
+            var intent = new Intent(this.Activity, typeof(GameScreenActivity));
+            intent.PutExtra("game", g.ToJSON());
         }
 
         void ISportsView.ShowMessage(string message)

@@ -15,6 +15,18 @@ namespace Client.Droid
 {
     class NotificationHub : INotificationHub
     {
+        public NotificationHub(object a, object b, object c)
+        {
+            //TODO 
+        }
+
+        public void UnregisterAll(object a)
+        {
+
+        }
+
+
+
         public void SaveTags(List<string> tags)
         {
             throw new NotImplementedException();

@@ -16,6 +16,7 @@ namespace Client.Droid
 
 		public override void OnTokenRefresh()
 		{
+            /*
 			var refreshedToken = FirebaseInstanceId.Instance.Token;
 			Hub = new NotificationHub(Secrets.NotificationHubPath, Secrets.AzureConnectionString, this);
 			try
@@ -27,6 +28,7 @@ namespace Client.Droid
 			{
 				Log.Error("ShowdownApp", ex.Message);
 			}
+            */
 		}
 	}
 }
