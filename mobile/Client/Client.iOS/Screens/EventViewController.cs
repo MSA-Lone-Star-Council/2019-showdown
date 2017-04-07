@@ -1,6 +1,7 @@
 ﻿using System;
 using Client.Common;
 using Common.Common.Models;
+using Common.iOS;
 using Foundation;
 using Masonry;
 using UIKit;
@@ -103,6 +104,17 @@ namespace Client.iOS
 			var navController = tabBarController.SelectedViewController as UINavigationController;
 
 			navController.PushViewController(new GameViewController(game), true);
+		}
+
+		void IEventView.ScheduleReminder(Event eventToRemind)
+		{
+			IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
+		}
+
+		void IEventView.ShowMessage(string message)
+		{
+			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+			alertView.Show();
 		}
 	}
 }

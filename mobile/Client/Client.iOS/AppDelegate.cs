@@ -103,26 +103,9 @@ namespace Client.iOS
 			{
 				NSString startTime = (NSString)data[new NSString("start_time")];
 				DateTimeOffset notificationTime = DateTimeOffset.Parse(startTime).ToOffset(TimeSpan.FromHours(-5)).Subtract(TimeSpan.FromMinutes(15));
+				NSString title = (NSString)data[new NSString("event_title")];
 
-				var dateComponent = new NSDateComponents();
-				dateComponent.SetValueForComponent(notificationTime.Year, NSCalendarUnit.Year);
-				dateComponent.SetValueForComponent(notificationTime.Month, NSCalendarUnit.Month);
-				dateComponent.SetValueForComponent(notificationTime.Day, NSCalendarUnit.Day);
-				dateComponent.SetValueForComponent(notificationTime.Hour, NSCalendarUnit.Hour);
-				dateComponent.SetValueForComponent(notificationTime.Minute, NSCalendarUnit.Minute);
-				dateComponent.SetValueForComponent(-5, NSCalendarUnit.TimeZone);
-
-				var trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponent, false);
-
-				var center = UNUserNotificationCenter.Current;
-
-				var content = new UNMutableNotificationContent();
-				content.Title = (NSString)data[new NSString("event_title")];
-				content.Body = "Starts in 15 minutes";
-				content.Sound = UNNotificationSound.Default;
-
-				var request = UNNotificationRequest.FromIdentifier("TEST", content, trigger);
-				await center.AddNotificationRequestAsync(request);
+				await IOSHelpers.ScheduleNotification(notificationTime, title);
 			}
 		}
 	}

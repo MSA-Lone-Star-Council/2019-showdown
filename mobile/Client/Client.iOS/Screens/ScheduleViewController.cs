@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Client.Common;
 using Common.Common.Models;
+using Common.iOS;
 using Foundation;
 using UIKit;
 
@@ -80,6 +82,13 @@ namespace Client.iOS
 
 		void IScheduleView.ShowMessage(string message)
 		{
+			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+			alertView.Show();
+		}
+
+		async Task IScheduleView.ScheduleReminder(Event eventToRemind)
+		{
+			IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
 		}
 
 		class ScheduleTableSource : UITableViewSource

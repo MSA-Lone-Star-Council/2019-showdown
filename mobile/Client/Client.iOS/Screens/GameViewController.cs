@@ -119,7 +119,8 @@ namespace Client.iOS
 
 		public void ShowMessage(string message)
 		{
-			throw new NotImplementedException();
+			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+			alertView.Show();
 		}
 
 		public void Refresh()

@@ -33,8 +33,8 @@ namespace Common.Common.Screens.Login
 	        if (!string.IsNullOrEmpty(facebookAccessToken))
 	        {
 	            backendToken = await _client.GetToken(facebookAccessToken);
-	            _storage.Save(BackendToken, backendToken);
 	            _client.Token = backendToken;
+				_storage.Save(BackendToken, backendToken);
 				if(View != null) View.Advance();
 	        }
 	    }
