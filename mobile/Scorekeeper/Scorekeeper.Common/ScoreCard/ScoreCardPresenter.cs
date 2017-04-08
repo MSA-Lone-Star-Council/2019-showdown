@@ -81,7 +81,6 @@ namespace Scorekeeper.Common
 
             Score newScore = new Score
             {
-                //Time = DateTimeOffset.Now,
                 HomePoints = newHomePoints,
                 AwayPoints = newAwayPoints
             };
@@ -92,6 +91,8 @@ namespace Scorekeeper.Common
             View.AwayScore = (int) scoreFromServer.AwayPoints;
             View.HomeScoreDelta = 0;
             View.AwayScoreDelta = 0;
+
+            View.CanPostScore = false;
 		}
 
         public async Task EndGameAsync()
