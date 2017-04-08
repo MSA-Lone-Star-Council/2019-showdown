@@ -20,9 +20,6 @@ namespace Scorekeeper.Common
 
         public async Task OnBegin()
         {
-            var token = await _client.GetToken(View.AccessToken);
-            _client.Token = token;
-
             await UpdateFromServer();
         }
 

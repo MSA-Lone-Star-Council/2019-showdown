@@ -21,8 +21,6 @@ namespace Scorekeeper.Droid
         private ProfilePictureView profilePicture;
         private Button continueButton;
 
-        private string accessToken;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -65,11 +63,15 @@ namespace Scorekeeper.Droid
             throw new NotImplementedException();
         }
 
-        void IFacebookCallback.OnSuccess(Java.Lang.Object result)
+        async void IFacebookCallback.OnSuccess(Java.Lang.Object result)
         {
-            //throw new NotImplementedException();
             LoginResult loginResult = result as LoginResult;
-            accessToken = loginResult.AccessToken.Token;
+            string facebook_token = loginResult.AccessToken.Token;
+
+            var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
+            var token = await backendClient.GetToken(facebook_token);
+            backendClient.Token = token;
+
 
         }
 

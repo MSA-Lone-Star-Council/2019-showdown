@@ -10,8 +10,6 @@ namespace Scorekeeper.Common
 {
     public interface IGameListView
     {
-        string AccessToken { get; }
-
         List<Game> Games { set; }
 
         void OpenGame(Game game);
