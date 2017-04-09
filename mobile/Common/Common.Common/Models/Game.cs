@@ -64,5 +64,7 @@ namespace Common.Common.Models
 	    {
 	        return !left.Equals(right);
 	    }
+
+		public string TopicId { get { return $"game_{ ID }"; } }
 	}
 }

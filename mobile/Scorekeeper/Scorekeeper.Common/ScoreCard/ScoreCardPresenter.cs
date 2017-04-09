@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Common.Common;
 using Common.Common.Models;
@@ -32,7 +32,6 @@ namespace Scorekeeper.Common
 		public void SetupView()
 		{
 			if (View == null) return;
-
             View.AwayTeamName = View.Game.AwayTeam.ShortName;
             View.HomeTeamName = View.Game.HomeTeam.ShortName;
 
@@ -101,6 +100,5 @@ namespace Scorekeeper.Common
             View.CanPostScore = false;
             View.EndGame();
         }
-
     }
 }

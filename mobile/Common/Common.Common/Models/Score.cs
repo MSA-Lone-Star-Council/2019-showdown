@@ -15,7 +15,7 @@ namespace Common.Common.Models
         [JsonProperty(PropertyName = ("time"), NullValueHandling = NullValueHandling.Ignore)]
         public DateTimeOffset? Time { get; set; }
 
-		public static Score FromJSON(string jsonString)
+        public static Score FromJSON(string jsonString)
 		{
 			return JsonConvert.DeserializeObject<Score>(jsonString);
 		}

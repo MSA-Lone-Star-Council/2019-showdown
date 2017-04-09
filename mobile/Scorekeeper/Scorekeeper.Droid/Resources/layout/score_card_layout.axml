@@ -25,6 +25,7 @@
             android:padding="3dip"
             android:textAppearance="@android:style/TextAppearance.Material.Headline"
             android:id="@+id/home_team_name" />
+
         <TextView
             android:text="0"
             android:gravity="right"

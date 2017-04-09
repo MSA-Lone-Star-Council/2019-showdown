@@ -33,7 +33,6 @@ namespace Scorekeeper.Droid
 
             // Replace the contents of the view with that element
             var holder = viewHolder as GameListAdapterViewHolder;
-
             holder.Game = item;
             holder.GameName.Text = item.Title;
         }

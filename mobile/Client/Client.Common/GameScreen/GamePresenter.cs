@@ -11,10 +11,12 @@ namespace Client.Common
 		public Game Game { get; set; }
 
 		public ShowdownRESTClient _client;
+		public SubscriptionManager manager;
 
-		public GamePresenter(ShowdownRESTClient client)
+		public GamePresenter(ShowdownRESTClient client, SubscriptionManager manager)
 		{
 			_client = client;
+			this.manager = manager;
 		}
 
 		public async Task OnBegin()
@@ -30,10 +32,16 @@ namespace Client.Common
 		}
 
 
-		public async Task OnStar()
+		public void OnStar()
 		{
-			View.ShowMessage("Subscribed for notifications for this game!");
-			// TODO: What the message says
+			//View.ShowMessage("Subscribed for notifications for this game!");
+			manager.ToggleSubscription(Game.TopicId);
+			View.Refresh();
+		}
+
+		public bool IsSubscribed()
+		{
+			return manager[Game.TopicId];
 		}
 
 		async Task UpdateFromServer()

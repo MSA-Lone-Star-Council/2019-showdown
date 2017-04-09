@@ -63,6 +63,13 @@ namespace Common.Common
             return Game.FromJSONArray(jsonString);
         }
 
+		public async Task<List<Game>> GetSchoolGames(string schoolSlug)
+		{
+			var path = $"/core/schools/{schoolSlug}/games";
+			var jsonString = await RequestAsync(path);
+			return Game.FromJSONArray(jsonString);
+		}
+
         public async Task<List<Score>> GetScoreHistory(String gameId)
         {
             var path = $"/scores/games/{gameId}/scores";

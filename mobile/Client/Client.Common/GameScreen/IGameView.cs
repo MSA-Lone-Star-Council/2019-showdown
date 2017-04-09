@@ -10,5 +10,7 @@ namespace Client.Common
 		List<Score> ScoreHistory { set; }
 
 		void ShowMessage(string message);
+
+		void Refresh();
 	}
 }
