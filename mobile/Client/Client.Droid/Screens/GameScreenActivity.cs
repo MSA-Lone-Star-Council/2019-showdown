@@ -43,7 +43,23 @@ namespace Client.Droid.Screens
             Game = Game.FromJSON(this.Intent.GetStringExtra("game"));
 
             SetContentView(Client.Droid.Resource.Layout.game_screen_layout);
-            Presenter = new GamePresenter(new ShowdownRESTClient(), null);
+            var gameTitle = FindViewById<TextView>(Resource.Id.game_title);
+            var gameEvent = FindViewById<TextView>(Resource.Id.game_event);
+            var team1 = FindViewById<TextView>(Resource.Id.team_1);
+            var team2 = FindViewById<TextView>(Resource.Id.team_2);
+            var score1 = FindViewById<TextView>(Resource.Id.score_1);
+            var score2 = FindViewById<TextView>(Resource.Id.score_2);
+            var isLive = FindViewById<TextView>(Resource.Id.is_live);
+
+            gameTitle.Text = Game.Title;
+            gameEvent.Text = Game.Event.Title;
+            team1.Text = Game.AwayTeam.ShortName;
+            team2.Text = Game.HomeTeam.ShortName;
+            score1.Text = Game.Score.AwayPoints.ToString();
+            score2.Text = Game.Score.HomePoints.ToString();
+            isLive.Text = Game.InProgress ? ("Live") : ("Not in progress");
+
+            Presenter = new GamePresenter(((ShowdownClientApplication)Application).BackendClient, null);
             Presenter.TakeView(this);
 
             Adapter = new ScoreAdapter()
