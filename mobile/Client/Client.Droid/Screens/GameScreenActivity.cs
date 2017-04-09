@@ -37,19 +37,27 @@ namespace Client.Droid.Screens
 
         public Game Game { get; set; }
 
+        private TextView gameTitle;
+        private TextView gameEvent;
+        private TextView team1;
+        private TextView team2;
+        private TextView score1;
+        private TextView score2;
+        private TextView isLive;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Game = Game.FromJSON(this.Intent.GetStringExtra("game"));
 
             SetContentView(Client.Droid.Resource.Layout.game_screen_layout);
-            var gameTitle = FindViewById<TextView>(Resource.Id.game_title);
-            var gameEvent = FindViewById<TextView>(Resource.Id.game_event);
-            var team1 = FindViewById<TextView>(Resource.Id.team_1);
-            var team2 = FindViewById<TextView>(Resource.Id.team_2);
-            var score1 = FindViewById<TextView>(Resource.Id.score_1);
-            var score2 = FindViewById<TextView>(Resource.Id.score_2);
-            var isLive = FindViewById<TextView>(Resource.Id.is_live);
+            gameTitle = FindViewById<TextView>(Resource.Id.game_title);
+            gameEvent = FindViewById<TextView>(Resource.Id.game_event);
+            team1 = FindViewById<TextView>(Resource.Id.team_1);
+            team2 = FindViewById<TextView>(Resource.Id.team_2);
+            score1 = FindViewById<TextView>(Resource.Id.score_1);
+            score2 = FindViewById<TextView>(Resource.Id.score_2);
+            isLive = FindViewById<TextView>(Resource.Id.is_live);
 
             gameTitle.Text = Game.Title;
             gameEvent.Text = Game.Event.Title;
@@ -80,7 +88,7 @@ namespace Client.Droid.Screens
 
         public void Refresh()
         {
-            throw new NotImplementedException();
+            //Update all the textviews
             
         }
     }
