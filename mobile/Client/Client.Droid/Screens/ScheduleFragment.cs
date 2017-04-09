@@ -36,7 +36,7 @@ namespace Client.Droid.Screens
         {
             base.OnCreate(savedInstanceState);
 
-            Presenter = new SchedulePresenter(new ShowdownRESTClient());
+            Presenter = new SchedulePresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
             Presenter.TakeView(this);
 
             Adapter = new ScheduleAdapter()
