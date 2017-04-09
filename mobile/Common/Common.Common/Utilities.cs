@@ -37,7 +37,9 @@ namespace Common.Common
 
         public static string FormatDateTime(DateTimeOffset? time)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            if (time == null) return null;
+            return FormatDateTime((DateTimeOffset)time);
         }
     }
 }

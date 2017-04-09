@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android:support.v7.widget.CardView 
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/old_score_view"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:layout_marginTop="16dp"
-  android:foreground="?android:attr/selectableItemBackground">
-  <RelativeLayout
+<android.support.v7.widget.CardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/android_card_view_example2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp">
+  <TableLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:stretchColumns="*"
       android:background="#fff"
       android:elevation="4dp"
       android:padding="16dp">
-    <TextView 
-      android:id="@+id/time"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:paddingBottom="5dp"
-      android:text="h:mm:dd"
-      android:textColor="#8b8b8b"
-      android:textSize="10sp" />
-      <TextView 
-        android:id="@+id/score_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/time"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="65dp"
-        android:paddingBottom="5dp"
-        android:text="XX"
-        android:textColor="#8b8b8b"
-        android:textSize="32sp" />
-      <TextView
-        android:id="@+id/score_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/time"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="65dp"
-        android:paddingBottom="5dp"
-        android:text="YY"
-        android:textColor="#8b8b8b"
-        android:textSize="32sp" />
-  </RelativeLayout> 
-</android:support.v7.widget.CardView>
+    <TableRow android:id="@+id/tableRow1">
+        <TextView
+            android:id="@+id/score_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="XX"
+            android:textColor="#8b8b8b" />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Time"
+            android:textColor="#8b8b8b" />
+        <TextView
+            android:id="@+id/score_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="YY"
+            android:textColor="#8b8b8b" />
+    </TableRow>
+  </TableLayout>
+</android.support.v7.widget.CardView>

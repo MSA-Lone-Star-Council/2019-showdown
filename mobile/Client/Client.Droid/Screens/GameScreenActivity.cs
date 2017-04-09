@@ -17,7 +17,7 @@ using Client.Droid.Adapters;
 
 namespace Client.Droid.Screens
 {
-    [Activity(Label = "GameScreenActivity")]
+    [Activity(Label = "Clicked Game")]
     public class GameScreenActivity : Activity, IGameView
     {
         GamePresenter Presenter;
@@ -50,16 +50,11 @@ namespace Client.Droid.Screens
             {
                 Scores = new List<Score>()
             };
-            await Presenter.OnBegin();
-        }
+            ScoreView = FindViewById<RecyclerView>(Resource.Id.scoreRecyclerView);
+            ScoreView.SetLayoutManager(new LinearLayoutManager(this));
+            ScoreView.SetAdapter(Adapter);
 
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-                View view = inflater.Inflate(Resource.Layout.game_screen_layout, container, false);
-                ScoreView = view.FindViewById<RecyclerView>(Resource.Id.scoreRecyclerView);
-                ScoreView.SetLayoutManager(new LinearLayoutManager(this));
-                ScoreView.SetAdapter(Adapter);
-                return view;
+            await Presenter.OnBegin();
         }
 
         public void ShowMessage(string message)

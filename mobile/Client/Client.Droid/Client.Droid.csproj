@@ -121,7 +121,6 @@
     <Compile Include="Adapters\SportsAdapter.cs" />
     <Compile Include="Adapters\ScheduleAdapter.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="NotificationHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\AcknowledgementsFragment.cs" />
     <Compile Include="Screens\AnnouncementsFragment.cs" />
