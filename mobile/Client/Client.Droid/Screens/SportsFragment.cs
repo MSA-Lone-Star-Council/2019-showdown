@@ -45,7 +45,7 @@ namespace Client.Droid.Screens
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            Presenter = new SportsPresenter(((Activity.Application) as ShowdownClientApplication).BackendClient, new SubscriptionManager(new Storage(), null));
+            Presenter = new SportsPresenter(((Activity.Application) as ShowdownClientApplication).BackendClient, new SubscriptionManager(new DroidStorage(), null));
             Presenter.TakeView(this);
 
             Adapter = new SportsAdapter()

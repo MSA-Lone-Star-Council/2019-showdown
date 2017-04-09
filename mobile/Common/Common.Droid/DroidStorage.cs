@@ -13,7 +13,7 @@ using Common.Common;
 
 namespace Common.Droid
 {
-    public class Storage : IStorage
+    public class DroidStorage : IStorage
     {
         public void AddToList(string key, string stringToSave)
         {
