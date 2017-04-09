@@ -9,6 +9,7 @@ from notifications.models import Announcement
 from notifications.serializers import AnnouncementSerializer
 from events.models import Event, Location
 from scores.models import Game
+from scores.serializers import GameSerializer as ClientGameSerializer
 from accounts.models import User
 
 from .permissions import AdminPermission, ScorekeeperPermission
@@ -73,7 +74,7 @@ class AllAnnouncementsView(generics.ListCreateAPIView):
 
 class ScorekeeperGamesView(generics.ListAPIView):
     permission_classes = (ScorekeeperPermission,)
-    serializer_class = GameSerializer
+    serializer_class = ClientGameSerializer
 
     def get_queryset(self):
         token = self.request.token
