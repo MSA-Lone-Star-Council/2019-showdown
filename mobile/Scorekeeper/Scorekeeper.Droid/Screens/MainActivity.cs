@@ -41,7 +41,14 @@ namespace Scorekeeper.Droid
             name = FindViewById<TextView>(Resource.Id.facebook_name);
             profilePicture = FindViewById<ProfilePictureView>(Resource.Id.facebook_profile_picture);
             continueButton = FindViewById<Button>(Resource.Id.continue_button);
-            continueButton.Click += delegate { StartActivity(new Intent(this, typeof(GameListActivity))); };
+            continueButton.Click += async delegate {
+                //TODO: Move this (repeated) code from here and IFacebookCallback.OnSuccess to a loginPresenter
+                string facebook_token = AccessToken.CurrentAccessToken.Token;
+                var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
+                var token = await backendClient.GetToken(facebook_token);
+                backendClient.Token = token;
+                StartActivity(new Intent(this, typeof(GameListActivity)));
+            };
 
             UpdateProfileViews(Profile.CurrentProfile);
         }
@@ -66,8 +73,8 @@ namespace Scorekeeper.Droid
         async void IFacebookCallback.OnSuccess(Java.Lang.Object result)
         {
             LoginResult loginResult = result as LoginResult;
-            string facebook_token = loginResult.AccessToken.Token;
 
+            string facebook_token = loginResult.AccessToken.Token;
             var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
             var token = await backendClient.GetToken(facebook_token);
             backendClient.Token = token;
