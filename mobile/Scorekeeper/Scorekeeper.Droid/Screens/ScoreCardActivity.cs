@@ -10,34 +10,49 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Scorekeeper.Common;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
 
 namespace Scorekeeper.Droid
 {
-    [Activity(Label = "ScoreCardActivity")]
+    [Activity(Label = "Score Card")]
     public class ScoreCardActivity : Activity, IScoreCardView
     {
         public Game Game { get; set; }
 
         private ScoreCardPresenter presenter;
 
+        private TextView homeTeamName, awayTeamName;
         private TextView homeScoreTV, awayScoreTV;
-        private Button HomePlusOneButton, AwayPlusOneButton;
+        private TextView homeScoreDelta, awayScoreDelta;
+        private Button homePlusOneButton, awayPlusOneButton;
+        private Button HomeMinusOneButton, AwayMinusOneButton;
+        private Button postScoreButton, endGameButton;
 
-        public int AwayScore
+        string IScoreCardView.HomeTeamName
         {
             get
             {
-                return int.Parse(awayScoreTV.Text);
+                return homeTeamName.Text;
             }
-
             set
             {
-                awayScoreTV.Text = value.ToString();
+                homeTeamName.Text = value;
             }
         }
 
-        public int HomeScore
+        string IScoreCardView.AwayTeamName
+        {
+            get
+            {
+                return awayTeamName.Text;
+            }
+            set
+            {
+                awayTeamName.Text = value;
+            }
+        }
+
+        int IScoreCardView.HomeScore
         {
             get
             {
@@ -50,33 +65,130 @@ namespace Scorekeeper.Droid
             }
         }
 
+        int IScoreCardView.AwayScore
+        {
+            get
+            {
+                return int.Parse(awayScoreTV.Text);
+            }
+
+            set
+            {
+                awayScoreTV.Text = value.ToString();
+            }
+        }
+
+        int IScoreCardView.HomeScoreDelta
+        {
+            get
+            {
+                return int.Parse(homeScoreDelta.Text);
+            }
+
+            set
+            {
+                homeScoreDelta.Text = value.ToString();
+            }
+        }
+
+        int IScoreCardView.AwayScoreDelta
+        {
+            get
+            {
+                return int.Parse(awayScoreDelta.Text);
+            }
+
+            set
+            {
+                awayScoreDelta.Text = value.ToString();
+            }
+        }
+
+        bool IScoreCardView.CanPostScore
+        {
+            set
+            {
+                postScoreButton.Enabled = value;
+            }
+        }
+
+        void IScoreCardView.EndGame()
+        {
+            postScoreButton.Enabled = false;
+            postScoreButton.Visibility = Android.Views.ViewStates.Gone;
+            endGameButton.Text = "Game Over";
+            endGameButton.Enabled = false;
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.score_card_layout);
 
-            presenter = new ScoreCardPresenter();
+            string deserializedObject = this.Intent.GetStringExtra("game");
+            Game = Game.FromJSON(deserializedObject);
+
+            presenter = new ScoreCardPresenter(((ShowdownScorekeeperApplication)Application).BackendClient);
+
+            homeTeamName = FindViewById<TextView>(Resource.Id.home_team_name);
+            awayTeamName = FindViewById<TextView>(Resource.Id.away_team_name);
 
             homeScoreTV = FindViewById<TextView>(Resource.Id.home_score);
             awayScoreTV = FindViewById<TextView>(Resource.Id.away_score);
-            HomePlusOneButton = FindViewById<Button>(Resource.Id.home_update_score_button);
-            AwayPlusOneButton = FindViewById<Button>(Resource.Id.away_update_score_button);
+
+            homeScoreDelta = FindViewById<TextView>(Resource.Id.home_score_delta_TextView);
+            awayScoreDelta = FindViewById<TextView>(Resource.Id.away_score_delta_TextView);
+
+            homePlusOneButton = FindViewById<Button>(Resource.Id.home_score_plus_one_button);
+            awayPlusOneButton = FindViewById<Button>(Resource.Id.away_score_plus_one_button);
+            HomeMinusOneButton = FindViewById<Button>(Resource.Id.home_score_minus_one_button);
+            AwayMinusOneButton = FindViewById<Button>(Resource.Id.away_score_minus_one_button);
+
+
+            homePlusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, 1); };
+            awayPlusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, 1); };
+            HomeMinusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, -1); };
+            AwayMinusOneButton.Click += (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, -1); };
+
+            postScoreButton = FindViewById<Button>(Resource.Id.post_score_button);
+            postScoreButton.Click += async (sender, e) => { await presenter.PostScoreUpdateAsync(); };
+
+            endGameButton = FindViewById<Button>(Resource.Id.end_game_button);
             
-            HomePlusOneButton.Click += async (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Home, 1); };
-            AwayPlusOneButton.Click += async (sender, e) => { presenter.UpdateScore(ScoreCardPresenter.Team.Away, 1); };
+            endGameButton.Click += (sender, e) => {
+                Dialog dialog = createAlertDialog();
+                dialog.Show();             
+            };
+
         }
 
-        protected async override void OnResume()
+        protected override void OnResume()
         {
             base.OnResume();
             presenter.TakeView(this);
-            await presenter.SetupView();
+            presenter.SetupView();
         }
 
         protected override void OnPause()
         {
             base.OnPause();
             presenter.RemoveView();
+        }
+
+        private Dialog createAlertDialog()
+        {
+            //set alert for End game button
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Are you sure?");
+            alert.SetMessage("Once you end the game, this can't be undone.");
+            alert.SetPositiveButton("End Game", async (senderAlert, args) => {
+                await presenter.EndGameAsync();
+            });
+            alert.SetNegativeButton("Cancel", (senderAlert, args) => {
+            });
+            Dialog dialog = alert.Create();
+
+            return dialog;
         }
     }
 }

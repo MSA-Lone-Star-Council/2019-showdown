@@ -1,6 +1,6 @@
-﻿using Admin.Common.API;
-using Admin.Common.API.Entities;
+using Admin.Common.API;
 using Common.Common;
+using Common.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +20,6 @@ namespace Scorekeeper.Common
 
         public async Task OnBegin()
         {
-            var token = await _client.GetToken("");
-            _client.Token = token;
-
             await UpdateFromServer();
         }
 

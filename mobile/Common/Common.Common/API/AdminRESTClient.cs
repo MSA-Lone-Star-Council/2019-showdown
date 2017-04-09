@@ -119,10 +119,10 @@ namespace Admin.Common.API
 			return Game.FromJSONArray(jsonString);
 		}
 
-        public async Task<List<Game>> GetScoreKeeperGames()
+        public async Task<List<ClientModel.Game>> GetScoreKeeperGames()
         {
             var jsonString = await RequestAsync("/admin/scorekeeper/games");
-            return Game.FromJSONArray(jsonString);
+            return ClientModel.Game.FromJSONArray(jsonString);
         }
 
         public async Task<Game> SaveGame(Game g)
@@ -142,7 +142,13 @@ namespace Admin.Common.API
 			return Game.FromJSON(jsonString);
 		}
 
-		public async Task DeleteGame(Game g)
+        public async Task EndGame(ClientModel.Game g)
+        {
+            var path = $"/admin/scorekeeper/games/{g.ID}/in-progress";
+            await PutAsync(path, "{ \"in_progress\": false}");
+        }
+
+        public async Task DeleteGame(Game g)
 		{
 			var path = $"/admin/games/{g.Id}";
 			await DeleteAsync(path);
@@ -175,6 +181,21 @@ namespace Admin.Common.API
 
 			return ClientModel.Announcement.FromJSON(jsonString);
 		}
+
+        public async Task<ClientModel.Score> GetScore(Game g)
+        {
+            var jsonString = await RequestAsync($"/admin/games/{g.Id}/scores");
+            return ClientModel.Score.FromJSON(jsonString);
+        }
+
+
+        public async Task<ClientModel.Score> SaveScore(ClientModel.Game g, ClientModel.Score score)
+        {
+            var path = $"/admin/scorekeeper/games/{g.ID}";
+            var jsonString = await PostAsync(path, JsonConvert.SerializeObject(score));
+
+            return ClientModel.Score.FromJSON(jsonString);
+        }
 
         private HttpRequestMessage BuildRequest(string path, string jsonBody, bool authenticated)
         {

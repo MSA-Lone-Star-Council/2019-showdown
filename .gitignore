@@ -262,8 +262,10 @@ __pycache__/
 
 **/[Rr]esource.[Dd]esigner.cs
 **/Secrets.cs
+**/secrets.xml
 
 *.p12
 *.pkey
 *.pem
 **/google-services.json
+
