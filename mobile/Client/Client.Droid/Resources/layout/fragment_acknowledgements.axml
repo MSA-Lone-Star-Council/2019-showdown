@@ -6,7 +6,7 @@
     android:elevation="4dp"
     android:padding="16dp">
     <TextView
-        android:text="LSC Showdown 2017"
+        android:text="MSA Showdown 2017"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
@@ -30,17 +30,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:text="Learn more at texas-msa.org"
         android:gravity="center"
-        android:textColor="#0645AD"
+        android:textColor="#0276FD"
         android:textSize="22sp"
         android:layout_below="@+id/info_text" />
-  <ImageView 
+    <ImageView
         android:id="@+id/twitter_pic"
-        android:src="@drawable/tw-logo"
+        android:src="@drawable/tw_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lsc_link"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="60dp" />
+    <ImageView
+        android:id="@+id/fb_pic"
+        android:src="@drawable/fb_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lsc_link"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="60dp" />
+    <TextView 
+        android:id="@+id/ppl_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/twitter_pic"
+        android:layout_marginTop="50dp"
+        android:text="Developed by Zonera Javed, Hamza Khatri, Ali Kedwaii, Saad Najmi, and Zuhair Parvez"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="15sp"
+        />
+    <TextView 
+        android:id="@+id/github_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="7dp"
+        android:gravity="center"
+        android:text="Find the app source code on GitHub"
+        android:textColor="#0276FD"
+        android:textSize="15sp"
         />
 </RelativeLayout>

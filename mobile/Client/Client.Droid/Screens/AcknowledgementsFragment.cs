@@ -33,6 +33,31 @@ namespace Client.Droid.Screens
             };
 
             ImageView twitter = view.FindViewById<ImageView>(Resource.Id.twitter_pic);
+            twitter.Clickable = true;
+            twitter.Click += delegate
+            {
+                var uri = Android.Net.Uri.Parse("https://twitter.com/msalsc");
+                var intent = new Intent(Intent.ActionView, uri);
+                StartActivity(intent);
+            };
+
+            ImageView facebook = view.FindViewById<ImageView>(Resource.Id.fb_pic);
+            facebook.Clickable = true;
+            facebook.Click += delegate
+            {
+                var uri = Android.Net.Uri.Parse("https://www.facebook.com/msalonestarcouncil/");
+                var intent = new Intent(Intent.ActionView, uri);
+                StartActivity(intent);
+            };
+
+            TextView gh = view.FindViewById<TextView>(Resource.Id.github_link);
+            gh.Clickable = true;
+            gh.Click += delegate
+            {
+                var uri = Android.Net.Uri.Parse("https://github.com/MSA-Lone-Star-Council/Showdown");
+                var intent = new Intent(Intent.ActionView, uri);
+                StartActivity(intent);
+            };
 
             return view;
         }
