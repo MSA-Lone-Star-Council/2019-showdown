@@ -10,7 +10,7 @@ using System;
 
 namespace Scorekeeper.Droid
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true)]
+    [Activity(Label = "@string/app_name_short", MainLauncher = true)]
     public class MainActivity : Activity, IFacebookCallback
     {
         private LoginButton loginButton;
