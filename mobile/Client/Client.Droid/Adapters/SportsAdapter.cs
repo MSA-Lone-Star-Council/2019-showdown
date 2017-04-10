@@ -40,10 +40,10 @@ namespace Client.Droid.Adapters
             holder.Game = item;
             holder.Title.Text = item.Title;
             holder.Category.Text = item.Event.Title;
-            holder.Team1.Text = item.AwayTeam.ShortName;
-            holder.Team2.Text = item.HomeTeam.ShortName;
-            holder.Score1.Text = item.Score.AwayPoints.ToString();
-            holder.Score2.Text = item.Score.HomePoints.ToString();
+            holder.AwayTeam.Text = item.AwayTeam.ShortName;
+            holder.HomeTeam.Text = item.HomeTeam.ShortName;
+            holder.AwayScore.Text = item.Score.AwayPoints.ToString();
+            holder.HomeScore.Text = item.Score.HomePoints.ToString();
             holder.StartTime.Text = Utilities.FormatDateTime(item.Event.StartTime);
             
 
@@ -68,10 +68,10 @@ namespace Client.Droid.Adapters
         public Game Game { get; set; }
         public TextView Title { get; set; }
         public TextView Category { get; set; }
-        public TextView Team1 { get; set; }
-        public TextView Team2 { get; set; }
-        public TextView Score1 { get; set; }
-        public TextView Score2 { get; set; }
+        public TextView AwayTeam { get; set; }
+        public TextView HomeTeam { get; set; }
+        public TextView AwayScore { get; set; }
+        public TextView HomeScore { get; set; }
         public TextView StartTime { get; set; }
 
 
@@ -80,10 +80,10 @@ namespace Client.Droid.Adapters
         {
             Title = itemView.FindViewById<TextView>(Resource.Id.sport_title);
             Category = itemView.FindViewById<TextView>(Resource.Id.sport_category);
-            Team1 = itemView.FindViewById<TextView>(Resource.Id.team_1);
-            Team2 = itemView.FindViewById<TextView>(Resource.Id.team_2);
-            Score1 = itemView.FindViewById<TextView>(Resource.Id.team_1_score);
-            Score2 = itemView.FindViewById<TextView>(Resource.Id.team_2_score);
+            AwayTeam = itemView.FindViewById<TextView>(Resource.Id.away_team);
+            HomeTeam = itemView.FindViewById<TextView>(Resource.Id.home_team);
+            AwayScore = itemView.FindViewById<TextView>(Resource.Id.away_team_score);
+            HomeScore = itemView.FindViewById<TextView>(Resource.Id.home_team_score);
             StartTime = itemView.FindViewById<TextView>(Resource.Id.start_time);
 
             itemView.Click += (sender, e) => clickListener(new SportsAdapterClickEventArgs {

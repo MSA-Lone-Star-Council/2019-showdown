@@ -7,7 +7,7 @@ namespace Client.Droid
 {
     [Application(
         Icon = "@drawable/lsc_icon",
-        Theme = "@android:style/Theme.Material")]
+        Theme = "@style/BlueGrey")]
     public class ShowdownClientApplication : Application
 	{
 		public ShowdownRESTClient BackendClient { get; set; }

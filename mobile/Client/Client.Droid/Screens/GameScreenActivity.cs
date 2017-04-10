@@ -50,7 +50,7 @@ namespace Client.Droid.Screens
             base.OnCreate(savedInstanceState);
             Game = Game.FromJSON(this.Intent.GetStringExtra("game"));
 
-            SetContentView(Client.Droid.Resource.Layout.game_screen_layout);
+            SetContentView(Resource.Layout.game_screen_layout);
             gameTitle = FindViewById<TextView>(Resource.Id.game_title);
             gameEvent = FindViewById<TextView>(Resource.Id.game_event);
             team1 = FindViewById<TextView>(Resource.Id.team_1);
