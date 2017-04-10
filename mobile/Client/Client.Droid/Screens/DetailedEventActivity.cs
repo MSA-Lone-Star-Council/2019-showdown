@@ -29,17 +29,23 @@ namespace Client.Droid.Screens
 
             TextView EventTitle = FindViewById<TextView>(Resource.Id.event_detailed_title);
             TextView EventDescription = FindViewById<TextView>(Resource.Id.event_detailed_description);
-            TextView EventStartTime = FindViewById<TextView>(Resource.Id.event_detailed_start_time);
-            TextView EventEndTime = FindViewById<TextView>(Resource.Id.event_detailed_end_time);
+            TextView EventTime = FindViewById<TextView>(Resource.Id.event_detailed_time);
             TextView LocationName = FindViewById<TextView>(Resource.Id.event_location_name);
             TextView LocationAddress = FindViewById<TextView>(Resource.Id.event_location_address);
 
             EventTitle.Text = Event.Title;
             EventDescription.Text = Event.Description;
-            EventStartTime.Text = Utilities.FormatDateTime(Event.StartTime);
-            EventEndTime.Text = Utilities.FormatDateTime(Event.EndTime);
+            EventTime.Text = Utilities.FormatEventTimeSpan(Event);
             LocationName.Text = Event.Location.Name;
             LocationAddress.Text = Event.Location.Address;
+
+            LocationAddress.Clickable = true;
+            LocationAddress.Click += delegate
+            {
+                var uri = Android.Net.Uri.Parse("http://maps.google.co.in/maps?q=" + LocationAddress.Text);
+                var intent = new Intent(Intent.ActionView, uri);
+                StartActivity(intent);
+            };
 
 
         }
