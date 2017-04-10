@@ -15,7 +15,7 @@ using Common.Common.Models;
 
 namespace Client.Droid.Screens
 {
-    [Activity(Label = "DetailedEventActivity")]
+    [Activity(Label = "DetailedEventActivity", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class DetailedEventActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
