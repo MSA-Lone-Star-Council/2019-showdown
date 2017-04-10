@@ -10,7 +10,7 @@ using System;
 
 namespace Scorekeeper.Droid
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "@string/app_name_short", MainLauncher = true)]
     public class MainActivity : Activity, IFacebookCallback
     {
         private LoginButton loginButton;
@@ -29,7 +29,7 @@ namespace Scorekeeper.Droid
             callbackManager = CallbackManagerFactory.Create();
 
             profileTracker = new MyProfileTracker();
-            profileTracker.mOnProfileChanged += OnProfileChanged;
+            profileTracker.OnProfileChanged += OnProfileChanged;
             profileTracker.StartTracking();
 
             SetContentView(Resource.Layout.Main);
@@ -107,13 +107,13 @@ namespace Scorekeeper.Droid
 
     public class MyProfileTracker : ProfileTracker
     {
-        public event EventHandler<OnProfileChangedEventArgs> mOnProfileChanged;
+        public event EventHandler<OnProfileChangedEventArgs> OnProfileChanged;
 
         protected override void OnCurrentProfileChanged(Profile oldProfile, Profile newProfile)
         {
-            if (mOnProfileChanged != null)
+            if (OnProfileChanged != null)
             {
-                mOnProfileChanged.Invoke(this, new OnProfileChangedEventArgs(newProfile));
+                OnProfileChanged.Invoke(this, new OnProfileChangedEventArgs(newProfile));
             }
         }
     }
