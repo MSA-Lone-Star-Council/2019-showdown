@@ -101,7 +101,7 @@ namespace Client.iOS
 			{
 				make.Top.EqualTo(facebookButton.Bottom()).Offset(5);
 				make.Width.EqualTo(View).MultipliedBy(0.9f);
-				make.Height.EqualTo(View.Height()).MultipliedBy(0.08f);
+				make.Height.EqualTo(View.Height()).MultipliedBy(0.1f);
 				make.CenterX.EqualTo(View);
 			});
 
