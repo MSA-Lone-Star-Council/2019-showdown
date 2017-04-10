@@ -9,34 +9,59 @@
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:text="Event Title"
-        android:textSize="24sp" />
+        android:textSize="36sp"
+        android:textColor="#fff" />
     <TextView
         android:id="@+id/event_detailed_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
+        android:paddingBottom="25dp"
         android:text="Event Description"
         android:textSize="24sp" />
+    <TextView 
+        android:id="@+id/event_detailed_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Starting at:"
+        android:textSize="24sp"
+        />
     <TextView
         android:id="@+id/event_detailed_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:text="Event Start Time"
+        android:textColor="#fff"
         android:textSize="24sp" />
+    <TextView
+        android:id="@+id/event_detailed_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ending at:"
+        android:textSize="24sp"
+        />
     <TextView
         android:id="@+id/event_detailed_end_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
+        android:paddingBottom="25dp"
         android:text="Event End Time"
+        android:textColor="#fff"
         android:textSize="24sp" />
+    <TextView 
+        android:id="@+id/event_detailed_location_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location Details:"
+        android:textSize="24sp"
+        />
     <TextView
         android:id="@+id/event_location_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:text="Event Location Name"
+        android:textColor="#fff"
         android:textSize="24sp" />
     <TextView
         android:id="@+id/event_location_address"
@@ -44,5 +69,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:text="Event Location Address"
+        android:textColor="#fff"
         android:textSize="24sp" />
 </LinearLayout>

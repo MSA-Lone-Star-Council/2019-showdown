@@ -17,7 +17,7 @@ using Client.Droid.Adapters;
 
 namespace Client.Droid.Screens
 {
-    [Activity(Label = "Clicked Game", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Game Details", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class GameScreenActivity : Activity, IGameView
     {
         GamePresenter Presenter;
