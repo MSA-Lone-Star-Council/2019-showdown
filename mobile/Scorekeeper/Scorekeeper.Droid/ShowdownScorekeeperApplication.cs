@@ -15,7 +15,9 @@ using Admin.Common.API;
 
 namespace Scorekeeper.Droid
 {
-    [Application]
+    [Application(
+        Icon = "@drawable/ic_watch_later_white_48dp", 
+        Theme = "@android:style/Theme.Material")]
     class ShowdownScorekeeperApplication : Application
     {
         public AdminRESTClient BackendClient { get; set; }
