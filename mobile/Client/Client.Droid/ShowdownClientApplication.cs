@@ -5,8 +5,10 @@ using Common.Common;
 
 namespace Client.Droid
 {
-	[Application]
-	public class ShowdownClientApplication : Application
+    [Application(
+        Icon = "@drawable/lsc_icon",
+        Theme = "@android:style/Theme.Material")]
+    public class ShowdownClientApplication : Application
 	{
 		public ShowdownRESTClient BackendClient { get; set; }
 
