@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/android_card_view_example2"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:foreground="?android:attr/selectableItemBackground">
+<android.support.v7.widget.CardView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:card_view="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/sports_card_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="10dp"
+      android:elevation="16dp"
+      android:foreground="?android:attr/selectableItemBackground">
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="#fff"
+      android:background="#212121"
       android:elevation="4dp"
       android:padding="16dp">
     <TextView
@@ -18,7 +23,6 @@
       android:layout_alignParentTop="true"
       android:paddingBottom="5dp"
       android:text="Sporting Event"
-      android:textColor="#8b8b8b"
       android:textSize="24sp" />
     <TextView
       android:id="@+id/sport_category"
@@ -27,31 +31,28 @@
       android:layout_below="@+id/sport_title"
       android:paddingBottom="5dp"
       android:text="Category"
-      android:textColor="#8b8b8b"
       android:textSize="20sp" />
     <TextView 
-      android:id="@+id/team_1"
+      android:id="@+id/away_team"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/sport_category"
       android:layout_marginTop="12dp"
       android:paddingBottom="5dp"
-      android:text="TEAM 1"
-      android:textColor="#8b8b8b"
+      android:text="Away Team"
       android:textSize="24sp"
       />
     <TextView
-      android:id="@+id/team_2"
+      android:id="@+id/home_team"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/team_1"
+      android:layout_below="@+id/away_team"
       android:paddingBottom="5dp"
-      android:text="TEAM 2"
-      android:textColor="#8b8b8b"
+      android:text="Home Team"
       android:textSize="24sp"
       />
     <TextView 
-      android:id="@+id/team_1_score"
+      android:id="@+id/away_team_score"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/sport_category"
@@ -59,28 +60,25 @@
       android:layout_alignParentRight="true"
       android:paddingBottom="5dp"
       android:text="XX"
-      android:textColor="#8b8b8b"
       android:textSize="24sp"
       />
     <TextView
-      android:id="@+id/team_2_score"
+      android:id="@+id/home_team_score"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/team_1_score"
+      android:layout_below="@+id/away_team_score"
       android:layout_alignParentRight="true"
       android:paddingBottom="5dp"
       android:text="YY"
-      android:textColor="#8b8b8b"
       android:textSize="24sp"
       />
     <TextView 
       android:id="@+id/start_time"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/team_2_score"
+      android:layout_below="@+id/home_team_score"
       android:layout_alignParentRight="true"
       android:text="m/dd h:mm:ss"
-      android:textColor="#8b8b8b"
       android:textSize="12sp"
       />
   </RelativeLayout>
