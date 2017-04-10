@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="25px"
-    android:minHeight="25px">
+    android:background="#000"
+    android:elevation="4dp"
+    android:padding="16dp">
     <TextView
-        android:text="Acknowledgements"
+        android:text="LSC Showdown 2017"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView1" />
-</LinearLayout>
+        android:id="@+id/title_text"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Showdown is a three-day, tournament style conference which strives to deliver a platform for MSAs in Texas to network in a competitive setting."
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:layout_below="@+id/title_text"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
+    <TextView
+        android:id="@+id/lsc_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Learn more at texas-msa.org"
+        android:gravity="center"
+        android:textColor="#0645AD"
+        android:textSize="22sp"
+        android:layout_below="@+id/info_text" />
+  <ImageView 
+        android:id="@+id/twitter_pic"
+        android:src="@drawable/tw-logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lsc_link"
+        android:layout_centerHorizontal="true"
+        />
+</RelativeLayout>
