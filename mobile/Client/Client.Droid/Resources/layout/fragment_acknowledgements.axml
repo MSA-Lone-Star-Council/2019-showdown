@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Learn more at texas-msa.org"
+        android:text="Learn more at msa-texas.org"
         android:gravity="center"
         android:textColor="#0276FD"
         android:textSize="22sp"
