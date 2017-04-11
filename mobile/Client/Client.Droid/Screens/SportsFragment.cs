@@ -56,8 +56,12 @@ namespace Client.Droid.Screens
                 Presenter = Presenter
             };
             Adapter.ItemClick += (object sender, SportsAdapterClickEventArgs args) => Presenter.OnClickRow(args.Game);
-            await Presenter.OnBegin();
+        }
 
+        public override async void OnResume()
+        {
+            base.OnResume();
+            await Presenter.OnBegin();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

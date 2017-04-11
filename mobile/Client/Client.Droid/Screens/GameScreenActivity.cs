@@ -77,7 +77,11 @@ namespace Client.Droid.Screens
             ScoreView = FindViewById<RecyclerView>(Resource.Id.scoreRecyclerView);
             ScoreView.SetLayoutManager(new LinearLayoutManager(this));
             ScoreView.SetAdapter(Adapter);
+        }
 
+        protected async override void OnResume()
+        {
+            base.OnResume();
             await Presenter.OnBegin();
         }
 

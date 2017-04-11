@@ -46,8 +46,6 @@ namespace Client.Droid.Screens
                 var intent = new Intent(Intent.ActionView, uri);
                 StartActivity(intent);
             };
-
-
         }
     }
 }

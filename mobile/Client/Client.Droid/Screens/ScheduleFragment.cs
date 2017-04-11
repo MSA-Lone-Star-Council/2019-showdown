@@ -48,6 +48,12 @@ namespace Client.Droid.Screens
             await Presenter.OnBegin();
         }
 
+        public async override void OnResume()
+        {
+            base.OnResume();
+            await Presenter.OnBegin();
+        }
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
