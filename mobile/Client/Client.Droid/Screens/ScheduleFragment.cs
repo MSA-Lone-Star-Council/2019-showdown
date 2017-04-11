@@ -1,4 +1,4 @@
-using Android.Support.V4.App;
+﻿using Android.Support.V4.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -12,6 +12,7 @@ using Client.Common;
 using Common.Common.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Client.Droid.Screens
 {
@@ -70,6 +71,11 @@ namespace Client.Droid.Screens
             Intent.PutExtra("event", row.ToJSON());
             StartActivity(Intent);
         }
-    }
+
+	    async Task IScheduleView.ScheduleReminder(Event eventToRemind)
+	    {
+            return;
+	    }
+	}
 }
 

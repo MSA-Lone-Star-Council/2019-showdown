@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -205,7 +205,7 @@ namespace Admin.Common.API
 			}
 			catch (Exception)
 			{
-				return new List<Game>();
+				return new List<ClientModel.Game>();
 			}
         }
 
