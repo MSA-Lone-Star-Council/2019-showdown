@@ -16,6 +16,7 @@ using Common.Droid;
 using Common.Common.Models;
 using Client.Droid.Adapters;
 using Android.Support.V7.Widget;
+using System.Timers;
 
 namespace Client.Droid.Screens
 {
@@ -40,6 +41,8 @@ namespace Client.Droid.Screens
         RecyclerView SportsView { get; set; }
         SportsAdapter Adapter { get; set; }
 
+        Timer timer = new Timer(TimeSpan.FromSeconds(5).TotalMilliseconds) { AutoReset = true };
+
         public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -61,7 +64,17 @@ namespace Client.Droid.Screens
         public override async void OnResume()
         {
             base.OnResume();
+            Presenter.TakeView(this);
             await Presenter.OnBegin();
+            timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
+            timer.Start();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            Presenter.RemoveView();
+            timer.Stop();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

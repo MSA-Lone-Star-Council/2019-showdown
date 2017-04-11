@@ -14,6 +14,7 @@ using Android.Support.V7.Widget;
 using Common.Common.Models;
 using Client.Common;
 using Client.Droid.Adapters;
+using System.Timers;
 
 namespace Client.Droid.Screens
 {
@@ -22,6 +23,8 @@ namespace Client.Droid.Screens
 		RecyclerView _announcementsListView;
 
 		AnnouncementsPresenter Presenter { get; set; }
+
+        Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
 
 		List<Announcement> IAnnouncementsView.Announcements
 		{
@@ -42,10 +45,19 @@ namespace Client.Droid.Screens
 			Presenter = new AnnouncementsPresenter(client);
 			Presenter.TakeView(this);
 			await Presenter.OnBegin();
+            timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
+            timer.Start();
 		}
 
+        public override void OnStop()
+        {
+            base.OnStop();
+            timer.Stop();
+            Presenter.RemoveView();
+        }
 
-		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			// Use this to return your custom view for this Fragment
 			View v = inflater.Inflate(Resource.Layout.fragment_announcements, container, false);

@@ -13,6 +13,7 @@ using Common.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Client.Droid.Screens
 {
@@ -33,6 +34,8 @@ namespace Client.Droid.Screens
         RecyclerView ScheduleView { get; set; }
         ScheduleAdapter Adapter { get; set; }
 
+        Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
+
         public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -45,13 +48,22 @@ namespace Client.Droid.Screens
                 Events = new List<Event>()
             };
             Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
-            await Presenter.OnBegin();
         }
 
         public async override void OnResume()
         {
             base.OnResume();
             await Presenter.OnBegin();
+
+            timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
+            timer.Start();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            timer.Stop();
+            Presenter.RemoveView();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
