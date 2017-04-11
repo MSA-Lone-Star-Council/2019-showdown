@@ -10,7 +10,6 @@ namespace Common.iOS
 	public class iOSStorage : IStorage
 	{
 
-
 		public bool GetBool(string key)
 		{
 			var plist = NSUserDefaults.StandardUserDefaults;

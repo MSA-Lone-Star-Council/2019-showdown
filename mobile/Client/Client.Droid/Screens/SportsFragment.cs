@@ -45,12 +45,15 @@ namespace Client.Droid.Screens
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            Presenter = new SportsPresenter(((Activity.Application) as ShowdownClientApplication).BackendClient, new SubscriptionManager(new DroidStorage(), null));
+            var application = Activity.Application as ShowdownClientApplication;
+
+            Presenter = new SportsPresenter(application.BackendClient, application.SubscriptionManager);
             Presenter.TakeView(this);
 
             Adapter = new SportsAdapter()
             {
-                Games = new List<Game>()
+                Games = new List<Game>(),
+                Presenter = Presenter
             };
             Adapter.ItemClick += (object sender, SportsAdapterClickEventArgs args) => Presenter.OnClickRow(args.Game);
             await Presenter.OnBegin();
@@ -73,8 +76,7 @@ namespace Client.Droid.Screens
 
         public void Refresh()
         {
-            //TODO
-            //throw new NotImplementedException();
+            Adapter?.NotifyDataSetChanged();
         }
 
         void ISportsView.OpenGame(Game g)

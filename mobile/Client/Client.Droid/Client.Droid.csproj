@@ -152,6 +152,7 @@
     <Compile Include="Screens\SportsFragment.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingIIDService.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingService.cs" />
+    <Compile Include="Notifications\NotificationHubUtility.cs" />
     <Compile Include="ShowdownClientApplication.cs" />
     <Compile Include="Adapters\AnnouncementsAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

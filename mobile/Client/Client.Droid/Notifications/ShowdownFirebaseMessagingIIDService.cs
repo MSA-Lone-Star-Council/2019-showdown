@@ -16,19 +16,10 @@ namespace Client.Droid
 
 		public override void OnTokenRefresh()
 		{
-
             var refreshedToken = FirebaseInstanceId.Instance.Token;
-            Hub = new NotificationHub(Secrets.NotificationHubPath, Secrets.AzureConnectionString, this);
-            try
-            {
-                Hub.UnregisterAll(refreshedToken);
-                Hub.Register(refreshedToken, (new List<string>()).ToArray());
-            }
-            catch (Exception ex)
-            {
-                Log.Error("ShowdownApp", ex.Message);
-            }
-
+            var application = Application as ShowdownClientApplication;
+            application.HubUtility.Token = refreshedToken;
+            application.SubscriptionManager.SaveToHub();
         }
     }
 }

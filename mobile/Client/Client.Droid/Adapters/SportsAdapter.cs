@@ -9,6 +9,8 @@ using Common.Common;
 using Common.Common.Models;
 using System.Collections.Generic;
 using Android.Util;
+using Plugin.Iconize.Droid.Controls;
+using Client.Common;
 
 namespace Client.Droid.Adapters
 {
@@ -17,6 +19,8 @@ namespace Client.Droid.Adapters
         public event EventHandler<SportsAdapterClickEventArgs> ItemClick;
         public event EventHandler<SportsAdapterClickEventArgs> ItemLongClick;
         public List<Game> Games { get; set; }
+
+        public IGameHavingPresenter Presenter { get; set; }
 
         // Create new views (invoked by the layout manager)
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -29,11 +33,12 @@ namespace Client.Droid.Adapters
             var vh = new Adapter1ViewHolder(itemView, OnClick, OnLongClick);
             return vh;
         }
-
+        
         // Replace the contents of a view (invoked by the layout manager)
         public override void OnBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
         {
-            var item = Games[position];
+            var item = Presenter.GetGame(position);
+            var isSubscribed = Presenter.IsSubscribed(position);
 
             // Replace the contents of the view with that element
             var holder = viewHolder as Adapter1ViewHolder;
@@ -45,15 +50,20 @@ namespace Client.Droid.Adapters
             holder.AwayScore.Text = item.Score.AwayPoints.ToString();
             holder.HomeScore.Text = item.Score.HomePoints.ToString();
             holder.StartTime.Text = Utilities.FormatDateTime(item.Event.StartTime);
-            
+            holder.BellButton.Text = isSubscribed ? $"{{fa-bell}}" : $"{{fa-bell-o}}";
 
+            holder.BellButton.Click += delegate
+            {
+                Log.Debug("ShowdownApp", "Bell tapped");
+                Presenter.SubscribeTapped(position);
+            };
         }
 
         public override int ItemCount
         {
             get
             {
-                return Games == null ? 0 : Games.Count;
+                return Presenter.GameCount();
             }
 
         }
@@ -73,6 +83,7 @@ namespace Client.Droid.Adapters
         public TextView AwayScore { get; set; }
         public TextView HomeScore { get; set; }
         public TextView StartTime { get; set; }
+        public IconButton BellButton { get; set; }
 
 
         public Adapter1ViewHolder(View itemView, Action<SportsAdapterClickEventArgs> clickListener,
@@ -85,6 +96,7 @@ namespace Client.Droid.Adapters
             AwayScore = itemView.FindViewById<TextView>(Resource.Id.away_team_score);
             HomeScore = itemView.FindViewById<TextView>(Resource.Id.home_team_score);
             StartTime = itemView.FindViewById<TextView>(Resource.Id.start_time);
+            BellButton = itemView.FindViewById<IconButton>(Resource.Id.bellIconButton);
 
             itemView.Click += (sender, e) => clickListener(new SportsAdapterClickEventArgs {
                 View = itemView,
