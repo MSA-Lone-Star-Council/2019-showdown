@@ -38,7 +38,12 @@ namespace Admin.Common.API.Entities
 			return JsonConvert.DeserializeObject<Game>(jsonString);
 		}
 
-		public bool IsEmpty()
+        public string ToJSON()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public bool IsEmpty()
 		{
 			return string.IsNullOrEmpty(Id) && string.IsNullOrEmpty(Title)
 						 && EventId == 0 && string.IsNullOrEmpty(ScorekeeperId) && string.IsNullOrEmpty(AwayTeamId)

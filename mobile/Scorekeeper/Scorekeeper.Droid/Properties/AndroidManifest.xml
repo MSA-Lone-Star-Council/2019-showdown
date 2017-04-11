@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Scorekeeper.Droid.Scorekeeper.Droid" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.msa_texas.showdown.scorekeeper" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="21" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application 
-    android:label="Showdown Scorekeeper"
-    android:name="ShowdownScoreKeeperApplication"></application>
+	<application android:label="MSA Showdown Scorekeeper" android:name="ShowdownScoreKeeperApplication" android:icon="@drawable/ic_watch_later_white_48dp">
+		<activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/app_name" />
+	</application>
 </manifest>

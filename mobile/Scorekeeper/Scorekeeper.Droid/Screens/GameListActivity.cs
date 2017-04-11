@@ -11,7 +11,8 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Scorekeeper.Common;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
+using Xamarin.Facebook;
 
 namespace Scorekeeper.Droid
 {
@@ -64,7 +65,10 @@ namespace Scorekeeper.Droid
 
         void IGameListView.OpenGame(Game game)
         {
-            throw new NotImplementedException();
+            var intent = new Intent(this, typeof(ScoreCardActivity));
+            string serializedObject = game.ToJSON();
+            intent.PutExtra("game", serializedObject);
+            StartActivity(intent);
         }
     }
 }

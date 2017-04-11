@@ -34,5 +34,12 @@ namespace Common.Common
 
 			return $"{startDay} {startTimeStr} - {endTimeStr}";
 		}
+
+        public static string FormatDateTime(DateTimeOffset? time)
+        {
+            //throw new NotImplementedException();
+            if (time == null) return null;
+            return FormatDateTime((DateTimeOffset)time);
+        }
     }
 }

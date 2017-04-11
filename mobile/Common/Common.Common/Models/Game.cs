@@ -33,7 +33,12 @@ namespace Common.Common.Models
 	        return JsonConvert.DeserializeObject<List<Game>>(jsonString);
 	    }
 
-	    public bool Equals(Game other)
+        public string ToJSON()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+        public bool Equals(Game other)
 	    {
 	        return (
                 ID == other.ID &&

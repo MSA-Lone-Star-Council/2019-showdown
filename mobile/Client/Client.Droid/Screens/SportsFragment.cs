@@ -10,22 +10,86 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Client.Common;
+using Common.Common;
+using Common.Droid;
+using Common.Common.Models;
+using Client.Droid.Adapters;
+using Android.Support.V7.Widget;
 
 namespace Client.Droid.Screens
 {
-    public class SportsFragment : Fragment
+    public class SportsFragment : Fragment, ISportsView
     {
-        public override void OnCreate(Bundle savedInstanceState)
+        SportsPresenter Presenter;
+
+        List<Game> ISportsView.Games
+        {
+            set
+            {
+                SportsAdapter adapter = this.Adapter;
+                if (adapter == null) return;
+                adapter.Games = value;
+                adapter.NotifyDataSetChanged();
+            }
+            get
+            {
+                return this.Adapter.Games;
+            }
+        }
+        RecyclerView SportsView { get; set; }
+        SportsAdapter Adapter { get; set; }
+
+        public override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
+            Presenter = new SportsPresenter(((Activity.Application) as ShowdownClientApplication).BackendClient, new SubscriptionManager(new DroidStorage(), null));
+            Presenter.TakeView(this);
+
+            Adapter = new SportsAdapter()
+            {
+                Games = new List<Game>()
+            };
+            Adapter.ItemClick += (object sender, SportsAdapterClickEventArgs args) => Presenter.OnClickRow(args.Game);
+            await Presenter.OnBegin();
+
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            return inflater.Inflate(Resource.Layout.fragment_sports, container, false);
+            View view = inflater.Inflate(Resource.Layout.fragment_sports, container, false);
+
+            //Setup recyclerview
+            SportsView = view.FindViewById<RecyclerView>(Resource.Id.sportsRecyclerView);
+            SportsView.SetLayoutManager(new LinearLayoutManager(this.Activity));
+            //create adapter
+            SportsView.SetAdapter(Adapter);
+            //return the view
+            return view;
         }
+
+        public void Refresh()
+        {
+            //TODO
+            //throw new NotImplementedException();
+        }
+
+        void ISportsView.OpenGame(Game g)
+        {
+            //throw new NotImplementedException();
+            var intent = new Intent(this.Activity, typeof(GameScreenActivity));
+            intent.PutExtra("game", g.ToJSON());
+            StartActivity(intent);
+        }
+
+        void ISportsView.ShowMessage(string message)
+        {
+            Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
+        }
+
+        //Add in handler for onClick events.
     }
 }

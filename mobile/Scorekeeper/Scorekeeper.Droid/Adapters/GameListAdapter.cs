@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using System.Collections.Generic;
-using Admin.Common.API.Entities;
+using Common.Common.Models;
 
 namespace Scorekeeper.Droid
 {
@@ -33,7 +33,8 @@ namespace Scorekeeper.Droid
 
             // Replace the contents of the view with that element
             var holder = viewHolder as GameListAdapterViewHolder;
-            holder.GameName.Text = Games[position].Title;
+            holder.Game = item;
+            holder.GameName.Text = item.Title;
         }
 
         public override int ItemCount

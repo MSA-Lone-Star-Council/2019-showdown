@@ -13,7 +13,7 @@ using Firebase.Iid;
 
 namespace Client.Droid
 {
-    [Activity(Label = "Client.Droid", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : V4.App.FragmentActivity
     {
 		public static string ScreenIndexKey = "ScreenIndex";

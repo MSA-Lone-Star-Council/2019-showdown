@@ -22,8 +22,12 @@ namespace Client.Common
 		public async Task OnBegin()
 		{
 			if (View != null)
-				View.ScoreHistory = new List<Score>();
-			await UpdateFromServer();
+            {
+                View.ScoreHistory = new List<Score>();
+                Game = View.Game;
+            }
+
+            await UpdateFromServer();
 		}
 
 		public async Task OnTick()

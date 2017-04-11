@@ -1,48 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/event_detailed_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="Event Title"
-        android:textSize="24sp" />
-    <TextView
-        android:id="@+id/event_detailed_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="Event Description"
-        android:textSize="24sp" />
-    <TextView
-        android:id="@+id/event_detailed_start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="Event Start Time"
-        android:textSize="24sp" />
-    <TextView
-        android:id="@+id/event_detailed_end_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="Event End Time"
-        android:textSize="24sp" />
-    <TextView
-        android:id="@+id/event_location_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="Event Location Name"
-        android:textSize="24sp" />
-    <TextView
-        android:id="@+id/event_location_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:text="Event Location Address"
-        android:textSize="24sp" />
-</LinearLayout>
+<android.support.v7.widget.CardView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:card_view="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/event_card_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="10dp"
+      android:elevation="16dp"
+      android:foreground="?android:attr/selectableItemBackground">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:background="#212121">
+        <TextView
+            android:id="@+id/event_detailed_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="Event Title"
+            android:textSize="36sp"/>
+        <TextView
+            android:id="@+id/event_detailed_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:text="Event Description"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/event_detailed_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:text="Event Time"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/event_detailed_location_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location: (Click for maps)"
+            android:paddingBottom="3dp"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/event_location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event Location Name"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/event_location_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="Event Location Address"
+            android:textColor="#1E90FF"
+            android:textSize="24sp" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

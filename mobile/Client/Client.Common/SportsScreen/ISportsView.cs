@@ -6,7 +6,9 @@ namespace Client.Common
 {
 	public interface ISportsView
 	{
-		void OpenGame(Game g);
+        List<Game> Games { get; set; }
+
+        void OpenGame(Game g);
 
 		void ShowMessage(string message);
 
