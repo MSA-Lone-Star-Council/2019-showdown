@@ -80,6 +80,7 @@ namespace Client.Common
 		{
 			manager.ToggleSubscription(Event.TopicId);
 			View.Refresh(Event);
+			View.ScheduleReminder(Event);
 		}
 	}
 }

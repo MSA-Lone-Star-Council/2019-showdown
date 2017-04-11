@@ -132,8 +132,8 @@ namespace Client.iOS
 			Time.Text = ((DateTimeOffset) g.Score.Time).ToString(format, null as DateTimeFormatInfo);
 			EventName.Text = g.Event.Title;
 
-			var awayTeam = g.HomeTeam;
-			var homeTeam = g.AwayTeam;
+			var awayTeam = g.AwayTeam;
+			var homeTeam = g.HomeTeam;
 
 			var awayTeamLost = g.Score.AwayPoints < g.Score.HomePoints;
 			var isTie = g.Score.AwayPoints == g.Score.HomePoints;

@@ -14,5 +14,7 @@ namespace Client.Common
         void ShowMessage(string message);
 
         void OpenEvent(Event row);
+
+		Task ScheduleReminder(Event eventToRemind);
     }
 }

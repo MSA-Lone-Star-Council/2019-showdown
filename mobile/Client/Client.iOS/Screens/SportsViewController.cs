@@ -17,6 +17,7 @@ namespace Client.iOS
 
 		UITableView GamesList { get; set; }
 
+		NSTimer updateTimer;
 
 		public SportsViewController()
 		{
@@ -30,13 +31,14 @@ namespace Client.iOS
 			base.ViewDidAppear(animated);
 			Presenter.TakeView(this);
 			await Presenter.OnBegin();
+			updateTimer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await Presenter.OnTick());
 		}
 
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
-			View.BackgroundColor = new UIColor(0.90f, 1.0f, 0.91f, 1.0f);
+			View.BackgroundColor = new UIColor(0.56f, 1.0f, 0.56f, 1.0f);
 
 			var tableSource = new GamesTableSource(GameCellID, Presenter);
 
@@ -56,6 +58,7 @@ namespace Client.iOS
 		{
 			base.ViewWillDisappear(animated);
 			Presenter.RemoveView();
+			updateTimer.Invalidate();
 		}
 
 		public void OpenGame(Game g)
@@ -69,7 +72,8 @@ namespace Client.iOS
 
 		public void ShowMessage(string message)
 		{
-			throw new NotImplementedException();
+			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+			alertView.Show();
 		}
 
 		void ISportsView.ShowMessage(string message)

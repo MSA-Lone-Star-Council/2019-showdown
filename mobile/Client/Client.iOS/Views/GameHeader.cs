@@ -15,7 +15,7 @@ namespace Client.iOS
 			set
 			{
 				gameTitleLabel.Text = value.Title;
-				eventTitleLabel.Text = value.Event.Title;
+				eventTitleLabel.SetTitle(value.Event.Title, UIControlState.Normal);
 				HomeTeamNameLabel.SetTitle(value.HomeTeam.ShortName, UIControlState.Normal);
 				AwayTeamNameLabel.SetTitle(value.AwayTeam.ShortName, UIControlState.Normal);
 				HomeScoreLabel.Text = value.Score.HomePoints.ToString();
@@ -56,7 +56,7 @@ namespace Client.iOS
 
 		IconButton NotificationButton { get; set; }
 		UILabel gameTitleLabel = new UILabel() { Font = GameTitleFont };
-		UILabel eventTitleLabel = new UILabel() { Font = EventTitleFont };
+		UIButton eventTitleLabel = new UIButton() { Font = EventTitleFont };
 
 		UIButton AwayTeamNameLabel { get; set; }
 		UIButton HomeTeamNameLabel { get; set; }
@@ -67,6 +67,7 @@ namespace Client.iOS
 
 		public Action AwayTeamAction { get; set; }
 		public Action HomeTeamAction { get; set; }
+		public Action EventAction { get; set; }
 		public Action NotificationTappedAction { get; set; }
 
 		public GameHeader()
@@ -92,6 +93,11 @@ namespace Client.iOS
 			HomeTeamNameLabel.SetTitleColor(UIColor.Black, UIControlState.Normal);
 			HomeTeamNameLabel.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
 			HomeTeamNameLabel.TouchUpInside += (sender, e) => HomeTeamAction();
+
+			eventTitleLabel.SetTitleColor(UIColor.Black, UIControlState.Normal);
+			eventTitleLabel.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+			eventTitleLabel.TouchUpInside += (sender, e) => EventAction();
+
 
 			AwayScoreLabel = new UILabel { Font = ScoreFont };
 			HomeScoreLabel = new UILabel { Font = ScoreFont };
@@ -126,8 +132,10 @@ namespace Client.iOS
 
 			eventTitleLabel.MakeConstraints(make =>
 			{
-				make.CenterX.EqualTo(parentView);
+				make.Left.EqualTo(parentView);
 				make.Top.EqualTo(gameTitleLabel.Bottom()).Offset(2);
+				make.Height.EqualTo((NSNumber)40);
+				make.Width.EqualTo(parentView);
 			});
 
 			AwayTeamNameLabel.MakeConstraints(make =>

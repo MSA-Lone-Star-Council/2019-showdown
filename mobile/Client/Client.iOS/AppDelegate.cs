@@ -4,6 +4,8 @@ using Client.Common;
 using Common.Common;
 using Common.iOS;
 using Foundation;
+using Plugin.Iconize.iOS;
+using Plugin.Iconize.iOS.Controls;
 using UIKit;
 using UserNotifications;
 using WindowsAzure.Messaging;
@@ -32,6 +34,8 @@ namespace Client.iOS
 		    BackendClient = new ShowdownRESTClient();
 			SubscriptionManager = new SubscriptionManager(new iOSStorage(), hub);
 
+			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
+
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
 			Window.RootViewController = BuildRootViewController();
@@ -39,7 +43,6 @@ namespace Client.iOS
 
 			RegisterForRemoteNotification();
 
-			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
 			return true;
 		}
@@ -61,13 +64,26 @@ namespace Client.iOS
 		{
 			var tabBarController = new UITabBarController();
 
+
+
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
-				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Annoucements" },
+				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
-				new UINavigationController(new AcknowledgementsViewController()) { Title = "Acknowledgemetns" },
+				new UINavigationController(new AboutViewController()) { Title = "About" },
 			};
+
+			var size = 20;
+			var scheduleIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-calendar").ToUIImage(size);
+			var announcementsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bullhorn").ToUIImage(size);
+			var sportsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-futbol-o").ToUIImage(size);
+			var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);
+
+			tabBarController.ViewControllers[0].TabBarItem.Image = scheduleIcon;
+			tabBarController.ViewControllers[1].TabBarItem.Image = announcementsIcon;
+			tabBarController.ViewControllers[2].TabBarItem.Image = sportsIcon;
+			tabBarController.ViewControllers[3].TabBarItem.Image = aboutIcon;
 
 			return tabBarController;
 		}
@@ -87,26 +103,9 @@ namespace Client.iOS
 			{
 				NSString startTime = (NSString)data[new NSString("start_time")];
 				DateTimeOffset notificationTime = DateTimeOffset.Parse(startTime).ToOffset(TimeSpan.FromHours(-5)).Subtract(TimeSpan.FromMinutes(15));
+				NSString title = (NSString)data[new NSString("event_title")];
 
-				var dateComponent = new NSDateComponents();
-				dateComponent.SetValueForComponent(notificationTime.Year, NSCalendarUnit.Year);
-				dateComponent.SetValueForComponent(notificationTime.Month, NSCalendarUnit.Month);
-				dateComponent.SetValueForComponent(notificationTime.Day, NSCalendarUnit.Day);
-				dateComponent.SetValueForComponent(notificationTime.Hour, NSCalendarUnit.Hour);
-				dateComponent.SetValueForComponent(notificationTime.Minute, NSCalendarUnit.Minute);
-				dateComponent.SetValueForComponent(-5, NSCalendarUnit.TimeZone);
-
-				var trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponent, false);
-
-				var center = UNUserNotificationCenter.Current;
-
-				var content = new UNMutableNotificationContent();
-				content.Title = (NSString)data[new NSString("event_title")];
-				content.Body = "Starts in 15 minutes";
-				content.Sound = UNNotificationSound.Default;
-
-				var request = UNNotificationRequest.FromIdentifier("TEST", content, trigger);
-				await center.AddNotificationRequestAsync(request);
+				await IOSHelpers.ScheduleNotification(notificationTime, title);
 			}
 		}
 	}

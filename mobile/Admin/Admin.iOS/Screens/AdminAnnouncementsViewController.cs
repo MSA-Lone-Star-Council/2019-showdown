@@ -9,6 +9,7 @@ namespace Admin.iOS
 	{
 		public AdminAnnouncementsViewController(IAnnoucementInteractor client) : base(client)
 		{
+			View.BackgroundColor = UIColor.White;
 		}
 
 		public async override void ViewWillAppear(bool animated)

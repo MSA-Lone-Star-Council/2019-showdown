@@ -33,12 +33,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.msa-texas.showdown.temporary</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
+	<string>org.msa-texas.showdown</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>iconize-fontawesome.ttf</string>

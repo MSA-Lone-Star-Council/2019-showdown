@@ -34,9 +34,12 @@ namespace Client.Common
 
         public void OnStar(Event e)
         {
-            View.ShowMessage("Subscribed for notifications for this game!");
 			if(manager != null) manager.ToggleSubscription(e.TopicId);
-			if (View != null) View.Events = events; // force a refresh...
+			if (View != null)
+			{
+				View.Events = events; // force a refresh...
+				View.ScheduleReminder(e);
+			}
         }
 
         public void OnClickRow(Event row)

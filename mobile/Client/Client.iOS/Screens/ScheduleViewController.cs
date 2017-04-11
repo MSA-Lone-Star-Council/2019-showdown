@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Client.Common;
 using Common.Common.Models;
+using Common.iOS;
 using Foundation;
 using UIKit;
 
@@ -15,6 +17,8 @@ namespace Client.iOS
 
 		UITableView scheduleList;
 
+		NSTimer timer;
+
 		public ScheduleViewController()
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
@@ -25,6 +29,15 @@ namespace Client.iOS
 		{
 			presenter.TakeView(this);
 			await presenter.OnBegin();
+
+			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(10), async (obj) => await presenter.OnTick());
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+			presenter.RemoveView();
+			timer.Invalidate();
 		}
 
 		public override void ViewDidLoad()
@@ -69,6 +82,13 @@ namespace Client.iOS
 
 		void IScheduleView.ShowMessage(string message)
 		{
+			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+			alertView.Show();
+		}
+
+		async Task IScheduleView.ScheduleReminder(Event eventToRemind)
+		{
+			IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
 		}
 
 		class ScheduleTableSource : UITableViewSource

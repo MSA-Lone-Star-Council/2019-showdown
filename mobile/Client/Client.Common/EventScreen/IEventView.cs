@@ -7,5 +7,8 @@ namespace Client.Common
 	{
 		void OpenGame(Game game);
 		void Refresh(Event e);
+		void ScheduleReminder(Event e);
+
+		void ShowMessage(string message);
 	}
 }

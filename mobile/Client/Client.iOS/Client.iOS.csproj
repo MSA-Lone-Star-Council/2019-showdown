@@ -36,14 +36,14 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution: Riaz Nimrah (3RJS63674Y)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision>match Development org.msa-texas.showdown.temporary</CodesignProvision>
+    <CodesignProvision>match AppStore org.msa-texas.showdown</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -107,12 +107,35 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\TwitterIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\TwitterIcon.imageset\twitter-128.png" />
+    <ImageAsset Include="Assets.xcassets\FacebookIcon.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\FacebookIcon.imageset\facebook-256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-57.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-114.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-50.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-100.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-72.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-144.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-48.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-55.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Screens\" />
     <Folder Include="Views\" />
     <Folder Include="GamesTableSource\" />
+    <Folder Include="Assets.xcassets\TwitterIcon.imageset\" />
+    <Folder Include="Assets.xcassets\FacebookIcon.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -127,7 +150,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Screens\ScheduleViewController.cs" />
     <Compile Include="Screens\SportsViewController.cs" />
-    <Compile Include="Screens\AcknowledgementsViewController.cs" />
     <Compile Include="Views\GameCell.cs" />
     <Compile Include="Screens\GameViewController.cs" />
     <Compile Include="Views\ScoreCell.cs" />
@@ -137,8 +159,10 @@
     <Compile Include="Views\SchoolHeader.cs" />
     <Compile Include="Screens\EventViewController.cs" />
     <Compile Include="Views\EventHeader.cs" />
+    <Compile Include="Screens\LocationViewController.cs" />
     <Compile Include="GamesTableSource.cs" />
     <Compile Include="NotificationHubUtility.cs" />
+    <Compile Include="Screens\AboutViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
@@ -153,6 +177,9 @@
       <Project>{9FC81125-076D-4AFC-8180-DE27BB1EAF33}</Project>
       <Name>Common.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
