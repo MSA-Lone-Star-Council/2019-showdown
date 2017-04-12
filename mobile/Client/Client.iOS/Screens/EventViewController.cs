@@ -86,7 +86,8 @@ namespace Client.iOS
 			gamesList.MakeConstraints(make =>
 			{
 				make.Top.EqualTo(header.Bottom());
-				make.Size.EqualTo(View);
+				make.Bottom.EqualTo(View).Offset(-49);
+				make.Width.EqualTo(View);
 			});
 		}
 

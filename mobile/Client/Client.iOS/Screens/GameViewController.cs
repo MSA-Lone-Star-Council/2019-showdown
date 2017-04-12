@@ -71,7 +71,8 @@ namespace Client.iOS
 			ScoresList.MakeConstraints(make =>
 			{
 				make.Top.EqualTo(Header.Bottom());
-				make.Size.EqualTo(View);
+				make.Bottom.EqualTo(View).Offset(-49);
+				make.Width.EqualTo(View);
 			});
 
 			Header.LayoutView();
