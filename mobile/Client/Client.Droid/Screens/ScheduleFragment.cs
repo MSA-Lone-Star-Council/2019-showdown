@@ -53,6 +53,8 @@ namespace Client.Droid.Screens
         public async override void OnResume()
         {
             base.OnResume();
+
+            Presenter.TakeView(this);
             await Presenter.OnBegin();
 
             timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
