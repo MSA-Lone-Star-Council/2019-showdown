@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Client.Common
 {
 	public interface INotificationHub
 	{
-		void SaveTags(List<string> tags);
+		Task SaveTags(List<string> tags);
 	}
 }

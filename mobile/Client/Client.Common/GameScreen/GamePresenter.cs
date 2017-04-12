@@ -36,11 +36,11 @@ namespace Client.Common
 		}
 
 
-		public void OnStar()
+		public async Task OnStar()
 		{
 			//View.ShowMessage("Subscribed for notifications for this game!");
-			manager.ToggleSubscription(Game.TopicId);
-			View.Refresh();
+			await manager.ToggleSubscription(Game.TopicId);
+			if(View != null) View.Refresh();
 		}
 
 		public bool IsSubscribed()

@@ -30,7 +30,7 @@ namespace Client.Droid.Adapters
             var id = Resource.Layout.sports_layout;
             View itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-            var vh = new Adapter1ViewHolder(itemView, OnClick, OnLongClick);
+            var vh = new Adapter1ViewHolder(itemView, OnClick, OnLongClick, Presenter);
             return vh;
         }
         
@@ -52,11 +52,7 @@ namespace Client.Droid.Adapters
             holder.StartTime.Text = Utilities.FormatDateTime(item.Event.StartTime);
             holder.BellButton.Text = isSubscribed ? $"{{fa-bell}}" : $"{{fa-bell-o}}";
 
-            holder.BellButton.Click += delegate
-            {
-                Log.Debug("ShowdownApp", "Bell tapped");
-                Presenter.SubscribeTapped(position);
-            };
+           
         }
 
         public override int ItemCount
@@ -87,7 +83,7 @@ namespace Client.Droid.Adapters
 
 
         public Adapter1ViewHolder(View itemView, Action<SportsAdapterClickEventArgs> clickListener,
-                            Action<SportsAdapterClickEventArgs> longClickListener) : base(itemView)
+                            Action<SportsAdapterClickEventArgs> longClickListener, IGameHavingPresenter presenter) : base(itemView)
         {
             Title = itemView.FindViewById<TextView>(Resource.Id.sport_title);
             Category = itemView.FindViewById<TextView>(Resource.Id.sport_category);
@@ -109,6 +105,12 @@ namespace Client.Droid.Adapters
                 Position = AdapterPosition,
                 Game = this.Game
             });
+
+            BellButton.Click += async delegate
+            {
+                Log.Debug("ShowdownApp", "Bell tapped");
+                await presenter.SubscribeTapped(AdapterPosition);
+            };
         }
     }
 

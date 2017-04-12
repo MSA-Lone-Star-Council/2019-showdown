@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Common.Models;
+using System.Threading.Tasks;
 
 namespace Client.Common
 {
@@ -9,6 +10,6 @@ namespace Client.Common
 		int GameCount();
 		void GameTapped(int index);
 		bool IsSubscribed(int index);
-		void SubscribeTapped(int index);
+		Task SubscribeTapped(int index);
 	}
 }

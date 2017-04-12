@@ -24,14 +24,14 @@ namespace Client.Droid
             SubscriptionManager = new SubscriptionManager(new DroidStorage(this), HubUtility);
 		}
 
-		public override void OnCreate()
+		public async override void OnCreate()
 		{
 			base.OnCreate();
 
             Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
             HubUtility.Token = FirebaseInstanceId.Instance.Token;
-            SubscriptionManager.SaveToHub();
+            await SubscriptionManager.SaveToHub();
 		}
 	}
 }

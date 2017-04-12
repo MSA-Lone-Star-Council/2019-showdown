@@ -1,5 +1,6 @@
 ﻿using System;
 using Common.Common;
+using System.Threading.Tasks;
 
 namespace Client.Common
 {
@@ -25,7 +26,7 @@ namespace Client.Common
 			}
 		}
 
-		public void ToggleSubscription(string subscriptionId)
+		public async Task ToggleSubscription(string subscriptionId)
 		{
 			var current = this[subscriptionId];
 
@@ -37,13 +38,13 @@ namespace Client.Common
 			{
 				storage.AddToList(TagStorageKey, subscriptionId);
 			}
-			hub.SaveTags(storage.GetList(TagStorageKey));
+			await hub.SaveTags(storage.GetList(TagStorageKey));
 		}
 
-		public void SaveToHub()
+		public async Task SaveToHub()
 		{
 			var tags = storage.GetList(TagStorageKey);
-			hub.SaveTags(storage.GetList(TagStorageKey));
+			await hub.SaveTags(storage.GetList(TagStorageKey));
 		}
 	}
 }

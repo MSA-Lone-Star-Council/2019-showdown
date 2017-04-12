@@ -57,12 +57,6 @@ namespace Client.Common
 			View.OpenGame(games[index]);
 		}
 
-		public async Task OnStar(Game game)
-		{
-			View.ShowMessage("Subscribed for notifications for this game!");
-			// TODO: What the message says
-		}
-
 		private async Task UpdateFromServer()
 		{
 			var gamesFromServer = await GetAllGames();
@@ -85,10 +79,10 @@ namespace Client.Common
 			return manager[game.TopicId];
 		}
 
-		public void SubscribeTapped(int index)
+		public async Task SubscribeTapped(int index)
 		{
-			manager.ToggleSubscription(games[index].TopicId);
-			View.Refresh();
+			await manager.ToggleSubscription(games[index].TopicId);
+			if(View != null) View.Refresh();
 		}
 	}
 }

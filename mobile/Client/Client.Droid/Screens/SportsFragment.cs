@@ -43,7 +43,7 @@ namespace Client.Droid.Screens
 
         Timer timer = new Timer(TimeSpan.FromSeconds(5).TotalMilliseconds) { AutoReset = true };
 
-        public override async void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 

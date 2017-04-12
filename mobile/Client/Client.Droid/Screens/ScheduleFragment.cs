@@ -36,7 +36,7 @@ namespace Client.Droid.Screens
 
         Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
 
-        public override async void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -92,9 +92,9 @@ namespace Client.Droid.Screens
             StartActivity(Intent);
         }
 
-	    async Task IScheduleView.ScheduleReminder(Event eventToRemind)
+	    Task IScheduleView.ScheduleReminder(Event eventToRemind)
 	    {
-            return;
+            return Task.CompletedTask;
 	    }
 	}
 }

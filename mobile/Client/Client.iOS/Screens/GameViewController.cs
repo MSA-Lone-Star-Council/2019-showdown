@@ -28,7 +28,7 @@ namespace Client.iOS
 			Game = g;
 		}
 
-		public async override void ViewDidLoad()
+		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
@@ -39,12 +39,12 @@ namespace Client.iOS
 			navController.NavigationBar.Translucent = false;
 
 			View.BackgroundColor = new UIColor(0.56f, 1.0f, 0.56f, 1.0f);
-			Header = new GameHeader()
-			{
-				AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
-				HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); },
-				EventAction = () => { navController.PushViewController(new EventViewController(Game.Event), true); },
-				NotificationTappedAction = Presenter.OnStar
+            Header = new GameHeader()
+            {
+                AwayTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.AwayTeam), true); },
+                HomeTeamAction = () => { navController.PushViewController(new SchoolViewController(Game.HomeTeam), true); },
+                EventAction = () => { navController.PushViewController(new EventViewController(Game.Event), true); },
+                NotificationTappedAction = async () => await Presenter.OnStar()
 			};
 
 			ScoresList = new UITableView()

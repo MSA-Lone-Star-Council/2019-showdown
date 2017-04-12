@@ -14,12 +14,12 @@ namespace Client.Droid
 	{
 		private NotificationHub Hub { get; set; }
 
-		public override void OnTokenRefresh()
+		public async override void OnTokenRefresh()
 		{
             var refreshedToken = FirebaseInstanceId.Instance.Token;
             var application = Application as ShowdownClientApplication;
             application.HubUtility.Token = refreshedToken;
-            application.SubscriptionManager.SaveToHub();
+            await application.SubscriptionManager.SaveToHub();
         }
     }
 }

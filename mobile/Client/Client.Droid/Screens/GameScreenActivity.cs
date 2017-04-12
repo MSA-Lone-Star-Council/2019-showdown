@@ -48,7 +48,7 @@ namespace Client.Droid.Screens
 
         Timer timer = new Timer(TimeSpan.FromSeconds(5).TotalMilliseconds) { AutoReset = true };
 
-        protected override async void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Game = Game.FromJSON(this.Intent.GetStringExtra("game"));

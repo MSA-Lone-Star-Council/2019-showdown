@@ -32,13 +32,13 @@ namespace Client.Common
             await UpdateFromServer();
         }
 
-        public void OnStar(Event e)
+        public async Task OnStar(Event e)
         {
-			if(manager != null) manager.ToggleSubscription(e.TopicId);
+			if(manager != null) await manager.ToggleSubscription(e.TopicId);
 			if (View != null)
 			{
 				View.Events = events; // force a refresh...
-				View.ScheduleReminder(e);
+				await View.ScheduleReminder(e);
 			}
         }
 

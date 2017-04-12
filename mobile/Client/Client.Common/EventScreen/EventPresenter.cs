@@ -70,15 +70,15 @@ namespace Client.Common
 			return manager[game.TopicId];
 		}
 
-		public void SubscribeTapped(int index)
+		public async Task SubscribeTapped(int index)
 		{
-			manager.ToggleSubscription(games[index].TopicId);
+			await manager.ToggleSubscription(games[index].TopicId);
 			View.Refresh(Event);
 		}
 
-		public void EventSubscribeTapped()
+		public async Task EventSubscribeTapped()
 		{
-			manager.ToggleSubscription(Event.TopicId);
+			await manager.ToggleSubscription(Event.TopicId);
 			View.Refresh(Event);
 			View.ScheduleReminder(Event);
 		}

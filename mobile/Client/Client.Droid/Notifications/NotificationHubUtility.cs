@@ -13,6 +13,7 @@ using Client.Common;
 using Common.Common;
 using WindowsAzure.Messaging;
 using Android.Util;
+using System.Threading.Tasks;
 
 namespace Client.Droid
 {
@@ -27,13 +28,13 @@ namespace Client.Droid
             context = c;
         }
 
-        public void SaveTags(List<string> tags)
+        public async Task SaveTags(List<string> tags)
         {
             var hub = new NotificationHub(Secrets.NotificationHubPath, Secrets.AzureConnectionString, context);
             try
             {
-                hub.UnregisterAll(Token);
-                hub.Register(Token, tags.ToArray());
+                await Task.Run(() => hub.UnregisterAll(Token));
+                await Task.Run(() => hub.Register(Token, tags.ToArray()));
             }
             catch (Exception ex)
             {
