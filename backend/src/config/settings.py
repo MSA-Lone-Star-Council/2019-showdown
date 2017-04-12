@@ -66,6 +66,13 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
+# Cache Configuration
+# --------------------------------------------------------------------------
+CACHES = {
+    'default': env.cache('DJANGO_CACHE_URL'),
+}
+
+
 # General Configuration
 # --------------------------------------------------------------------------
 LANGUAGE_CODE = 'en-us'

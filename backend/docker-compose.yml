@@ -16,5 +16,8 @@ services:
         image: postgres
         volumes:
             - data:/var/lib/postgresql/data
+    
+    cache:
+        image: redis
 volumes:
     data: {}
