@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.msa_texas.showdown.scorekeeper" android:versionName="1.0.0" android:installLocation="auto" android:versionCode="2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.msa_texas.showdown.scorekeeper" android:versionName="1.0.1" android:installLocation="auto" android:versionCode="3">
 	<uses-sdk android:minSdkVersion="21" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="MSA Showdown Scorekeeper" android:name="ShowdownScoreKeeperApplication">
