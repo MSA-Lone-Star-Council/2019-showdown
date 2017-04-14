@@ -13,6 +13,9 @@ class User(models.Model):
     name = models.CharField(max_length=200)
     adminstrator = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['name']
+
     def save(self, *args, **kwargs):
         if not self.name:
             profile = facebook.get_facebook_profile(self.facebook_id)
@@ -20,3 +23,6 @@ class User(models.Model):
             logger.info('Fetching name for user %s' % self.id)
 
         super(User, self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name

@@ -7,6 +7,9 @@ class Location(models.Model):
     longitude = models.FloatField()
     notes = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 class Event(models.Model):
     title = models.CharField(max_length=80)
     audience = models.CharField(max_length=8) # "brothers", "sisters", or "general" 
@@ -14,5 +17,8 @@ class Event(models.Model):
     end_time = models.DateTimeField()
     description = models.TextField()
     location = models.ForeignKey(Location, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
 

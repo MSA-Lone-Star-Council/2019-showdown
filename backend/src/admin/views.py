@@ -97,7 +97,7 @@ class ScorekeeperScoresView(generics.CreateAPIView):
         
         score = serializer.data
         options = NotificationOptions(
-            title='%s %d v %s %d' % (
+            title='%s %d vs %s %d' % (
                 game.away_team.short_name, 
                 score['away_points'],
                 game.home_team.short_name,
