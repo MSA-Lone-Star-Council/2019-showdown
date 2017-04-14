@@ -104,7 +104,7 @@ namespace Scorekeeper.Droid
         {
             var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
 
-            if (backendClient.Token != null) return;
+            if (string.IsNotNullOrEmpty(backendClient.Token)) return;
 
             var token = await backendClient.GetToken(facebook_token);
             backendClient.Token = token;
