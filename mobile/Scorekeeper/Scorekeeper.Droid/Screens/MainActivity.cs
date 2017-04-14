@@ -106,7 +106,10 @@ namespace Scorekeeper.Droid
 
             if (!string.IsNullOrEmpty(backendClient.Token)) return;
 
+            continueButton.Enabled = false;
             var token = await backendClient.GetToken(facebook_token);
+            continueButton.Enabled = true;
+
             backendClient.Token = token;
         }
     }
