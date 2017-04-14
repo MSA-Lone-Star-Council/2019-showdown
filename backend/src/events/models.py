@@ -15,7 +15,7 @@ class Event(models.Model):
     audience = models.CharField(max_length=8) # "brothers", "sisters", or "general" 
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     location = models.ForeignKey(Location, blank=True, null=True)
 
     def __str__(self):
