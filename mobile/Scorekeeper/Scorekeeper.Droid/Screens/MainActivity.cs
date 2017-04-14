@@ -103,6 +103,9 @@ namespace Scorekeeper.Droid
         private async Task TokenExchange(string facebook_token)
         {
             var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
+
+            if (backendClient.Token != null) return;
+
             var token = await backendClient.GetToken(facebook_token);
             backendClient.Token = token;
         }
