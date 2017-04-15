@@ -114,10 +114,11 @@ class ScorekeeperScoresView(generics.CreateAPIView):
         )
         logger.info(options)
         
-        tags = "game_%s || school_%s || school_%s" % (
+        tags = "game_%s || school_%s || school_%s || event_%d" % (
             game.id,
             game.away_team.slug,
-            game.home_team.slug)
+            game.home_team.slug,
+            game.event.id)
         send_notification(options, tags)
 
         return Response(score, status=status.HTTP_201_CREATED, headers=headers)
