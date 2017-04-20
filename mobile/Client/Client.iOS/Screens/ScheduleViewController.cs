@@ -57,6 +57,7 @@ namespace Client.iOS
 				RowHeight = 110,
 			};
 			scheduleList.RegisterClassForCellReuse(typeof(EventCell), EventCellID);
+			this.AutomaticallyAdjustsScrollViewInsets = true;
 
 			View.AddSubview(scheduleList);
 		}

@@ -16,6 +16,7 @@ using Common.Droid;
 using Common.Common.Models;
 using Client.Droid.Adapters;
 using Android.Support.V7.Widget;
+using System.Timers;
 
 namespace Client.Droid.Screens
 {
@@ -40,21 +41,40 @@ namespace Client.Droid.Screens
         RecyclerView SportsView { get; set; }
         SportsAdapter Adapter { get; set; }
 
-        public override async void OnCreate(Bundle savedInstanceState)
+        Timer timer = new Timer(TimeSpan.FromSeconds(5).TotalMilliseconds) { AutoReset = true };
+
+        public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your fragment here
-            Presenter = new SportsPresenter(((Activity.Application) as ShowdownClientApplication).BackendClient, new SubscriptionManager(new DroidStorage(), null));
+            var application = Activity.Application as ShowdownClientApplication;
+
+            Presenter = new SportsPresenter(application.BackendClient, application.SubscriptionManager);
             Presenter.TakeView(this);
 
             Adapter = new SportsAdapter()
             {
-                Games = new List<Game>()
+                Games = new List<Game>(),
+                Presenter = Presenter
             };
             Adapter.ItemClick += (object sender, SportsAdapterClickEventArgs args) => Presenter.OnClickRow(args.Game);
-            await Presenter.OnBegin();
+        }
 
+        public override async void OnResume()
+        {
+            base.OnResume();
+            Presenter.TakeView(this);
+            await Presenter.OnBegin();
+            timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
+            timer.Start();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            Presenter.RemoveView();
+            timer.Stop();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -73,8 +93,7 @@ namespace Client.Droid.Screens
 
         public void Refresh()
         {
-            //TODO
-            //throw new NotImplementedException();
+            Adapter?.NotifyDataSetChanged();
         }
 
         void ISportsView.OpenGame(Game g)

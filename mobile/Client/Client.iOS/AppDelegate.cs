@@ -88,10 +88,10 @@ namespace Client.iOS
 			return tabBarController;
 		}
 
-		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+		public async override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 		{
 			hub.DeviceToken = deviceToken;
-			SubscriptionManager.SaveToHub();
+			await SubscriptionManager.SaveToHub();
 		}
 
 

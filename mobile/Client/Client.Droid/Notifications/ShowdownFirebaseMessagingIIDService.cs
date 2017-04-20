@@ -14,21 +14,12 @@ namespace Client.Droid
 	{
 		private NotificationHub Hub { get; set; }
 
-		public override void OnTokenRefresh()
+		public async override void OnTokenRefresh()
 		{
-            /*
-			var refreshedToken = FirebaseInstanceId.Instance.Token;
-			Hub = new NotificationHub(Secrets.NotificationHubPath, Secrets.AzureConnectionString, this);
-			try
-			{
-				Hub.UnregisterAll(refreshedToken);
-				Hub.Register(refreshedToken, (new List<string>()).ToArray());
-			}
-			catch (Exception ex)
-			{
-				Log.Error("ShowdownApp", ex.Message);
-			}
-            */
-		}
-	}
+            var refreshedToken = FirebaseInstanceId.Instance.Token;
+            var application = Application as ShowdownClientApplication;
+            application.HubUtility.Token = refreshedToken;
+            await application.SubscriptionManager.SaveToHub();
+        }
+    }
 }

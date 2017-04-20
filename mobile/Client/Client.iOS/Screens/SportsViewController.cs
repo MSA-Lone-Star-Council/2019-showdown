@@ -16,6 +16,7 @@ namespace Client.iOS
 		SportsPresenter Presenter { get; set; }
 
 		UITableView GamesList { get; set; }
+		public List<Game> Games { get; set; }
 
 		NSTimer updateTimer;
 
@@ -50,6 +51,7 @@ namespace Client.iOS
 				SeparatorStyle = UITableViewCellSeparatorStyle.None
 			};
 			GamesList.RegisterClassForCellReuse(typeof(GameCell), GameCellID);
+			AutomaticallyAdjustsScrollViewInsets = true;
 			View.AddSubview(GamesList);
 		}
 

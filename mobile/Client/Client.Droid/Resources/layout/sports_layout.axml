@@ -81,6 +81,14 @@
       android:text="m/dd h:mm:ss"
       android:textSize="12sp"
       />
-  </RelativeLayout>
+    <Plugin.Iconize.Droid.Controls.IconButton
+      android:id="@+id/bellIconButton"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:textSize="10sp"
+      android:minWidth="10sp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

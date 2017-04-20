@@ -14,6 +14,7 @@ using Common.Common;
 using Common.Common.Models;
 using Android.Support.V7.Widget;
 using Client.Droid.Adapters;
+using System.Timers;
 
 namespace Client.Droid.Screens
 {
@@ -45,7 +46,9 @@ namespace Client.Droid.Screens
         private TextView score2;
         private TextView isLive;
 
-        protected override async void OnCreate(Bundle savedInstanceState)
+        Timer timer = new Timer(TimeSpan.FromSeconds(5).TotalMilliseconds) { AutoReset = true };
+
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Game = Game.FromJSON(this.Intent.GetStringExtra("game"));
@@ -77,8 +80,21 @@ namespace Client.Droid.Screens
             ScoreView = FindViewById<RecyclerView>(Resource.Id.scoreRecyclerView);
             ScoreView.SetLayoutManager(new LinearLayoutManager(this));
             ScoreView.SetAdapter(Adapter);
+        }
 
+        protected async override void OnResume()
+        {
+            base.OnResume();
             await Presenter.OnBegin();
+            timer.Elapsed += (sender, e) => RunOnUiThread(async () => await Presenter.OnTick());
+            timer.Start();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+            timer.Stop();
+            Presenter.RemoveView();
         }
 
         public void ShowMessage(string message)

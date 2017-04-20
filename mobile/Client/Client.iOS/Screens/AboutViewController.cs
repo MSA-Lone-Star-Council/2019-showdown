@@ -68,7 +68,7 @@ namespace Client.iOS
 				make.CenterX.EqualTo(View);
 			});
 
-			visitLink.SetTitle("Learn more at texas-msa.org", UIControlState.Normal);
+			visitLink.SetTitle("Learn more at msa-texas.org", UIControlState.Normal);
 			visitLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
 			visitLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
 			visitLink.MakeConstraints(make =>

@@ -7,6 +7,7 @@ using Xamarin.Facebook.Login.Widget;
 using Xamarin.Facebook.Login;
 using Java.Lang;
 using System;
+using System.Threading.Tasks;
 
 namespace Scorekeeper.Droid
 {
@@ -42,11 +43,9 @@ namespace Scorekeeper.Droid
             profilePicture = FindViewById<ProfilePictureView>(Resource.Id.facebook_profile_picture);
             continueButton = FindViewById<Button>(Resource.Id.continue_button);
             continueButton.Click += async delegate {
-                //TODO: Move this (repeated) code from here and IFacebookCallback.OnSuccess to a loginPresenter
                 string facebook_token = AccessToken.CurrentAccessToken.Token;
                 var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
-                var token = await backendClient.GetToken(facebook_token);
-                backendClient.Token = token;
+                await TokenExchange(facebook_token);
                 StartActivity(new Intent(this, typeof(GameListActivity)));
             };
 
@@ -75,10 +74,7 @@ namespace Scorekeeper.Droid
             LoginResult loginResult = result as LoginResult;
 
             string facebook_token = loginResult.AccessToken.Token;
-            var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
-            var token = await backendClient.GetToken(facebook_token);
-            backendClient.Token = token;
-
+            await TokenExchange(loginResult.AccessToken.Token);
 
         }
 
@@ -102,6 +98,19 @@ namespace Scorekeeper.Droid
                 continueButton.Visibility = Android.Views.ViewStates.Gone;
             }
 
+        }
+
+        private async Task TokenExchange(string facebook_token)
+        {
+            var backendClient = ((ShowdownScorekeeperApplication)Application).BackendClient;
+
+            if (!string.IsNullOrEmpty(backendClient.Token)) return;
+
+            continueButton.Enabled = false;
+            var token = await backendClient.GetToken(facebook_token);
+            continueButton.Enabled = true;
+
+            backendClient.Token = token;
         }
     }
 

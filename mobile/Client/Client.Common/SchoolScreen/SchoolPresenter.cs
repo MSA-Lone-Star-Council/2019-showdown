@@ -32,10 +32,10 @@ namespace Client.Common
 			await UpdateFromServer();
 		}
 
-		public void SubscribeToSchool()
+		public async Task SubscribeToSchool()
 		{
-			manager.ToggleSubscription(School.TopicId);
-			View.Refresh();
+			await manager.ToggleSubscription(School.TopicId);
+			if (View != null) View.Refresh();
 		}
 
 		public bool SubscribedToSchool()
@@ -79,9 +79,9 @@ namespace Client.Common
 			return manager[game.TopicId];
 		}
 
-		public void SubscribeTapped(int index)
+		public async Task SubscribeTapped(int index)
 		{
-			manager.ToggleSubscription(games[index].TopicId);
+			await manager.ToggleSubscription(games[index].TopicId);
 			View.Refresh();
 		}
 	}

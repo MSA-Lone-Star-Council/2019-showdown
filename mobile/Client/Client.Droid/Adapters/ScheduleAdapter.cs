@@ -40,7 +40,7 @@ namespace Client.Droid.Adapters
             holder.Event = item;
             holder.Title.Text = item.Title;
             holder.Location.Text = item.Location.Name;
-            holder.StartTime.Text = Utilities.FormatDateTime(item.StartTime);
+            holder.StartTime.Text = Utilities.FormatEventTimeSpan(item);
         }
 
 		public override int ItemCount
