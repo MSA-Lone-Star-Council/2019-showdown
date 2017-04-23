@@ -18,7 +18,7 @@ provisioning profile.
 ## Set up for Distribution
 Before proceeding, have fastlane installed and availabe on your ```PATH```
 ```bash
-fastlane match app_store --force_for_new_devices # In this directory
+fastlane match appstore --force_for_new_devices # In this directory
 fastlane pem # Upload the p12 file to Notification Hub to work with push notifications production
 ```
 
