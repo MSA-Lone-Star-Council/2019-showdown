@@ -31,6 +31,7 @@ docker-compose up # For development
 docker exec -it backend_api_1 ./manage.py migrate
 docker exec -it backend_api_1 ./manage.py collectstatic
 ```
+Visit ```localhost``` 
 
 For production runs:
 1. Set up a publicly exposed server (ports 80, 443, and 8080 should be accessible) with Docker
@@ -50,3 +51,7 @@ docker-compose -p backend logs api -f
 # Scaling horizontally
 docker-compose -p backend scale api=3
 ```
+
+## Building new image
+```docker build -t msalonestarcouncil/showdown:latest src```
+```docker push msalonestarcouncil/showdown # If you want to publish it to the docker registry - will need permissions```
