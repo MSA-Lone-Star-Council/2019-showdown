@@ -32,12 +32,14 @@ namespace Common.iOS
 
 			var center = UNUserNotificationCenter.Current;
 
-			var content = new UNMutableNotificationContent();
-			content.Title = eventTitle;
-			content.Body = "Starts in 15 minutes";
-			content.Sound = UNNotificationSound.Default;
+            var content = new UNMutableNotificationContent
+            {
+                Title = eventTitle,
+                Body = "Starts in 15 minutes",
+                Sound = UNNotificationSound.Default
+            };
 
-			var request = UNNotificationRequest.FromIdentifier($"event_{content.Title}", content, trigger);
+            var request = UNNotificationRequest.FromIdentifier($"event_{content.Title}", content, trigger);
 			await center.AddNotificationRequestAsync(request);
 		}
 	}

@@ -24,11 +24,11 @@ namespace Client.iOS
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
 			presenter = new SchoolPresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager) { School = s };
-			Header = new SchoolHeader()
-			{
-				NotificationTappedAction = presenter.SubscribeToSchool,
-				IsSubscribed = presenter.SubscribedToSchool(),
-			};
+            Header = new SchoolHeader()
+            {
+                // NotificationTappedAction = presenter.SubscribeToSchool, //TODO
+                IsSubscribed = presenter.SubscribedToSchool(),
+            };
 			school = s;
 		}
 

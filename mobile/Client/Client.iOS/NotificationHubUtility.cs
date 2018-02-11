@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Client.Common;
 using Common.Common;
 using Common.iOS;
@@ -29,5 +30,10 @@ namespace Client.iOS
 				});
 			});
 		}
-	}
+
+        Task INotificationHub.SaveTags(List<string> tags)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

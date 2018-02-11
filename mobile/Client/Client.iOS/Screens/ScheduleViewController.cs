@@ -37,7 +37,7 @@ namespace Client.iOS
 		{
 			base.ViewWillDisappear(animated);
 			presenter.RemoveView();
-			timer.Invalidate();
+			if (timer != null) timer.Invalidate();
 		}
 
 		public override void ViewDidLoad()
