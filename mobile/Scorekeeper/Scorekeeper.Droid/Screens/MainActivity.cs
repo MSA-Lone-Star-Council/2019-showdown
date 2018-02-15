@@ -8,6 +8,10 @@ using Xamarin.Facebook.Login;
 using Java.Lang;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Common.Common;
 
 namespace Scorekeeper.Droid
 {
@@ -25,6 +29,8 @@ namespace Scorekeeper.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            AppCenter.Start(Secrets.scorekeeperAndroidAppCenterSecret, typeof(Analytics), typeof(Crashes));
 
             FacebookSdk.SdkInitialize(this.ApplicationContext);
             callbackManager = CallbackManagerFactory.Create();

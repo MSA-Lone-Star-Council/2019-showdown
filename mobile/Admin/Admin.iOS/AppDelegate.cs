@@ -2,6 +2,9 @@
 using Common.Common;
 using Foundation;
 using UIKit;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace Admin.iOS
 {
@@ -22,14 +25,17 @@ namespace Admin.iOS
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
-			BackendClient = new AdminRESTClient();
+            AppCenter.Start(Secrets.AdminiOSAppCenterSecret, typeof(Analytics), typeof(Crashes));
 
-			Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            // Override point for customization after application launch.
+            // If not required for your application you can safely delete this method
+            BackendClient = new AdminRESTClient();
 
-			Window.RootViewController = BuildRootViewController();
-			Window.MakeKeyAndVisible();
+            Window = new UIWindow(UIScreen.MainScreen.Bounds)
+            {
+                RootViewController = BuildRootViewController()
+            };
+            Window.MakeKeyAndVisible();
 
 			return true;
 		}

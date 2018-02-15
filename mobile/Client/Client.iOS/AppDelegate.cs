@@ -9,6 +9,9 @@ using Plugin.Iconize.iOS.Controls;
 using UIKit;
 using UserNotifications;
 using WindowsAzure.Messaging;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace Client.iOS
 {
@@ -31,15 +34,18 @@ namespace Client.iOS
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-		    BackendClient = new ShowdownRESTClient();
+            AppCenter.Start(Secrets.clientiOSAppCenterSecret, typeof(Analytics), typeof(Crashes));
+
+            BackendClient = new ShowdownRESTClient();
 			SubscriptionManager = new SubscriptionManager(new iOSStorage(), hub);
 
 			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
-			Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-			Window.RootViewController = BuildRootViewController();
-			Window.MakeKeyAndVisible();
+            Window = new UIWindow(UIScreen.MainScreen.Bounds)
+            {
+                RootViewController = BuildRootViewController()
+            };
+            Window.MakeKeyAndVisible();
 
 			RegisterForRemoteNotification();
 

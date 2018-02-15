@@ -10,6 +10,10 @@ using Client.Droid.Screens;
 using Android.Gms.Common;
 using Android.Util;
 using Firebase.Iid;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Common.Common;
 
 namespace Client.Droid
 {
@@ -31,7 +35,9 @@ namespace Client.Droid
 
             SetContentView(Resource.Layout.Main);
 
-			BuildDrawer();
+            AppCenter.Start(Secrets.clientAndroidAppCenterSecret, typeof(Analytics), typeof(Crashes));
+
+            BuildDrawer();
 
             Fragments = new V4.App.Fragment[] {
                 new ScheduleFragment(),
@@ -42,6 +48,7 @@ namespace Client.Droid
 
 
 			IsPlayServicesAvailable();
+
         }
 
 		protected override void OnResume()
