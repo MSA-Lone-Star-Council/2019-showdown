@@ -60,7 +60,7 @@ namespace Client.iOS
 		{
 			base.ViewWillDisappear(animated);
 			Presenter.RemoveView();
-			updateTimer.Invalidate();
+			if (updateTimer != null) updateTimer.Invalidate();
 		}
 
 		public void OpenGame(Game g)

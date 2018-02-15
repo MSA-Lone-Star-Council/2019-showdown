@@ -64,7 +64,7 @@ namespace Common.iOS
 	    {
 	        base.ViewWillDisappear(animated);
 	        Presenter.RemoveView();
-			timer.Invalidate();
+			if (timer != null) timer.Invalidate();
 	    }
 
 		public virtual void OpenNewAnnouncement()
