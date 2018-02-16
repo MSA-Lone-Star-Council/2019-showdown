@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!-- inherit from the material theme -->
-  <style name="BlueGrey" parent="android:Theme.Material">
+  <style name="ShowdownOrange" parent="android:Theme.Material">
     <!-- Main theme colors -->
     <!--   your app branding color for the app bar -->
-    <item name="android:colorPrimary">#bf5700</item>
+    <item name="android:colorPrimary">@colors/primaryColor</item>
     <!--   darker variant for the status bar and contextual app bars -->
-    <item name="android:colorPrimaryDark">#882a00</item>
+    <item name="android:colorPrimaryDark">@colors/primaryDarkColor</item>
     <!--   theme UI controls like checkboxes and text fields -->
-    <item name="android:colorAccent">#f88638</item>
+    <item name="android:colorAccent">@colors/secondaryColor</item>
+    <!-- -->
+    <item name="android:windowBackground">@colors/backgroundColor</item>
+    <!-- 
+    <item name="navigationBarColor">colors:black</item>
+     -->
+    <item name="textColorPrimary">@colors/primaryTextColor</item>
   </style>
 </resources>
