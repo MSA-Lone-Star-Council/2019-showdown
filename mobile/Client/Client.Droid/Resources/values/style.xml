@@ -11,9 +11,9 @@
     <item name="android:colorAccent">@colors/secondaryColor</item>
     <!-- -->
     <item name="android:windowBackground">@colors/backgroundColor</item>
-    <!-- 
-    <item name="navigationBarColor">colors:black</item>
-     -->
-    <item name="textColorPrimary">@colors/primaryTextColor</item>
+    <!-- -->
+    <item name="android:navigationBarColor">@colors/navigationBarColor</item>
+    <!-- -->
+    <item name="android:textColorPrimary">@colors/primaryTextColor</item>
   </style>
 </resources>
