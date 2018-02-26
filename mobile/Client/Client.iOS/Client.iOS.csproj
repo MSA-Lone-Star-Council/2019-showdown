@@ -83,6 +83,9 @@
     <Reference Include="Masonry.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Masonry.1.0.2\lib\Xamarin.iOS\Masonry.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialControls, Version=1.2.6136.26345, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MaterialControls.1.2.2\lib\Xamarin.iOS10\MaterialControls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AppCenter, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AppCenter.1.4.0\lib\Xamarin.iOS10\Microsoft.AppCenter.dll</HintPath>
     </Reference>
@@ -212,7 +215,9 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
