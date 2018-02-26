@@ -1,38 +1,38 @@
-Registration,30,17,0,21,40,general
-Welcome/Introductions,30,18,30,19,0,general
-Ice Breakers,30,19,0,19,30,general
-Sisters Tajweed,30,19,0,22,15,sisters
-Brothers Tajweed,30,19,0,22,15,brothers
-Maghrib,30,19,30,20,0,general
-Sisters Nasheed,30,20,30,22,15,sisters
-Brothers Nasheed,30,20,0,22,15,brothers
-Isha,30,22,30,22,45,general
-Captain Meeting,30,22,45,23,0,general
-Qiyam,30,23,45,0,0,general
-Fajr,31,6,40,7,0,general
-Knowledge Bowl (1st Round - Written),31,7,0,8,0,general
-Breakfast,31,7,0,8,0,general
-Registration,31,8,0,13,0,general
-Sisters Volleyball,31,8,0,13,30,sisters
-Brothers Basketball,31,8,0,13,30,brothers
-Art/Scrapbook/Photography Check In,31,10,0,11,0,general
-Art/Scrapbook/Photography Viewing Open For Everyone,31,13,30,20,10,general
-Lunch & Dhuhr,31,13,30,14,0,general
-Sisters Basketball,31,14,0,19,0,sisters
-Sisters Dodgeball,31,14,0,19,0,sisters
-Brothers Football,31,14,0,19,0,brothers
-Brothers Soccer,31,14,0,19,0,brothers
-Activity ,31,14,0,17,0,general
-Asr,31,17,5,17,15,general
-Dinner,31,18,30,19,0,general
-Halaqa,31,19,0,19,45,general
-Maghrib,31,19,45,20,0,general
-Performance Poetry,31,20,15,22,15,general
-Isha,31,22,15,22,30,general
-Roll Call,31,22,30,23,30,general
-Fajr,1,6,25,6,35,general
-Breakfast,1,7,30,9,0,general
-Knowledge Bowl Finals,1,8,0,9,0,general
-Film,1,9,0,11,30,general
-Awards,1,11,45,12,30,general
-Dhuhr,1,13,35,13,45,general
+Registration,30,17,0,21,40,general,HEB University Center: Ballroom
+Welcome/Introductions,30,18,30,19,0,general,HEB University Center: Ballroom
+Ice Breakers,30,19,0,19,30,general,HEB University Center: Ballroom
+Sisters Tajweed,30,19,0,22,15,sisters,HEB University Center: Ballroom
+Brothers Tajweed,30,19,0,22,15,brothers,HEB University Center: Ballroom
+Maghrib,30,19,30,20,0,general,HEB University Center: Ballroom
+Sisters Nasheed,30,20,30,22,15,sisters,HEB University Center: Ballroom
+Brothers Nasheed,30,20,0,22,15,brothers,HEB University Center: Ballroom
+Isha,30,22,30,22,45,general,HEB University Center: Ballroom
+Captain Meeting,30,22,45,23,0,general,HEB University Center: Ballroom
+Qiyam,30,23,45,0,0,general,HEB University Center: Ballroom
+Fajr,31,6,40,7,0,general,HEB University Center: Ballroom
+Knowledge Bowl (1st Round - Written),31,7,0,8,0,general,HEB University Center: Ballroom
+Breakfast,31,7,0,8,0,general,HEB University Center: Ballroom
+Registration,31,8,0,13,0,general,HEB University Center: Ballroom
+Sisters Volleyball,31,8,0,13,30,sisters,HEB University Center: Ballroom
+Brothers Basketball,31,8,0,13,30,brothers,HEB University Center: Ballroom
+Art/Scrapbook/Photography Check In,31,10,0,11,0,general,HEB University Center: Ballroom
+Art/Scrapbook/Photography Viewing Open For Everyone,31,13,30,20,10,general,HEB University Center: Ballroom
+Lunch & Dhuhr,31,13,30,14,0,general,HEB University Center: Ballroom
+Sisters Basketball,31,14,0,19,0,sisters,HEB University Center: Ballroom
+Sisters Dodgeball,31,14,0,19,0,sisters,HEB University Center: Ballroom
+Brothers Football,31,14,0,19,0,brothers,HEB University Center: Ballroom
+Brothers Soccer,31,14,0,19,0,brothers,HEB University Center: Ballroom
+Activity ,31,14,0,17,0,general,HEB University Center: Ballroom
+Asr,31,17,5,17,15,general,HEB University Center: Ballroom
+Dinner,31,18,30,19,0,general,HEB University Center: Ballroom
+Halaqa,31,19,0,19,45,general,HEB University Center: Ballroom
+Maghrib,31,19,45,20,0,general,HEB University Center: Ballroom
+Performance Poetry,31,20,15,22,15,general,HEB University Center: Ballroom
+Isha,31,22,15,22,30,general,HEB University Center: Ballroom
+Roll Call,31,22,30,23,30,general,HEB University Center: Ballroom
+Fajr,1,6,25,6,35,general,HEB University Center: Ballroom
+Breakfast,1,7,30,9,0,general,HEB University Center: Ballroom
+Knowledge Bowl Finals,1,8,0,9,0,general,HEB University Center: Ballroom
+Film,1,9,0,11,30,general,HEB University Center: Ballroom
+Awards,1,11,45,12,30,general,HEB University Center: Ballroom
+Dhuhr,1,13,35,13,45,general,HEB University Center: Ballroom
