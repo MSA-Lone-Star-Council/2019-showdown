@@ -8,7 +8,7 @@ from dateutil import tz
 import arrow
 
 def datetime(day, hour, minute):
-    return arrow.get(2017, 4, day, hour, minute, 0, 0, tz.gettz('US/Central')).datetime
+    return arrow.get(2018, (day == 1) ? (4) : (1), day, hour, minute, 0, 0, tz.gettz('US/Central')).datetime
 
 def get_event_data_from_csv():
     csv_file = open('./showdown_schedule_expanded.csv')
