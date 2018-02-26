@@ -205,7 +205,6 @@
     <Folder Include="Assets.xcassets\FacebookIcon.imageset\" />
     <Folder Include="Assets.xcassets\TwitterIcon.imageset\" />
     <Folder Include="GamesTableSource\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -218,6 +217,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Resources\Colors.cs" />
     <Compile Include="Screens\ScheduleViewController.cs" />
     <Compile Include="Screens\SportsViewController.cs" />
     <Compile Include="Views\GameCell.cs" />
