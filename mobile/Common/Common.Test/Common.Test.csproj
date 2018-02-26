@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Common.Test</RootNamespace>
     <AssemblyName>Common.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
