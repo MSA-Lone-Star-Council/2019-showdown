@@ -58,7 +58,7 @@ namespace Client.iOS
 
 			navController.NavigationBar.Translucent = false;
 
-			View.BackgroundColor = new UIColor(0.56f, 1.0f, 0.56f, 1.0f);
+			View.BackgroundColor = Resources.Colors.backgroundColor;
 
 			GamesList = new UITableView()
 			{

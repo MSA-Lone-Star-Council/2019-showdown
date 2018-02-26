@@ -39,7 +39,7 @@ namespace Client.iOS
 		{
 			base.ViewDidLoad();
 
-			View.BackgroundColor = new UIColor(0.56f, 1.0f, 0.56f, 1.0f);
+			View.BackgroundColor = Resources.Colors.backgroundColor;
 
 			var tableSource = new GamesTableSource(GameCellID, Presenter);
 

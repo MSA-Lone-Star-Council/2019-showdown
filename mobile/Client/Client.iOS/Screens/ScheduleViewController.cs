@@ -43,7 +43,7 @@ namespace Client.iOS
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			View.BackgroundColor = new UIColor(0.16f, 0.75f, 1.00f, 1.0f);
+			View.BackgroundColor = Resources.Colors.backgroundColor;
 
 			var tableSource = new ScheduleTableSource() { Presenter = presenter };
 			tableSource.Events = new List<Event>();
