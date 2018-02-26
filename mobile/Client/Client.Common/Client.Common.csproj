@@ -46,12 +46,6 @@
     <Compile Include="Notifications\INotificationHub.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="project.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

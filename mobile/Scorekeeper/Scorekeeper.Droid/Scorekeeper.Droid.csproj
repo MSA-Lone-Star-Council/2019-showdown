@@ -186,10 +186,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{c8d3aeba-b013-4b34-a559-83ebf00f0cdb}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
       <Project>{eefa1122-8413-42a3-874f-132d90640e58}</Project>
       <Name>Scorekeeper.Common</Name>

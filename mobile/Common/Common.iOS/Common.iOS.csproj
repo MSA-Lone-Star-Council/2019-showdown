@@ -81,9 +81,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,12 +93,6 @@
     <Compile Include="AnnoucementsViewController.cs" />
     <Compile Include="AnnouncementCell.cs" />
     <Compile Include="Utilities\ConfirmActionAlert.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Common\Common.Common.csproj">
-      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
