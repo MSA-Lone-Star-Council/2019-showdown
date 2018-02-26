@@ -1,11 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F240F33F-CA8A-42C2-B5A6-EF854421050E}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UseMSBuildEngine>true</UseMSBuildEngine>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Client.Common</RootNamespace>
+    <AssemblyName>Client.Common</AssemblyName>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleScreen\IScheduleView.cs" />
+    <Compile Include="ScheduleScreen\SchedulePresenter.cs" />
+    <Compile Include="SportsScreen\SportsPresenter.cs" />
+    <Compile Include="SportsScreen\ISportsView.cs" />
+    <Compile Include="GameScreen\GamePresenter.cs" />
+    <Compile Include="GameScreen\IGameView.cs" />
+    <Compile Include="SchoolScreen\SchoolPresenter.cs" />
+    <Compile Include="SchoolScreen\ISchoolView.cs" />
+    <Compile Include="EventScreen\EventPresenter.cs" />
+    <Compile Include="EventScreen\IEventView.cs" />
+    <Compile Include="IGameHavingPresenter.cs" />
+    <Compile Include="Notifications\SubscriptionManager.cs" />
+    <Compile Include="Notifications\INotificationHub.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
   </ItemGroup>
 
 </Project>

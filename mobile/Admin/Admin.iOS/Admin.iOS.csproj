@@ -235,10 +235,6 @@
       <Project>{6B32DD6D-85D3-421E-9F80-D7977043A3A2}</Project>
       <Name>Admin.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />

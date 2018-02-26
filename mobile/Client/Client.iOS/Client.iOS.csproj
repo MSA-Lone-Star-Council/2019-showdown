@@ -239,10 +239,6 @@
       <Project>{F240F33F-CA8A-42C2-B5A6-EF854421050E}</Project>
       <Name>Client.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
       <Project>{9FC81125-076D-4AFC-8180-DE27BB1EAF33}</Project>
       <Name>Common.iOS</Name>

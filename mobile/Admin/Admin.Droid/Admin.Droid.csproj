@@ -109,10 +109,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{c8d3aeba-b013-4b34-a559-83ebf00f0cdb}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Admin.Common\Admin.Common.csproj">
       <Project>{6b32dd6d-85d3-421e-9f80-d7977043a3a2}</Project>
       <Name>Admin.Common</Name>

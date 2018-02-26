@@ -54,12 +54,6 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Common\Common.Common.csproj">
-      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
-      <Name>Common.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\Values\colors.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
