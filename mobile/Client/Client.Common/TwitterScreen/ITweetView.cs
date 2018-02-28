@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Tweetinvi.Models;
 
-namespace Client.Common.TwitterScreen
+namespace Client.Common
 {
-    interface ITweetView
+    public interface ITweetView
     {
         List<ITweet> Tweets { get; set; }
 

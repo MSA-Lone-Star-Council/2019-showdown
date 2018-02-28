@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Common;
 
-namespace Client.Common.TwitterScreen
+namespace Client.Common
 {
     public class TweetPresenter : Presenter<ITweetView>
     {

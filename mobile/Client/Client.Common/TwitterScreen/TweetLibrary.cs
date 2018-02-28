@@ -8,7 +8,7 @@ using Tweetinvi.Streaming;
 using Tweetinvi.Models;
 using Common.Common;
 
-namespace Client.Common.TwitterScreen
+namespace Client.Common
 {
     public class TweetLibrary
     {
