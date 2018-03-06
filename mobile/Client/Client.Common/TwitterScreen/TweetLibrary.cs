@@ -42,5 +42,12 @@ namespace Client.Common
                 filteredStream.AddTrack(track);
             }
         }
+
+        public void ListenForTweets(IClientUi clientUi) {
+            filteredStream.MatchingTweetReceived += (sender, arg) =>
+            {
+                clientUi.updateClientUi();
+            };
+        }
     }
 }
