@@ -17,39 +17,29 @@ namespace Client.Common
         private IFilteredStream filteredStream;
         private TwitterCredentials twitterCredentials;
         private readonly ShowdownRESTClient _client;
-        private static readonly string TRACK_HASHTAG = "#test";
+        private readonly IClientUi _clientUi;
+        private static readonly string TRACK_HASHTAG = "#blackpanther";
 
         List<ITweet> tweets;
 
-        public TweetPresenter(ShowdownRESTClient client)
+        public TweetPresenter(ShowdownRESTClient client, IClientUi clientUi)
         {
             _client = client;
+            _clientUi = clientUi;
             filteredStream = Stream.CreateFilteredStream();
-
-            var twitterCredentials = new TwitterCredentials(
-                Secrets.twitterConsumerKey, 
-                Secrets.twitterConsumerSecret,
-                Secrets.twitterAccessToken, 
-                Secrets.twitterAccessTokenSecret)
-            {
-                ApplicationOnlyBearerToken = Secrets.twitterBearerToken
-            };
-            Auth.SetCredentials(twitterCredentials);
+            SetTwitterCredentials();
         }
 
         public async Task OnBegin()
         {
-            SetTwitterCredentials();
             filteredStream.AddTrack(TRACK_HASHTAG);
             await GetCachedTweets();
-            List<string> strings = new List<string>
+            filteredStream.AddTrack(TRACK_HASHTAG);
+            filteredStream.MatchingTweetReceived += (sender, arg) =>
             {
-                "test"
+                _clientUi.updateClientUi();
             };
-            var stream = Stream.CreateFilteredStream();
-            stream.AddTrack("#blackpanther");
-            stream.MatchingTweetReceived += AddTweetInRealtime();
-            stream.StartStreamMatchingAnyCondition();
+            filteredStream.StartStreamMatchingAnyCondition();
 
         }
 
@@ -83,20 +73,14 @@ namespace Client.Common
         private void SetTwitterCredentials()
         {
             twitterCredentials = new TwitterCredentials(
-            Secrets.twitterConsumerKey, Secrets.twitterConsumerSecret,
-            Secrets.twitterAccessToken, Secrets.twitterAccessTokenSecret)
+            Secrets.twitterConsumerKey,
+            Secrets.twitterConsumerSecret,
+            Secrets.twitterAccessToken,
+            Secrets.twitterAccessTokenSecret)
             {
                 ApplicationOnlyBearerToken = Secrets.twitterBearerToken
             };
             Auth.SetCredentials(twitterCredentials);
-        }
-
-        public void ListenForTweets(IClientUi clientUi)
-        {
-            filteredStream.MatchingTweetReceived += (sender, arg) =>
-            {
-                clientUi.updateClientUi();
-            };
         }
     }
 }
