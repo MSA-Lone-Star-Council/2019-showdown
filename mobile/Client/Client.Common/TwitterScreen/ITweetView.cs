@@ -10,7 +10,7 @@ namespace Client.Common
 {
     public interface ITweetView
     {
-        List<ITweet> Tweets { get; set; }
+        List<ITweet> Tweets { set; }
 
         void Refresh();
 
