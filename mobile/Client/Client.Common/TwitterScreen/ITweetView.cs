@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tweetinvi.Events;
 using Tweetinvi.Models;
 
 namespace Client.Common
@@ -11,8 +12,9 @@ namespace Client.Common
     {
         List<ITweet> Tweets { get; set; }
 
-        void OpenTweet(ITweet tweet);
-
         void Refresh();
+
+        void OpenTweet(ITweet tweet);
+        EventHandler<MatchedTweetReceivedEventArgs> AddTweetFromStream();
     }
 }
