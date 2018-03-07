@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Android.App;
+using Android.Support.V4.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -54,7 +54,7 @@ namespace Client.Droid
             View view = inflater.Inflate(Resource.Layout.fragment_twitter, container, false);
 
             // Set up Recycler View for the Schedule
-            TwitterView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
+            TwitterView = view.FindViewById<RecyclerView>(Resource.Id.twitterRecyclerView);
             TwitterView.SetLayoutManager(new LinearLayoutManager(this.Activity));
             TwitterView.SetAdapter(Adapter);
 
@@ -63,6 +63,9 @@ namespace Client.Droid
 
         EventHandler<MatchedTweetReceivedEventArgs> ITweetView.AddTweetFromStream()
         {
+            this.
+
+
             throw new NotImplementedException();
         }
 
