@@ -32,8 +32,10 @@ namespace Client.Droid
                 adapter.NotifyDataSetChanged();
             }
         }
+
         RecyclerView TwitterView { get; set; }
         TwitterAdapter Adapter { get; set; }
+
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -61,14 +63,6 @@ namespace Client.Droid
             return view;
         }
 
-        EventHandler<MatchedTweetReceivedEventArgs> ITweetView.AddTweetFromStream()
-        {
-            this.
-
-
-            throw new NotImplementedException();
-        }
-
         void ITweetView.OpenTweet(ITweet tweet)
         {
             throw new NotImplementedException();
@@ -76,7 +70,8 @@ namespace Client.Droid
 
         void ITweetView.Refresh()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            this.Adapter.NotifyDataSetChanged();
         }
     }
 }

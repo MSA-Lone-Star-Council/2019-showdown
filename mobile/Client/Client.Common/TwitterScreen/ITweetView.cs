@@ -13,8 +13,6 @@ namespace Client.Common
         List<ITweet> Tweets { set; }
 
         void Refresh();
-
         void OpenTweet(ITweet tweet);
-        EventHandler<MatchedTweetReceivedEventArgs> AddTweetFromStream();
     }
 }

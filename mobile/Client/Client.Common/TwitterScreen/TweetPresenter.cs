@@ -20,6 +20,7 @@ namespace Client.Common
 
         public TweetPresenter(ShowdownRESTClient client)
         {
+            tweets = new List<ITweet>();
             _client = client;
             filteredStream = Stream.CreateFilteredStream();
             SetTwitterCredentials();
@@ -27,9 +28,15 @@ namespace Client.Common
 
         public async Task OnBegin()
         {
+            View.Tweets = tweets;
             await GetCachedTweets();
             filteredStream.AddTrack(TRACK_HASHTAG);
-            filteredStream.MatchingTweetReceived += View.AddTweetFromStream();
+            filteredStream.MatchingTweetReceived += (sender, arg) =>
+            {
+                Console.WriteLine(arg.Tweet.Text);
+                tweets.Add(arg.Tweet);
+                View.Refresh();
+            };
             filteredStream.StartStreamMatchingAnyCondition();
         }
 
