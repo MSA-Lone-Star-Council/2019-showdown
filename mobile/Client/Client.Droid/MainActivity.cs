@@ -43,7 +43,8 @@ namespace Client.Droid
                 new ScheduleFragment(),
                 new AnnouncementsFragment(),
                 new SportsFragment(),
-                new AcknowledgementsFragment()
+                new AcknowledgementsFragment(),
+                new TwitterFragment()
             };
 
 

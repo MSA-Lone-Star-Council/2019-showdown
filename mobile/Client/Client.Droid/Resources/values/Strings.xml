@@ -7,6 +7,7 @@
       <item>Annoucements</item>
       <item>Sports</item>
       <item>Acknowledgements</item>
+      <item>Twitter</item>
     </string-array>
     <string name="drawer_open">Open Menu</string>
     <string name="drawer_close">Close Menu</string>

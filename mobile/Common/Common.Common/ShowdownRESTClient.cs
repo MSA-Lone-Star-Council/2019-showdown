@@ -31,7 +31,12 @@ namespace Common.Common
 			return ((string)data["token"]);
         }
 
-		public async Task<List<Event>> GetScheduleAsync()
+        public Task<List<Object>> GetTweetsAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Event>> GetScheduleAsync()
 		{
 			var jsonString = await RequestAsync("/events/schedule");
 			return Event.FromJSONArray(jsonString);
