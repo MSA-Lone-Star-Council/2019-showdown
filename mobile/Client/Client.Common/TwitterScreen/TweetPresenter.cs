@@ -22,8 +22,8 @@ namespace Client.Common
         {
             tweets = new List<ITweet>();
             _client = client;
-            filteredStream = Stream.CreateFilteredStream();
             SetTwitterCredentials();
+            filteredStream = Stream.CreateFilteredStream();
         }
 
         public async Task OnBegin()
@@ -33,7 +33,7 @@ namespace Client.Common
             filteredStream.AddTrack(TRACK_HASHTAG);
             filteredStream.MatchingTweetReceived += (sender, arg) =>
             {
-                Console.WriteLine(arg.Tweet.Text);
+                //Console.WriteLine(arg.Tweet.Text);
                 tweets.Add(arg.Tweet);
                 View.Refresh();
             };

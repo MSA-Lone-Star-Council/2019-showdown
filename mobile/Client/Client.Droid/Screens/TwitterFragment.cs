@@ -63,6 +63,20 @@ namespace Client.Droid
             return view;
         }
 
+        public async override void OnResume()
+        {
+            base.OnResume();
+
+            Presenter.TakeView(this);
+            await Presenter.OnBegin();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            Presenter.RemoveView();
+        }
+
         void ITweetView.OpenTweet(ITweet tweet)
         {
             throw new NotImplementedException();
