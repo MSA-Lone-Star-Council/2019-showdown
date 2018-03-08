@@ -63,12 +63,18 @@ namespace Client.Droid
             return view;
         }
 
+        public override void OnPause()
+        {
+            base.OnPause();
+            Presenter.OnPause();
+        }
+
         public async override void OnResume()
         {
             base.OnResume();
 
             Presenter.TakeView(this);
-            await Presenter.OnBegin();
+            Presenter.OnResume();
         }
 
         public override void OnStop()

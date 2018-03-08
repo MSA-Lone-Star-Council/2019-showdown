@@ -33,9 +33,9 @@ namespace Client.Common
             filteredStream.AddTrack(TRACK_HASHTAG);
             filteredStream.MatchingTweetReceived += (sender, arg) =>
             {
-                //Console.WriteLine(arg.Tweet.Text);
-                tweets.Add(arg.Tweet);
-                View.Refresh();
+                Console.WriteLine(arg.Tweet.Text);
+            //    tweets.Add(arg.Tweet);
+            //    View.Refresh();
             };
             filteredStream.StartStreamMatchingAnyCondition();
         }
@@ -73,6 +73,16 @@ namespace Client.Common
                 ApplicationOnlyBearerToken = Secrets.twitterBearerToken
             };
             Auth.SetCredentials(twitterCredentials);
+        }
+
+        public void OnPause()
+        {
+            filteredStream.PauseStream();
+        }
+
+        public void OnResume()
+        {
+            filteredStream.ResumeStream();
         }
     }
 }
