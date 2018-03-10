@@ -14,5 +14,6 @@ namespace Client.Common
 
         void Refresh();
         void OpenTweet(ITweet tweet);
+        EventHandler<MatchedTweetReceivedEventArgs> AddTweetFromStream();
     }
 }

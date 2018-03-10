@@ -30,7 +30,10 @@ namespace Client.Common
         public async Task OnBegin()
         {
             View.Tweets = tweets;
-            //await GetCachedTweets();
+            await GetCachedTweets();
+            filteredStream.AddTrack(TRACK_HASHTAG);
+            filteredStream.MatchingTweetReceived += View.AddTweetFromStream();
+            filteredStream.StartStreamMatchingAnyCondition();
         }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MSA Showdown 2017</string>
-    <string name="app_name_short">Showdown 2017</string>
+    <string name="app_name">MSA Showdown 2018</string>
+    <string name="app_name_short">Showdown 2018</string>
     <string-array name="nav_titles">
       <item>Schedule</item>
       <item>Annoucements</item>
