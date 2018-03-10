@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!-- inherit from the material theme -->
-  <style name="BlueGrey" parent="android:Theme.Material">
+  <style name="BlueGrey" parent="android:Theme.Material.Light">
     <!-- Main theme colors -->
     <!--   your app branding color for the app bar -->
     <item name="android:colorPrimary">#bf5700</item>
