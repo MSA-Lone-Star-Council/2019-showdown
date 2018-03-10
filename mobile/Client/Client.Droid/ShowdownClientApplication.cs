@@ -10,7 +10,7 @@ namespace Client.Droid
 {
     [Application(
         Icon = "@drawable/lsc_icon",
-        Theme = "@style/BlueGrey")]
+        Theme = "@style/UTColors")]
     public class ShowdownClientApplication : Application
 	{
         public NotificationHubUtility HubUtility { get; set; }
