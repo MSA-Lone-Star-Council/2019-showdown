@@ -14,7 +14,8 @@ namespace Client.Common
         private IFilteredStream filteredStream;
         private TwitterCredentials twitterCredentials;
         private readonly ShowdownRESTClient _client;
-        private static readonly string TRACK_HASHTAG = "#blackpanther";
+        public IClientUpdateUi ClientUpdateUi { get; set; }
+        private static readonly string TRACK_HASHTAG = "rockets";
 
         List<ITweet> tweets;
 
@@ -29,15 +30,7 @@ namespace Client.Common
         public async Task OnBegin()
         {
             View.Tweets = tweets;
-            await GetCachedTweets();
-            filteredStream.AddTrack(TRACK_HASHTAG);
-            filteredStream.MatchingTweetReceived += (sender, arg) =>
-            {
-                Console.WriteLine(arg.Tweet.Text);
-            //    tweets.Add(arg.Tweet);
-            //    View.Refresh();
-            };
-            filteredStream.StartStreamMatchingAnyCondition();
+            //await GetCachedTweets();
         }
 
 
@@ -83,6 +76,17 @@ namespace Client.Common
         public void OnResume()
         {
             filteredStream.ResumeStream();
+        }
+
+        public void StartStream() {
+            filteredStream.AddTrack(TRACK_HASHTAG);
+            filteredStream.MatchingTweetReceived += (sender, arg) =>
+            {   if (!arg.Tweet.Retweeted && !arg.Tweet.Text.Contains("RT"))
+                {
+                    ClientUpdateUi.UpdateUi(arg.Tweet);
+                }
+            };
+            filteredStream.StartStreamMatchingAnyCondition();
         }
     }
 }

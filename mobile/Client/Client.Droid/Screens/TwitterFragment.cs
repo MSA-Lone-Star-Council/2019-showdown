@@ -8,6 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Widget;
+using System.Threading.Tasks;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -21,6 +22,7 @@ namespace Client.Droid
     public class TwitterFragment : Fragment, ITweetView
     {
         TweetPresenter Presenter { get; set; }
+        FetchTweets task;
 
         List<ITweet> ITweetView.Tweets
         {
@@ -48,7 +50,8 @@ namespace Client.Droid
             {
                 Tweets = new List<ITweet>()
             };
-            Adapter.ItemClick += (object sender, TwitterAdapterClickEventArgs args) => Presenter.OnClickRow(args.Tweet);
+            task = new FetchTweets(Adapter.Tweets, this, Presenter);
+            Presenter.ClientUpdateUi = task;
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -59,6 +62,7 @@ namespace Client.Droid
             TwitterView = view.FindViewById<RecyclerView>(Resource.Id.twitterRecyclerView);
             TwitterView.SetLayoutManager(new LinearLayoutManager(this.Activity));
             TwitterView.SetAdapter(Adapter);
+            task.Execute();
 
             return view;
         }
@@ -67,6 +71,7 @@ namespace Client.Droid
         {
             base.OnPause();
             Presenter.OnPause();
+            task.Cancel(true);
         }
 
         public async override void OnResume()
@@ -92,6 +97,36 @@ namespace Client.Droid
         {
             //throw new NotImplementedException();
             this.Adapter.NotifyDataSetChanged();
+        }
+
+        public class FetchTweets : AsyncTask<String, ITweet, String>, IClientUpdateUi
+        {
+            List<ITweet> tweets;
+            TwitterAdapter adapter;
+            TweetPresenter presenter;
+            public FetchTweets(List<ITweet> tweets, TwitterFragment fragment, TweetPresenter presenter)
+            {
+                this.tweets = tweets;
+                this.adapter = fragment.Adapter;
+                this.presenter = presenter;
+            }
+
+            public void UpdateUi(ITweet tweet)
+            {
+                PublishProgress(tweet);
+            }
+
+            protected override void OnProgressUpdate(params ITweet[] tweetArray)
+            {
+                this.tweets.Insert(0, tweetArray[0]);
+                adapter.NotifyDataSetChanged();
+            }
+
+            protected override String RunInBackground(params String[] @params)
+            {
+                presenter.StartStream();
+                return null;
+            }
         }
     }
 }

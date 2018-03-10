@@ -15,8 +15,6 @@ namespace Client.Droid.Adapters
 {
     class TwitterAdapter : RecyclerView.Adapter
     {
-        public event EventHandler<TwitterAdapterClickEventArgs> ItemClick;
-        public event EventHandler<TwitterAdapterClickEventArgs> ItemLongClick;
         public List<ITweet> Tweets { get; set; }
 
         // Create new views (invoked by the layout manager)
@@ -24,10 +22,10 @@ namespace Client.Droid.Adapters
         {
 
             //Setup your layout here
-            var id = Resource.Layout.event_layout;
+            var id = Resource.Layout.tweet_layout;
             View itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-            var vh = new TwitterAdapterViewHolder(itemView, OnClick, OnLongClick);
+            var vh = new TwitterAdapterViewHolder(itemView);
             return vh;
         }
 
@@ -53,45 +51,20 @@ namespace Client.Droid.Adapters
 
         }
 
-        void OnClick(TwitterAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
-        void OnLongClick(TwitterAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);
-
     }
 
     public class TwitterAdapterViewHolder : RecyclerView.ViewHolder
     {
         public ITweet Tweet { get; set; }
 
-        public TextView Username { get; set; }
-        public TextView TweetBody { get; set; }
+        public TextView Username;
+        public TextView TweetBody;
 
 
-        public TwitterAdapterViewHolder(View itemView, Action<TwitterAdapterClickEventArgs> clickListener,
-                            Action<TwitterAdapterClickEventArgs> longClickListener) : base(itemView)
+        public TwitterAdapterViewHolder(View itemView) : base(itemView)
         {
             Username = itemView.FindViewById<TextView>(Resource.Id.tweet_username);
             TweetBody = itemView.FindViewById<TextView>(Resource.Id.tweet_body);
-
-
-            itemView.Click += (sender, e) => clickListener(new TwitterAdapterClickEventArgs
-            {
-                View = itemView,
-                Position = AdapterPosition,
-                Tweet = this.Tweet  //Edge case, Null if ViewHolder has been clicked before it was bound to a view
-            });
-            itemView.LongClick += (sender, e) => longClickListener(new TwitterAdapterClickEventArgs
-            {
-                View = itemView,
-                Position = AdapterPosition,
-                Tweet = this.Tweet //Edge case, Null if ViewHolder has been clicked before it was bound to a view
-            });
         }
-    }
-
-    public class TwitterAdapterClickEventArgs : EventArgs
-    {
-        public View View { get; set; }
-        public int Position { get; set; }
-        public ITweet Tweet { get; set; }
     }
 }
