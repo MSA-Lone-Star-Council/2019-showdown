@@ -12,7 +12,7 @@ namespace Client.Common
         private static readonly string HASHTAG_ALT = "#lakers"; //TODO: Change later to Showdown tags
         private static readonly string BASE_SEARCH_URL = "https://twitter.com/search";
 
-        public TweetPresenter(ShowdownRESTClient client)
+        public TweetPresenter()
         {
             uriBuilder = new UriBuilder(BASE_SEARCH_URL);
         }
