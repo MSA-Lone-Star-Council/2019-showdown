@@ -20,16 +20,11 @@ namespace Client.Common
         public void OnBegin()
         {
             if (View.HasInternetConnection()) {
-                View.StartWebView();
+                View.StartWebView(BuildUriQuery().ToString());
             }
             else {
                 View.NoInternetConnection();
             }
-        }
-
-        public string GetUrlString()
-        {
-            return BuildUriQuery().ToString();
         }
 
         private Uri BuildUriQuery()

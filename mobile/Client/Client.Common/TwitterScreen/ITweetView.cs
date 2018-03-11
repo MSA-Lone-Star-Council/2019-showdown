@@ -2,7 +2,7 @@
 {
     public interface ITweetView
     {
-        void StartWebView();
+        void StartWebView(string url);
         void NoInternetConnection();
         bool HasInternetConnection();
     }
