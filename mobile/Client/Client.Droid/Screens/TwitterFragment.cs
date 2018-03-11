@@ -99,6 +99,11 @@ namespace Client.Droid
             this.Adapter.NotifyDataSetChanged();
         }
 
+        public EventHandler<MatchedTweetReceivedEventArgs> AddTweetFromStream()
+        {
+            throw new NotImplementedException();
+        }
+
         public class FetchTweets : AsyncTask<String, ITweet, String>, IClientUpdateUi
         {
             List<ITweet> tweets;
