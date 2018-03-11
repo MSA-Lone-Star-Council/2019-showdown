@@ -1,95 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Web;
 using Common.Common;
-using Tweetinvi;
-using Tweetinvi.Models;
-using Tweetinvi.Streaming;
 
 namespace Client.Common
 {
     public class TweetPresenter : Presenter<ITweetView>
     {
 
-        private IFilteredStream filteredStream;
-        private TwitterCredentials twitterCredentials;
-        private readonly ShowdownRESTClient _client;
-        public IClientUpdateUi ClientUpdateUi { get; set; }
-        private static readonly string TRACK_HASHTAG = "rockets";
-
-        List<ITweet> tweets;
+        private UriBuilder uriBuilder;
+        private static readonly string HASHTAG_PRIMARY = "#rockets"; //TODO: Change later to Showdown tags
+        private static readonly string HASHTAG_ALT = "#lakers"; //TODO: Change later to Showdown tags
+        private static readonly string BASE_SEARCH_URL = "https://twitter.com/search";
 
         public TweetPresenter(ShowdownRESTClient client)
         {
-            tweets = new List<ITweet>();
-            _client = client;
-            SetTwitterCredentials();
-            filteredStream = Stream.CreateFilteredStream();
+            uriBuilder = new UriBuilder(BASE_SEARCH_URL);
         }
 
-        public async Task OnBegin()
+        public void OnBegin()
         {
-            View.Tweets = tweets;
-            await GetCachedTweets();
-            filteredStream.AddTrack(TRACK_HASHTAG);
-            filteredStream.MatchingTweetReceived += View.AddTweetFromStream();
-            filteredStream.StartStreamMatchingAnyCondition();
+            if (View.HasInternetConnection()) {
+                View.StartWebView();
+            }
+            else {
+                View.NoInternetConnection();
+            }
         }
 
-
-        public void OnClickRow(ITweet Tweet)
+        public string GetUrlString()
         {
-            View.OpenTweet(Tweet);
+            return BuildUriQuery().ToString();
         }
 
-        private Task UpdateFromServer()
+        private Uri BuildUriQuery()
         {
-            throw new NotImplementedException();
-        }
-
-        private async Task GetCachedTweets()
-        {
-            //TODO Make a local model of Itweet
-            //TODO Update Backend so it actually does this method
-            /*
-            tweets = await _client.GetTweetsAsync();    
-            if (View != null) View.Tweets = tweets;
-            */
-            await Task.CompletedTask;
-        }
-
-        private void SetTwitterCredentials()
-        {
-            twitterCredentials = new TwitterCredentials(
-            Secrets.twitterConsumerKey,
-            Secrets.twitterConsumerSecret,
-            Secrets.twitterAccessToken,
-            Secrets.twitterAccessTokenSecret)
-            {
-                ApplicationOnlyBearerToken = Secrets.twitterBearerToken
-            };
-            Auth.SetCredentials(twitterCredentials);
-        }
-
-        public void OnPause()
-        {
-            filteredStream.PauseStream();
-        }
-
-        public void OnResume()
-        {
-            filteredStream.ResumeStream();
-        }
-
-        public void StartStream() {
-            filteredStream.AddTrack(TRACK_HASHTAG);
-            filteredStream.MatchingTweetReceived += (sender, arg) =>
-            {   if (!arg.Tweet.Retweeted && !arg.Tweet.Text.Contains("RT"))
-                {
-                    ClientUpdateUi.UpdateUi(arg.Tweet);
-                }
-            };
-            filteredStream.StartStreamMatchingAnyCondition();
+            var queryBuilder = HttpUtility.ParseQueryString(uriBuilder.Query);
+            queryBuilder["f"] = "tweets";
+            queryBuilder["vertical"] = "default";
+            queryBuilder["q"] = HASHTAG_PRIMARY + ", OR " + HASHTAG_ALT;
+            queryBuilder["src"] = "typd";
+            uriBuilder.Query = queryBuilder.ToString();
+            return uriBuilder.Uri;
         }
     }
 }
