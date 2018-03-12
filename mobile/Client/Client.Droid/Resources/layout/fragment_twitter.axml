@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-	android:orientation="vertical"
-	android:gravity="center">
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
 
-	<TextView
-		android:id="@+id/empty_view"
-		android:width="match_parent"
-		android:height="wrap_content"
-		android:gravity="center"
-		android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-	  />
+	<android.webkit.WebView
+		android:id="@+id/web_view"
+		android:layout_height="match_parent"
+		android:layout_width="match_parent" />
 
-	<ProgressBar
-		android:id="@+id/progress_spinner"
-		android:style="@style/Base.Widget.AppCompat.ProgressBar"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-	  />
-
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+    <ProgressBar
+        android:id="@+id/progress_spinner"
+        style="@style/Base.Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
