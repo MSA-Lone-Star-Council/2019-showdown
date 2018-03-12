@@ -8,10 +8,10 @@ namespace Client.iOS
 {
 	public class LocationViewController : UIViewController
 	{
-		static UIFont titleFont = UIFont.SystemFontOfSize(18, UIFontWeight.Bold);
-		static UIFont timeFont = UIFont.SystemFontOfSize(16, UIFontWeight.Semibold);
-		static UIFont locationFont = UIFont.SystemFontOfSize(16, UIFontWeight.Medium);
-		static UIFont descriptionFont = UIFont.SystemFontOfSize(14, UIFontWeight.Regular);
+		static UIFont titleFont         = UIFont.SystemFontOfSize(18, UIFontWeight.Bold);
+		static UIFont timeFont          = UIFont.SystemFontOfSize(16, UIFontWeight.Semibold);
+		static UIFont locationFont      = UIFont.SystemFontOfSize(16, UIFontWeight.Medium);
+		static UIFont descriptionFont   = UIFont.SystemFontOfSize(14, UIFontWeight.Regular);
 
 		// Since locations will probably be rarely updated and it's mostly just view code, we're going to forgo all
 		// the formalities of making a presenter and view implementation...
@@ -23,14 +23,14 @@ namespace Client.iOS
 		}
 
 
-		UILabel nameLabel = new UILabel() { TextAlignment = UITextAlignment.Center, Font = titleFont };
-		UIButton addressButton = new UIButton() { Font = timeFont, BackgroundColor = UIColor.White };
-		UILabel notesLabel = new UILabel() { TextAlignment = UITextAlignment.Center, Font = descriptionFont };
+		UILabel nameLabel       = new UILabel() { TextAlignment = UITextAlignment.Center, Font = titleFont };
+		UIButton addressButton  = new UIButton() { Font = timeFont, BackgroundColor = UIColor.White };
+		UILabel notesLabel      = new UILabel() { TextAlignment = UITextAlignment.Center, Font = descriptionFont };
 
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			View.BackgroundColor = new UIColor(0.16f, 0.75f, 1.00f, 1.0f);
+			View.BackgroundColor = Resources.Colors.backgroundColor;
 
 			addressButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
 			addressButton.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);

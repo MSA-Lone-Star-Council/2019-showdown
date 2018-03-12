@@ -10,7 +10,7 @@ namespace Client.iOS
 
 		UILabel title = new UILabel()
 		{
-			Text = "LSC Showdown 2017",
+			Text = "LSC Showdown 2018",
 			Font = UIFont.SystemFontOfSize(24, UIFontWeight.Bold),
 			TextAlignment = UITextAlignment.Center
 		};
@@ -29,7 +29,7 @@ namespace Client.iOS
 
 		UILabel authors = new UILabel()
 		{
-			Text = "Developed by Zonera Javed, Ali Kedwaii, Hamzah Khatri, Saad Najmi, and Zuhair Parvez",
+			Text = "Developed by Ali Naqvi, Ali Kedwaii, Hamzah Khatri, Saad Najmi, and Zuhair Parvez",
 			Font = UIFont.SystemFontOfSize(14, UIFontWeight.Light),
 			TextAlignment = UITextAlignment.Center,
 			Lines = 0
@@ -41,7 +41,8 @@ namespace Client.iOS
 		{
 			base.ViewDidLoad();
 
-			View.BackgroundColor = UIColor.White;
+            View.BackgroundColor = Resources.Colors.backgroundColor;
+
 
 			View.AddSubviews(new UIView[]
 			{

@@ -269,3 +269,7 @@ __pycache__/
 *.pem
 **/google-services.json
 
+
+mobile/Client/Client.Droid/google-services.json
+mobile/Common/Common.Common/Secrets.cs
+mobile/Scorekeeper/Scorekeeper.Droid/Resources/values/secrets.xml
