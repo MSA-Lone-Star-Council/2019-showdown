@@ -1,71 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Web;
 using Common.Common;
-using Tweetinvi;
-using Tweetinvi.Models;
-using Tweetinvi.Streaming;
 
 namespace Client.Common
 {
     public class TweetPresenter : Presenter<ITweetView>
     {
 
-        private IFilteredStream filteredStream;
-        private TwitterCredentials twitterCredentials;
-        private readonly ShowdownRESTClient _client;
-        private static readonly string TRACK_HASHTAG = "#blackpanther";
+        private UriBuilder uriBuilder;
+        private static readonly string HASHTAG_PRIMARY = "#rockets"; //TODO: Change later to Showdown tags
+        private static readonly string HASHTAG_SECONDARY = "#lakers"; //TODO: Change later to Showdown tags
+        private static readonly string BASE_SEARCH_URL = "https://twitter.com/search";
 
-        List<ITweet> tweets;
-
-        public TweetPresenter(ShowdownRESTClient client)
+        public TweetPresenter()
         {
-            _client = client;
-            filteredStream = Stream.CreateFilteredStream();
-            SetTwitterCredentials();
+            uriBuilder = new UriBuilder(BASE_SEARCH_URL);
         }
 
-        public async Task OnBegin()
+        public void OnBegin()
         {
-            await GetCachedTweets();
-            filteredStream.AddTrack(TRACK_HASHTAG);
-            filteredStream.MatchingTweetReceived += View.AddTweetFromStream();
-            filteredStream.StartStreamMatchingAnyCondition();
+            if (View.HasInternetConnection()) {
+                View.StartWebView(BuildUriQuery().ToString());
+            }
+            else {
+                View.NoInternetConnection();
+            }
         }
 
-
-        public void OnClickRow(ITweet Tweet)
+        private Uri BuildUriQuery()
         {
-            View.OpenTweet(Tweet);
-        }
-
-        private Task UpdateFromServer()
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task GetCachedTweets()
-        {
-            //TODO Make a local model of Itweet
-            //TODO Update Backend so it actually does this method
-            /*
-            tweets = await _client.GetTweetsAsync();    
-            if (View != null) View.Tweets = tweets;
-            */
-            await Task.CompletedTask;
-        }
-
-        private void SetTwitterCredentials()
-        {
-            twitterCredentials = new TwitterCredentials(
-            Secrets.twitterConsumerKey,
-            Secrets.twitterConsumerSecret,
-            Secrets.twitterAccessToken,
-            Secrets.twitterAccessTokenSecret)
-            {
-                ApplicationOnlyBearerToken = Secrets.twitterBearerToken
-            };
-            Auth.SetCredentials(twitterCredentials);
+            var queryBuilder = HttpUtility.ParseQueryString(uriBuilder.Query);
+            queryBuilder["f"] = "tweets";
+            queryBuilder["vertical"] = "default";
+            queryBuilder["q"] = HASHTAG_PRIMARY + ", OR " + HASHTAG_SECONDARY;
+            queryBuilder["src"] = "typd";
+            uriBuilder.Query = queryBuilder.ToString();
+            return uriBuilder.Uri;
         }
     }
 }
