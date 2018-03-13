@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!-- inherit from the material theme -->
-  <style name="UTColors" parent="android:Theme.Material">
+  <style name="UTColors" parent="Theme.AppCompat">
     <!-- Main theme colors -->
     <!--   your app branding color for the app bar -->
     <item name="android:colorPrimary">@color/primaryColor</item>
