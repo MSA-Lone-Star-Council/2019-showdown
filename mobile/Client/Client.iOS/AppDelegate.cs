@@ -70,7 +70,7 @@ namespace Client.iOS
 		{
 			var tabBarController = new UITabBarController();
 
-
+            var a = new TwitterViewController();
 
 			tabBarController.ViewControllers = new UIViewController[]
 			{
@@ -78,7 +78,7 @@ namespace Client.iOS
 				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
 				new UINavigationController(new AboutViewController()) { Title = "About" },
-                new UINavigationController(new TwitterViewController()) {Title = "Twitter"}
+                new UINavigationController(a) {Title = "Twitter"}
 			};
 
 			var size = 20;
