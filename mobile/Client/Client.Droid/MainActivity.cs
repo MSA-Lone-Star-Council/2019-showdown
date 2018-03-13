@@ -9,6 +9,8 @@ using Microsoft.AppCenter.Crashes;
 using Android.Support.V7.App;
 using Common.Common;
 using BottomNavigationBar;
+using Android.Support.V4.Content;
+using Android.Graphics;
 
 namespace Client.Droid
 {
@@ -43,10 +45,10 @@ namespace Client.Droid
 				new BottomBarTab(Resource.Drawable.ic_info_white_24dp, Resource.String.info_title)
 			});
 
-			bottomBar.MapColorForTab(0, "#bf5700");
-			bottomBar.MapColorForTab(1, "#bf5700");
-			bottomBar.MapColorForTab(2, "#bf5700");
-			bottomBar.MapColorForTab(3, "#bf5700");
+			bottomBar.MapColorForTab(0, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
+			bottomBar.MapColorForTab(1, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
+			bottomBar.MapColorForTab(2, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
+			bottomBar.MapColorForTab(3, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
 			bottomBar.SetOnTabClickListener(this);
 
 			IsPlayServicesAvailable();

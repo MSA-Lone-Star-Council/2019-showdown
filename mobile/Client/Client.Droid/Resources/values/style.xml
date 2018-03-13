@@ -22,5 +22,7 @@
   <style name="UTActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
 	<item name="android:background"  tools:ignore="NewApi">@color/primaryColor</item>
 	<item name="background">@color/primaryColor</item>
+	<item name="android:elevation">0dp</item>
+	<item name="elevation">0dp</item>
   </style>
 </resources>
