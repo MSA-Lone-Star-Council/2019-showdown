@@ -78,18 +78,22 @@ namespace Client.iOS
 				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
 				new UINavigationController(new SportsViewController())  { Title = "Sports" },
 				new UINavigationController(new AboutViewController()) { Title = "About" },
+                new UINavigationController(new TwitterViewController()) {Title = "Twitter"}
 			};
 
 			var size = 20;
 			var scheduleIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-calendar").ToUIImage(size);
 			var announcementsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bullhorn").ToUIImage(size);
 			var sportsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-futbol-o").ToUIImage(size);
-			var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);
+            var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);
+            var twitterIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-twitter").ToUIImage(size);
+
 
 			tabBarController.ViewControllers[0].TabBarItem.Image = scheduleIcon;
 			tabBarController.ViewControllers[1].TabBarItem.Image = announcementsIcon;
 			tabBarController.ViewControllers[2].TabBarItem.Image = sportsIcon;
 			tabBarController.ViewControllers[3].TabBarItem.Image = aboutIcon;
+            tabBarController.ViewControllers[4].TabBarItem.Image = twitterIcon;
 
 			return tabBarController;
 		}
