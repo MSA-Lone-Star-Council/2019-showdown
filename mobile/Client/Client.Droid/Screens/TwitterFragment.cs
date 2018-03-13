@@ -39,6 +39,13 @@ namespace Client.Droid
 		{
 			base.OnResume();
 			Presenter.TakeView(this);
+			webView.OnResume();
+		}
+
+		public override void OnPause()
+		{
+			base.OnPause();
+			webView.OnPause();
 		}
 
 		public override void OnStop()
