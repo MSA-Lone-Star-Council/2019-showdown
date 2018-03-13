@@ -9,7 +9,7 @@ using Android.Text;
 
 namespace Client.Droid.Screens
 {
-    public class AcknowledgementsFragment : Fragment
+    public class InfoFragment : Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -21,7 +21,7 @@ namespace Client.Droid.Screens
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            var view = inflater.Inflate(Resource.Layout.fragment_acknowledgements, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_info, container, false);
 
             TextView tv = view.FindViewById<TextView>(Resource.Id.lsc_link);
             tv.Clickable = true;
