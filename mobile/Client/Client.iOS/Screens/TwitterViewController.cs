@@ -39,8 +39,6 @@ namespace Client.iOS
 
 		void ITweetView.StartWebView(string url)
         {
-            //throw new NotImplementedException();
-            Console.WriteLine(View.Bounds);
             webView.LoadRequest(new NSUrlRequest(new NSUrl(url)));
         }
 
