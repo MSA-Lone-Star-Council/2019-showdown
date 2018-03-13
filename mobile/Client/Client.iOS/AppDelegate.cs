@@ -12,6 +12,7 @@ using WindowsAzure.Messaging;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System.Collections.Generic;
 
 namespace Client.iOS
 {
@@ -43,7 +44,8 @@ namespace Client.iOS
 
             Window = new UIWindow(UIScreen.MainScreen.Bounds)
             {
-                RootViewController = BuildRootViewController()
+                RootViewController = BuildRootViewController(),
+                TintColor = Resources.Colors.primaryColor
             };
             Window.MakeKeyAndVisible();
 
@@ -70,30 +72,28 @@ namespace Client.iOS
 		{
 			var tabBarController = new UITabBarController();
 
-            var a = new TwitterViewController();
-
 			tabBarController.ViewControllers = new UIViewController[]
 			{
 				new UINavigationController(new ScheduleViewController()) { Title = "Schedule" },
 				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
-				new UINavigationController(new SportsViewController())  { Title = "Sports" },
-				new UINavigationController(new AboutViewController()) { Title = "About" },
-                new UINavigationController(a) {Title = "Twitter"}
+				//new UINavigationController(new SportsViewController())  { Title = "Sports" },
+                new UINavigationController(new TwitterViewController()) {Title = "Twitter"},
+                new UINavigationController(new AboutViewController()) { Title = "About" }
 			};
 
 			var size = 20;
 			var scheduleIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-calendar").ToUIImage(size);
 			var announcementsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-bullhorn").ToUIImage(size);
-			var sportsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-futbol-o").ToUIImage(size);
-            var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);
             var twitterIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-twitter").ToUIImage(size);
+			//var sportsIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-futbol-o").ToUIImage(size);
+            var aboutIcon = Plugin.Iconize.Iconize.FindIconForKey("fa-info").ToUIImage(size);
 
 
 			tabBarController.ViewControllers[0].TabBarItem.Image = scheduleIcon;
 			tabBarController.ViewControllers[1].TabBarItem.Image = announcementsIcon;
-			tabBarController.ViewControllers[2].TabBarItem.Image = sportsIcon;
-			tabBarController.ViewControllers[3].TabBarItem.Image = aboutIcon;
-            tabBarController.ViewControllers[4].TabBarItem.Image = twitterIcon;
+			//tabBarController.ViewControllers[2].TabBarItem.Image = sportsIcon;
+            tabBarController.ViewControllers[2].TabBarItem.Image = twitterIcon;
+            tabBarController.ViewControllers[3].TabBarItem.Image = aboutIcon;
 
 			return tabBarController;
 		}
