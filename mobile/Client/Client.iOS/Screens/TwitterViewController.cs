@@ -13,30 +13,34 @@ namespace Client.iOS
         public TwitterViewController() : base("TwitterViewController", null)
         {
             presenter = new TweetPresenter();
+            View.AutosizesSubviews = true;
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
+            // Perform any additional setup after loading the view, typically from a nib
+            webView = new UIWebView(UIScreen.MainScreen.Bounds);
 
-            webView = new UIWebView(View.Bounds);
             webView.ScalesPageToFit = true;
             View.AddSubview(webView);
+            this.ViewDidLayoutSubviews();
 
             presenter.TakeView(this);
+
+        }
+
+		public override void ViewDidAppear(bool animated)
+		{
+            base.ViewDidAppear(animated);
             presenter.OnBegin();
-        }
+		}
 
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-            // Release any cached data, images, etc that aren't in use.
-        }
 
-        void ITweetView.StartWebView(string url)
+		void ITweetView.StartWebView(string url)
         {
             //throw new NotImplementedException();
+            Console.WriteLine(View.Bounds);
             webView.LoadRequest(new NSUrlRequest(new NSUrl(url)));
         }
 
