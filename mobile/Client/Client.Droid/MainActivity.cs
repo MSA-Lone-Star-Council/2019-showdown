@@ -13,25 +13,25 @@ using BottomNavigationBar;
 namespace Client.Droid
 {
 	[Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class MainActivity : AppCompatActivity, BottomNavigationBar.Listeners.IOnTabClickListener
-    {
+	public class MainActivity : AppCompatActivity, BottomNavigationBar.Listeners.IOnTabClickListener
+	{
 		int prevPosition = 0;
 		BottomBar bottomBar;
-        V4.App.Fragment[] Fragments { get; set; }
+		V4.App.Fragment[] Fragments { get; set; }
 
 		public static string ScreenIndexKey = "ScreenIndex";
 
 		protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+		{
+			base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.Main);
+			SetContentView(Resource.Layout.Main);
 			AppCenter.Start(Secrets.clientAndroidAppCenterSecret, typeof(Analytics), typeof(Crashes));
 
 			Fragments = new V4.App.Fragment[] {
-			new ScheduleFragment(), 
-			new AnnouncementsFragment(), 
-			new TwitterFragment(), 
+			new ScheduleFragment(),
+			new AnnouncementsFragment(),
+			new TwitterFragment(),
 			new InfoFragment()
 			};
 
@@ -39,7 +39,7 @@ namespace Client.Droid
 			bottomBar.SetItems(new[] {
 				new BottomBarTab(Resource.Drawable.ic_event_white_24dp, Resource.String.schedule_title),
 				new BottomBarTab(Resource.Drawable.ic_notifications_white_24dp, Resource.String.announcements_title),
-				new BottomBarTab(Resource.Drawable.ic_twitter_white_24dp, Resource.String.twitter_title), 
+				new BottomBarTab(Resource.Drawable.ic_twitter_white_24dp, Resource.String.twitter_title),
 				new BottomBarTab(Resource.Drawable.ic_info_white_24dp, Resource.String.info_title)
 			});
 
@@ -51,7 +51,7 @@ namespace Client.Droid
 
 			IsPlayServicesAvailable();
 
-        }
+		}
 
 		protected override void OnSaveInstanceState(Bundle outState)
 		{

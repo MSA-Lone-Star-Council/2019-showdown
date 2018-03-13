@@ -2,18 +2,18 @@
 <resources>
   <!-- inherit from the material theme -->
   <style name="UTColors" parent="Theme.AppCompat">
-    <!-- Main theme colors -->
-    <!--   your app branding color for the app bar -->
-    <item name="android:colorPrimary">@color/primaryColor</item>
-    <!--   darker variant for the status bar and contextual app bars -->
-    <item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
-    <!--   theme UI controls like checkboxes and text fields -->
-    <item name="android:colorAccent">@color/secondaryColor</item>
-    <!-- -->
-    <item name="android:windowBackground">@color/backgroundColor</item>
-    <!-- -->
-    <item name="android:navigationBarColor">@color/navigationBarColor</item>
-    <!-- -->
-    <item name="android:textColorPrimary">@color/primaryTextColor</item>
+	<!-- Main theme colors -->
+	<!--   your app branding color for the app bar -->
+	<item name="android:colorPrimary">@color/primaryColor</item>
+	<!--   darker variant for the status bar and contextual app bars -->
+	<item name="android:colorPrimaryDark">@color/primaryDarkColor</item>
+	<!--   theme UI controls like checkboxes and text fields -->
+	<item name="android:colorAccent">@color/secondaryColor</item>
+	<!-- -->
+	<item name="android:windowBackground">@color/backgroundColor</item>
+	<!-- -->
+	<item name="android:navigationBarColor">@color/navigationBarColor</item>
+	<!-- -->
+	<item name="android:textColorPrimary">@color/primaryTextColor</item>
   </style>
 </resources>
