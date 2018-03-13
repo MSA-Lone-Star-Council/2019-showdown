@@ -17,85 +17,94 @@ using System.Timers;
 
 namespace Client.Droid.Screens
 {
-    public class ScheduleFragment : Fragment, IScheduleView
-    {
-        SchedulePresenter Presenter { get; set; }
+	public class ScheduleFragment : Fragment, IScheduleView
+	{
+		SchedulePresenter Presenter { get; set; }
 
 
-        List<Event> IScheduleView.Events {
-            set
-            {
-                ScheduleAdapter adapter = this.Adapter;
+		List<Event> IScheduleView.Events
+		{
+			set
+			{
+				ScheduleAdapter adapter = this.Adapter;
 				if (adapter == null) return;
-                adapter.Events = value;
-                adapter.NotifyDataSetChanged();
-            }
-        }
-        RecyclerView ScheduleView { get; set; }
-        ScheduleAdapter Adapter { get; set; }
+				adapter.Events = value;
+				adapter.NotifyDataSetChanged();
+			}
+		}
+		RecyclerView ScheduleView { get; set; }
+		ScheduleAdapter Adapter { get; set; }
+		int day; // TODO: Update fragment and adapter to break data into 3 days
 
-        Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
+		Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+		public ScheduleFragment(int day)
+		{
+			this.day = day;
+		}
 
-            Presenter = new SchedulePresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
-            Presenter.TakeView(this);
+		public override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
 
-            Adapter = new ScheduleAdapter()
-            {
-                Events = new List<Event>()
-            };
-            Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
-        }
+			Presenter = new SchedulePresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
+			Presenter.TakeView(this);
 
-        public async override void OnResume()
-        {
-            base.OnResume();
+			Adapter = new ScheduleAdapter()
+			{
+				Events = new List<Event>()
+			};
+			Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
+		}
 
-            Presenter.TakeView(this);
-            await Presenter.OnBegin();
+		public async override void OnResume()
+		{
+			base.OnResume();
 
-            timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
-            timer.Start();
-        }
+			Presenter.TakeView(this);
+			await Presenter.OnBegin();
 
-        public override void OnStop()
-        {
-            base.OnStop();
-            timer.Stop();
-            Presenter.RemoveView();
-        }
+			timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
+			timer.Start();
+		}
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            View view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
+		public override void OnStop()
+		{
+			base.OnStop();
+			timer.Stop();
+			Presenter.RemoveView();
+		}
 
-            // Set up Recycler View for the Schedule
-            ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
-            ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
-            ScheduleView.SetAdapter(Adapter);
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		{
+			View view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
-            return view;
-        }
+			// Set up Recycler View for the Schedule
+			ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
+			ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
+			ScheduleView.SetAdapter(Adapter);
 
-        void IScheduleView.ShowMessage(string message)
-        {
-            Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
-        }
+			Toast.MakeText(Context, "Day: " + day, ToastLength.Short).Show();
 
-        void IScheduleView.OpenEvent(Event row)
-        {
-            var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
-            Intent.PutExtra("event", row.ToJSON());
-            StartActivity(Intent);
-        }
+			return view;
+		}
 
-	    Task IScheduleView.ScheduleReminder(Event eventToRemind)
-	    {
-            return Task.CompletedTask;
-	    }
+		void IScheduleView.ShowMessage(string message)
+		{
+			Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
+		}
+
+		void IScheduleView.OpenEvent(Event row)
+		{
+			var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
+			Intent.PutExtra("event", row.ToJSON());
+			StartActivity(Intent);
+		}
+
+		Task IScheduleView.ScheduleReminder(Event eventToRemind)
+		{
+			return Task.CompletedTask;
+		}
 	}
 }
 

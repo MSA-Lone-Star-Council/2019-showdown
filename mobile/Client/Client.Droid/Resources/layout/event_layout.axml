@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:card_view="http://schemas.android.com/apk/res-auto"
-      android:id="@+id/event_card_view"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="10dp"
-      android:layout_marginRight="10dp"
-      android:layout_marginTop="10dp"
-      android:elevation="16dp"
-      android:foreground="?android:attr/selectableItemBackground">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/event_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:elevation="16dp"
+    android:foreground="?android:attr/selectableItemBackground">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#212121"
+        android:background="@color/secondaryColor"
         android:padding="16dp">
         <ImageView
             android:id="@+id/event_picture"
@@ -43,6 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/event_location"
             android:layout_toRightOf="@+id/event_picture"
-            android:text="Event Time"/>
+            android:text="Event Time" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>
