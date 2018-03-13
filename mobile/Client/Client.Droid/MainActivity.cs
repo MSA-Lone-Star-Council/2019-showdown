@@ -29,7 +29,7 @@ namespace Client.Droid
 			AppCenter.Start(Secrets.clientAndroidAppCenterSecret, typeof(Analytics), typeof(Crashes));
 
 			Fragments = new V4.App.Fragment[] {
-			new ScheduleFragment(),
+			new SchedulePagerFragment(),
 			new AnnouncementsFragment(),
 			new TwitterFragment(),
 			new InfoFragment()

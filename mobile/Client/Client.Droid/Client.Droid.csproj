@@ -16,7 +16,7 @@
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
@@ -34,11 +34,11 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
-    <BundleAssemblies>False</BundleAssemblies>
+    <BundleAssemblies>false</BundleAssemblies>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <Debugger>.Net (Xamarin)</Debugger>
-    <AotAssemblies>False</AotAssemblies>
-    <EnableLLVM>False</EnableLLVM>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
     <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
     <EnableProguard>False</EnableProguard>
   </PropertyGroup>
@@ -201,6 +201,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\SchedulePagerAdapter.cs" />
     <Compile Include="Adapters\ScoreAdapter.cs" />
     <Compile Include="Adapters\SportsAdapter.cs" />
     <Compile Include="Adapters\ScheduleAdapter.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Screens\DetailedEventActivity.cs" />
     <Compile Include="Screens\GameScreenActivity.cs" />
     <Compile Include="Screens\ScheduleFragment.cs" />
+    <Compile Include="Screens\SchedulePagerFragment.cs" />
     <Compile Include="Screens\SportsFragment.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingIIDService.cs" />
     <Compile Include="Notifications\ShowdownFirebaseMessagingService.cs" />
@@ -256,6 +258,9 @@
     <AndroidResource Include="Resources\layout\fragment_twitter.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_schedule_pager.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -263,7 +268,9 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />

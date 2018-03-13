@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
   <!-- inherit from the material theme -->
   <style name="UTColors" parent="Theme.AppCompat">
 	<!-- Main theme colors -->
@@ -15,5 +15,12 @@
 	<item name="android:navigationBarColor">@color/navigationBarColor</item>
 	<!-- -->
 	<item name="android:textColorPrimary">@color/primaryTextColor</item>
+	<item name="android:actionBarStyle"   tools:ignore="NewApi">@style/UTActionBar</item>
+	<item name="actionBarStyle">@style/UTActionBar</item>
+  </style>
+
+  <style name="UTActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+	<item name="android:background"  tools:ignore="NewApi">@color/primaryColor</item>
+	<item name="background">@color/primaryColor</item>
   </style>
 </resources>
