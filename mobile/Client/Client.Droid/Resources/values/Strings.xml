@@ -2,8 +2,6 @@
 <resources>
   <string name="app_name">MSA Showdown 2018</string>
   <string name="app_name_short">Showdown 2018</string>
-  <string name="drawer_open">Open Menu</string>
-  <string name="drawer_close">Close Menu</string>
   <string name="no_internet">No Internet connection</string>
   <string name="schedule_title">Schedule</string>
   <string name="announcements_title">Announcements</string>
