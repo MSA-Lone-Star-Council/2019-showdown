@@ -45,7 +45,7 @@ namespace Client.iOS
             Window = new UIWindow(UIScreen.MainScreen.Bounds)
             {
                 RootViewController = BuildRootViewController(),
-                TintColor = Resources.Colors.primaryColor
+                TintColor = Resources.Colors.primaryLightColor
             };
             Window.MakeKeyAndVisible();
 
