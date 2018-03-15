@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/announcement_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp"
-    android:elevation="16dp"
+    android:layout_margin="8dp"
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="2dp"
     android:foreground="?android:attr/selectableItemBackground">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondaryColor"
-        android:elevation="16dp"
-        android:padding="16dp"
+        android:background="@android:color/white"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="24dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/announcement_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:text="Announcement Title"
-            android:textSize="24sp" />
+            tools:text="Announcement Title"
+            android:textSize="24sp"
+            android:textColor="@color/primaryTextColor" />
         <TextView
             android:id="@+id/announcement_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Announcement Body" />
+            tools:text="Announcement Body"
+			style="@style/AnnouncementSecondary"/>
         <TextView
             android:id="@+id/announcement_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Announcement Time" />
+            tools:text="Announcement Time"
+            style="@style/AnnouncementSecondary"
+            android:layout_gravity="end" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
