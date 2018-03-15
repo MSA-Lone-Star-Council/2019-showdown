@@ -25,4 +25,16 @@
 	<item name="android:elevation">0dp</item>
 	<item name="elevation">0dp</item>
   </style>
+
+  <style name="AnnouncementSecondary">
+	<item name="android:textSize">14sp</item>
+	<item name="android:textColor">@color/secondaryTextColor</item>
+  </style>
+
+  <style name="EventSecondary">
+	<item name="android:fontFamily">sans-serif</item>
+	<item name="android:textSize">14sp</item>
+	<item name="android:textColor">@color/secondaryTextColor</item>
+	<item name="android:paddingLeft">16dp</item>
+  </style>
 </resources>
