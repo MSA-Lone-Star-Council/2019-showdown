@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             tools:text="Announcement Title"
             android:textSize="24sp"
-            android:textColor="@color/primaryTextColor" />
+            android:textColor="@color/primaryDarkTextColor" />
         <TextView
             android:id="@+id/announcement_body"
             android:layout_width="wrap_content"

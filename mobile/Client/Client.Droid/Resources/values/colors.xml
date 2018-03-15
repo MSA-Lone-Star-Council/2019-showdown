@@ -6,8 +6,9 @@
   <color name="secondaryColor">#333f48</color>
   <color name="secondaryLightColor">#5d6a73</color>
   <color name="secondaryDarkColor">#0d1921</color>
-  <color name="primaryTextColor">#DE000000</color>
-  <color name="secondaryTextColor">#91000000</color>
+  <color name="primaryTextColor">#FFFFFF</color>
+  <color name="primaryDarkTextColor">#DE000000</color>
+  <color name="secondaryDarkTextColor">#91000000</color>
   <color name="backgroundColor">#f5f5f5</color>
   <color name="navigationBarColor">#882a00</color>
 </resources>
