@@ -20,59 +20,29 @@ namespace Client.Droid.Screens
 	public class ScheduleFragment : Fragment, IScheduleView
 	{
 		SchedulePresenter Presenter { get; set; }
-
-
+		public List<Event> DayEvents { get; set; }
 		List<Event> IScheduleView.Events
 		{
 			set
 			{
-				ScheduleAdapter adapter = this.Adapter;
-				if (adapter == null) return;
-				adapter.Events = value;
-				adapter.NotifyDataSetChanged();
+				return;
 			}
 		}
 		RecyclerView ScheduleView { get; set; }
 		ScheduleAdapter Adapter { get; set; }
-		int day; // TODO: Update fragment and adapter to break data into 3 days
-
-		Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
-
-		public ScheduleFragment(int day)
-		{
-			this.day = day;
-		}
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
 
-			Presenter = new SchedulePresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
+			Presenter = new SchedulePresenter(null);
 			Presenter.TakeView(this);
 
 			Adapter = new ScheduleAdapter()
 			{
-				Events = new List<Event>()
+				Events = DayEvents
 			};
 			Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
-		}
-
-		public async override void OnResume()
-		{
-			base.OnResume();
-
-			Presenter.TakeView(this);
-			await Presenter.OnBegin();
-
-			timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
-			timer.Start();
-		}
-
-		public override void OnStop()
-		{
-			base.OnStop();
-			timer.Stop();
-			Presenter.RemoveView();
 		}
 
 		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -83,8 +53,6 @@ namespace Client.Droid.Screens
 			ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
 			ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
 			ScheduleView.SetAdapter(Adapter);
-
-			Toast.MakeText(Context, "Day: " + day, ToastLength.Short).Show();
 
 			return view;
 		}
