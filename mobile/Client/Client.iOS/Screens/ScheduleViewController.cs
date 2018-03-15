@@ -53,8 +53,8 @@ namespace Client.iOS
 			{
 				BackgroundColor = UIColor.Clear,
 				Source = tableSource,
-				SeparatorStyle = UITableViewCellSeparatorStyle.None,
-				RowHeight = 110,
+                SeparatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched,
+				RowHeight = 60,
 			};
 			scheduleList.RegisterClassForCellReuse(typeof(EventCell), EventCellID);
 			this.AutomaticallyAdjustsScrollViewInsets = true;
