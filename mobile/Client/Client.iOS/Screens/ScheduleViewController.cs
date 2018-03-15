@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Client.Common;
 using Common.Common.Models;
@@ -94,9 +95,36 @@ namespace Client.iOS
 
 		class ScheduleTableSource : UITableViewSource
 		{
-			public delegate void OnRowTapped(Event row);
+            class SectionHeaderData 
+            {
+                public string Header;
+                public int Count;
+            }
 
-			public List<Event> Events { get; set; }
+            List<SectionHeaderData> eventHeaders = new List<SectionHeaderData>();
+
+            List<Event> _events;
+            public List<Event> Events //{ get; set; }
+
+            {
+                get
+                {
+                    return _events;
+                }
+                set
+                {
+                    _events = value;
+                    eventHeaders = Events.GroupBy(item => item.StartTime.DayOfWeek.ToString())
+                                  .Select(group => new SectionHeaderData
+                                  {
+                                      Header = group.Key,
+                                      Count = group.Count()
+                                  })
+                                  .ToList();
+                } 
+            }
+
+            public delegate void OnRowTapped(Event row);
 
 			public event OnRowTapped RowTappedEvent;
 
@@ -115,17 +143,42 @@ namespace Client.iOS
 				return cell;
 			}
 
-			public override nint RowsInSection(UITableView tableview, nint section)
-			{
-				return Events.Count;
-			}
-
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				var row = Events[indexPath.Row];
 				RowTappedEvent(row);
 				tableView.DeselectRow(indexPath, false);
 			}
+
+            //
+            public override nint NumberOfSections(UITableView tableView)
+            {
+                return eventHeaders.Count();
+            }
+
+            public override nint RowsInSection(UITableView tableview, nint section)
+            {
+                //return Events.Count();
+                return eventHeaders[(int)section].Count;
+            }
+
+
+            public override string[] SectionIndexTitles(UITableView tableView)
+            {
+                string[] titles = new string[eventHeaders.Count()];
+                for (int i = 0; i < eventHeaders.Count; i++) 
+                {
+                    titles[i] = eventHeaders[i].Header.Substring(0,3);
+                }
+                return titles;
+            }
+
+
+            public override string TitleForHeader(UITableView tableView, nint section)
+            {
+                return eventHeaders[(int)section].Header;
+            }
+
 		}
 	}
 }
