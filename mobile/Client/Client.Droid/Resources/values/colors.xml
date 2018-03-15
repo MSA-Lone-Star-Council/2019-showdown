@@ -10,5 +10,5 @@
   <color name="primaryDarkTextColor">#DE000000</color>
   <color name="secondaryDarkTextColor">#91000000</color>
   <color name="backgroundColor">#f5f5f5</color>
-  <color name="navigationBarColor">#882a00</color>
+  <color name="navigationBarColor">#7f7f7f</color>
 </resources>
