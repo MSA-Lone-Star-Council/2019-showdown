@@ -8,7 +8,7 @@ namespace Common.Common
     {
         public static string FormatDateTime(DateTimeOffset time)
         {
-			string format = "M/d h:mm:ss";
+			string format = "M/d h:mm tt";
 			time = time.ToOffset(TimeSpan.FromHours(-5));
             return time.ToString(format, null as DateTimeFormatInfo);
         }
@@ -22,17 +22,15 @@ namespace Common.Common
 
 		public static string FormatEventTimeSpan(Event e)
 		{
-			string dayFormat = "dddd";
 			string time = "h:mmtt";
 
 			var startTime = e.StartTime.ToOffset(TimeSpan.FromHours(-5));
 			var endTime = e.EndTime.ToOffset(TimeSpan.FromHours(-5));
 
-			string startDay = startTime.ToString(dayFormat, null as DateTimeFormatInfo);
 			string startTimeStr = startTime.ToString(time, null as DateTimeFormatInfo).ToLower();
 			string endTimeStr = endTime.ToString(time, null as DateTimeFormatInfo).ToLower();
 
-			return $"{startDay} {startTimeStr} - {endTimeStr}";
+			return $"{startTimeStr} - {endTimeStr}";
 		}
 
         public static string FormatDateTime(DateTimeOffset? time)
