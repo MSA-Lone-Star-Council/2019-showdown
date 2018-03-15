@@ -49,12 +49,13 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-			events = await _client.GetScheduleAsync();
+			var newEvents = await _client.GetScheduleAsync();
 
             if (View != null)
             {
-                if (events != View.Events)
+                if (events != newEvents)
                 {
+                    events = newEvents;
                     View.Events = events;
                 }
             }	
