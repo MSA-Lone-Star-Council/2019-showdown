@@ -51,8 +51,13 @@ namespace Client.Common
 		{
 			events = await _client.GetScheduleAsync();
 
-			if (View != null)
-				View.Events = events;
+            if (View != null)
+            {
+                if (events != View.Events)
+                {
+                    View.Events = events;
+                }
+            }	
 		}
 
 		public bool IsSubscribed(Event item)
