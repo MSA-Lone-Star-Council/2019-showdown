@@ -1,14 +1,10 @@
 using System;
-
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
-using Android.Support.V7;
-
 using Common.Common;
 using Common.Common.Models;
 using System.Collections.Generic;
-using Android.Util;
 
 namespace Client.Droid.Adapters
 {
