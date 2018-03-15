@@ -14,7 +14,8 @@ using Android.Graphics;
 
 namespace Client.Droid
 {
-	[Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+	[Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, 
+	WindowSoftInputMode = Android.Views.SoftInput.AdjustPan)]
 	public class MainActivity : AppCompatActivity, BottomNavigationBar.Listeners.IOnTabClickListener
 	{
 		int prevPosition = 0;
