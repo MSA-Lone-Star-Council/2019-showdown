@@ -38,14 +38,14 @@ namespace Common.iOS
 	    public async override void ViewDidLoad()
 	    {
 	        base.ViewDidLoad();
-			View.BackgroundColor = new UIColor(1, 0.8f, 0.36f, 1);
+            View.BackgroundColor = UIColor.Clear;
 
 	        AnnouncementsList = new UITableView(View.Bounds)
 	        {
-                BackgroundColor = UIColor.Clear,
+                BackgroundColor = UIColor.White,
 	            Source = new AnnouncementsTableSource(),
 	            RowHeight = 100,
-	            SeparatorStyle = UITableViewCellSeparatorStyle.None
+                SeparatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
 	        };
 			AnnouncementsList.RegisterClassForCellReuse(typeof(AnnouncementCell), AnnouncmentCellID);
 

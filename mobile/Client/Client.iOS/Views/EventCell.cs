@@ -69,7 +69,7 @@ namespace Client.iOS
             endTimeLabel.MakeConstraints(make =>
             {
                 make.Left.EqualTo(startTimeLabel);
-                make.Bottom.EqualTo(parentView);
+                make.Top.EqualTo(startTimeLabel.Bottom()).Offset(5);
             });
 
             divider.MakeConstraints(make =>
@@ -89,7 +89,7 @@ namespace Client.iOS
 
             locationLabel.MakeConstraints(make =>
             {
-                make.Bottom.EqualTo(parentView);
+                make.Top.EqualTo(titleLabel.Bottom()).Offset(5);
                 make.Right.EqualTo(parentView);
                 make.Left.EqualTo(titleLabel);
             });
