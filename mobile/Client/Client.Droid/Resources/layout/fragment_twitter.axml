@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-    <android.webkit.WebView
-        android:id="@+id/web_view"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:visibility="gone" />
-    <TextView
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:textColor="@color/secondaryDarkTextColor"
-        tools:text="No Internet connection" />
-    <ProgressBar
-        android:id="@+id/progress_spinner"
-        style="@android:style/Widget.ProgressBar"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+  <android.webkit.WebView
+	  android:id="@+id/web_view"
+	  android:layout_height="match_parent"
+	  android:layout_width="match_parent"
+	  android:visibility="gone" />
+  <TextView
+	  android:id="@+id/empty_view"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:gravity="center"
+	  android:layout_centerInParent="true"
+	  android:textColor="@color/secondaryDarkTextColor"
+	  tools:text="No Internet connection" />
+  <ProgressBar
+	  android:id="@+id/progress_spinner"
+	  style="@android:style/Widget.ProgressBar"
+	  android:layout_centerInParent="true"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content" />
 </RelativeLayout>
