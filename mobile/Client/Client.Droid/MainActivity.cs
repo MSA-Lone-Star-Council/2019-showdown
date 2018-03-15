@@ -14,7 +14,7 @@ using Android.Graphics;
 
 namespace Client.Droid
 {
-	[Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, 
+	[Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait,
 	WindowSoftInputMode = Android.Views.SoftInput.AdjustPan)]
 	public class MainActivity : AppCompatActivity, BottomNavigationBar.Listeners.IOnTabClickListener
 	{
@@ -38,18 +38,18 @@ namespace Client.Droid
 			new InfoFragment()
 			};
 
-			bottomBar = BottomBar.Attach(this, savedInstanceState);
+			bottomBar = BottomBar.Attach(
+						this,
+						savedInstanceState,
+						new Color(255, 255, 255), // BG value as white
+						new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)), // Active tab value as burnt orange
+						0.4f);  // Transparency value
 			bottomBar.SetItems(new[] {
 				new BottomBarTab(Resource.Drawable.ic_event_white_24dp, Resource.String.schedule_title),
 				new BottomBarTab(Resource.Drawable.ic_notifications_white_24dp, Resource.String.announcements_title),
 				new BottomBarTab(Resource.Drawable.ic_twitter_white_24dp, Resource.String.twitter_title),
 				new BottomBarTab(Resource.Drawable.ic_info_white_24dp, Resource.String.info_title)
 			});
-
-			bottomBar.MapColorForTab(0, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
-			bottomBar.MapColorForTab(1, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
-			bottomBar.MapColorForTab(2, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
-			bottomBar.MapColorForTab(3, new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)));
 			bottomBar.SetOnTabClickListener(this);
 
 			IsPlayServicesAvailable();
