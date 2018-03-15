@@ -27,6 +27,11 @@ namespace Client.Droid.Adapters
 			return fragment;
 		}
 
+		public override int GetItemPosition(Java.Lang.Object @object)
+		{
+            return PositionNone;
+		}
+
 		public override ICharSequence GetPageTitleFormatted(int position)
 		{
 			return new Java.Lang.String(titles[position]);
