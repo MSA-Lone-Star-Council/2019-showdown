@@ -4,6 +4,7 @@
 <dict>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleName</key>
@@ -15,7 +16,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>10.1</string>
+	<string>11.2</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -38,5 +39,7 @@
 	<array>
 		<string>iconize-fontawesome.ttf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<true/>
 </dict>
 </plist>
