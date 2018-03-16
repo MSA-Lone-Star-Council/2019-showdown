@@ -119,7 +119,10 @@ namespace Client.Droid
 					break;
 				case 2:
 					WebView webView = (Fragments[position] as TwitterFragment).WebView;
-					webView.ScrollTo(0, 0);
+					if (webView != null)
+					{
+						webView.ScrollTo(0, 0);
+					}
 					break;
 			}
 			if (scrollingView != null)
