@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Common.Common;
 using Common.Common.Models;
 using Foundation;
@@ -10,99 +11,96 @@ namespace Client.iOS
 {
 	public class EventCell : UITableViewCell
 	{
-		static UIFont titleFont = UIFont.SystemFontOfSize(20, UIFontWeight.Bold);
-		static UIFont locationFont = UIFont.SystemFontOfSize(18, UIFontWeight.Semibold);
-		static UIFont timeFont = UIFont.SystemFontOfSize(18, UIFontWeight.Regular);
+        public Func<Task> NotificationButtonAction { get; internal set; }
 
-		IconButton NotificationButton = new IconButton();
+        static UIFont titleFont     = UIFont.SystemFontOfSize(16, UIFontWeight.Bold);
+        static UIFont locationFont  = UIFont.SystemFontOfSize(16, UIFontWeight.Regular);
+		static UIFont startTimeFont = UIFont.SystemFontOfSize(16, UIFontWeight.Regular);
+        static UIFont endTimeFont   = UIFont.SystemFontOfSize(16, UIFontWeight.Regular);
 
-		UIView audienceIcon = new UIView();
-		UILabel titleLabel = new UILabel() { Font = titleFont };
-		UILabel timeLabel = new UILabel() { Font = timeFont };
-		UILabel locationLabel = new UILabel() { Font = locationFont };
+        UIView divider = new UIView()
+        {
+            BackgroundColor = Resources.Colors.primaryLightColor
+        };
+		UILabel titleLabel = new UILabel() 
+        { 
+            Font = titleFont,
+            LineBreakMode = UILineBreakMode.TailTruncation,
+        };
+        UILabel startTimeLabel = new UILabel() { Font = startTimeFont };
+        UILabel endTimeLabel = new UILabel() 
+        { 
+            Font = endTimeFont,
+            TextColor = UIColor.DarkGray
+        };
 
-		public Action NotificationButtonAction { get; set; }
+
+		UILabel locationLabel = new UILabel() 
+        { 
+            Font = locationFont,
+            TextColor = UIColor.DarkGray
+        };
 
 		public EventCell(IntPtr p) : base (p)
 		{
-			var containerView = new UIView() { BackgroundColor = UIColor.White };
+            var containerView = new UIView() { BackgroundColor = Resources.Colors.backgroundColor };
 			ContentView.Add(containerView);
 			containerView.MakeConstraints(make =>
 			{
-				make.Edges.EqualTo(ContentView).Insets(new UIEdgeInsets(5, 5, 5, 5));
+                make.Edges.EqualTo(ContentView).Insets(new UIEdgeInsets(10,10,10,10));
 			});
-			containerView.Layer.CornerRadius = 3;
-			containerView.Layer.BorderWidth = 0.5f;
-			containerView.Layer.BorderColor = UIColor.LightGray.CGColor;
 
 			containerView.AddSubviews(new UIView[] {
-				NotificationButton,
-				audienceIcon,
+				divider,
 				titleLabel,
-				timeLabel,
+                startTimeLabel,
+                endTimeLabel,
 				locationLabel
 			});
 
 			var parentView = containerView;
 
-			NotificationButton.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(parentView).Offset(3);
-				make.Right.EqualTo(parentView).Offset(-3);
-				make.Height.EqualTo((NSNumber)40);
-				make.Width.EqualTo((NSNumber)40);
-			});
+            startTimeLabel.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(parentView);
+                make.Left.EqualTo(parentView).Offset(10);
+            });
 
-			titleLabel.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(parentView).Offset(5);
-				make.Left.EqualTo(parentView).Offset(5);
-				make.Right.EqualTo(parentView);
-			});
+            endTimeLabel.MakeConstraints(make =>
+            {
+                make.Left.EqualTo(startTimeLabel);
+                make.Top.EqualTo(startTimeLabel.Bottom()).Offset(5);
+            });
 
-			audienceIcon.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(titleLabel.Bottom()).Offset(6);
-				make.Right.EqualTo(parentView).Offset(-3);
-				make.Left.EqualTo(titleLabel).Offset(3);
-				make.Height.EqualTo((NSNumber)3);
-			});
+            divider.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(parentView);
+                make.Bottom.EqualTo(parentView);
+                make.Left.EqualTo(parentView).Offset(80);
+                make.Width.EqualTo((NSNumber)2);
+            });
 
-			locationLabel.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(audienceIcon.Bottom()).Offset(10);
-				make.Left.EqualTo(titleLabel);
-				make.Right.EqualTo(parentView);
-			});
+            titleLabel.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(parentView);
+                make.Right.EqualTo(parentView);
+                make.Left.EqualTo(divider).Offset(10);
+            });
 
-			timeLabel.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(locationLabel.Bottom()).Offset(5);
-				make.Left.EqualTo(titleLabel);
-				make.Right.EqualTo(parentView);
-			});
+            locationLabel.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(titleLabel.Bottom()).Offset(5);
+                make.Right.EqualTo(parentView);
+                make.Left.EqualTo(titleLabel);
+            });
 		}
 
-		public void UpdateCell(Event row, bool subscribed)
+        public void UpdateCell(Event row, bool subscribed)
 		{
 			titleLabel.Text = row.Title;
 			locationLabel.Text = row.Location.Name;
-			timeLabel.Text = Utilities.FormatEventTimeSpan(row);
-
-			switch (row.Audience)
-			{
-				case "general": audienceIcon.BackgroundColor = UIColor.Green; break;
-				case "brothers": audienceIcon.BackgroundColor = UIColor.Blue; break;
-				case "sisters": audienceIcon.BackgroundColor = UIColor.Purple; break;
-				default: audienceIcon.BackgroundColor = UIColor.Black; break;
-			}
-
-			string normalText = subscribed ? $"{{fa-bell 20pt}}" : $"{{fa-bell-o 20pt}}";
-			string highligtedText = subscribed ? $"{{fa-bell-o 20pt}}" : $"{{fa-bell 20pt}}";
-
-			NotificationButton.SetTitle(normalText, UIControlState.Normal);
-			NotificationButton.SetTitle(highligtedText, UIControlState.Highlighted);
-			NotificationButton.TouchUpInside += (sender, e) => NotificationButtonAction();
+            startTimeLabel.Text = Utilities.FormatEventTime(row.StartTime);
+            endTimeLabel.Text = Utilities.FormatEventTime(row.EndTime);
 		}
 	}
 }

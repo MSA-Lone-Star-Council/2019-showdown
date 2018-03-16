@@ -15,14 +15,15 @@ namespace Common.Common
 
 		public static string FormatEventTime(DateTimeOffset time)
 		{
-			string format = "M/d h:mmtt";
+			string format = "h:mm tt";
 			time = time.ToOffset(TimeSpan.FromHours(-5));
 			return time.ToString(format, null as DateTimeFormatInfo).ToLower();
 		}
 
 		public static string FormatEventTimeSpan(Event e)
 		{
-			string time = "h:mmtt";
+			string dayFormat = "dddd";
+			string time = "h:mm tt";
 
 			var startTime = e.StartTime.ToOffset(TimeSpan.FromHours(-5));
 			var endTime = e.EndTime.ToOffset(TimeSpan.FromHours(-5));

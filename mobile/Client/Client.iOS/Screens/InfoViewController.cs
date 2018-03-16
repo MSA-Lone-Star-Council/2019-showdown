@@ -5,7 +5,7 @@ using UIKit;
 
 namespace Client.iOS
 {
-	public partial class AboutViewController : UIViewController
+	public partial class InfoViewController : UIViewController
 	{
 
 		UILabel title = new UILabel()
@@ -92,7 +92,7 @@ namespace Client.iOS
 			facebookButton.SetImage(UIImage.FromBundle("FacebookIcon"), UIControlState.Normal);
 			facebookButton.MakeConstraints(make =>
 			{
-				make.CenterY.EqualTo(twitterButton).Offset(10);
+				make.CenterY.EqualTo(twitterButton);
 				make.Width.EqualTo((NSNumber)64);
 				make.Height.EqualTo((NSNumber)64);
 				make.CenterX.EqualTo(View).MultipliedBy(1.3f);
