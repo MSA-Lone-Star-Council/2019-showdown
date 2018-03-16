@@ -8,30 +8,29 @@ using Firebase.Iid;
 
 namespace Client.Droid
 {
-    [Application(
-        Icon = "@drawable/lsc_icon",
-        Theme = "@style/UTColors")]
-    public class ShowdownClientApplication : Application
+	[Application(
+		Icon = "@drawable/lsc_icon")]
+	public class ShowdownClientApplication : Application
 	{
-        public NotificationHubUtility HubUtility { get; set; }
-        public SubscriptionManager SubscriptionManager { get; set; }
+		public NotificationHubUtility HubUtility { get; set; }
+		public SubscriptionManager SubscriptionManager { get; set; }
 		public ShowdownRESTClient BackendClient { get; set; }
 
 		public ShowdownClientApplication(IntPtr handle, JniHandleOwnership ownership) : base(handle, ownership)
 		{
-            HubUtility = new NotificationHubUtility(this);
+			HubUtility = new NotificationHubUtility(this);
 			BackendClient = new ShowdownRESTClient();
-            SubscriptionManager = new SubscriptionManager(new DroidStorage(this), HubUtility);
+			SubscriptionManager = new SubscriptionManager(new DroidStorage(this), HubUtility);
 		}
 
 		public async override void OnCreate()
 		{
 			base.OnCreate();
 
-            Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
+			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
 
-            HubUtility.Token = FirebaseInstanceId.Instance.Token;
-            await SubscriptionManager.SaveToHub();
+			HubUtility.Token = FirebaseInstanceId.Instance.Token;
+			await SubscriptionManager.SaveToHub();
 		}
 	}
 }

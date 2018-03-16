@@ -28,11 +28,10 @@ namespace Common.Common
 			var startTime = e.StartTime.ToOffset(TimeSpan.FromHours(-5));
 			var endTime = e.EndTime.ToOffset(TimeSpan.FromHours(-5));
 
-			string startDay = startTime.ToString(dayFormat, null as DateTimeFormatInfo);
 			string startTimeStr = startTime.ToString(time, null as DateTimeFormatInfo).ToLower();
 			string endTimeStr = endTime.ToString(time, null as DateTimeFormatInfo).ToLower();
 
-			return $"{startDay} {startTimeStr} - {endTimeStr}";
+			return $"{startTimeStr} - {endTimeStr}";
 		}
 
         public static string FormatDateTime(DateTimeOffset? time)

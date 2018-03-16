@@ -1,101 +1,132 @@
 ﻿using Android.Support.V4.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
 using Client.Droid.Adapters;
-using Common.Common;
 using Client.Common;
 using Common.Common.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Linq;
+using DroidUri = Android.Net.Uri;
+using System;
 
 namespace Client.Droid.Screens
 {
-    public class ScheduleFragment : Fragment, IScheduleView
-    {
-        SchedulePresenter Presenter { get; set; }
+	public class ScheduleFragment : Fragment, IScheduleView
+	{
+		SchedulePresenter Presenter { get; set; }
 
 
-        List<Event> IScheduleView.Events {
-            set
-            {
-                ScheduleAdapter adapter = this.Adapter;
+		List<Event> IScheduleView.Events
+		{
+			set
+			{
+				ScheduleAdapter adapter = this.Adapter;
 				if (adapter == null) return;
-                adapter.Events = value;
-                adapter.NotifyDataSetChanged();
-            }
-        }
-        RecyclerView ScheduleView { get; set; }
-        ScheduleAdapter Adapter { get; set; }
+				adapter.Events = GetDayEvents(value, this.day);
+				adapter.NotifyDataSetChanged();
+			}
+		}
+		RecyclerView ScheduleView;
+		public RecyclerView ScheduleList 
+		{
+			get
+			{
+				return ScheduleView;
+			}
+		}
+		ScheduleAdapter Adapter { get; set; }
+		int day;
 
-        Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
+		Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+		public ScheduleFragment(int dayIndex)
+		{
+			day = dayIndex;
+		}
 
-            Presenter = new SchedulePresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
-            Presenter.TakeView(this);
+		public override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
 
-            Adapter = new ScheduleAdapter()
-            {
-                Events = new List<Event>()
-            };
-            Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
-        }
+			Presenter = new SchedulePresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
+			Presenter.TakeView(this);
 
-        public async override void OnResume()
-        {
-            base.OnResume();
+			Adapter = new ScheduleAdapter()
+			{
+				Events = new List<Event>()
+			};
+			Adapter.ItemClick += (object sender, ScheduleAdapterClickEventArgs args) => Presenter.OnClickRow(args.Event);
+		}
 
-            Presenter.TakeView(this);
-            await Presenter.OnBegin();
+		public async override void OnResume()
+		{
+			base.OnResume();
 
-            timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
-            timer.Start();
-        }
+			Presenter.TakeView(this);
+			await Presenter.OnBegin();
 
-        public override void OnStop()
-        {
-            base.OnStop();
-            timer.Stop();
-            Presenter.RemoveView();
-        }
+			timer.Elapsed += (sender, e) => Activity.RunOnUiThread(async () => await Presenter.OnTick());
+			timer.Start();
+		}
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            View view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
+		public override void OnStop()
+		{
+			base.OnStop();
+			timer.Stop();
+			Presenter.RemoveView();
+		}
 
-            // Set up Recycler View for the Schedule
-            ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
-            ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
-            ScheduleView.SetAdapter(Adapter);
+		public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		{
+			View view = inflater.Inflate(Resource.Layout.fragment_schedule, container, false);
 
-            return view;
-        }
+			// Set up Recycler View for the Schedule
+			ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
+			ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
+			ScheduleView.SetAdapter(Adapter);
 
-        void IScheduleView.ShowMessage(string message)
-        {
-            Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
-        }
+			return view;
+		}
 
-        void IScheduleView.OpenEvent(Event row)
-        {
-            var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
-            Intent.PutExtra("event", row.ToJSON());
-            StartActivity(Intent);
-        }
+		void IScheduleView.ShowMessage(string message)
+		{
+			Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
+		}
 
-	    Task IScheduleView.ScheduleReminder(Event eventToRemind)
-	    {
-            return Task.CompletedTask;
-	    }
+		void IScheduleView.OpenEvent(Event row)
+		{
+			//var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
+			//Intent.PutExtra("event", row.ToJSON());
+			//StartActivity(Intent);
+			Intent intent = new Intent(Intent.ActionView);
+			DroidUri locationUri = GenerateUri(row);
+			intent.SetData(locationUri);
+			Activity.StartActivity(intent);
+		}
+
+		Task IScheduleView.ScheduleReminder(Event eventToRemind)
+		{
+			//return Task.CompletedTask;
+			return null;
+		}
+
+		private List<Event> GetDayEvents(List<Event> e, int day)
+		{
+			var eventsByDay = e.GroupBy(x => x.StartTime.Day).ToArray();
+			return eventsByDay[day].ToList();
+		}
+
+		private DroidUri GenerateUri(Event e) {
+			DroidUri uri = DroidUri.Parse("geo:0,0?");
+			DroidUri.Builder uriBuilder = uri.BuildUpon();
+			uriBuilder.AppendQueryParameter("q", e.Location.Address);
+			return uriBuilder.Build();
+		}
 	}
 }
 
