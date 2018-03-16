@@ -22,6 +22,8 @@ namespace Common.iOS
 		{
 		    Presenter = new AnnouncementsPresenter(client);
 			Presenter.TakeView(this);
+            this.Title = "Announcements";
+
 		}
 
 	    public List<Announcement> Announcements

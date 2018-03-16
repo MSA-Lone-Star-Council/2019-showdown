@@ -24,6 +24,7 @@ namespace Client.iOS
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
 			presenter = new SchedulePresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager);
+            this.Title = "Schedule";
 		}
 
 		public async override void ViewWillAppear(bool animated)

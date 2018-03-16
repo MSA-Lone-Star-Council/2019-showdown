@@ -14,6 +14,7 @@ namespace Client.iOS
         {
             presenter = new TweetPresenter();
             View.AutosizesSubviews = true;
+            this.Title = "#TxShowdown18";
         }
 
         public override void ViewDidLoad()

@@ -78,7 +78,7 @@ namespace Client.iOS
 				new UINavigationController(new AnnoucementsViewController(BackendClient))  { Title = "Announcements" },
 				//new UINavigationController(new SportsViewController())  { Title = "Sports" },
                 new UINavigationController(new TwitterViewController()) {Title = "Twitter"},
-                new UINavigationController(new AboutViewController()) { Title = "About" }
+                new UINavigationController(new InfoViewController()) { Title = "Info" }
 			};
 
 			var size = 20;

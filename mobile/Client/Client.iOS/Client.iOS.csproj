@@ -209,7 +209,7 @@
     <Compile Include="Screens\LocationViewController.cs" />
     <Compile Include="GamesTableSource.cs" />
     <Compile Include="NotificationHubUtility.cs" />
-    <Compile Include="Screens\AboutViewController.cs" />
+    <Compile Include="Screens\InfoViewController.cs" />
     <Compile Include="Screens\TwitterViewController.cs" />
     <Compile Include="MapDelegate.cs" />
   </ItemGroup>

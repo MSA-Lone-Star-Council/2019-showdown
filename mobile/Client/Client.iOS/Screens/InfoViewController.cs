@@ -5,7 +5,7 @@ using UIKit;
 
 namespace Client.iOS
 {
-	public partial class AboutViewController : UIViewController
+	public partial class InfoViewController : UIViewController
 	{
 
 		UILabel title = new UILabel()
