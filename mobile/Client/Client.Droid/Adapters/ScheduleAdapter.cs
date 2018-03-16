@@ -60,6 +60,7 @@ namespace Client.Droid.Adapters
 		public TextView Title { get; set; }
 		public TextView Location { get; set; }
 		public TextView StartTime { get; set; }
+		public ImageView MapIcon { get; set; }
 
 
 		public ScheduleAdapterViewHolder(View itemView, Action<ScheduleAdapterClickEventArgs> clickListener,
@@ -68,8 +69,9 @@ namespace Client.Droid.Adapters
 			Title = itemView.FindViewById<TextView>(Resource.Id.event_title);
 			Location = itemView.FindViewById<TextView>(Resource.Id.event_location);
 			StartTime = itemView.FindViewById<TextView>(Resource.Id.event_start_time);
+			MapIcon = itemView.FindViewById<ImageView>(Resource.Id.map_icon);
 
-			itemView.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs
+			MapIcon.Click += (sender, e) => clickListener(new ScheduleAdapterClickEventArgs
 			{
 				View = itemView,
 				Position = AdapterPosition,

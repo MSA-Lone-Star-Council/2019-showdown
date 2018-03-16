@@ -29,6 +29,7 @@
 	  android:paddingBottom="20dp"
 	  android:layout_below="@id/event_location" />
   <ImageView
+	  android:id="@+id/map_icon"
 	  android:layout_height="wrap_content"
 	  android:layout_width="wrap_content"
 	  android:src="@drawable/ic_map_grey600_24dp"

@@ -7,11 +7,12 @@ using Android.Support.V7.Widget;
 using Client.Droid.Adapters;
 using Client.Common;
 using Common.Common.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Linq;
+using DroidUri = Android.Net.Uri;
+using System;
 
 namespace Client.Droid.Screens
 {
@@ -92,20 +93,32 @@ namespace Client.Droid.Screens
 
 		void IScheduleView.OpenEvent(Event row)
 		{
-			var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
-			Intent.PutExtra("event", row.ToJSON());
-			StartActivity(Intent);
+			//var Intent = new Intent(this.Activity, typeof(DetailedEventActivity));
+			//Intent.PutExtra("event", row.ToJSON());
+			//StartActivity(Intent);
+			Intent intent = new Intent(Intent.ActionView);
+			DroidUri locationUri = GenerateUri(row);
+			intent.SetData(locationUri);
+			Activity.StartActivity(intent);
 		}
 
 		Task IScheduleView.ScheduleReminder(Event eventToRemind)
 		{
-			return Task.CompletedTask;
+			//return Task.CompletedTask;
+			return null;
 		}
 
 		private List<Event> GetDayEvents(List<Event> e, int day)
 		{
 			var eventsByDay = e.GroupBy(x => x.StartTime.Day).ToArray();
 			return eventsByDay[day].ToList();
+		}
+
+		private DroidUri GenerateUri(Event e) {
+			DroidUri uri = DroidUri.Parse("geo:0,0?");
+			DroidUri.Builder uriBuilder = uri.BuildUpon();
+			uriBuilder.AppendQueryParameter("q", e.Location.Address);
+			return uriBuilder.Build();
 		}
 	}
 }
