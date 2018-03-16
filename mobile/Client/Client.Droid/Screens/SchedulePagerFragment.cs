@@ -11,6 +11,13 @@ namespace Client.Droid.Screens
 	{
 		ViewPager viewPager;
 		TabLayout tabLayout;
+		public ViewPager ViewPager
+		{
+			get 
+			{
+				return viewPager;
+			}
+		}
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{

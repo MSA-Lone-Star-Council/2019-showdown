@@ -16,6 +16,13 @@ namespace Client.Droid
 		private TextView emptyTextView;
 		private ProgressBar progressBar;
 		private WebView webView;
+		public WebView WebView
+		{
+			get
+			{
+				return webView;
+			}
+		}
 
 		public override void OnCreate(Bundle savedInstanceState)
 		{

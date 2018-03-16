@@ -31,7 +31,14 @@ namespace Client.Droid.Screens
 				adapter.NotifyDataSetChanged();
 			}
 		}
-		RecyclerView ScheduleView { get; set; }
+		RecyclerView ScheduleView;
+		public RecyclerView ScheduleList 
+		{
+			get
+			{
+				return ScheduleView;
+			}
+		}
 		ScheduleAdapter Adapter { get; set; }
 		int day;
 

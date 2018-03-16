@@ -11,6 +11,9 @@ using Common.Common;
 using BottomNavigationBar;
 using Android.Support.V4.Content;
 using Android.Graphics;
+using Android.Views;
+using Android.Webkit;
+using Android.Support.V7.Widget;
 
 namespace Client.Droid
 {
@@ -37,13 +40,13 @@ namespace Client.Droid
 			new TwitterFragment(),
 			new InfoFragment()
 			};
-
 			bottomBar = BottomBar.Attach(
 						this,
 						savedInstanceState,
 						new Color(255, 255, 255), // BG value as white
 						new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)), // Active tab value as burnt orange
 						0.4f);  // Transparency value
+
 			bottomBar.SetItems(new[] {
 				new BottomBarTab(Resource.Drawable.ic_event_white_24dp, Resource.String.schedule_title),
 				new BottomBarTab(Resource.Drawable.ic_notifications_white_24dp, Resource.String.announcements_title),
@@ -100,7 +103,29 @@ namespace Client.Droid
 
 		public void OnTabReSelected(int position)
 		{
-			return;
+			RecyclerView scrollingView = null;
+			switch (position)
+			{
+				case 0:
+					SchedulePagerFragment schedulePagerFragment = (SchedulePagerFragment)Fragments[position];
+					int currentItem = schedulePagerFragment.ViewPager.CurrentItem;
+					ScheduleFragment scheduleFragment =
+						(ScheduleFragment)schedulePagerFragment.ChildFragmentManager
+						.FindFragmentByTag("android:switcher:" + Resource.Id.view_pager + ":" + currentItem);
+					scrollingView = scheduleFragment.ScheduleList;
+					break;
+				case 1:
+					scrollingView = (Fragments[position] as AnnouncementsFragment).AnnouncementList;
+					break;
+				case 2:
+					WebView webView = (Fragments[position] as TwitterFragment).WebView;
+					webView.ScrollTo(0, 0);
+					break;
+			}
+			if (scrollingView != null)
+			{
+				scrollingView.GetLayoutManager().ScrollToPosition(0);
+			}
 		}
 	}
 }
