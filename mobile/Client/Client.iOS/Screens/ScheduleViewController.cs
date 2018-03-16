@@ -18,7 +18,7 @@ namespace Client.iOS
 
 		UITableView scheduleList;
 
-		NSTimer timer;
+		//NSTimer timer;
 
 		public ScheduleViewController()
 		{
@@ -31,14 +31,14 @@ namespace Client.iOS
 			presenter.TakeView(this);
 			await presenter.OnBegin();
 
-			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(10), async (obj) => await presenter.OnTick());
+			//timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(10), async (obj) => await presenter.OnTick());
 		}
 
 		public override void ViewWillDisappear(bool animated)
 		{
 			base.ViewWillDisappear(animated);
 			presenter.RemoveView();
-			if (timer != null) timer.Invalidate();
+			//if (timer != null) timer.Invalidate();
 		}
 
 		public override void ViewDidLoad()
@@ -84,13 +84,17 @@ namespace Client.iOS
 
 		void IScheduleView.ShowMessage(string message)
 		{
-			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
-			alertView.Show();
+            //var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+            //alertView.Show();
+            throw new NotImplementedException();
 		}
 
 		async Task IScheduleView.ScheduleReminder(Event eventToRemind)
 		{
-			IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
+            //IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
+            await Task.CompletedTask;
+            throw new NotImplementedException();
+
 		}
 
 		class ScheduleTableSource : UITableViewSource
