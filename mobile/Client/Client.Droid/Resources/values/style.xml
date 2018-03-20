@@ -37,4 +37,19 @@
 	<item name="android:textColor">@color/secondaryDarkTextColor</item>
 	<item name="android:paddingLeft">16dp</item>
   </style>
+
+  <style name="question">
+	<item name="android:textColor">@color/primaryDarkTextColor</item>
+	<item name="android:paddingTop">16dp</item>
+	<item name="android:paddingBottom">2dp</item>
+	<item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+  </style>
+
+  <style name="answer">
+	<item name="android:textColor">@color/secondaryDarkTextColor</item>
+	<item name="android:paddingStart">6dp</item>
+	<item name="android:paddingBottom">4dp</item>
+	<item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+	<item name="android:gravity">center</item>
+  </style>
 </resources>

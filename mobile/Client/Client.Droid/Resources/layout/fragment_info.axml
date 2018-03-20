@@ -1,78 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    android:elevation="4dp"
-    android:padding="16dp">
-  <TextView
-	  android:text="MSA Showdown 2017"
-	  android:textStyle="bold"
-	  android:textAppearance="?android:attr/textAppearanceLarge"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:id="@+id/title_text"
-	  android:layout_centerHorizontal="true" />
-  <TextView
-	  android:id="@+id/info_text"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:layout_centerHorizontal="true"
-	  android:gravity="center"
-	  android:text="Showdown is a three-day, tournament style conference which strives to deliver a platform for MSAs in Texas to network in a competitive setting."
-	  android:textColor="#fff"
-	  android:textSize="20sp"
-	  android:layout_below="@+id/title_text"
-	  android:layout_marginTop="30dp"
-	  android:layout_marginBottom="30dp" />
-  <TextView
-	  android:id="@+id/lsc_link"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:layout_centerHorizontal="true"
-	  android:layout_marginBottom="10dp"
-	  android:text="Learn more at msa-texas.org"
-	  android:gravity="center"
-	  android:textColor="#0276FD"
-	  android:textSize="22sp"
-	  android:layout_below="@+id/info_text" />
-  <ImageView
-	  android:id="@+id/twitter_pic"
-	  android:src="@drawable/tw_logo"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:layout_below="@+id/lsc_link"
-	  android:layout_marginTop="2dp"
-	  android:layout_marginLeft="60dp" />
-  <ImageView
-	  android:id="@+id/fb_pic"
-	  android:src="@drawable/fb_logo"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:layout_below="@+id/lsc_link"
-	  android:layout_alignParentRight="true"
-	  android:layout_marginTop="5dp"
-	  android:layout_marginRight="60dp" />
-  <TextView
-	  android:id="@+id/ppl_text"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:layout_centerHorizontal="true"
-	  android:layout_below="@+id/twitter_pic"
-	  android:layout_marginTop="50dp"
-	  android:text="Developed by Zonera Javed, Hamza Khatri, Ali Kedwaii, Saad Najmi, and Zuhair Parvez"
-	  android:gravity="center"
-	  android:textColor="#fff"
-	  android:textSize="15sp" />
-  <TextView
-	  android:id="@+id/github_link"
-	  android:layout_width="wrap_content"
-	  android:layout_height="wrap_content"
-	  android:layout_alignParentBottom="true"
-	  android:layout_centerHorizontal="true"
-	  android:layout_marginBottom="7dp"
-	  android:gravity="center"
-	  android:text="Find the app source code on GitHub"
-	  android:textColor="#0276FD"
-	  android:textSize="15sp" />
-</RelativeLayout>
+    android:orientation="vertical"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/question_showdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question_showdown"
+		android:paddingTop="0dp"
+        style="@style/question" />
+    <TextView
+        android:id="@+id/answer_showdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/answer_showdown"
+        style="@style/answer" />
+    <TextView
+        android:id="@+id/question_lsc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question_lsc"
+        style="@style/question" />
+    <TextView
+        android:id="@+id/answer_lsc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/answer_lsc"
+        android:paddingBottom="2dp"
+        style="@style/answer" />
+    <TextView
+        android:id="@+id/website_lsc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/website_lsc"
+        android:paddingBottom="2dp"
+        android:textStyle="italic"
+        style="@style/answer" />
+    <TextView
+        android:id="@+id/twitter_lsc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/twitter_lsc"
+        android:paddingBottom="2dp"
+        android:textStyle="italic"
+        style="@style/answer" />
+    <TextView
+        android:id="@+id/facebook_lsc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/facebook_lsc"
+        android:textStyle="italic"
+        style="@style/answer" />
+    <TextView
+        android:id="@+id/question_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question_app"
+        style="@style/question" />
+    <TextView
+        android:id="@+id/answer_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/answer_app"
+        android:paddingBottom="2dp"
+        style="@style/answer" />
+    <TextView
+        android:id="@+id/github_showdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/github_showdown"
+        android:textStyle="italic"
+        style="@style/answer" />
+</LinearLayout>
