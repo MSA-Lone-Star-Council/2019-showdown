@@ -1,6 +1,7 @@
 ﻿namespace Common.Common
 {
-	using System;
+    using Plugin.Connectivity;
+    using System;
 	using System.Threading.Tasks;
 
 	/// <summary>
@@ -10,7 +11,10 @@
 	/// </summary>
 	public class Presenter<V>
 	{
-		protected V View { get; set; }
+        Task OnlineMode  { get; set; }
+        Task OfflineMode { get; set; }
+
+        protected V View { get; set; }
 
 		/// <summary>
 		/// Sets the view the presenter is holding
@@ -28,6 +32,17 @@
 		{
 			this.View = default(V);
 		}
+
+        public virtual bool IsConnected()
+        {
+            return CrossConnectivity.Current.IsConnected;
+        }
+
+        public virtual void OnStart()
+        {
+            var taskToRun = (IsConnected()) ? (OnlineMode) : (OfflineMode);
+            taskToRun.Start();
+        }
 	}
 
 }
