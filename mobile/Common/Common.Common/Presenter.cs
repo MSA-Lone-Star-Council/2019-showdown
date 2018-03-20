@@ -11,8 +11,8 @@
 	/// </summary>
 	public class Presenter<V>
 	{
-        Task OnlineMode  { get; set; }
-        Task OfflineMode { get; set; }
+        protected virtual Task OnlineMode  { get; set; }
+        protected virtual Task OfflineMode { get; set; }
 
         protected V View { get; set; }
 
@@ -33,7 +33,7 @@
 			this.View = default(V);
 		}
 
-        public virtual bool IsConnected()
+        public bool IsConnected()
         {
             return CrossConnectivity.Current.IsConnected;
         }
