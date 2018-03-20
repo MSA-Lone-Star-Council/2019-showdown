@@ -9,7 +9,7 @@ using Firebase.Iid;
 namespace Client.Droid
 {
 	[Application(
-		Icon = "@drawable/lsc_icon")]
+		Icon = "@drawable/ic_launcher_heart")]
 	public class ShowdownClientApplication : Application
 	{
 		public NotificationHubUtility HubUtility { get; set; }
