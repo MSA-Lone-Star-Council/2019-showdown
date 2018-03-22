@@ -23,7 +23,7 @@ namespace Client.Droid.Screens
 			// Use this to return your custom view for this Fragment
 			var view = inflater.Inflate(Resource.Layout.fragment_info, container, false);
 
-			TextView tv = view.FindViewById<TextView>(Resource.Id.lsc_link);
+			TextView tv = view.FindViewById<TextView>(Resource.Id.website_lsc);
 			tv.Clickable = true;
 			tv.Click += delegate
 			{
@@ -32,7 +32,7 @@ namespace Client.Droid.Screens
 				StartActivity(intent);
 			};
 
-			ImageView twitter = view.FindViewById<ImageView>(Resource.Id.twitter_pic);
+			TextView twitter = view.FindViewById<TextView>(Resource.Id.twitter_lsc);
 			twitter.Clickable = true;
 			twitter.Click += delegate
 			{
@@ -41,7 +41,7 @@ namespace Client.Droid.Screens
 				StartActivity(intent);
 			};
 
-			ImageView facebook = view.FindViewById<ImageView>(Resource.Id.fb_pic);
+			TextView facebook = view.FindViewById<TextView>(Resource.Id.facebook_lsc);
 			facebook.Clickable = true;
 			facebook.Click += delegate
 			{
@@ -50,7 +50,7 @@ namespace Client.Droid.Screens
 				StartActivity(intent);
 			};
 
-			TextView gh = view.FindViewById<TextView>(Resource.Id.github_link);
+			TextView gh = view.FindViewById<TextView>(Resource.Id.github_showdown);
 			gh.Clickable = true;
 			gh.Click += delegate
 			{
