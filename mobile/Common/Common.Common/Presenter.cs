@@ -38,6 +38,16 @@
             return CrossConnectivity.Current.IsConnected;
         }
 
+        public async Task<bool> IsBackendReachable()
+        {
+            var connectivity = CrossConnectivity.Current;
+            if (!connectivity.IsConnected) return false;
+
+            var reachable = await connectivity.IsRemoteReachable(Secrets.BACKEND_URL);
+
+            return reachable;
+        }
+
         public virtual void OnStart()
         {
             var taskToRun = (IsConnected()) ? (OnlineMode) : (OfflineMode);
