@@ -118,7 +118,14 @@ namespace Client.Droid.Screens
 		private List<Event> GetDayEvents(List<Event> e, int day)
 		{
 			var eventsByDay = e.GroupBy(x => x.StartTime.Day).ToArray();
-			return eventsByDay[day].ToList();
+			if (day > eventsByDay.Length - 1)
+			{
+				return new List<Event>();
+			}
+			else
+			{
+				return eventsByDay[day].ToList();
+			}
 		}
 
 		private DroidUri GenerateUri(Event e) {

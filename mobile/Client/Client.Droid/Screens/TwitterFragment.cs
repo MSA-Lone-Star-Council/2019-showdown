@@ -6,6 +6,7 @@ using Android.Content;
 using Android.Net;
 using Android.Widget;
 using Android.Webkit;
+using Common.Common;
 
 namespace Client.Droid
 {
@@ -28,7 +29,7 @@ namespace Client.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
-			Presenter = new TweetPresenter();
+            Presenter = new TweetPresenter(((ShowdownClientApplication)this.Activity.Application).BackendClient);
 			Presenter.TakeView(this);
 		}
 
@@ -59,14 +60,6 @@ namespace Client.Droid
 		{
 			base.OnStop();
 			Presenter.RemoveView();
-		}
-
-		bool ITweetView.HasInternetConnection()
-		{
-			ConnectivityManager connectivityManager = (ConnectivityManager)Context.GetSystemService(Context.ConnectivityService);
-			NetworkInfo networkInfo = connectivityManager.ActiveNetworkInfo;
-			bool isConnected = networkInfo != null && networkInfo.IsConnectedOrConnecting;
-			return isConnected;
 		}
 
 		void ITweetView.NoInternetConnection()

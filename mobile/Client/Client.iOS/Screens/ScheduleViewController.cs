@@ -85,9 +85,12 @@ namespace Client.iOS
 
 		void IScheduleView.ShowMessage(string message)
 		{
-            //var alertView = new UIAlertView("", message, null, "OK", new string[] { });
-            //alertView.Show();
-            throw new NotImplementedException();
+            //Create Alert
+            var okAlertController = UIAlertController.Create("Error", message, UIAlertControllerStyle.Alert);
+            //Add Action
+            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            // Present Alert
+            PresentViewController(okAlertController, true, null);
 		}
 
 		async Task IScheduleView.ScheduleReminder(Event eventToRemind)

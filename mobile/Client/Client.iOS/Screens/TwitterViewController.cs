@@ -12,7 +12,8 @@ namespace Client.iOS
 
         public TwitterViewController() : base("TwitterViewController", null)
         {
-            presenter = new TweetPresenter();
+            var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+            presenter = new TweetPresenter(appDelegate.BackendClient);
             View.AutosizesSubviews = true;
             this.Title = "#TxShowdown18";
         }
@@ -45,13 +46,12 @@ namespace Client.iOS
 
         void ITweetView.NoInternetConnection()
         {
-            throw new NotImplementedException();
-        }
-
-        bool ITweetView.HasInternetConnection()
-        {
-            //throw new NotImplementedException();
-            return true;
+            //Create Alert
+            var okAlertController = UIAlertController.Create("Error", "Not connected to the internet", UIAlertControllerStyle.Alert);
+            //Add Action
+            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            // Present Alert
+            PresentViewController(okAlertController, true, null);
         }
     }
 }

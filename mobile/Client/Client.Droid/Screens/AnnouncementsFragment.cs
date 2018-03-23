@@ -33,6 +33,11 @@ namespace Client.Droid.Screens
 
         Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
 
+        void IAnnouncementsView.ShowMessage(string message)
+        {
+            Toast.MakeText(this.Activity, message, ToastLength.Short);
+        }
+
 		List<Announcement> IAnnouncementsView.Announcements
 		{
 			set

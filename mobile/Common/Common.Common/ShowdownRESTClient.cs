@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Common.Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,9 +32,33 @@ namespace Common.Common
 			return ((string)data["token"]);
         }
 
-        public Task<List<Object>> GetTweetsAsync()
+        public async Task<String> GetTwitterQueryAsync()
         {
-            throw new NotImplementedException();
+            var isBackendQueryRequestImplemented = await Connectivity.IsBackendReachable("/twitter/query");
+            //This didn't work.. sooo 
+            isBackendQueryRequestImplemented = false;
+
+            String query;
+            if (isBackendQueryRequestImplemented)
+            {
+                query = await RequestAsync("/twitter/query");
+            }
+            else
+            {
+                String HASHTAG_PRIMARY = "#TxShowdown18";
+                String BASE_SEARCH_URL = "https://twitter.com/search";
+
+                var uribuilder = new UriBuilder(BASE_SEARCH_URL);
+                    
+                var queryBuilder = HttpUtility.ParseQueryString(uribuilder.Query);
+                queryBuilder["f"] = "tweets";
+                queryBuilder["vertical"] = "default";
+                queryBuilder["q"] = HASHTAG_PRIMARY;
+                queryBuilder["src"] = "typd";
+                uribuilder.Query = queryBuilder.ToString();
+                query = uribuilder.Uri.ToString();
+            }
+            return query;
         }
 
         public async Task<List<Event>> GetScheduleAsync()

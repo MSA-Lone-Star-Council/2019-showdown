@@ -4,6 +4,5 @@
     {
         void StartWebView(string url);
         void NoInternetConnection();
-        bool HasInternetConnection();
     }
 }
