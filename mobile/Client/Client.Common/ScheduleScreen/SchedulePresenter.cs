@@ -24,7 +24,15 @@ namespace Client.Common
 
         public async Task OnBegin()
         {
-            await UpdateFromServer();
+            if (Connectivity.IsConnected()) 
+            {
+                await UpdateFromServer(); 
+            } else 
+            {
+                events = new List<Event>(); //Empty List
+                View.ShowMessage("Not Connected to the internet");
+            }
+
         }
 
         public async Task OnTick()
@@ -49,7 +57,16 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-			events = await _client.GetScheduleAsync();
+                try 
+                {
+                    events = await _client.GetScheduleAsync();
+                } catch(Exception e) 
+                {
+                    View.ShowMessage("Oops! Something went wrong");
+                    Console.WriteLine(e.StackTrace);
+                    events = new List<Event>();
+                }
+			
 
 			if (View != null)
 				View.Events = events;

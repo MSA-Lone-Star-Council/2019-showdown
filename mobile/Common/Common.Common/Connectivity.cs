@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using Plugin.Connectivity;
+
 namespace Common.Common
 {
     public static class Connectivity
