@@ -19,7 +19,7 @@ namespace Client.Common
 
 		public void OnBegin()
 		{
-			if (View.HasInternetConnection())
+            if (Connectivity.IsConnected())
 			{
 				View.StartWebView(BuildUriQuery().ToString());
 			}

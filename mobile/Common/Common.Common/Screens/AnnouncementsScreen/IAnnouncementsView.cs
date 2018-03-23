@@ -9,5 +9,6 @@ namespace Client.Common
 	    List<Announcement> Announcements { set; }
 
 		void OpenNewAnnouncement();
+		void ShowMessage(string v);
 	}
 }

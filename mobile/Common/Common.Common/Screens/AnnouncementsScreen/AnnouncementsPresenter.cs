@@ -40,9 +40,20 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-		    _announcements = await _client.GetAnnouncements();
-		    if (View != null)
-		        View.Announcements = _announcements;
+            _announcements = new List<Announcement>();
+
+            if (Connectivity.IsConnected()) 
+            {
+                _announcements = await _client.GetAnnouncements();
+                if (View != null)
+                    View.Announcements = _announcements; 
+            } else 
+            {
+                View.ShowMessage("Not connected to internet");
+                View.Announcements = _announcements;
+            }
+
+
 		}
 	}
 }

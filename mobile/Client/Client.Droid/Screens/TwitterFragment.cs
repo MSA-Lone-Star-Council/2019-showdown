@@ -61,14 +61,6 @@ namespace Client.Droid
 			Presenter.RemoveView();
 		}
 
-		bool ITweetView.HasInternetConnection()
-		{
-			ConnectivityManager connectivityManager = (ConnectivityManager)Context.GetSystemService(Context.ConnectivityService);
-			NetworkInfo networkInfo = connectivityManager.ActiveNetworkInfo;
-			bool isConnected = networkInfo != null && networkInfo.IsConnectedOrConnecting;
-			return isConnected;
-		}
-
 		void ITweetView.NoInternetConnection()
 		{
 			webView.Visibility = ViewStates.Gone;

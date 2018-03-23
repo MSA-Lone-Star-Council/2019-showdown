@@ -26,6 +26,16 @@ namespace Common.iOS
 
 		}
 
+        void IAnnouncementsView.ShowMessage(string message)
+        {
+            //Create Alert
+            var okAlertController = UIAlertController.Create("Error", message, UIAlertControllerStyle.Alert);
+            //Add Action
+            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+            // Present Alert
+            PresentViewController(okAlertController, true, null);
+        }
+
 	    public List<Announcement> Announcements
 	    {
 	        set
