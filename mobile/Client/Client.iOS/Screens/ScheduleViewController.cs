@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Client.Common;
 using Common.Common.Models;
@@ -17,12 +18,13 @@ namespace Client.iOS
 
 		UITableView scheduleList;
 
-		NSTimer timer;
+		//NSTimer timer;
 
 		public ScheduleViewController()
 		{
 			var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
 			presenter = new SchedulePresenter(appDelegate.BackendClient, appDelegate.SubscriptionManager);
+            this.Title = "Schedule";
 		}
 
 		public async override void ViewWillAppear(bool animated)
@@ -30,14 +32,14 @@ namespace Client.iOS
 			presenter.TakeView(this);
 			await presenter.OnBegin();
 
-			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(10), async (obj) => await presenter.OnTick());
+			//timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(10), async (obj) => await presenter.OnTick());
 		}
 
 		public override void ViewWillDisappear(bool animated)
 		{
 			base.ViewWillDisappear(animated);
 			presenter.RemoveView();
-			if (timer != null) timer.Invalidate();
+			//if (timer != null) timer.Invalidate();
 		}
 
 		public override void ViewDidLoad()
@@ -53,8 +55,8 @@ namespace Client.iOS
 			{
 				BackgroundColor = UIColor.Clear,
 				Source = tableSource,
-				SeparatorStyle = UITableViewCellSeparatorStyle.None,
-				RowHeight = 110,
+                SeparatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched,
+				RowHeight = 60,
 			};
 			scheduleList.RegisterClassForCellReuse(typeof(EventCell), EventCellID);
 			this.AutomaticallyAdjustsScrollViewInsets = true;
@@ -83,20 +85,51 @@ namespace Client.iOS
 
 		void IScheduleView.ShowMessage(string message)
 		{
-			var alertView = new UIAlertView("", message, null, "OK", new string[] { });
-			alertView.Show();
+            //var alertView = new UIAlertView("", message, null, "OK", new string[] { });
+            //alertView.Show();
+            throw new NotImplementedException();
 		}
 
 		async Task IScheduleView.ScheduleReminder(Event eventToRemind)
 		{
-			IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
+            //IOSHelpers.ScheduleNotification(eventToRemind.StartTime.Subtract(TimeSpan.FromMinutes(15)), eventToRemind.Title);
+            await Task.CompletedTask;
+            throw new NotImplementedException();
+
 		}
 
 		class ScheduleTableSource : UITableViewSource
 		{
-			public delegate void OnRowTapped(Event row);
+            class SectionHeaderData 
+            {
+                public string Header;
+                public int Count;
+            }
 
-			public List<Event> Events { get; set; }
+            List<SectionHeaderData> eventHeaders = new List<SectionHeaderData>();
+
+            List<Event> _events;
+            public List<Event> Events //{ get; set; }
+
+            {
+                get
+                {
+                    return _events;
+                }
+                set
+                {
+                    _events = value;
+                    eventHeaders = Events.GroupBy(item => item.StartTime.DayOfWeek.ToString())
+                                  .Select(group => new SectionHeaderData
+                                  {
+                                      Header = group.Key,
+                                      Count = group.Count()
+                                  })
+                                  .ToList();
+                } 
+            }
+
+            public delegate void OnRowTapped(Event row);
 
 			public event OnRowTapped RowTappedEvent;
 
@@ -115,17 +148,42 @@ namespace Client.iOS
 				return cell;
 			}
 
-			public override nint RowsInSection(UITableView tableview, nint section)
-			{
-				return Events.Count;
-			}
-
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				var row = Events[indexPath.Row];
 				RowTappedEvent(row);
 				tableView.DeselectRow(indexPath, false);
 			}
+
+            //
+            public override nint NumberOfSections(UITableView tableView)
+            {
+                return eventHeaders.Count();
+            }
+
+            public override nint RowsInSection(UITableView tableview, nint section)
+            {
+                //return Events.Count();
+                return eventHeaders[(int)section].Count;
+            }
+
+
+            public override string[] SectionIndexTitles(UITableView tableView)
+            {
+                string[] titles = new string[eventHeaders.Count()];
+                for (int i = 0; i < eventHeaders.Count; i++) 
+                {
+                    titles[i] = eventHeaders[i].Header.Substring(0,3);
+                }
+                return titles;
+            }
+
+
+            public override string TitleForHeader(UITableView tableView, nint section)
+            {
+                return eventHeaders[(int)section].Header;
+            }
+
 		}
 	}
 }

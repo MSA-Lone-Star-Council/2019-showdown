@@ -12,25 +12,36 @@ namespace Common.iOS
 		UILabel Body { get; set; }
 		UILabel Time { get; set; }
 
-		static UIFont TitleFont = UIFont.FromName("Helvetica-Bold", 16);
-		static UIFont TimeFont =  UIFont.FromName("Helvetica-Oblique", 12);
-		static UIFont BodyFont = UIFont.FromName("Helvetica", 14);
+        static UIFont TitleFont = UIFont.SystemFontOfSize(16, UIFontWeight.Bold);
+        static UIFont TimeFont =  UIFont.SystemFontOfSize(16, UIFontWeight.Regular);
+        static UIFont BodyFont = UIFont.SystemFontOfSize(16, UIFontWeight.Regular);
 
         public AnnouncementCell(IntPtr p) : base(p)
         {
-			Title = new UILabel() {Font = TitleFont, Lines = 0};
-            Body = new UILabel() {Font = BodyFont, Lines = 0};
-            Time = new UILabel() {Font = TimeFont, Lines = 0};
+			Title = new UILabel() 
+            {
+                Font = TitleFont,
+                Lines = 2
+            };
+            Body = new UILabel() 
+            {
+                Font = BodyFont, 
+                Lines = 0,
+            };
+            Time = new UILabel() 
+            {
+                Font = TimeFont,
+                TextColor = UIColor.DarkGray,
+                Lines = 2,
+            };
 
-			var containerView = new UIView() { BackgroundColor = UIColor.White };
+			var containerView = new UIView() { BackgroundColor = UIColor.Clear };
 			ContentView.Add(containerView);
 			containerView.MakeConstraints(make =>
 			{
-				make.Edges.EqualTo(ContentView).Insets(new UIEdgeInsets(5, 5, 5, 5));
+				make.Edges.EqualTo(ContentView).Insets(new UIEdgeInsets(10, 10, 10, 10));
 			});
-			containerView.Layer.CornerRadius = 3;
-			containerView.Layer.BorderWidth = 0.5f;
-			containerView.Layer.BorderColor = UIColor.LightGray.CGColor;
+
 
             var parentView = containerView;
 
@@ -38,9 +49,15 @@ namespace Common.iOS
 
             Title.MakeConstraints(make =>
             {
-                make.Top.EqualTo(parentView).Offset(5);
-                make.Left.EqualTo(parentView).Offset(5);
-				make.Width.EqualTo(parentView);
+                make.Top.EqualTo(parentView);
+                make.Left.EqualTo(parentView);
+				make.Right.EqualTo(parentView).Offset(-80);
+            });
+
+            Time.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(parentView);
+                make.Right.EqualTo(parentView);
             });
 
             Body.MakeConstraints(make =>
@@ -50,11 +67,7 @@ namespace Common.iOS
 				make.Width.EqualTo(parentView);
             });
 
-            Time.MakeConstraints(make =>
-            {
-                make.Right.EqualTo(parentView).Offset(-5);
-                make.Bottom.EqualTo(parentView).Offset(-5);
-            });
+
 
         }
 

@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MSA Showdown 2018</string>
-    <string name="app_name_short">Showdown 2018</string>
-    <string-array name="nav_titles">
-      <item>Schedule</item>
-      <item>Annoucements</item>
-      <item>Sports</item>
-      <item>Acknowledgements</item>
-      <item>Twitter</item>
-    </string-array>
-    <string name="drawer_open">Open Menu</string>
-    <string name="drawer_close">Close Menu</string>
+  <string name="app_name">MSA Showdown 2018</string>
+  <string name="app_name_short">Showdown 2018</string>
+
   <string name="no_internet">No Internet connection</string>
+  
+  <!--Nav bar titles-->
+  <string name="schedule_title">Schedule</string>
+  <string name="announcements_title">Announcements</string>
+  <string name="twitter_title">Twitter</string>
+  <string name="info_title">Info</string>
+
+  <!--Info FAQ questions-->
+  <string name="question_showdown">What is Showdown?</string>
+  <string name="question_lsc">What is LSC?</string>
+  <string name="question_app">Who made this app?</string>
+
+  <!--Info FAQ answers-->
+  <string name="answer_showdown">
+	Showdown is a three-day, tournament style conference which 
+	strives to deliver a platform for MSAs in Texas to network in a 
+	competitive setting.
+  </string>
+  <string name="answer_lsc">
+	The MSA Lone Star Council is a coalition of MSAs across the state of 
+	Texas whose primary purpose is to unify MSAs for the sake of Allah
+  </string>
+  <string name="website_lsc">
+	<u>Learn more at the LSC website</u>
+  </string>
+  <string name="twitter_lsc">
+	<u>Follow LSC on Twitter</u>
+  </string>
+  <string name="facebook_lsc">
+	<u>Check LSC out on Facebook</u>
+  </string>
+  <string name="answer_app">
+	A joint effort by Saad Najmi, Zuhair Parvez, Ali Naqvi, Hamza Khatri, 
+	Ali Kedwaii, and Adil Moosani
+  </string>
+  <string name="github_showdown">
+	<u>See the source code on Github</u>
+  </string>
 </resources>

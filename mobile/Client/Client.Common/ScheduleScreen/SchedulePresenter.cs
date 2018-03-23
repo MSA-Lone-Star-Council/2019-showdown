@@ -57,19 +57,24 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-                try 
-                {
-                    events = await _client.GetScheduleAsync();
-                } catch(Exception e) 
-                {
-                    View.ShowMessage("Oops! Something went wrong");
-                    Console.WriteLine(e.StackTrace);
-                    events = new List<Event>();
-                }
-			
+            try 
+            {
+                events = await _client.GetScheduleAsync();
+            } catch(Exception e) 
+            {
+                View.ShowMessage("Oops! Something went wrong");
+                Console.WriteLine(e.StackTrace);
+                events = new List<Event>();
+            }
 
-			if (View != null)
-				View.Events = events;
+            if (View != null)
+            {
+                if (events != newEvents)
+                {
+                    events = newEvents;
+                    View.Events = events;
+                }
+            }	
 		}
 
 		public bool IsSubscribed(Event item)
