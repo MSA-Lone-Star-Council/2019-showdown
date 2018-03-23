@@ -10,6 +10,9 @@ namespace Common.Common
             return CrossConnectivity.Current.IsConnected;
         }
 
+        // TODO :
+        // As this is exposed to Client frontend, and I do not believe frontend code should
+        // know anything about endpoints, we may want to refactor this
         public static async Task<bool> IsBackendReachable(string endpoint)
         {
             var connectivity = CrossConnectivity.Current;
