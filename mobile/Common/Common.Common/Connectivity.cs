@@ -10,12 +10,12 @@ namespace Common.Common
             return CrossConnectivity.Current.IsConnected;
         }
 
-        public static async Task<bool> IsBackendReachable()
+        public static async Task<bool> IsBackendReachable(string endpoint)
         {
             var connectivity = CrossConnectivity.Current;
             if (!connectivity.IsConnected) return false;
 
-            var reachable = await connectivity.IsRemoteReachable(Secrets.BACKEND_URL);
+            var reachable = await connectivity.IsRemoteReachable(Secrets.BACKEND_URL + endpoint);
 
             return reachable;
         }

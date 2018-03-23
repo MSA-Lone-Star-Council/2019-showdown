@@ -31,9 +31,10 @@ namespace Common.Common
 			return ((string)data["token"]);
         }
 
-        public Task<List<Object>> GetTweetsAsync()
+        public async Task<String> GetTwitterQueryAsync()
         {
-            throw new NotImplementedException();
+            var returnString = await RequestAsync("/twitter/query");
+            return returnString;
         }
 
         public async Task<List<Event>> GetScheduleAsync()

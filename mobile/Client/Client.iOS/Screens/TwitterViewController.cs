@@ -12,7 +12,8 @@ namespace Client.iOS
 
         public TwitterViewController() : base("TwitterViewController", null)
         {
-            presenter = new TweetPresenter();
+            var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+            presenter = new TweetPresenter(appDelegate.BackendClient);
             View.AutosizesSubviews = true;
             this.Title = "#TxShowdown18";
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using Common.Common;
 
@@ -6,22 +7,33 @@ namespace Client.Common
 {
 	public class TweetPresenter : Presenter<ITweetView>
 	{
-
 		private UriBuilder uriBuilder;
-		private static readonly string HASHTAG_PRIMARY = "#rockets"; //TODO: Change later to Showdown tags
-		private static readonly string HASHTAG_SECONDARY = "#lakers"; //TODO: Change later to Showdown tags
+		private static readonly string HASHTAG_PRIMARY = "#TxShowdown18";
 		private static readonly string BASE_SEARCH_URL = "https://twitter.com/search";
 
-		public TweetPresenter()
+        private readonly ShowdownRESTClient _client;
+
+        public TweetPresenter(ShowdownRESTClient client)
 		{
 			uriBuilder = new UriBuilder(BASE_SEARCH_URL);
+            _client = client;
 		}
 
-		public void OnBegin()
+		public async Task OnBegin()
 		{
             if (Connectivity.IsConnected())
 			{
-				View.StartWebView(BuildUriQuery().ToString());
+                var isBackendImplemented = await Connectivity.IsBackendReachable("/twitter /query");
+
+                String query;
+                if (isBackendImplemented) 
+                {
+                    query = await _client.GetTwitterQueryAsync();
+                } else 
+                {
+                    query = BuildUriQuery().ToString();
+                }
+                View.StartWebView(query);				
 			}
 			else
 			{
@@ -35,7 +47,7 @@ namespace Client.Common
 			var queryBuilder = HttpUtility.ParseQueryString(uriBuilder.Query);
 			queryBuilder["f"] = "tweets";
 			queryBuilder["vertical"] = "default";
-			queryBuilder["q"] = HASHTAG_PRIMARY + ", OR " + HASHTAG_SECONDARY;
+			queryBuilder["q"] = HASHTAG_PRIMARY;
 			queryBuilder["src"] = "typd";
 			uriBuilder.Query = queryBuilder.ToString();
 			return uriBuilder.Uri;
