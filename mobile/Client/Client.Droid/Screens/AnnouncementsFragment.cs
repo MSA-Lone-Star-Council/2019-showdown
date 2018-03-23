@@ -21,6 +21,13 @@ namespace Client.Droid.Screens
 	public class AnnouncementsFragment : Fragment, IAnnouncementsView
 	{
 		RecyclerView _announcementsListView;
+		public RecyclerView AnnouncementList
+		{
+			get 
+			{
+				return _announcementsListView;
+			}
+		}
 
 		AnnouncementsPresenter Presenter { get; set; }
 

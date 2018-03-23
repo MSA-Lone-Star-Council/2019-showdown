@@ -49,10 +49,16 @@ namespace Client.Common
 
 		private async Task UpdateFromServer()
 		{
-			events = await _client.GetScheduleAsync();
+			var newEvents = await _client.GetScheduleAsync();
 
-			if (View != null)
-				View.Events = events;
+            if (View != null)
+            {
+                if (events != newEvents)
+                {
+                    events = newEvents;
+                    View.Events = events;
+                }
+            }	
 		}
 
 		public bool IsSubscribed(Event item)

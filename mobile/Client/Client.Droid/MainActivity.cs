@@ -1,105 +1,69 @@
 ﻿using Android.App;
-using Android.Widget;
 using Android.OS;
 using V4 = Android.Support.V4;
-using V7 = Android.Support.V7;
-using Android.Support.V4.Widget;
-using Android.Views;
-using System;
 using Client.Droid.Screens;
 using Android.Gms.Common;
-using Android.Util;
-using Firebase.Iid;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Android.Support.V7.App;
 using Common.Common;
+using BottomNavigationBar;
+using Android.Support.V4.Content;
+using Android.Graphics;
+using Android.Views;
+using Android.Webkit;
+using Android.Support.V7.Widget;
 
 namespace Client.Droid
 {
-    [Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class MainActivity : V4.App.FragmentActivity
-    {
+	[Activity(Label = "@string/app_name_short", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait,
+	WindowSoftInputMode = Android.Views.SoftInput.AdjustPan)]
+	public class MainActivity : AppCompatActivity, BottomNavigationBar.Listeners.IOnTabClickListener
+	{
+		int prevPosition = 0;
+		BottomBar bottomBar;
+		V4.App.Fragment[] Fragments { get; set; }
+
 		public static string ScreenIndexKey = "ScreenIndex";
 
-        string[] NavigationTitles { get; set; }
-        DrawerLayout DrawerLayout { get; set; }
-        V7.App.ActionBarDrawerToggle DrawerToggle { get; set; }
-        ListView DrawerList { get; set; }
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
 
-        V4.App.Fragment[] Fragments { get; set; }
+			SetContentView(Resource.Layout.Main);
+			AppCenter.Start(Secrets.clientAndroidAppCenterSecret, typeof(Analytics), typeof(Crashes));
 
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+			Fragments = new V4.App.Fragment[] {
+			new SchedulePagerFragment(),
+			new AnnouncementsFragment(),
+			new TwitterFragment(),
+			new InfoFragment()
+			};
+			bottomBar = BottomBar.Attach(
+						this,
+						savedInstanceState,
+						new Color(255, 255, 255), // BG value as white
+						new Color(ContextCompat.GetColor(this, Resource.Color.primaryColor)), // Active tab value as burnt orange
+						0.4f);  // Transparency value
 
-            SetContentView(Resource.Layout.Main);
-
-            AppCenter.Start(Secrets.clientAndroidAppCenterSecret, typeof(Analytics), typeof(Crashes));
-
-            BuildDrawer();
-
-            Fragments = new V4.App.Fragment[] {
-                new ScheduleFragment(),
-                new AnnouncementsFragment(),
-                new SportsFragment(),
-                new AcknowledgementsFragment(),
-                new TwitterFragment()
-            };
-
+			bottomBar.SetItems(new[] {
+				new BottomBarTab(Resource.Drawable.ic_event_white_24dp, Resource.String.schedule_title),
+				new BottomBarTab(Resource.Drawable.ic_notifications_white_24dp, Resource.String.announcements_title),
+				new BottomBarTab(Resource.Drawable.ic_twitter_white_24dp, Resource.String.twitter_title),
+				new BottomBarTab(Resource.Drawable.ic_info_white_24dp, Resource.String.info_title)
+			});
+			bottomBar.SetOnTabClickListener(this);
 
 			IsPlayServicesAvailable();
 
-        }
-
-		protected override void OnResume()
-		{
-			base.OnResume();
-			int screenIndex = Intent.GetIntExtra(ScreenIndexKey, 0);
-			SelectItem(screenIndex);
-		}
-	
-
-		void BuildDrawer()
-		{
-			ActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_drawer);
-			ActionBar.SetDisplayHomeAsUpEnabled(true);
-			ActionBar.SetHomeButtonEnabled(true);
-			//ActionBar.SetDisplayShowTitleEnabled(false);
-
-			NavigationTitles = Resources.GetStringArray(Resource.Array.nav_titles);
-
-			DrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
-
-			DrawerList = FindViewById<ListView>(Resource.Id.left_drawer);
-			DrawerList.Adapter = new ArrayAdapter<string>(this, Resource.Layout.drawer_list_item, NavigationTitles);
-			DrawerList.ItemClick += (sender, e) => SelectItem(e.Position);
-
-			DrawerToggle = new V7.App.ActionBarDrawerToggle(
-				this,
-				DrawerLayout,
-				Resource.String.drawer_open,
-				Resource.String.drawer_close);
 		}
 
-        void SelectItem(int position)
-        {
-            var fragmentToShow = Fragments[position];
-            this.SupportFragmentManager.BeginTransaction()
-                                  .Replace(Resource.Id.content_frame, fragmentToShow)
-                                  .Commit();
-
-            DrawerList.SetItemChecked(position, true);
-            this.Title = NavigationTitles[position];
-            DrawerLayout.CloseDrawer(DrawerList);
-        }
-
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            if (DrawerToggle.OnOptionsItemSelected(item)) return true; // This gets the menu icon to work
-            return base.OnOptionsItemSelected(item);
-        }
+		protected override void OnSaveInstanceState(Bundle outState)
+		{
+			base.OnSaveInstanceState(outState);
+			bottomBar.OnSaveInstanceState(outState);
+		}
 
 		void IsPlayServicesAvailable()
 		{
@@ -110,5 +74,61 @@ namespace Client.Droid
 				Finish();
 			}
 		}
-    }
+
+		public void OnTabSelected(int position)
+		{
+			V4.App.Fragment fragment = Fragments[position];
+			V4.App.Fragment oldFragment = Fragments[prevPosition];
+
+			if (SupportFragmentManager.FindFragmentByTag(prevPosition.ToString()) != null)
+			{
+				SupportFragmentManager.BeginTransaction()
+				.Hide(oldFragment)
+				.Commit();
+			}
+			if (SupportFragmentManager.FindFragmentByTag(position.ToString()) == null)
+			{
+				SupportFragmentManager.BeginTransaction()
+				.Add(Resource.Id.content_frame, fragment, position.ToString())
+				.Commit();
+			}
+			else
+			{
+				SupportFragmentManager.BeginTransaction()
+				.Show(fragment)
+				.Commit();
+			}
+			prevPosition = position;
+		}
+
+		public void OnTabReSelected(int position)
+		{
+			RecyclerView scrollingView = null;
+			switch (position)
+			{
+				case 0:
+					SchedulePagerFragment schedulePagerFragment = (SchedulePagerFragment)Fragments[position];
+					int currentItem = schedulePagerFragment.ViewPager.CurrentItem;
+					ScheduleFragment scheduleFragment =
+						(ScheduleFragment)schedulePagerFragment.ChildFragmentManager
+						.FindFragmentByTag("android:switcher:" + Resource.Id.view_pager + ":" + currentItem);
+					scrollingView = scheduleFragment.ScheduleList;
+					break;
+				case 1:
+					scrollingView = (Fragments[position] as AnnouncementsFragment).AnnouncementList;
+					break;
+				case 2:
+					WebView webView = (Fragments[position] as TwitterFragment).WebView;
+					if (webView != null)
+					{
+						webView.ScrollTo(0, 0);
+					}
+					break;
+			}
+			if (scrollingView != null)
+			{
+				scrollingView.GetLayoutManager().ScrollToPosition(0);
+			}
+		}
+	}
 }

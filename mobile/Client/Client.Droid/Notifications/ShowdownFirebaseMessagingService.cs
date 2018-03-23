@@ -43,7 +43,7 @@ namespace Client.Droid
 
 			return
 				new NotificationCompat.Builder(this)
-				.SetSmallIcon(Resource.Drawable.lsc_icon)
+				.SetSmallIcon(Resource.Drawable.ic_launcher_heart)
 				.SetContentTitle(data["title"])
 				.SetContentText(data["subtitle"])
 				.SetContentIntent(resultPendingIntent)
