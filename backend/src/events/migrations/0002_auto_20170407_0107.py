@@ -68,25 +68,25 @@ def generate_seed_data(apps, schema_editor):
         latitude=30.2862222, longitude=-97.7415767,
         notes=""
     )
-    utc_2.102A = Location(
+    utc_2_102A = Location(
         name="UTC: Room 2.102A",
         address="105 W 21st St, Austin TX, 78712",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    utc_2.112A = Location(
+    utc_2_112A = Location(
         name="UTC: Room 2.112A",
         address="105 W 21st St, Austin TX, 78712",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    utc_1.102 = Location(
+    utc_1_102 = Location(
         name="UTC: Room 1.102",
         address="105 W 21st St, Austin TX, 78712",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    utc_1.130 = Location(
+    utc_1_130 = Location(
         name="UTC: Room 1.130",
         address="105 W 21st St, Austin TX, 78712",
         latitude=30.2832791, longitude=-97.739008,
@@ -97,8 +97,8 @@ def generate_seed_data(apps, schema_editor):
         union_ballroom, union_quadrangle,
         union_eastwoods, nueces_mosque, rec_sports, gregory_gym,
         main_mall_tower, whitaker_fields,
-        utc_2.102A, clark_basketball,
-        utc_2.112A, utc_1.102, utc_1.130
+        utc_2_102A, clark_basketball,
+        utc_2_112A, utc_1_102, utc_1_130
     ])
 
 class Migration(migrations.Migration):
