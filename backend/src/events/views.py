@@ -12,11 +12,7 @@ from .serializers import FullEventSerializer, FullLocationSerializer
 
 class ScheduleView(generics.ListAPIView):
     serializer_class = FullEventSerializer
-
-    def get_queryset(self):
-        # Find all events that ended up to an hour ago or haven't ended yet
-        cutoff = arrow.utcnow().replace(hours=-1).datetime
-        return Event.objects.filter(end_time__gte=cutoff).order_by('start_time')
+    queryset = Event.objects.order_by('start_time')
 
 class LocationView(generics.RetrieveAPIView):
     queryset = Location.objects.all()
