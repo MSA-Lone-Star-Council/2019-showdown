@@ -14,6 +14,9 @@ class Score(models.Model):
     class Meta:
         ordering = ['-time']
 
+    def __str__(self):
+        return "%d to %d" % (self.away_points, self.home_points)
+
 class Game(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=140)
@@ -28,3 +31,6 @@ class Game(models.Model):
             score = Score(game=self, away_points=0, home_points=0)
             score.save()
         super(Game, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
