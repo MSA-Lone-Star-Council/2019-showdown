@@ -17,19 +17,19 @@ def generate_seed_data(apps, schema_editor):
     union_ballroom = Location(
         name="Texas Union: Sherley Bird Perry Ballroom",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649 longitude=-97.7433516,
+        latitude=30.2866649, longitude=-97.7433516,
         notes=""
     )
     union_quadrangle = Location(
         name="Texas Union: Quadrangle Room",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649 longitude=-97.7433516,
+        latitude=30.2866649, longitude=-97.7433516,
         notes=""
     )
     union_eastwoods = Location(
         name="Texas Union: Eastwoods Room",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649 longitude=-97.7433516,
+        latitude=30.2866649, longitude=-97.7433516,
         notes=""
     )
     nueces_mosque = Location(
