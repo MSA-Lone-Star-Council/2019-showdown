@@ -1,38 +1,40 @@
-Registration,30,17,0,21,40,general,HEB University Center: Ballroom
-Welcome/Introductions,30,18,30,19,0,general,HEB University Center: Ballroom
-Ice Breakers,30,19,0,19,30,general,HEB University Center: Ballroom
-Sisters Tajweed,30,19,0,22,15,sisters,HEB University Center: Ballroom
-Brothers Tajweed,30,19,0,22,15,brothers,HEB University Center: Ballroom
-Maghrib,30,19,30,20,0,general,HEB University Center: Ballroom
-Sisters Nasheed,30,20,30,22,15,sisters,HEB University Center: Ballroom
-Brothers Nasheed,30,20,0,22,15,brothers,HEB University Center: Ballroom
-Isha,30,22,30,22,45,general,HEB University Center: Ballroom
-Captain Meeting,30,22,45,23,0,general,HEB University Center: Ballroom
-Qiyam,30,23,45,0,0,general,HEB University Center: Ballroom
-Fajr,31,6,40,7,0,general,HEB University Center: Ballroom
-Knowledge Bowl (1st Round - Written),31,7,0,8,0,general,HEB University Center: Ballroom
-Breakfast,31,7,0,8,0,general,HEB University Center: Ballroom
-Registration,31,8,0,13,0,general,HEB University Center: Ballroom
-Sisters Volleyball,31,8,0,13,30,sisters,HEB University Center: Ballroom
-Brothers Basketball,31,8,0,13,30,brothers,HEB University Center: Ballroom
-Art/Scrapbook/Photography Check In,31,10,0,11,0,general,HEB University Center: Ballroom
-Art/Scrapbook/Photography Viewing Open For Everyone,31,13,30,20,10,general,HEB University Center: Ballroom
-Lunch & Dhuhr,31,13,30,14,0,general,HEB University Center: Ballroom
-Sisters Basketball,31,14,0,19,0,sisters,HEB University Center: Ballroom
-Sisters Dodgeball,31,14,0,19,0,sisters,HEB University Center: Ballroom
-Brothers Football,31,14,0,19,0,brothers,HEB University Center: Ballroom
-Brothers Soccer,31,14,0,19,0,brothers,HEB University Center: Ballroom
-Activity ,31,14,0,17,0,general,HEB University Center: Ballroom
-Asr,31,17,5,17,15,general,HEB University Center: Ballroom
-Dinner,31,18,30,19,0,general,HEB University Center: Ballroom
-Halaqa,31,19,0,19,45,general,HEB University Center: Ballroom
-Maghrib,31,19,45,20,0,general,HEB University Center: Ballroom
-Performance Poetry,31,20,15,22,15,general,HEB University Center: Ballroom
-Isha,31,22,15,22,30,general,HEB University Center: Ballroom
-Roll Call,31,22,30,23,30,general,HEB University Center: Ballroom
-Fajr,1,6,25,6,35,general,HEB University Center: Ballroom
-Breakfast,1,7,30,9,0,general,HEB University Center: Ballroom
-Knowledge Bowl Finals,1,8,0,9,0,general,HEB University Center: Ballroom
-Film,1,9,0,11,30,general,HEB University Center: Ballroom
-Awards,1,11,45,12,30,general,HEB University Center: Ballroom
-Dhuhr,1,13,35,13,45,general,HEB University Center: Ballroom
+Jummah (Friday Prayer),30,13,0,14,0,general,Nueces Mosque
+Registration,30,17,0,21,45,general,Texas Union: Sherley Bird Perry Ballroom
+Sisters Tajweed,30,19,0,22,15,sisters,UTC 1.102
+Brothers Tajweed,30,19,0,22,15,brothers,UTC 1.130
+Maghrib Prayer,30,19,45,20,0,general,Texas Union: Quadrangle Room
+Sisters Nasheed | LSC Welcome & Intros,30,20,0,22,15,sisters,UTC 2.102A
+Brothers Nasheed | LSC Welcome & Intros,30,20,0,22,15,brothers,UTC 2.112A
+Isha,30,22,30,22,45,general,Main Mall
+Captain Meeting,30,22,45,23,0,general,UTC 2.112A
+Qiyam,30,23,45,0,0,general,Nueces Mosque
+Fajr,31,6,40,7,0,general,Nueces Mosque
+Knowledge Bowl (Written),31,7,0,8,0,general,Texas Union: Eastwoods Room
+Breakfast,31,7,0,8,0,general,Texas Union: Sherley Bird Perry Ballroom
+Registration,31,8,0,10,0,general,Texas Union Ballroom/Gregory Gym/Rec Sports
+Sisters Volleyball,31,8,0,13,30,sisters,Recreational Sports Center: Room 2.200
+Brothers Basketball,31,8,0,13,30,brothers,Gregory Gym: Arena 3.108
+Art/Scrapbook/Photography,31,10,0,18,0,general,Texas Union: Quadrangle Room
+UMR Project Downtown,31,12,0,14,0,general,UTC Classroom
+Games Room & Scavenger Hunt,31,12,0,17,0,general,UTC Classroom
+Lunch & Dhuhr,31,13,30,14,0,general,Greg Gamesroom/UTC Classroom/Rec Sports
+Sisters Basketball,31,14,0,19,0,sisters,Recreational Sports Center: Room 2.200
+Sisters Dodgeball,31,14,0,19,0,sisters,Clark Basketball Courts
+Brothers Football,31,14,0,19,0,brothers,Wright-Whitaker Fields
+Brothers Soccer,31,14,0,19,0,brothers,Wright-Whitaker Fields
+Caligraphy Workshop,31,14,30,15,30,general,UTC Classroom
+Package Dinner,31,17,0,19,0,general,Main Mall/Union Patio
+Asr,31,17,5,17,15,general,Rec Sports/Wright-Whitaker Fields
+Dinner,31,18,0,19,0,general,Main Mall/Union Patio
+Leadership Dinner,31,18,0,19,0,general,UTC Classroom
+Halaqa,31,19,0,19,45,general,Texas Union: Sherley Bird Perry Ballroom
+Maghrib,31,19,45,20,0,general,Texas Union: Sherley Bird Perry Ballroom
+Performance Poetry,31,20,15,22,15,general,Texas Union: Sherley Bird Perry Ballroom
+Isha,31,22,15,22,30,general,Texas Union: Sherley Bird Perry Ballroom
+Roll Call,31,22,30,23,30,general,Texas Union: Sherley Bird Perry Ballroom
+Fajr,1,6,25,6,35,general,Nueces Mosque
+Breakfast,1,7,30,9,0,general,Texas Union: Sherley Bird Perry Ballroom
+Knowledge Bowl Finals,1,8,0,9,0,general,Texas Union: Sherley Bird Perry Ballroom
+Film,1,9,0,11,30,general,Texas Union: Sherley Bird Perry Ballroom
+Awards,1,11,45,12,30,general,Texas Union: Sherley Bird Perry Ballroom
+Dhuhr,1,13,35,13,45,general,Texas Union: Sherley Bird Perry Ballroom
