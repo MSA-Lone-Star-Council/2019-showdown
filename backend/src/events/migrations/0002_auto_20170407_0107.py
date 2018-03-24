@@ -92,13 +92,38 @@ def generate_seed_data(apps, schema_editor):
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
+    utc_classroom = Location(
+        name="UTC Classroom",
+        address="105 W 21st St, Austin TX, 78712",
+        latitude=30.2832791, longitude=-97.739008,
+        notes=""
+    )
+    sports = Location(
+        name="Rec Sports/Wright-Whitaker Fields",
+        address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
+        latitude=30.2815448, longitude=-97.73465080,
+        notes=""
+    )
+    sat_registration = Location(
+        name="Texas Union Ballroom/Gregory Gym/Rec Sports",
+        address="Texas Union Building Austin, Texas",
+        latitude=30.2866649, longitude=-97.7433516,
+        notes=""
+    )
+    sat_lunch = Location(
+        name="Gregory Gym Gamesroom/UTC Classroom/Rec Sports",
+        address="2101 Speedway, Austin, TX 78712",
+        latitude=30.2842377, longitude=-97.7386967,
+        notes=""
+    )
 
     Location.objects.using(db_alias).bulk_create([
         union_ballroom, union_quadrangle,
         union_eastwoods, nueces_mosque, rec_sports, gregory_gym,
         main_mall_tower, whitaker_fields,
         utc_2_102A, clark_basketball,
-        utc_2_112A, utc_1_102, utc_1_130
+        utc_2_112A, utc_1_102, utc_1_130, utc_classroom, 
+        sports, sat_registration, sat_lunch
     ])
 
 class Migration(migrations.Migration):
