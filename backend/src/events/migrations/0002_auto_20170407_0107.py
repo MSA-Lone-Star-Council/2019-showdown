@@ -8,7 +8,7 @@ from dateutil import tz
 import arrow
 
 def datetime(day, hour, minute):
-    return arrow.get(2018, 4 if (day == 1) else 3, day, hour, minute, 0, 0, tz.gettz('US/Central')).datetime
+    return arrow.get(2018, 4 if (day == 1) else 3, day, hour, minute, 0, 0, tz.gettz('America/Chicago')).datetime
 
 def generate_seed_data(apps, schema_editor):
     Location = apps.get_model("events", "Location")
