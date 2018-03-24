@@ -52,7 +52,7 @@ def generate_seed_data(apps, schema_editor):
     )
     clark_basketball = Location(
         name="Clark Basketball Courts",
-        address="Basketball Support Building, 301 Jester Cir, Austin, TX 78712",
+        address="Clark Basketball Courts, Basketball Support Building, 301 Jester Cir, Austin, TX 78712",
         latitude=30.2811592, longitude=-97.7377321,
         notes=""
     )
