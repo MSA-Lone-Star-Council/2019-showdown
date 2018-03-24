@@ -46,6 +46,7 @@ namespace Common.Common
             else
             {
                 String HASHTAG_PRIMARY = "#TxShowdown18";
+				String HASHTAG_SECONDARY = "#RaceToShowdown2018";
                 String BASE_SEARCH_URL = "https://twitter.com/search";
 
                 var uribuilder = new UriBuilder(BASE_SEARCH_URL);
@@ -53,8 +54,8 @@ namespace Common.Common
                 var queryBuilder = HttpUtility.ParseQueryString(uribuilder.Query);
                 queryBuilder["f"] = "tweets";
                 queryBuilder["vertical"] = "default";
-                queryBuilder["q"] = HASHTAG_PRIMARY;
-                queryBuilder["src"] = "typd";
+                queryBuilder["q"] = HASHTAG_PRIMARY + ", OR " + HASHTAG_SECONDARY;
+				queryBuilder["src"] = "typd";
                 uribuilder.Query = queryBuilder.ToString();
                 query = uribuilder.Uri.ToString();
             }
