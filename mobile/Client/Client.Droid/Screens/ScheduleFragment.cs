@@ -43,6 +43,7 @@ namespace Client.Droid.Screens
 		int day;
 
 		Timer timer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds) { AutoReset = true };
+		private TextView emptyTextView;
 
 		public ScheduleFragment(int dayIndex)
 		{
@@ -87,6 +88,7 @@ namespace Client.Droid.Screens
 
 			// Set up Recycler View for the Schedule
 			ScheduleView = view.FindViewById<RecyclerView>(Resource.Id.scheduleRecyclerView);
+			emptyTextView = view.FindViewById<TextView>(Resource.Id.empty_view);
 			ScheduleView.SetLayoutManager(new LinearLayoutManager(this.Activity));
 			ScheduleView.SetAdapter(Adapter);
 
@@ -95,7 +97,7 @@ namespace Client.Droid.Screens
 
 		void IScheduleView.ShowMessage(string message)
 		{
-			Toast.MakeText(this.Activity, message, ToastLength.Short).Show();
+			emptyTextView.Text = message;
 		}
 
 		void IScheduleView.OpenEvent(Event row)
@@ -120,10 +122,15 @@ namespace Client.Droid.Screens
 			var eventsByDay = e.GroupBy(x => x.StartTime.Day).ToArray();
 			if (day > eventsByDay.Length - 1)
 			{
+				if (emptyTextView.Text.Length == 0)
+				{
+					emptyTextView.Text = "No events on this day";
+				}
 				return new List<Event>();
 			}
 			else
 			{
+				emptyTextView.Text = "";
 				return eventsByDay[day].ToList();
 			}
 		}

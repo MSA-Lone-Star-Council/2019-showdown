@@ -20,6 +20,7 @@ namespace Client.Droid.Screens
 {
 	public class AnnouncementsFragment : Fragment, IAnnouncementsView
 	{
+		private TextView emptyTextView;
 		RecyclerView _announcementsListView;
 		public RecyclerView AnnouncementList
 		{
@@ -35,8 +36,8 @@ namespace Client.Droid.Screens
 
         void IAnnouncementsView.ShowMessage(string message)
         {
-            Toast.MakeText(this.Activity, message, ToastLength.Short);
-        }
+			emptyTextView.Text = message;
+		}
 
 		List<Announcement> IAnnouncementsView.Announcements
 		{
@@ -44,6 +45,15 @@ namespace Client.Droid.Screens
 			{
 				AnnouncementsAdapter adapter = _announcementsListView?.GetAdapter() as AnnouncementsAdapter;
 				adapter.Announcements = value;
+				if (value.Capacity == 0)
+				{
+					emptyTextView.Text = "No announcements retrieved";
+				}
+				else
+				{
+					emptyTextView.Text = "";
+				}
+					
 				adapter?.NotifyDataSetChanged();
 			}
 		}
@@ -80,8 +90,8 @@ namespace Client.Droid.Screens
 				Announcements = new List<Announcement>()
 			});
 			_announcementsListView.SetLayoutManager(new LinearLayoutManager(Activity));
+			emptyTextView = v.FindViewById<TextView>(Resource.Id.empty_view);
 
-		
 			return v;
 		}
 

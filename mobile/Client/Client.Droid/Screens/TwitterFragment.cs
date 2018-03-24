@@ -15,7 +15,6 @@ namespace Client.Droid
 		TweetPresenter Presenter { get; set; }
 
 		private TextView emptyTextView;
-		private ProgressBar progressBar;
 		private WebView webView;
 		public WebView WebView
 		{
@@ -37,9 +36,7 @@ namespace Client.Droid
 		{
 			View view = inflater.Inflate(Resource.Layout.fragment_twitter, container, false);
 			emptyTextView = view.FindViewById<TextView>(Resource.Id.empty_view);
-			progressBar = view.FindViewById<ProgressBar>(Resource.Id.progress_spinner);
 			webView = view.FindViewById<WebView>(Resource.Id.web_view);
-			Presenter.OnBegin();
 			return view;
 		}
 
@@ -47,6 +44,7 @@ namespace Client.Droid
 		{
 			base.OnResume();
 			Presenter.TakeView(this);
+			Presenter.OnBegin();
 			webView.OnResume();
 		}
 
@@ -65,17 +63,19 @@ namespace Client.Droid
 		void ITweetView.NoInternetConnection()
 		{
 			webView.Visibility = ViewStates.Gone;
-			progressBar.Visibility = ViewStates.Gone;
 			emptyTextView.Text = GetString(Resource.String.no_internet);
 		}
 
 		void ITweetView.StartWebView(string url)
 		{
-			progressBar.Visibility = ViewStates.Gone;
-			webView.Visibility = ViewStates.Visible;
-			webView.Settings.JavaScriptEnabled = true;
-			webView.SetWebViewClient(new TwitterWebViewClient());
-			webView.LoadUrl(url);
+			if (webView.Visibility == ViewStates.Gone)
+			{
+				webView.Visibility = ViewStates.Visible;
+				emptyTextView.Text = "";
+				webView.Settings.JavaScriptEnabled = true;
+				webView.SetWebViewClient(new TwitterWebViewClient());
+				webView.LoadUrl(url);
+			}
 		}
 
 		private class TwitterWebViewClient : WebViewClient
