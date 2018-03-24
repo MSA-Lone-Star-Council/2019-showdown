@@ -49,7 +49,7 @@ namespace Client.Common
                     View.Announcements = _announcements; 
             } else 
             {
-                View.ShowMessage("Not connected to internet");
+                View.ShowMessage("No Internet connection");
                 View.Announcements = _announcements;
             }
 

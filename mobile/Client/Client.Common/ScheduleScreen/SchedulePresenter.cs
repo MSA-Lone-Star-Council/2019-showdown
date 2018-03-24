@@ -67,7 +67,7 @@ namespace Client.Common
             else
             {
                 newEvents = new List<Event>(); //Empty List
-                View.ShowMessage("Not Connected to the internet");
+                View.ShowMessage("No Internet connection");
             }
 
             if (View != null)
