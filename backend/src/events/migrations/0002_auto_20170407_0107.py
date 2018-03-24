@@ -34,13 +34,13 @@ def generate_seed_data(apps, schema_editor):
     )
     nueces_mosque = Location(
         name="Nueces Mosque",
-        address="1906 Nueces St, Austin, TX 78705",
+        address="Nueces Mosque, 1906 Nueces St, Austin, TX 78705",
         latitude=30.2831914, longitude=-97.7465274,
         notes=""
     )
     gregory_gym = Location(
         name="Gregory Gym: Arena 3.108",
-        address="2101 Speedway, Austin, TX 78712",
+        address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
         latitude=30.2842377, longitude=-97.7386967,
         notes=""
     )
@@ -58,43 +58,43 @@ def generate_seed_data(apps, schema_editor):
     )
     whitaker_fields = Location(
         name="Wright-Whitaker Fields",
-        address="4901 Guadalupe St, Austin, TX 78751",
+        address="Charles Alan Wright Fields, 4901 Guadalupe St, Austin, TX 78751",
         latitude=30.2812333, longitude=-97.7705628,
         notes=""
     )
     main_mall_tower = Location(
         name="Main Mall: UT Tower",
-        address="110 Inner Campus Drive, Austin, TX 78705",
+        address="Main Building, 110 Inner Campus Drive, Austin, TX 78705",
         latitude=30.2862222, longitude=-97.7415767,
         notes=""
     )
     utc_2_102A = Location(
         name="UTC: Room 2.102A",
-        address="105 W 21st St, Austin TX, 78712",
+        address="University Teaching Center, Austin, TX 78705",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
     utc_2_112A = Location(
         name="UTC: Room 2.112A",
-        address="105 W 21st St, Austin TX, 78712",
+        address="University Teaching Center, Austin, TX 78705",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
     utc_1_102 = Location(
         name="UTC: Room 1.102",
-        address="105 W 21st St, Austin TX, 78712",
+        address="University Teaching Center, Austin, TX 78705",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
     utc_1_130 = Location(
         name="UTC: Room 1.130",
-        address="105 W 21st St, Austin TX, 78712",
+        address="University Teaching Center, Austin, TX 78705",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
     utc_classroom = Location(
         name="UTC Classroom",
-        address="105 W 21st St, Austin TX, 78712",
+        address="University Teaching Center, Austin, TX 78705",
         latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
@@ -111,8 +111,8 @@ def generate_seed_data(apps, schema_editor):
         notes=""
     )
     sat_lunch = Location(
-        name="Gregory Gym Gamesroom/UTC Classroom/Rec Sports",
-        address="2101 Speedway, Austin, TX 78712",
+        name="Gregory Gym/UTC Classroom/Rec Sports",
+        address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
         latitude=30.2842377, longitude=-97.7386967,
         notes=""
     )
