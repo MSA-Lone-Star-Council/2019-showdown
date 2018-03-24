@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import generics
 
+import arrow
+
 from scores.models import Game
 from scores.serializers import GameSerializer
 
@@ -9,8 +11,12 @@ from .models import Event, Location
 from .serializers import FullEventSerializer, FullLocationSerializer
 
 class ScheduleView(generics.ListAPIView):
-    queryset = Event.objects.order_by('start_time')
     serializer_class = FullEventSerializer
+
+    def get_queryset(self):
+        # Find all events that ended up to an hour ago or haven't ended yet
+        cutoff = arrow.utcnow().replace(hours=-1).datetime
+        return Event.objects.filter(end_time__gte=cutoff).order_by('start_time')
 
 class LocationView(generics.RetrieveAPIView):
     queryset = Location.objects.all()
