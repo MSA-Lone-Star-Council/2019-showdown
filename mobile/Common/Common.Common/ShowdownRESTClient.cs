@@ -65,7 +65,8 @@ namespace Common.Common
         public async Task<List<Event>> GetScheduleAsync()
 		{
 			var jsonString = await RequestAsync("/events/schedule");
-			return Event.FromJSONArray(jsonString);
+			var eventList = Event.FromJSONArray(jsonString);
+			return SetEventsToCst(eventList);
 		}
 
 		public async Task<Location> GetLocationInformation(string id)
@@ -127,6 +128,20 @@ namespace Common.Common
 		public Task<Announcement> CreateAnnouncement(Announcement announcement)
 		{
 			throw new NotImplementedException();
+		}
+
+		private List<Event> SetEventsToCst(List<Event> events)
+		{
+			List<Event> fixedEvent = new List<Event>();
+			TimeZoneInfo cstInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Chicago");
+			for(int i = 0; i < events.Count; i++)
+			{
+				Event e = events[i];
+				e.StartTime = TimeZoneInfo.ConvertTimeFromUtc(e.StartTime.DateTime, cstInfo);
+				e.EndTime = TimeZoneInfo.ConvertTimeFromUtc(e.EndTime.DateTime, cstInfo);
+				fixedEvent.Add(e);
+			}
+			return fixedEvent;
 		}
 	}
 }
