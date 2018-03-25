@@ -11,7 +11,7 @@ namespace Client.iOS
         UILabel ShowdownQuestion = new UILabel()
         {
             Text = "What is Showdown?",
-            Font = UIFont.SystemFontOfSize(20, UIFontWeight.Bold),
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Bold),
             TextAlignment = UITextAlignment.Center
         };
 
@@ -26,7 +26,7 @@ namespace Client.iOS
         UILabel LSCQuestion = new UILabel()
         {
             Text = "What is Lone Star Council?",
-            Font = UIFont.SystemFontOfSize(20, UIFontWeight.Bold),
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Bold),
             TextAlignment = UITextAlignment.Center
         };
 
@@ -41,7 +41,7 @@ namespace Client.iOS
         UILabel AppQuestion = new UILabel()
         {
             Text = "Who made the app?",
-            Font = UIFont.SystemFontOfSize(20, UIFontWeight.Bold),
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Bold),
             TextAlignment = UITextAlignment.Center
         };
 
@@ -54,18 +54,16 @@ namespace Client.iOS
         };
 
         UIButton visitLink = new UIButton();
-
         UIButton twitterButton = new UIButton();
         UIButton facebookButton = new UIButton();
-
-        UIButton contributionLink = new UIButton() { Font = UIFont.SystemFontOfSize(10, UIFontWeight.Bold) };
+        UIButton contributionLink = new UIButton();
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
             View.BackgroundColor = Resources.Colors.backgroundColor;
-            this.Title = "MSA Showdown";
+            this.Title = "Info";
 
             View.AddSubviews(new UIView[]
             {
@@ -83,7 +81,7 @@ namespace Client.iOS
 
             ShowdownQuestion.MakeConstraints(make =>
             {
-                make.Top.EqualTo(View.Top()).Offset(10);
+                make.Top.EqualTo(View.Top()).Offset(100);
                 make.CenterX.EqualTo(View.CenterX());
                 make.Left.EqualTo(View.Left()).Offset(10);
                 make.Right.EqualTo(View.Right()).Offset(-10);
@@ -131,7 +129,7 @@ namespace Client.iOS
 
             visitLink.MakeConstraints(make =>
             {
-                make.Top.EqualTo(AppAnswer.Bottom()).Offset(10);
+                make.Top.EqualTo(AppAnswer.Bottom()).Offset(5);
                 make.CenterX.EqualTo(View.CenterX());
                 make.Left.EqualTo(View.Left()).Offset(10);
                 make.Right.EqualTo(View.Right()).Offset(-10);
@@ -139,7 +137,7 @@ namespace Client.iOS
 
             facebookButton.MakeConstraints(make =>
             {
-                make.Top.EqualTo(visitLink.Bottom()).Offset(10);
+                make.Top.EqualTo(visitLink.Bottom()).Offset(5);
                 make.CenterX.EqualTo(View.CenterX());
                 make.Left.EqualTo(View.Left()).Offset(10);
                 make.Right.EqualTo(View.Right()).Offset(-10);
@@ -155,11 +153,27 @@ namespace Client.iOS
 
             contributionLink.MakeConstraints(make =>
             {
-                make.Top.EqualTo(facebookButton.Bottom()).Offset(10);
+                make.Top.EqualTo(twitterButton.Bottom()).Offset(5);
                 make.CenterX.EqualTo(View.CenterX());
                 make.Left.EqualTo(View.Left()).Offset(10);
                 make.Right.EqualTo(View.Right()).Offset(-10);
             });
+
+            visitLink.SetTitle("Learn more at the LSC Website", UIControlState.Normal);
+            visitLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            visitLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+
+            facebookButton.SetTitle("Visit LSC on Facebook", UIControlState.Normal);
+            facebookButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            facebookButton.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+
+            twitterButton.SetTitle("Visit LSC on Twitter", UIControlState.Normal);
+            twitterButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            twitterButton.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+
+            contributionLink.SetTitle("View the app source on Github", UIControlState.Normal);
+            contributionLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            contributionLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
 
 
             visitLink.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("http://msa-texas.org"));
