@@ -215,7 +215,6 @@
     <Compile Include="ShowdownClientApplication.cs" />
     <Compile Include="Adapters\AnnouncementsAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="InfoViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

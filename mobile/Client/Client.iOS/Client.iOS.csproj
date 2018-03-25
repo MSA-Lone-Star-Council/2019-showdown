@@ -224,6 +224,7 @@
     <Compile Include="NotificationHubUtility.cs" />
     <Compile Include="Screens\TwitterViewController.cs" />
     <Compile Include="MapDelegate.cs" />
+    <Compile Include="Screens\InfoViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client.Common\Client.Common.csproj">
