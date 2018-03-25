@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Riaz Nimrah (8VPWJ5H665)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
@@ -27,6 +27,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <CodesignProvision>VS: org.msa-texas.showdown Development</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -36,14 +37,16 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Distribution: Riaz Nimrah (3RJS63674Y)</CodesignKey>
+    <CodesignKey>iPhone Developer: Riaz Nimrah (8VPWJ5H665)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchArch>ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision>match AppStore org.msa-texas.showdown</CodesignProvision>
+    <CodesignProvision>VS: org.msa-texas.showdown Development</CodesignProvision>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -53,11 +56,12 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Riaz Nimrah (8VPWJ5H665)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchLink>None</MtouchLink>
-    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchArch>x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <CodesignProvision>VS: org.msa-texas.showdown Development</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,7 +81,7 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <CodesignProvision>match Development org.msa-texas.showdown</CodesignProvision>
+    <CodesignProvision>VS: org.msa-texas.showdown Development</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -218,7 +222,6 @@
     <Compile Include="Screens\LocationViewController.cs" />
     <Compile Include="GamesTableSource.cs" />
     <Compile Include="NotificationHubUtility.cs" />
-    <Compile Include="Screens\InfoViewController.cs" />
     <Compile Include="Screens\TwitterViewController.cs" />
     <Compile Include="MapDelegate.cs" />
   </ItemGroup>
@@ -238,6 +241,34 @@
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-48.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-55.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-88.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-172.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-196.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-16.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-32.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-64.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-128.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-256.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
