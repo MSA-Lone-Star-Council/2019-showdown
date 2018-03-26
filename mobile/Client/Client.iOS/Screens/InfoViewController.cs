@@ -5,123 +5,182 @@ using UIKit;
 
 namespace Client.iOS
 {
-	public partial class InfoViewController : UIViewController
-	{
+    public class InfoViewController : UIViewController
+    {
 
-		UILabel title = new UILabel()
-		{
-			Text = "LSC Showdown 2018",
-			Font = UIFont.SystemFontOfSize(24, UIFontWeight.Bold),
-			TextAlignment = UITextAlignment.Center
-		};
+        UILabel ShowdownQuestion = new UILabel()
+        {
+            Text = "What is Showdown?",
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Bold),
+            TextAlignment = UITextAlignment.Center
+        };
 
-		UILabel description = new UILabel()
-		{
-			Text = "Showdown is a three-day, tournament style conference which strives to deliever a platform for MSAs in Texas to network in a competitve setting.",
-			Font = UIFont.SystemFontOfSize(16, UIFontWeight.Regular),
-			TextAlignment = UITextAlignment.Center,
-			Lines = 0,
-		};
+        UILabel ShowdownAnswer = new UILabel()
+        {
+            Text = "Showdown is a three-day, tournament style conference which strives to deliever a platform for MSAs in Texas to network in a competitve setting.",
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Regular),
+            TextAlignment = UITextAlignment.Center,
+            Lines = 0,
+        };
 
-		UIButton twitterButton = new UIButton();
-		UIButton facebookButton = new UIButton();
-		UIButton visitLink = new UIButton();
+        UILabel LSCQuestion = new UILabel()
+        {
+            Text = "What is Lone Star Council?",
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Bold),
+            TextAlignment = UITextAlignment.Center
+        };
 
-		UILabel authors = new UILabel()
-		{
-			Text = "Developed by Ali Naqvi, Ali Kedwaii, Hamzah Khatri, Saad Najmi, and Zuhair Parvez",
-			Font = UIFont.SystemFontOfSize(14, UIFontWeight.Light),
-			TextAlignment = UITextAlignment.Center,
-			Lines = 0
-		};
+        UILabel LSCAnswer = new UILabel()
+        {
+            Text = "The MSA Lone Star Council is a coalition of MSAs across the state of Texas whose primary purpose is to unify MSAs for the sake of Allah",
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Regular),
+            TextAlignment = UITextAlignment.Center,
+            Lines = 0,
+        };
 
-		UIButton contributionLink = new UIButton() { Font = UIFont.SystemFontOfSize(10, UIFontWeight.Bold) };
+        UILabel AppQuestion = new UILabel()
+        {
+            Text = "Who made the app?",
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Bold),
+            TextAlignment = UITextAlignment.Center
+        };
 
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
+        UILabel AppAnswer = new UILabel()
+        {
+            Text = "A joint effort between Saad Najmi, Zuhair Parvez, Ali Naqvi, Hamza Khatri, Ali Kedwaii, and Adil Moosani",
+            Font = UIFont.SystemFontOfSize(16, UIFontWeight.Regular),
+            TextAlignment = UITextAlignment.Center,
+            Lines = 0,
+        };
+
+        UIButton visitLink = new UIButton();
+        UIButton twitterButton = new UIButton();
+        UIButton facebookButton = new UIButton();
+        UIButton contributionLink = new UIButton();
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
 
             View.BackgroundColor = Resources.Colors.backgroundColor;
+            this.Title = "Info";
+
+            View.AddSubviews(new UIView[]
+            {
+                ShowdownQuestion,
+                ShowdownAnswer,
+                LSCQuestion,
+                LSCAnswer,
+                AppQuestion,
+                AppAnswer,
+                visitLink,
+                twitterButton,
+                facebookButton,
+                contributionLink
+            });
+
+            ShowdownQuestion.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(View.Top()).Offset(100);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            ShowdownAnswer.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(ShowdownQuestion.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            LSCQuestion.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(ShowdownAnswer.Bottom()).Offset(10);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            LSCAnswer.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(LSCQuestion.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            AppQuestion.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(LSCAnswer.Bottom()).Offset(10);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            AppAnswer.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(AppQuestion.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            visitLink.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(AppAnswer.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            facebookButton.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(visitLink.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            twitterButton.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(facebookButton.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            contributionLink.MakeConstraints(make =>
+            {
+                make.Top.EqualTo(twitterButton.Bottom()).Offset(5);
+                make.CenterX.EqualTo(View.CenterX());
+                make.Left.EqualTo(View.Left()).Offset(10);
+                make.Right.EqualTo(View.Right()).Offset(-10);
+            });
+
+            visitLink.SetTitle("Learn more at the LSC Website", UIControlState.Normal);
+            visitLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            visitLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+
+            facebookButton.SetTitle("Visit LSC on Facebook", UIControlState.Normal);
+            facebookButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            facebookButton.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+
+            twitterButton.SetTitle("Visit LSC on Twitter", UIControlState.Normal);
+            twitterButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            twitterButton.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
+
+            contributionLink.SetTitle("View the app source on Github", UIControlState.Normal);
+            contributionLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+            contributionLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
 
 
-			View.AddSubviews(new UIView[]
-			{
-				title,
-				description,
-				visitLink,
-				twitterButton,
-				facebookButton,
-				authors,
-				contributionLink
-			});
-
-			title.MakeConstraints(make =>
-			{
-				make.CenterY.EqualTo(View).MultipliedBy(0.3f);
-				make.Width.EqualTo(View);
-			});
-
-			description.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(title.Bottom()).Offset(5);
-				make.Width.EqualTo(View).MultipliedBy(0.9f);
-				make.Height.EqualTo(View.Height()).MultipliedBy(0.2f);
-				make.CenterX.EqualTo(View);
-			});
-
-			visitLink.SetTitle("Learn more at msa-texas.org", UIControlState.Normal);
-			visitLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
-			visitLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
-			visitLink.MakeConstraints(make =>
-			{
-				make.CenterX.EqualTo(View);
-				make.Width.EqualTo(View).MultipliedBy(0.9f);
-				make.Height.EqualTo((NSNumber)40);
-				make.Top.EqualTo(description.Bottom());
-			});
-
-			twitterButton.SetImage(UIImage.FromBundle("TwitterIcon"), UIControlState.Normal);
-			twitterButton.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(visitLink.Bottom()).Offset(10);
-				make.Width.EqualTo((NSNumber)64);
-				make.Height.EqualTo((NSNumber)64);
-				make.CenterX.EqualTo(View).MultipliedBy(0.7f);
-			});
-
-			facebookButton.SetImage(UIImage.FromBundle("FacebookIcon"), UIControlState.Normal);
-			facebookButton.MakeConstraints(make =>
-			{
-				make.CenterY.EqualTo(twitterButton);
-				make.Width.EqualTo((NSNumber)64);
-				make.Height.EqualTo((NSNumber)64);
-				make.CenterX.EqualTo(View).MultipliedBy(1.3f);
-			});
-
-			authors.MakeConstraints(make =>
-			{
-				make.Top.EqualTo(facebookButton.Bottom()).Offset(5);
-				make.Width.EqualTo(View).MultipliedBy(0.9f);
-				make.Height.EqualTo(View.Height()).MultipliedBy(0.1f);
-				make.CenterX.EqualTo(View);
-			});
-
-			contributionLink.SetTitle("Find the app source on GitHub", UIControlState.Normal);
-			contributionLink.SetTitleColor(UIColor.Blue, UIControlState.Normal);
-			contributionLink.SetTitleColor(UIColor.LightGray, UIControlState.Highlighted);
-			contributionLink.MakeConstraints(make =>
-			{
-				make.CenterX.EqualTo(View);
-				make.Width.EqualTo(View).MultipliedBy(0.9f);
-				make.Height.EqualTo((NSNumber)40);
-				make.Top.EqualTo(authors.Bottom());
-			});
-
-			visitLink.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("http://msa-texas.org"));
-			facebookButton.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://www.facebook.com/msalonestarcouncil/"));
-			twitterButton.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://twitter.com/msalsc"));
-			contributionLink.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://github.com/MSA-Lone-Star-Council/Showdown"));
-		}
-	}
+            visitLink.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("http://msa-texas.org"));
+            facebookButton.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://www.facebook.com/msalonestarcouncil/"));
+            twitterButton.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://twitter.com/msalsc"));
+            contributionLink.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://github.com/MSA-Lone-Star-Council/Showdown"));
+        }
+    }
 }
 
