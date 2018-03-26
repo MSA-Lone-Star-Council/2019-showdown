@@ -31,10 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Common", "Common\Common.Common\Common.Common.csproj", "{BF2F8849-80CA-4619-A978-0308B0B4BB3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scorekeeper.Common", "Scorekeeper\Scorekeeper.Common\Scorekeeper.Common.csproj", "{4E2FDDAB-F2E3-483F-AB92-E19ACC1BED7A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BF2F8849-80CA-4619-A978-0308B0B4BB3B} = {BF2F8849-80CA-4619-A978-0308B0B4BB3B}
-		{FB4AA57E-E092-4831-B92A-5F1A49112095} = {FB4AA57E-E092-4831-B92A-5F1A49112095}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Admin.Common", "Admin\Admin.Common\Admin.Common.csproj", "{FB4AA57E-E092-4831-B92A-5F1A49112095}"
 	ProjectSection(ProjectDependencies) = postProject

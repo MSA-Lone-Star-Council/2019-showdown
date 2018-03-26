@@ -180,6 +180,7 @@ namespace Client.iOS
             facebookButton.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://www.facebook.com/msalonestarcouncil/"));
             twitterButton.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://twitter.com/msalsc"));
             contributionLink.TouchUpInside += (sender, e) => UIApplication.SharedApplication.OpenUrl(new NSUrl("https://github.com/MSA-Lone-Star-Council/Showdown"));
+
         }
     }
 }

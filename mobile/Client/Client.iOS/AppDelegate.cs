@@ -29,7 +29,7 @@ namespace Client.iOS
 			set;
 		}
 
-		NotificationHubUtility hub = new NotificationHubUtility();
+        NotificationHubUtility hub;
 	    public ShowdownRESTClient BackendClient { get; set; }
 		public SubscriptionManager SubscriptionManager { get; set; }
 
@@ -38,6 +38,7 @@ namespace Client.iOS
             AppCenter.Start(Secrets.clientiOSAppCenterSecret, typeof(Analytics), typeof(Crashes));
 
             BackendClient = new ShowdownRESTClient();
+            hub = new NotificationHubUtility();
 			SubscriptionManager = new SubscriptionManager(new iOSStorage(), hub);
 
 			Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
