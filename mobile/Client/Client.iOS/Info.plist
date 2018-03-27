@@ -4,7 +4,6 @@
 <dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleName</key>
@@ -39,20 +38,9 @@
 	<true/>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>MKDirectionsRequest</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.apple.maps.directionsrequest</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>3.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>3.0.0</string>
+	<string>3.0.2</string>
 </dict>
 </plist>
