@@ -72,6 +72,7 @@ namespace Client.iOS
 		private UIViewController BuildRootViewController()
 		{
 			var tabBarController = new UITabBarController();
+            tabBarController.AutomaticallyAdjustsScrollViewInsets = true;
 
 			tabBarController.ViewControllers = new UIViewController[]
 			{

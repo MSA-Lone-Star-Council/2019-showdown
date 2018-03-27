@@ -111,14 +111,13 @@ namespace Client.iOS
 			});
 			*/
 
-            var coordinate = new CLLocationCoordinate2D(30.2862, -97.7394); //UT Tower
-            mapView.SetRegion(MKCoordinateRegion.FromDistance(coordinate, 1000, 1000), true); //1000 meter radius
+            var mapCenter = new CLLocationCoordinate2D(presenter.Event.Location.Latitude, presenter.Event.Location.Longitude);
+            mapView.SetRegion(MKCoordinateRegion.FromDistance(mapCenter, 1000, 1000), true); //1000 meter radius
             var annotation = new MKPointAnnotation()
             {
                 Title = presenter.Event.Title,
                 Subtitle = presenter.Event.Location.Name,
-                //Coordinate = new CLLocationCoordinate2D(presenter.Event.Location.Latitude, presenter.Event.Location.Longitude)
-                Coordinate = coordinate
+                Coordinate = new CLLocationCoordinate2D(presenter.Event.Location.Latitude, presenter.Event.Location.Longitude)
             };
             mapView.AddAnnotations(annotation);
             mapView.SelectAnnotation(annotation, true);

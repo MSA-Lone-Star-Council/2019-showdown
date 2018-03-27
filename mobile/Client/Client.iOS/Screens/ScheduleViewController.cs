@@ -59,9 +59,11 @@ namespace Client.iOS
 				RowHeight = 60,
 			};
 			scheduleList.RegisterClassForCellReuse(typeof(EventCell), EventCellID);
-			this.AutomaticallyAdjustsScrollViewInsets = true;
-
+            View.InsetsLayoutMarginsFromSafeArea = true;
 			View.AddSubview(scheduleList);
+
+
+            this.AutomaticallyAdjustsScrollViewInsets = true;
 		}
 
 		List<Event> IScheduleView.Events
@@ -143,7 +145,13 @@ namespace Client.iOS
 				var cell = tableView.DequeueReusableCell(EventCellID) as EventCell;
 				cell.BackgroundColor = UIColor.Clear;
 
-				var item = Events[indexPath.Row];
+                int offset = 0;
+                for (int section = 0; section < indexPath.Section; section++)
+                {
+                    offset += eventHeaders[section].Count;
+                }
+                var item = Events[offset + indexPath.Row];
+
 
 				cell.UpdateCell(item, Presenter.IsSubscribed(item));
 				cell.NotificationButtonAction = () => Presenter.OnStar(item);
