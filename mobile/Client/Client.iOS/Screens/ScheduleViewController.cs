@@ -161,7 +161,13 @@ namespace Client.iOS
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				var row = Events[indexPath.Row];
+                int offset = 0;
+                for (int section = 0; section < indexPath.Section; section++)
+                {
+                    offset += eventHeaders[section].Count;
+                }
+                var row = Events[offset + indexPath.Row];
+
 				RowTappedEvent(row);
 				tableView.DeselectRow(indexPath, false);
 			}

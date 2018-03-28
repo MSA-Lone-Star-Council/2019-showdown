@@ -33,7 +33,8 @@ namespace Client.iOS
 
         Task INotificationHub.SaveTags(List<string> tags)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
