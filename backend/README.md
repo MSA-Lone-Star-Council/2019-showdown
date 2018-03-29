@@ -57,3 +57,19 @@ docker-compose -p backend scale api=3
 docker build -t msalonestarcouncil/showdown:latest src
 docker push msalonestarcouncil/showdown # If you want to publish it to the docker registry - will need permissions
 ```
+
+## Adding admins
+1. Have the user log in to the admin app. This will fail as expected
+2. Open a Django shell
+```bash
+sudo docker exec -it backend_api_1 ./manage.py shell
+```
+3. In the Django shell
+```python
+from accounts.models import User
+u = User.objects.get(name__contains="Saad")
+u.adminstrator = True # yes, it is spelled wrong
+u.save()
+```
+
+4. Have the user log back in (may require app to be re-installed)
