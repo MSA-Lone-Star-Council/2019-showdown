@@ -32,8 +32,8 @@ class LoginView(APIView):
             return Response(status=400)
 
         try:
-            user_id = facebook.get_token_info(facebook_access_token)
-            user, _= User.objects.get_or_create(facebook_id=user_id)
+            user_id, name = facebook.get_token_info(facebook_access_token)
+            user, _= User.objects.get_or_create(facebook_id=user_id, name=name)
             claim = build_claim(user)
             jwt_token = jwt.encode(claim, settings.SECRET_KEY).decode("utf-8")
             return Response({'token': jwt_token}, status=200)
