@@ -46,6 +46,7 @@ namespace Common.Common
             else
             {
                 String HASHTAG_PRIMARY = "#TxShowdown18";
+				String HASHTAG_SECONDARY = "#RaceToShowdown2018";
                 String BASE_SEARCH_URL = "https://twitter.com/search";
 
                 var uribuilder = new UriBuilder(BASE_SEARCH_URL);
@@ -53,8 +54,8 @@ namespace Common.Common
                 var queryBuilder = HttpUtility.ParseQueryString(uribuilder.Query);
                 queryBuilder["f"] = "tweets";
                 queryBuilder["vertical"] = "default";
-                queryBuilder["q"] = HASHTAG_PRIMARY;
-                queryBuilder["src"] = "typd";
+                queryBuilder["q"] = HASHTAG_PRIMARY + ", OR " + HASHTAG_SECONDARY;
+				queryBuilder["src"] = "typd";
                 uribuilder.Query = queryBuilder.ToString();
                 query = uribuilder.Uri.ToString();
             }
@@ -64,7 +65,8 @@ namespace Common.Common
         public async Task<List<Event>> GetScheduleAsync()
 		{
 			var jsonString = await RequestAsync("/events/schedule");
-			return Event.FromJSONArray(jsonString);
+			var eventList = Event.FromJSONArray(jsonString);
+			return SetEventsToCst(eventList);
 		}
 
 		public async Task<Location> GetLocationInformation(string id)
@@ -126,6 +128,20 @@ namespace Common.Common
 		public Task<Announcement> CreateAnnouncement(Announcement announcement)
 		{
 			throw new NotImplementedException();
+		}
+
+		private List<Event> SetEventsToCst(List<Event> events)
+		{
+			List<Event> fixedEvent = new List<Event>();
+			TimeZoneInfo cstInfo = TimeZoneInfo.FindSystemTimeZoneById("America/Chicago");
+			for(int i = 0; i < events.Count; i++)
+			{
+				Event e = events[i];
+				e.StartTime = TimeZoneInfo.ConvertTimeFromUtc(e.StartTime.DateTime, cstInfo);
+				e.EndTime = TimeZoneInfo.ConvertTimeFromUtc(e.EndTime.DateTime, cstInfo);
+				fixedEvent.Add(e);
+			}
+			return fixedEvent;
 		}
 	}
 }

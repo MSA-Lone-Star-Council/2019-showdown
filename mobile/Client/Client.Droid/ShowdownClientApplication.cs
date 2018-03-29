@@ -10,6 +10,11 @@ namespace Client.Droid
 {
 	[Application(
 		Icon = "@drawable/ic_launcher_heart")]
+	#if DEBUG
+	[assembly: Application(Debuggable=true)]
+	#else
+	[assembly: Application(Debuggable = false)]
+	#endif
 	public class ShowdownClientApplication : Application
 	{
 		public NotificationHubUtility HubUtility { get; set; }

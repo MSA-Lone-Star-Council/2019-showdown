@@ -25,8 +25,8 @@ namespace Common.Common
 			string dayFormat = "dddd";
 			string time = "h:mm tt";
 
-			var startTime = e.StartTime.ToOffset(TimeSpan.FromHours(-5));
-			var endTime = e.EndTime.ToOffset(TimeSpan.FromHours(-5));
+			var startTime = e.StartTime;
+			var endTime = e.EndTime;
 
 			string startTimeStr = startTime.ToString(time, null as DateTimeFormatInfo).ToLower();
 			string endTimeStr = endTime.ToString(time, null as DateTimeFormatInfo).ToLower();
