@@ -92,14 +92,32 @@ def generate_seed_data(apps, schema_editor):
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
-    utc_classroom = Location(
-        name="UTC Classroom",
+    utc_3_102 = Location(
+        name="UTC: Room 3.102",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
+    utc_3_112 = Location(
+        name="UTC: Room 3.112",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2830485, longitude=-97.7388064,
+        notes=""
+    )
+    utc_4_112 = Location(
+        name="UTC: Room 4.112",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2830485, longitude=-97.7388064,
+        notes=""
+    )
+    jester = Location(
+        name="Jester",
+        address="Jester West Residence Hall, 201 E 21st St, Austin, TX 78705",
+        latitude=30.2819983, longitude=-97.7372298,
+        notes=""
+    )
     sports = Location(
-        name="Rec Sports/Wright-Whitaker Fields",
+        name="Rec Sports (Sisters)/Wright-Whitaker Fields (Brothers)",
         address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
         latitude=30.2815045, longitude=-97.732335,
         notes=""
@@ -111,7 +129,7 @@ def generate_seed_data(apps, schema_editor):
         notes=""
     )
     sat_lunch = Location(
-        name="Gregory Gym/UTC Classroom/Rec Sports",
+        name="Gregory Gym (Brothers)/Rec Sports (Sisters)",
         address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
         latitude=30.2844637, longitude=-97.7358777,
         notes=""
@@ -122,8 +140,9 @@ def generate_seed_data(apps, schema_editor):
         union_eastwoods, nueces_mosque, rec_sports, gregory_gym,
         main_mall_tower, whitaker_fields,
         utc_2_102A, clark_basketball,
-        utc_2_112A, utc_1_102, utc_1_130, utc_classroom, 
-        sports, sat_registration, sat_lunch
+        utc_2_112A, utc_1_102, utc_1_130, utc_3_102, 
+        utc_3_112, utc_4_112, jester, sports, 
+        sat_registration, sat_lunch
     ])
 
 class Migration(migrations.Migration):
