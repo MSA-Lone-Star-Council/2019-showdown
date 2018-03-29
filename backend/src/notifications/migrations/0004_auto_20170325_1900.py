@@ -9,13 +9,9 @@ def forwards_func(apps, schema_editor):
     db_alias = schema_editor.connection.alias
     Announcement.objects.using(db_alias).bulk_create([
         Announcement(
-            title="Submission deadline for art at 4:30pm", 
-            body="Submissions are due by 4:30pm. Late entries won't be judged",
-       ),
-        Announcement(
-            title="Brother's Lunch available at IM fields", 
-            body="Registered attendees can get lunch at the fields. Please have your band ready",
-       ),
+            title="Both of the Showdown apps are live!", 
+            body="The Showdown Android and iOS apps are now live! We hope y'all enjoy them!",
+       )
     ])
 
 def reverse_func(apps, schema_editor):
