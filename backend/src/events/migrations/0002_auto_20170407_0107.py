@@ -17,103 +17,103 @@ def generate_seed_data(apps, schema_editor):
     union_ballroom = Location(
         name="Texas Union: Sherley Bird Perry Ballroom",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649, longitude=-97.7433516,
+        latitude=30.2866603, longitude=-97.7411629,
         notes=""
     )
     union_quadrangle = Location(
         name="Texas Union: Quadrangle Room",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649, longitude=-97.7433516,
+        latitude=30.2866603, longitude=-97.7411629,
         notes=""
     )
     union_eastwoods = Location(
         name="Texas Union: Eastwoods Room",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649, longitude=-97.7433516,
+        latitude=30.2866603, longitude=-97.7411629,
         notes=""
     )
     nueces_mosque = Location(
         name="Nueces Mosque",
         address="Nueces Mosque, 1906 Nueces St, Austin, TX 78705",
-        latitude=30.2831914, longitude=-97.7465274,
+        latitude=30.2831868, longitude=-97.7443387,
         notes=""
     )
     gregory_gym = Location(
         name="Gregory Gym: Arena 3.108",
         address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
-        latitude=30.2842377, longitude=-97.7386967,
+        latitude=30.2844637, longitude=-97.7358777,
         notes=""
     )
     rec_sports = Location(
         name="Recreational Sports Center: Room 2.200",
         address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
-        latitude=30.2815448, longitude=-97.73465080,
+        latitude=30.2815045, longitude=-97.732335,
         notes=""
     )
     clark_basketball = Location(
         name="Clark Basketball Courts",
         address="Clark Basketball Courts, Basketball Support Building, 301 Jester Cir, Austin, TX 78712",
-        latitude=30.2811592, longitude=-97.7377321,
+        latitude=30.2811546, longitude=-97.7355434,
         notes=""
     )
     whitaker_fields = Location(
         name="Wright-Whitaker Fields",
         address="Charles Alan Wright Fields, 4901 Guadalupe St, Austin, TX 78751",
-        latitude=30.2812333, longitude=-97.7705628,
+        latitude=30.3161402, longitude=-97.7270667,
         notes=""
     )
     main_mall_tower = Location(
         name="Main Mall: UT Tower",
         address="Main Building, 110 Inner Campus Drive, Austin, TX 78705",
-        latitude=30.2862222, longitude=-97.7415767,
+        latitude=30.2861062, longitude=-97.7393634,
         notes=""
     )
     utc_2_102A = Location(
         name="UTC: Room 2.102A",
         address="University Teaching Center, Austin, TX 78705",
-        latitude=30.2832791, longitude=-97.739008,
+        latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_2_112A = Location(
         name="UTC: Room 2.112A",
         address="University Teaching Center, Austin, TX 78705",
-        latitude=30.2832791, longitude=-97.739008,
+        latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_1_102 = Location(
         name="UTC: Room 1.102",
         address="University Teaching Center, Austin, TX 78705",
-        latitude=30.2832791, longitude=-97.739008,
+        latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_1_130 = Location(
         name="UTC: Room 1.130",
         address="University Teaching Center, Austin, TX 78705",
-        latitude=30.2832791, longitude=-97.739008,
+        latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_classroom = Location(
         name="UTC Classroom",
         address="University Teaching Center, Austin, TX 78705",
-        latitude=30.2832791, longitude=-97.739008,
+        latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     sports = Location(
         name="Rec Sports/Wright-Whitaker Fields",
         address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
-        latitude=30.2815448, longitude=-97.73465080,
+        latitude=30.2815045, longitude=-97.732335,
         notes=""
     )
     sat_registration = Location(
         name="Texas Union Ballroom/Gregory Gym/Rec Sports",
         address="Texas Union Building Austin, Texas",
-        latitude=30.2866649, longitude=-97.7433516,
+        latitude=30.2866603, longitude=-97.7411629,
         notes=""
     )
     sat_lunch = Location(
         name="Gregory Gym/UTC Classroom/Rec Sports",
         address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
-        latitude=30.2842377, longitude=-97.7386967,
+        latitude=30.2844637, longitude=-97.7358777,
         notes=""
     )
 
