@@ -44,7 +44,7 @@ namespace Client.iOS
             detailButton = UIButton.FromType(UIButtonType.DetailDisclosure);
             detailButton.TouchUpInside += (s, e) => {
                 //Navigate to Location 
-                var path = $"https://maps.google.com/?daddr={ mappedEvent.Location.Address }";
+                var path = $"https://maps.apple.com/?daddr={ mappedEvent.Location.Address }";
                 NSUrl url = new NSUrl(System.Uri.EscapeUriString(path));
                 if (UIApplication.SharedApplication.CanOpenUrl(url))
                 {

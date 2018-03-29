@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Plugin.Connectivity;
+//using Plugin.Connectivity;
 
 namespace Common.Common
 {
@@ -7,7 +7,7 @@ namespace Common.Common
     {
         public static bool IsConnected()
         {
-            return CrossConnectivity.Current.IsConnected;
+            return true;//CrossConnectivity.Current.IsConnected;
         }
 
         // TODO :
@@ -15,12 +15,14 @@ namespace Common.Common
         // know anything about endpoints, we may want to refactor this
         public static async Task<bool> IsBackendReachable(string endpoint)
         {
-            var connectivity = CrossConnectivity.Current;
-            if (!connectivity.IsConnected) return false;
+            //var connectivity = CrossConnectivity.Current;
+            //if (!connectivity.IsConnected) return false;
 
-            var reachable = await connectivity.IsRemoteReachable(Secrets.BACKEND_URL + endpoint);
+            //var reachable = await connectivity.IsRemoteReachable(Secrets.BACKEND_URL + endpoint);
 
-            return reachable;
+            //return reachable;
+            await Task.CompletedTask;
+            return true;
         }
 
     }

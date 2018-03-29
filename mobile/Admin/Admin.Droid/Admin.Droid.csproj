@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -116,11 +116,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{c8d3aeba-b013-4b34-a559-83ebf00f0cdb}</Project>
+      <Project>{BF2F8849-80CA-4619-A978-0308B0B4BB3B}</Project>
       <Name>Common.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Admin.Common\Admin.Common.csproj">
-      <Project>{6b32dd6d-85d3-421e-9f80-d7977043a3a2}</Project>
+      <Project>{FB4AA57E-E092-4831-B92A-5F1A49112095}</Project>
       <Name>Admin.Common</Name>
     </ProjectReference>
   </ItemGroup>

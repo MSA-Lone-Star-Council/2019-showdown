@@ -8,104 +8,122 @@ from dateutil import tz
 import arrow
 
 def datetime(day, hour, minute):
-    return arrow.get(2018, 4 if (day == 1) else 3, day, hour, minute, 0, 0, tz.gettz('US/Central')).datetime
+    return arrow.get(2018, 4 if (day == 1) else 3, day, hour, minute, 0, 0, tz.gettz('America/Chicago')).datetime
 
 def generate_seed_data(apps, schema_editor):
     Location = apps.get_model("events", "Location")
     db_alias = schema_editor.connection.alias
 
-    ballroom_galleria = Location(
-        name="HEB University Center: Ballroom Galleria",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    union_ballroom = Location(
+        name="Texas Union: Sherley Bird Perry Ballroom",
+        address="Texas Union Building Austin, Texas",
+        latitude=30.2866649, longitude=-97.7433516,
         notes=""
     )
-    ballroom = Location(
-        name="HEB University Center: Ballroom",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    union_quadrangle = Location(
+        name="Texas Union: Quadrangle Room",
+        address="Texas Union Building Austin, Texas",
+        latitude=30.2866649, longitude=-97.7433516,
         notes=""
     )
-    travis_room = Location(
-        name="HEB University Center: Travis Room",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    union_eastwoods = Location(
+        name="Texas Union: Eastwoods Room",
+        address="Texas Union Building Austin, Texas",
+        latitude=30.2866649, longitude=-97.7433516,
         notes=""
     )
-    denman_room = Location(
-        name="University Center: Denman Room",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    nueces_mosque = Location(
+        name="Nueces Mosque",
+        address="Nueces Mosque, 1906 Nueces St, Austin, TX 78705",
+        latitude=30.2831914, longitude=-97.7465274,
         notes=""
     )
-    harris_room = Location(
-        name="Harris Room",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    gregory_gym = Location(
+        name="Gregory Gym: Arena 3.108",
+        address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
+        latitude=30.2842377, longitude=-97.7386967,
         notes=""
     )
-    mesquite_room = Location(
-        name="University Center: Mesquite Room",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    rec_sports = Location(
+        name="Recreational Sports Center: Room 2.200",
+        address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
+        latitude=30.2815448, longitude=-97.73465080,
         notes=""
     )
-    main_building_1_122 = Location(
-        name="Main Building: 1.122",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    clark_basketball = Location(
+        name="Clark Basketball Courts",
+        address="Clark Basketball Courts, Basketball Support Building, 301 Jester Cir, Austin, TX 78712",
+        latitude=30.2811592, longitude=-97.7377321,
         notes=""
     )
-    main_building_1_101 = Location(
-        name="Main Building: 1.101",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    whitaker_fields = Location(
+        name="Wright-Whitaker Fields",
+        address="Charles Alan Wright Fields, 4901 Guadalupe St, Austin, TX 78751",
+        latitude=30.2812333, longitude=-97.7705628,
         notes=""
     )
-    main_building_0_104 = Location(
-        name="Main Building: 0.104",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    main_mall_tower = Location(
+        name="Main Mall: UT Tower",
+        address="Main Building, 110 Inner Campus Drive, Austin, TX 78705",
+        latitude=30.2862222, longitude=-97.7415767,
         notes=""
     )
-    main_building_0_106 = Location(
-        name="Main Building: 0.106",
-        address="1 UTSA Circle San Antonio, TX",
-        latitude=0, longitude=0,
+    utc_2_102A = Location(
+        name="UTC: Room 2.102A",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    mcecc = Location(
-        name="MCECC Masjid",
-        address="5281 Casa Bella, San Antonio, TX 78249",
-        latitude=0, longitude=0,
+    utc_2_112A = Location(
+        name="UTC: Room 2.112A",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    convocation_center = Location(
-        name="Convocation Center",
-        address="San Antonio, TX 78249",
-        latitude=0, longitude=0,
+    utc_1_102 = Location(
+        name="UTC: Room 1.102",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    rec_center = Location(
-        name="UTSA Rec Center",
-        address="6900 N Loop W, San Antonio, TX 78249",
-        latitude=0, longitude=0,
+    utc_1_130 = Location(
+        name="UTC: Room 1.130",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2832791, longitude=-97.739008,
         notes=""
     )
-    im_field = Location(
-        name="IM Fields",
-        address="Sam Barshop Blvd",
-        latitude=0, longitude=0,
+    utc_classroom = Location(
+        name="UTC Classroom",
+        address="University Teaching Center, Austin, TX 78705",
+        latitude=30.2832791, longitude=-97.739008,
+        notes=""
+    )
+    sports = Location(
+        name="Rec Sports/Wright-Whitaker Fields",
+        address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
+        latitude=30.2815448, longitude=-97.73465080,
+        notes=""
+    )
+    sat_registration = Location(
+        name="Texas Union Ballroom/Gregory Gym/Rec Sports",
+        address="Texas Union Building Austin, Texas",
+        latitude=30.2866649, longitude=-97.7433516,
+        notes=""
+    )
+    sat_lunch = Location(
+        name="Gregory Gym/UTC Classroom/Rec Sports",
+        address="Gregory Gymnasium, 2101 Speedway, Austin, TX 78712",
+        latitude=30.2842377, longitude=-97.7386967,
         notes=""
     )
 
     Location.objects.using(db_alias).bulk_create([
-        ballroom_galleria, ballroom,
-        travis_room, denman_room, mesquite_room, harris_room,
-        main_building_0_104, main_building_1_101,
-        main_building_0_106, main_building_1_122,
-        mcecc,
-        convocation_center, rec_center, im_field
+        union_ballroom, union_quadrangle,
+        union_eastwoods, nueces_mosque, rec_sports, gregory_gym,
+        main_mall_tower, whitaker_fields,
+        utc_2_102A, clark_basketball,
+        utc_2_112A, utc_1_102, utc_1_130, utc_classroom, 
+        sports, sat_registration, sat_lunch
     ])
 
 class Migration(migrations.Migration):

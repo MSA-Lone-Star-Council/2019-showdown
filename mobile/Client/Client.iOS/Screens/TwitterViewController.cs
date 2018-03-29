@@ -10,7 +10,7 @@ namespace Client.iOS
         TweetPresenter presenter;
         UIWebView webView;
 
-        public TwitterViewController() : base("TwitterViewController", null)
+        public TwitterViewController()
         {
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
             presenter = new TweetPresenter(appDelegate.BackendClient);

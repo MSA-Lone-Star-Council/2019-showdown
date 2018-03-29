@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import generics
 
+import arrow
+
 from scores.models import Game
 from scores.serializers import GameSerializer
 
@@ -9,8 +11,8 @@ from .models import Event, Location
 from .serializers import FullEventSerializer, FullLocationSerializer
 
 class ScheduleView(generics.ListAPIView):
-    queryset = Event.objects.order_by('start_time')
     serializer_class = FullEventSerializer
+    queryset = Event.objects.order_by('start_time')
 
 class LocationView(generics.RetrieveAPIView):
     queryset = Location.objects.all()

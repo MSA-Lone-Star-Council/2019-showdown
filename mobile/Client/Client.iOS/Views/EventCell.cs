@@ -63,13 +63,14 @@ namespace Client.iOS
             startTimeLabel.MakeConstraints(make =>
             {
                 make.Top.EqualTo(parentView);
-                make.Left.EqualTo(parentView).Offset(10);
+                make.Right.EqualTo(divider).Offset(-10);
             });
 
             endTimeLabel.MakeConstraints(make =>
             {
-                make.Left.EqualTo(startTimeLabel);
                 make.Top.EqualTo(startTimeLabel.Bottom()).Offset(5);
+                make.Right.EqualTo(startTimeLabel);
+
             });
 
             divider.MakeConstraints(make =>

@@ -241,11 +241,11 @@
       <Name>Common.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\Admin.Common\Admin.Common.csproj">
-      <Project>{6B32DD6D-85D3-421E-9F80-D7977043A3A2}</Project>
+      <Project>{FB4AA57E-E092-4831-B92A-5F1A49112095}</Project>
       <Name>Admin.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Common\Common.Common.csproj">
-      <Project>{C8D3AEBA-B013-4B34-A559-83EBF00F0CDB}</Project>
+      <Project>{BF2F8849-80CA-4619-A978-0308B0B4BB3B}</Project>
       <Name>Common.Common</Name>
     </ProjectReference>
   </ItemGroup>

@@ -20,7 +20,7 @@ namespace Client.iOS
         //UITableView gamesList;
         MKMapView mapView;
 
-		NSTimer timer;
+		//NSTimer timer;
 
 		public EventViewController(Event e)
 		{
@@ -38,23 +38,25 @@ namespace Client.iOS
 			};
 			header.IsSubscribed = false;
 
-            mapView = new MKMapView();
-            mapView.Delegate = new MapDelegate(this, presenter.Event);
-		}
+            mapView = new MKMapView
+            {
+                Delegate = new MapDelegate(this, presenter.Event)
+            };
+        }
 
 		public override async void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
 			presenter.TakeView(this);
 			await presenter.OnBegin();
-			timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await presenter.OnTick());
+			//timer = NSTimer.CreateRepeatingScheduledTimer(TimeSpan.FromSeconds(5), async (obj) => await presenter.OnTick());
 		}
 
 		public override void ViewWillDisappear(bool animated)
 		{
 			base.ViewWillDisappear(animated);
 			presenter.RemoveView();
-			timer.Invalidate();
+			//timer.Invalidate();
 		}
 
 		public override void ViewDidLoad()
@@ -111,14 +113,13 @@ namespace Client.iOS
 			});
 			*/
 
-            var coordinate = new CLLocationCoordinate2D(30.2862, -97.7394); //UT Tower
-            mapView.SetRegion(MKCoordinateRegion.FromDistance(coordinate, 1000, 1000), true); //1000 meter radius
+            var mapCenter = new CLLocationCoordinate2D(presenter.Event.Location.Latitude, presenter.Event.Location.Longitude);
+            mapView.SetRegion(MKCoordinateRegion.FromDistance(mapCenter, 1000, 1000), true); //1000 meter radius
             var annotation = new MKPointAnnotation()
             {
                 Title = presenter.Event.Title,
                 Subtitle = presenter.Event.Location.Name,
-                //Coordinate = new CLLocationCoordinate2D(presenter.Event.Location.Latitude, presenter.Event.Location.Longitude)
-                Coordinate = coordinate
+                Coordinate = new CLLocationCoordinate2D(presenter.Event.Location.Latitude, presenter.Event.Location.Longitude)
             };
             mapView.AddAnnotations(annotation);
             mapView.SelectAnnotation(annotation, true);
