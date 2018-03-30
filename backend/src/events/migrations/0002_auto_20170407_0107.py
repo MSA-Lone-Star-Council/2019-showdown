@@ -15,7 +15,7 @@ def generate_seed_data(apps, schema_editor):
     db_alias = schema_editor.connection.alias
 
     union_ballroom = Location(
-        name="Texas Union: Sherley Bird Perry Ballroom",
+        name="Texas Union: Shirley Bird Perry Ballroom",
         address="Texas Union Building Austin, Texas",
         latitude=30.2866603, longitude=-97.7411629,
         notes=""
@@ -69,43 +69,43 @@ def generate_seed_data(apps, schema_editor):
         notes=""
     )
     utc_2_102A = Location(
-        name="UTC: Room 2.102A",
+        name="University Teaching Center: Room 2.102A",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_2_112A = Location(
-        name="UTC: Room 2.112A",
+        name="University Teaching Center: Room 2.112A",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_1_102 = Location(
-        name="UTC: Room 1.102",
+        name="University Teaching Center: Room 1.102",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_1_130 = Location(
-        name="UTC: Room 1.130",
+        name="University Teaching Center: Room 1.130",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_3_102 = Location(
-        name="UTC: Room 3.102",
+        name="University Teaching Center: Room 3.102",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_3_112 = Location(
-        name="UTC: Room 3.112",
+        name="University Teaching Center: Room 3.112",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
     )
     utc_4_112 = Location(
-        name="UTC: Room 4.112",
+        name="University Teaching Center: Room 4.112",
         address="University Teaching Center, Austin, TX 78705",
         latitude=30.2830485, longitude=-97.7388064,
         notes=""
