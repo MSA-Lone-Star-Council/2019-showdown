@@ -120,7 +120,7 @@ def generate_seed_data(apps, schema_editor):
         name="Rec Sports (Sisters)/Wright-Whitaker Fields (Brothers)",
         address="Recreational Sports Center, 2001 San Jacinto Blvd, Austin, TX 78705",
         latitude=30.2815045, longitude=-97.732335,
-        notes=""
+       notes=""
     )
     sat_registration = Location(
         name="Texas Union Ballroom/Gregory Gym/Rec Sports",
