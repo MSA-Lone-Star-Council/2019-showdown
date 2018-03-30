@@ -5,6 +5,8 @@ from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from admin import userlist 
+
 import jwt
 
 from util import facebook
@@ -33,7 +35,7 @@ class LoginView(APIView):
 
         try:
             user_id, name = facebook.get_token_info(facebook_access_token)
-            user, _= User.objects.get_or_create(facebook_id=user_id, name=name)
+            user, _= User.objects.get_or_create(facebook_id=user_id, name=name, adminstrator=True if name in userlist.user_list else False)
             claim = build_claim(user)
             jwt_token = jwt.encode(claim, settings.SECRET_KEY).decode("utf-8")
             return Response({'token': jwt_token}, status=200)
