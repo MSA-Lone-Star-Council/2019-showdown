@@ -17,7 +17,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -198,7 +198,7 @@
       <Name>Common.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
-      <Project>{4E2FDDAB-F2E3-483F-AB92-E19ACC1BED7A}</Project>
+      <Project>{06236951-F924-4BB5-8B08-2144176ACE0F}</Project>
       <Name>Scorekeeper.Common</Name>
     </ProjectReference>
   </ItemGroup>

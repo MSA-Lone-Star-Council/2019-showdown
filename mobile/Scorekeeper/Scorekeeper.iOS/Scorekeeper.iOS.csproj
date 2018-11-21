@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Scorekeeper.Common\Scorekeeper.Common.csproj">
-      <Project>{4E2FDDAB-F2E3-483F-AB92-E19ACC1BED7A}</Project>
+      <Project>{06236951-F924-4BB5-8B08-2144176ACE0F}</Project>
       <Name>Scorekeeper.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.iOS\Common.iOS.csproj">
