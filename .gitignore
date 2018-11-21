@@ -270,3 +270,6 @@ __pycache__/
 **/google-services.json
 
 **/.DS_Store
+
+# User list
+**/userlist.py

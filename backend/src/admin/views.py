@@ -69,6 +69,7 @@ class AllAnnouncementsView(generics.ListCreateAPIView):
         
         options = NotificationOptions(title=announcement['title'], subtitle='Announcement from LSC', extra = { 'type': 'announcement' })
         send_notification(options, '')
+        logger.info("Lowkey announcement from %s", User.name)
 
         return response
 

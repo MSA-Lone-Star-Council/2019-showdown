@@ -90,10 +90,10 @@
     <Reference Include="Masonry.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Masonry.1.0.2\lib\Xamarin.iOS\Masonry.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialControls, Version=1.2.6136.26345, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MaterialControls.1.2.2\lib\Xamarin.iOS10\MaterialControls.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Nito.AsyncEx.Context, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Nito.AsyncEx.Context.1.1.0\lib\netstandard1.3\Nito.AsyncEx.Context.dll</HintPath>
     </Reference>
@@ -198,6 +198,7 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config">
