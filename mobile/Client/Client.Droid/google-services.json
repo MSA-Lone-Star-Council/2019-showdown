@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1018420045992",
+    "firebase_url": "https://showdown-app-ee90a.firebaseio.com",
+    "project_id": "showdown-app",
+    "storage_bucket": "showdown-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018420045992:android:549839fa883574c3",
+        "android_client_info": {
+          "package_name": "lsc.msa_texas.showdown"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018420045992-anbd5k7j846h7eeqg41c2dsr27ma82ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkPyxroSKwclj0MkLX_1gZM_cjdM4O5CU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
