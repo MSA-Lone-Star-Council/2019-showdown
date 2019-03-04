@@ -39,7 +39,7 @@ Following instructions are for Docker for Linux and Docker for Mac.
 For Windows, you will need Windows 10 Pro with the Anniversary Update to run Docker for Windows. Make Powershell substitutions as appropriate.
 (You could also just run a Linux VM....)
 
-**If you change requirements.json, run the following to see your changes in the docker container!!!**
+**If you change requirements.txt, run the following to see your changes in the docker container!!!**
 ```bash
 docker-compose up --build
 ```
