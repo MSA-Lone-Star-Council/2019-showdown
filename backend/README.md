@@ -18,7 +18,7 @@ Backend for the Texas MSA Showdown 2017 mobile application.
 
 ## Quickstart
 
-In order to run the entire application in development:
+In order to quickly run the entire application in development, if you just need a server that's running, follow the steps below. For backend development, it's better to read the CONTRIBUTING.md file to set up your local environment for editing.
 
 0. Docker must be installed. 
 1. Copy ```.env.example``` to ```.env``` and specify parameters
